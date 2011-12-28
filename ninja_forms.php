@@ -30,7 +30,7 @@ global $version_compare;
 
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/ninja-forms");
 define("NINJA_FORMS_URL", WP_PLUGIN_URL."/ninja-forms");
-define("NINJA_FORMS_VERSION", "1.2.4");
+define("NINJA_FORMS_VERSION", "1.2.5");
 define("NINJA_FORMS_TYPE", "Lite");
 
 session_start();

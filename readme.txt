@@ -81,3 +81,6 @@ If you have any requests, please post them in the WordPress.org forum.
 
 = 1.2.4 =
 * First version of NinjaForms Lite released.
+
+= 1.2.5 =
+* Fixed a bug some users were experiencing with a bad require_once() call.
