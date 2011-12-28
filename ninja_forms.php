@@ -28,8 +28,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 global $version_compare;
 
-define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/ninja-forms-lite");
-define("NINJA_FORMS_URL", WP_PLUGIN_URL."/ninja-forms-lite");
+define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/ninja-forms");
+define("NINJA_FORMS_URL", WP_PLUGIN_URL."/ninja-forms");
 define("NINJA_FORMS_VERSION", "1.2.4");
 define("NINJA_FORMS_TYPE", "Lite");
 
