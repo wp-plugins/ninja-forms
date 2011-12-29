@@ -9,7 +9,7 @@
 <div id="post-body">
 	<div id="post-body-content">
 		<h3>Because of different CSS settings, this preview of your form may appear different than what your end-user sees.</h3>
-		<?php echo ninja_display_form_id($form_id);?>
+		<?php ninja_display_form_id($form_id);?>
 	</div><!-- /#post-body-content -->
 </div><!-- /#post-body -->
 <div id="nav-menu-footer">

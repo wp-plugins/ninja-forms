@@ -107,7 +107,6 @@ function ninja_display_form_id($form_id){
 	$post_options = unserialize($ninja_forms_row['post_options']);
 	$multi_options = unserialize($ninja_forms_row['multi_options']);
 	$save_status = $ninja_forms_row['save_status'];
-	
 	if(isset($multi_options['progress_bar'])){
 		$progress_bar = $multi_options['progress_bar'];
 	}else{
@@ -125,7 +124,7 @@ function ninja_display_form_id($form_id){
 	}
 	$previous = $multi_options['previous'];
 	$next = $multi_options['next'];
-	if((($ninja_post == 'checked' && $post_options['login'] == 'checked') && $user_id) OR ($ninja_post == 'unchecked' OR $post_options['login'] == 'unchecked')){	
+	if((($ninja_post == 'checked' && $post_options['login'] == 'checked') && $user_id) OR ($ninja_post == 'unchecked' OR $post_options['login'] == 'unchecked') OR $ninja_post == ""){	
 		if($ninja_forms_row){
 			$ninja_forms_fields_sections = $wpdb->get_row( 
 			$wpdb->prepare("SELECT * FROM $ninja_forms_fields_table_name WHERE type = 'divider' AND form_id = %d ORDER BY field_order ASC", $form_id)
@@ -295,7 +294,7 @@ function ninja_display_form_id($form_id){
 			<input type='hidden' id='ninja_form_save_password' name='ninja_form_save_password' value=''>
 			<input type='hidden' id='ninja_form_continue' name='ninja_form_continue' value=''>
 			";
-			
+			wp_nonce_field('ninja_forms_submit','ninja_forms_nonce');
 			if($user_id){
 				echo "<input type='hidden' id='ninja_user_id' name='ninja_user_id' value='$user_id'>";
 			}

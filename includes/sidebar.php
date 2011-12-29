@@ -31,12 +31,12 @@
 	switch($current_tab){
 		case 'settings':
 			if($_REQUEST['ninja_form_id']){
-
+			$action = esc_html($_REQUEST['action']);
 			?>			
 				
 		<form id="ninja_form_settings" name="" action="" method="post">
 		 <?php wp_nonce_field('ninja_save_form_settings','ninja_form_settings'); ?>
-		<input type="hidden" id="ninja_form_action" name="action" value="<?php echo $_REQUEST['action'];?>">
+		<input type="hidden" id="ninja_form_action" name="action" value="<?php echo $action;?>">
 		<input type="hidden" name="submitted" value="yes">
 		<input type="hidden" name="tab" value="settings">
 		<input type="hidden" id="ninja_form_new" value="<?php echo $form_new;?>">
@@ -277,6 +277,8 @@
 		foreach($subs_sidebar_order as $order){
 			switch($order){
 				case 'export-subs':
+					$begin_date = esc_html($_REQUEST['begin_date']);
+					$end_date = esc_html($_REQUEST['end_date']);
 				?>
 		<div id="export-subs" class="postbox" name="subs-settings-list">
 			<div class="handlediv" id="handle-subs-export" title="Click to toggle"><br></div>
@@ -293,9 +295,9 @@
 				<p class="button-controls">
 				<table>
 					<tr>
-						<td>Begin Date:</td><td><input type="text" name="begin_date" id="begin_date" class="date" value="<?php echo $_REQUEST['begin_date'];?>"></td>
+						<td>Begin Date:</td><td><input type="text" name="begin_date" id="begin_date" class="date" value="<?php echo $begin_date;?>"></td>
 					</tr><tr>
-						<td>End Date:</td><td><input type="text" name="end_date" id="end_date" class="date" value="<?php echo $_REQUEST['end_date'];?>"></td>
+						<td>End Date:</td><td><input type="text" name="end_date" id="end_date" class="date" value="<?php echo $end_date];?>"></td>
 					</tr>
 				</table>
 				</p>

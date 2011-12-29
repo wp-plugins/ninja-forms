@@ -31,9 +31,9 @@ function ninja_forms_download_subs(){
 
 	require_once (NINJA_FORMS_DIR."/includes/xls.class.php");
 	if(current_user_can('administrator')){
-		$begin_date = $_REQUEST['begin_date'];
-		$end_date = $_REQUEST['end_date'];
-		$form_id = $_REQUEST['form_id'];
+		$begin_date = esc_html($_REQUEST['begin_date']);
+		$end_date = esc_html($_REQUEST['end_date']);
+		$form_id = esc_html($_REQUEST['form_id']);
 		if($begin_date != ''){
 			$begin_date = date("Y-m-d G:i:s", strtotime($begin_date));
 		}

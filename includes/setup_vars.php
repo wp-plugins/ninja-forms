@@ -1,11 +1,11 @@
 <?php
 if(isset($_REQUEST['ninja_form_id'])){
-	$form_id = $_REQUEST['ninja_form_id'];
+	$form_id = esc_html($_REQUEST['ninja_form_id']);
 }else{
 	$form_id = '';
 }
 if(isset($_REQUEST['tab'])){
-	$current_tab = $_REQUEST['tab'];
+	$current_tab = esc_html($_REQUEST['tab']);
 }else{
 	$current_tab = '';
 }

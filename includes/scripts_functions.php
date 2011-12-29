@@ -3,7 +3,7 @@
 function ninja_form_admin_css(){
 	global $wp_version;
 	if(isset($_REQUEST['tab'])){
-		$tab = $_REQUEST['tab'];
+		$tab = esc_html($_REQUEST['tab']);
 	}else{
 		$tab = '';
 	}
@@ -79,7 +79,7 @@ add_action('init', 'ninja_form_display_js');
 function ninja_form_display_js(){
 	global $version_compare;
 	if(isset($_REQUEST['tab'])){
-		$tab = $_REQUEST['tab'];
+		$tab = esc_html($_REQUEST['tab']);
 	}else{
 		$tab = '';
 	}

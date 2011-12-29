@@ -33,7 +33,7 @@ function ninja_forms_add_custom_box() {
 /* Prints the box content */
 function ninja_forms_inner_custom_box() {
 	global $wpdb;
-	$post_id = $_REQUEST['post'];
+	$post_id = esc_html($_REQUEST['post']);
 	$ninja_forms_table_name = $wpdb->prefix . "ninja_forms";
 	$ninja_forms_row = $wpdb->get_row( 
 	$wpdb->prepare( "SELECT * FROM $ninja_forms_table_name WHERE append_page = %d", $form_id)

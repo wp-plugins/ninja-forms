@@ -90,9 +90,9 @@ function ninja_delete_sub(){
 add_action('wp_ajax_ninja_check_subs', 'ninja_check_subs');
 function ninja_check_subs(){
 	global $wpdb;
-	$begin_date = $_REQUEST['begin_date'];
-	$end_date = $_REQUEST['end_date'];
-	$form_id = $_REQUEST['form_id'];
+	$begin_date = esc_html($_REQUEST['begin_date']);
+	$end_date = esc_html($_REQUEST['end_date']);
+	$form_id = esc_html($_REQUEST['form_id']);
 	if($begin_date != ''){
 		$begin_date = date("Y-m-d G:i:s", strtotime($begin_date));
 	}
@@ -172,8 +172,8 @@ function ninja_purge_fields(){
 }
 add_action('wp_ajax_ninja_save_settings_order', 'ninja_save_settings_order');
 function ninja_save_settings_order(){
-	$page = $_REQUEST['page'];
-	$order = $_REQUEST['order'];
+	$page = esc_html($_REQUEST['page']);
+	$order = esc_html($_REQUEST['order']);
 	$plugin_settings = get_option('ninja_forms_settings');
 	if($page == 'form-settings-list'){
 		$plugin_settings['settings_sidebar_order'] = $order;
@@ -190,8 +190,8 @@ function ninja_save_settings_order(){
 add_action('wp_ajax_ninja_save_settings_state', 'ninja_save_settings_state');
 function ninja_save_settings_state(){
 	
-	$item = $_REQUEST['item'];
-	$state = $_REQUEST['state'];
+	$item = esc_html($_REQUEST['item']);
+	$state = esc_html($_REQUEST['state']);
 	
 	$plugin_settings = get_option('ninja_forms_settings');
 	$plugin_settings[$item] = $state;
@@ -208,11 +208,11 @@ function ninja_form_login(){
 	session_start();
 	$ninja_forms_subs = $wpdb->prefix."ninja_forms_subs";
 	$ninja_forms_fields = $wpdb->prefix."ninja_forms_fields";
-	$email = $_REQUEST['email'];
-	$password = $_REQUEST['password'];
+	$email = esc_html($_REQUEST['email']);
+	$password = esc_html($_REQUEST['password']);
 	$password = md5($password);
-	$form_id = $_REQUEST['form_id'];
-	$user_id = $_REQUEST['user_id'];
+	$form_id = esc_html($_REQUEST['form_id']);
+	$user_id = esc_html($_REQUEST['user_id']);
 	if($user_id){
 		if($user_id == $current_userid){
 			$login_row = $wpdb->get_row($wpdb->prepare("SELECT * FROM $ninja_forms_subs WHERE user_id = %d AND form_id = %d AND sub_status = 'incomplete'", $user_id, $form_id), ARRAY_A);
@@ -266,8 +266,8 @@ add_action( 'wp_ajax_nopriv_ninja_email_pass', 'ninja_email_pass' );
 add_action( 'wp_ajax_ninja_email_pass', 'ninja_email_pass');
 function ninja_email_pass(){
 	global $wpdb;
-	$email = $_REQUEST['email'];
-	$form_id = $_REQUEST['form_id'];
+	$email = esc_html($_REQUEST['email']);
+	$form_id = esc_html($_REQUEST['form_id']);
 	$ninja_forms = $wpdb->prefix."ninja_forms";
 	$ninja_forms_subs = $wpdb->prefix."ninja_forms_subs";
 	$form_row = $wpdb->get_row($wpdb->prepare("SELECT email_from, title FROM $ninja_forms WHERE id = %d", $form_id), ARRAY_A);
