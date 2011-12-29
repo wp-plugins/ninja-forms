@@ -31,7 +31,7 @@
 	switch($current_tab){
 		case 'settings':
 			if($_REQUEST['ninja_form_id']){
-			$action = esc_html($_REQUEST['action']);
+				$action = esc_html($_REQUEST['action']);
 			?>			
 				
 		<form id="ninja_form_settings" name="" action="" method="post">
@@ -297,7 +297,7 @@
 					<tr>
 						<td>Begin Date:</td><td><input type="text" name="begin_date" id="begin_date" class="date" value="<?php echo $begin_date;?>"></td>
 					</tr><tr>
-						<td>End Date:</td><td><input type="text" name="end_date" id="end_date" class="date" value="<?php echo $end_date];?>"></td>
+						<td>End Date:</td><td><input type="text" name="end_date" id="end_date" class="date" value="<?php echo $end_date;?>"></td>
 					</tr>
 				</table>
 				</p>
