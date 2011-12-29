@@ -3,7 +3,7 @@
 Plugin Name: NinjaForms Lite
 Plugin URI: http://ninjaforms.com
 Description: NinjaForms Lite is the free version of NinjaForms, a webform builder with unparalleled ease of use and features. The Pro version has many more features. See the plugin settings page for more information.
-Version: 1.2.6
+Version: 1.2.7
 Author: The WP Ninjas
 Author URI: http://wpninjas.net
 */
@@ -30,7 +30,7 @@ global $version_compare;
 
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/ninja-forms");
 define("NINJA_FORMS_URL", WP_PLUGIN_URL."/ninja-forms");
-define("NINJA_FORMS_VERSION", "1.2.6");
+define("NINJA_FORMS_VERSION", "1.2.7");
 define("NINJA_FORMS_TYPE", "Lite");
 
 session_start();
