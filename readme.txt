@@ -4,11 +4,13 @@ Donate link: http://wpninjas.net
 Tags: form, forms
 Requires at least: 3.1
 Tested up to: 3.3
-Stable tag: 1.2.5
+Stable tag: 1.2.6
 
 NinjaForms Lite is the free version of NinjaForms Pro. Its drag and drop interface makes it easy to create both simple and complex forms.
 
 == Description ==
+*Update Notice* - Version 1.2.6 contains various security-related fixes. Users are strongly encouraged to download this version to fix any insecurities within Ninja Forms Lite.
+
 NinjaForms Lite is a fully-functional WordPress form creation plugin, with an interface designed to look right at home within your WordPress dashboard.
 
 NinjaForms is a WordPress form building plugin for the rest of us. While there are plenty of other form building plugins available, they tend to be either very expensive or overly complicated. 
@@ -84,3 +86,6 @@ If you have any requests, please post them in the WordPress.org forum.
 
 = 1.2.5 =
 * Fixed a bug some users were experiencing with a bad require_once() call.
+
+= 1.2.6 =
+* Fixed some major security-related bugs, please ensure that you are using this version.
