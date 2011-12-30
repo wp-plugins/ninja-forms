@@ -225,9 +225,6 @@
 			<p class="button-controls">
 				<a class="button add-new-h2 ninja_new_field" id="ninja_new_hidden_<?php echo $ninja_forms_row['id'];?>" href="#">New Hidden Field</a>
 			</p>
-			<p class="button-controls">
-				<a class="button add-new-h2 ninja_new_field" id="ninja_new_file_<?php echo $ninja_forms_row['id'];?>" href="#">New File Upload</a>
-			</p>
 			<?php
 			if($plugin_settings['admin_help'] == 'checked'){ ?>
 				<p><a href="#" class="ninja_help_open" name="custom_fields_help">Where's stuff like Firstname, Phone #, Date and E-mail address?</a></p>
