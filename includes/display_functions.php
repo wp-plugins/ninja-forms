@@ -262,13 +262,14 @@ function ninja_display_form_id($form_id){
 				$ninja_forms_subject = stripslashes($ninja_forms_row['subject']);
 			}
 			
+			echo "<div id='ninja_form'><p class='req-item-desc'>Items marked with \"<span class='required-item'>*</span>\" are required.</p>";		
+			
 			if($ninja_forms_show_title == 'checked'){
 				echo "<h2 class='ninja-forms-title'>$ninja_forms_title</h2>";
 			}
 			if($ninja_forms_show_desc == 'checked'){
 				echo "<p class='ninja-forms-desc'>$ninja_forms_desc</p>";
 			}
-			echo "<div id='ninja_form'><p class='req-item-desc'>Items marked with \"<span class='required-item'>*</span>\" are required.</p>";
 			
 			$multi_count = '';
 			if($multi == 'checked'){
