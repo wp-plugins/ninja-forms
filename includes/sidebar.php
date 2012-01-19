@@ -2,13 +2,13 @@
 <div id="side-sortables" class="meta-box-sortables ui-sortable">
 	<div id="navigation" class="postbox">
 		<h3 >
-			<span>Navigation</span>
+			<span><?php _e('Navigation');?></span>
 		</h3>
 		<div class="inside">
 			<br />
-				Jump To: 
+				<?php _e('Jump To');?>: 
 				<select class="select-nav-menu" name="menu" id="ninja_select_form">
-				<option value="<?php echo $link;?>">--- Select A Form ---</option>
+				<option value="<?php echo $link;?>">--- <?php _e('Select A Form');?> ---</option>
 					<?php
 						foreach($ninja_all_forms as $form){
 						$link = esc_url(add_query_arg(array('tab' => $current_tab, 'ninja_form_id' => $form['id'])));
@@ -18,12 +18,12 @@
 					}
 					?>
 					<?php if($form_id == 'new'){ ?>
-					<option value="" selected>--- New Form ---</option>
+					<option value="" selected>--- <?php _e('New Form');?> ---</option>
 					<?php } ?>
 				</select>
 				
 				<?php if($form_id != 'new'){ ?>
-					<br/> or <input class="button-secondary ninja_new_form" id="" name="" type="button" value="<?php esc_attr_e('Add New'); ?>" />
+					<br/> or <input class="button-secondary ninja_new_form" id="" name="" type="button" value="<?php _e('Add New'); ?>" />
 				<?php } ?>
 		</div><br />
 	</div>
@@ -52,29 +52,29 @@
 		<div id="subs-settings" class="postbox" name="form-settings-list">
 		<div class="handlediv" id="handle-sub-settings" title="Click to toggle"><br></div>
 		<h3 >
-			<span>Submission Settings</span>
+			<span><?php _e('Submission Settings');?></span>
 		</h3>
 		<div class="inside" id="sub-settings" <?php if($sub_settings_state == 'closed' OR $echoed){ echo 'style="display:none;"'; }else{$echoed = true;}?>>
 			<p class="howto"></p>
 			<p class="button-controls">
 				<input type="hidden" name="form_<?php echo $form_id;?>[save_subs]" value="unchecked"><input type="checkbox" name="form_<?php echo $form_id;?>[save_subs]" id="form_<?php echo $form_id;?>[save_subs]" value="checked" <?php echo $form_save_subs;?>>
-				 <label for="form_<?php echo $form_id;?>[save_subs]">Save Form Submissions</label>
+				 <label for="form_<?php echo $form_id;?>[save_subs]"><?php _e('Save Form Submissions');?></label>
 				<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="save_subs" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
 			</p>					
 			<p class="button-controls">
 				
 				<input type="hidden" name="form_<?php echo $form_id;?>[send_email]" value="unchecked"><input type="checkbox" class="ninja_form_send_email" name="form_<?php echo $form_id;?>[send_email]" id="form_<?php echo $form_id;?>[send_email]" value="checked" <?php echo $form_send_email;?>>
-				 <label for="form_<?php echo $form_id;?>[send_email]">Email To User</label>
+				 <label for="form_<?php echo $form_id;?>[send_email]"><?php _e('Email To User');?></label>
 				<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="send_email" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
 			</p>
 			<p class="button-controls">
 				
 				<input type="hidden" name="form_<?php echo $form_id;?>[ajax]" value="unchecked"><input type="checkbox" name="form_<?php echo $form_id;?>[ajax]" id="form_<?php echo $form_id;?>[ajax]" value="checked" class="ninja_form_ajax" <?php echo $form_ajax;?>>
-				 <label for="form_<?php echo $form_id;?>[ajax]">Submit via Ajax</label>
+				 <label for="form_<?php echo $form_id;?>[ajax]"><?php _e('Submit via Ajax');?></label>
 				<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="ajax" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
 			</p>						
 			<p class="button-controls">
-				<label for="form_<?php echo $form_id;?>[landing_page]" id="form_<?php echo $form_id;?>[landing_page][label]" style="<?php if($form_ajax == 'checked'){ echo 'display:none;';}?>">Select Landing Page:
+				<label for="form_<?php echo $form_id;?>[landing_page]" id="form_<?php echo $form_id;?>[landing_page][label]" style="<?php if($form_ajax == 'checked'){ echo 'display:none;';}?>"><?php _e('Select Landing Page');?>:
 					<select name="form_<?php echo $form_id;?>[landing_page]" id="form_<?php echo $form_id;?>[landing_page]"> 
 						<?php 
 						  $pages = get_pages(); 
@@ -95,6 +95,12 @@
 				</label>
 				
 			</p>
+			<?php /* Lite version does not include: */
+			if(NINJA_FORMS_TYPE == 'Pro'){
+				require_once(NINJA_FORMS_DIR."/includes/pro/sidebar-save-progress.php");
+			}
+			/*       */
+			?>
 		</div>
 	</div>
 	<?php
@@ -104,7 +110,7 @@
 	<div id="append-page-settings" class="postbox" name="form-settings-list">
 	<div class="handlediv" id="handle-page-settings" title="Click to toggle"><br></div>
 		<h3 >
-			<span>Append To A Page<?php if($plugin_settings['admin_help'] == 'checked'){ ?> <img id="append_page" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?></span>
+			<span><?php _e('Append To A Page');?><?php if($plugin_settings['admin_help'] == 'checked'){ ?> <img id="append_page" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?></span>
 		</h3>
 		<div class="inside" id="page-settings" <?php if($page_settings_state == 'closed' OR $echoed){ echo 'style="display:none;"'; }else{$echoed = true;}?>>
 			<p class="button-controls">
@@ -135,14 +141,14 @@
 	<div id="append-post-settings" class="postbox" name="form-settings-list">
 	<div class="handlediv" id="handle-post-settings" title="Click to toggle"><br></div>
 		<h3>
-			<span>Append To A Post</span>
+			<span><?php _e('Append To A Post');?></span>
 		</h3>
 		<div class="inside" id="post-settings" <?php if($post_settings_state == 'closed' OR $echoed){ echo 'style="display:none;"'; }else{$echoed = true;}?>>
 			<p class="button-controls">
-				<span class="howto">In order to append/unappend a form to a post, please visit the post editing page.</span>
+				<span class="howto"><?php _e('In order to append/unappend a form to a post, please visit the post editing page');?>.</span>
 			</p>
 			<p class="button-controls">
-				<span class="howto">This form is set to be appended to the following posts:</span>
+				<span class="howto"><?php _e('This form is set to be appended to the following posts');?>:</span>
 			</p>
 			<p class="button-controls">
 				<ul>
@@ -185,50 +191,67 @@
 	<div id="defined-fields" class="postbox" name="field-settings-list">
 	<div class="handlediv" id="handle-predefined-fields" title="Click to toggle"><br></div>
 		<h3 >
-			<span>Pre-Defined Fields</span>
+			<span><?php _e('Pre-Defined Fields');?></span>
 		</h3>
 		<div class="inside" id="predefined-fields"<?php if($predefined_fields_state == 'closed' OR $echoed){ echo 'style="display:none;"'; }else{$echoed = true;}?>>
-			<p class="howto">These fields are used within Ninja Forms to direct correspondance and detect spam. You can only have one of each in your forms.</p>
+			<p class="howto"><?php _e('These fields are used within Ninja Forms to direct correspondance and detect spam. You can only have one of each in your forms');?>.</p>
 			<p class="button-controls">
 				<span <?php if($new_spam == 'no'){ ?>style="display:none;"<?php } ?> id="ninja_new_spam_<?php echo $ninja_forms_row['id'];?>_cont">
-				<a class="button add-new-h2 ninja_new_field" id="ninja_new_spam_<?php echo $ninja_forms_row['id'];?>" href="#">Anti-Spam Question</a>
+				<a class="button add-new-h2 ninja_new_field" id="ninja_new_spam_<?php echo $ninja_forms_row['id'];?>" href="#"><?php _e('Anti-Spam Question');?></a>
 				</span>
 			</p>			
 			<p class="button-controls" <?php if($new_submit == 'no'){ ?>style="display:none;"<?php } ?> id="ninja_new_submit_<?php echo $ninja_forms_row['id'];?>_cont">	
-				<a class="button add-new-h2 ninja_new_field" id="ninja_new_submit_<?php echo $ninja_forms_row['id'];?>" href="#">Submit Button</a>
+				<a class="button add-new-h2 ninja_new_field" id="ninja_new_submit_<?php echo $ninja_forms_row['id'];?>" href="#"><?php _e('Submit Button');?></a>
 			</p>
 		</div>
 	</div>
 	<?php
 	break;
+	/* Lite version does not include: */
+	case 'multi-part':
+		if(NINJA_FORMS_TYPE == 'Pro'){
+			require_once(NINJA_FORMS_DIR."/includes/pro/sidebar-multi-part.php");
+		}
+	break;
+	case 'post-elements':
+		$post_types = get_post_types();
+		if(NINJA_FORMS_TYPE == 'Pro'){
+			require_once(NINJA_FORMS_DIR."/includes/pro/sidebar-post-elements.php");
+		}
+		break;
+	/*             */
+	
 	case 'custom-fields':
 	?>
 	<div id="custom-fields" class="postbox" name="field-settings-list" >
 	<div class="handlediv" id="handle-cust-fields" title="Click to toggle"><br></div>
 		<h3 >
-			<span>Custom Fields</span>
+			<span><?php _e('Custom Fields');?></span>
 		</h3>
 		<div class="inside" id="cust-fields" <?php if($cust_fields_state == 'closed' OR $echoed){ echo 'style="display:none;"'; }else{$echoed = true;}?>>
-			<p class="howto">You can add any number of these fields to your form.</p>
+			<p class="howto"><?php _e('You can add any number of these fields to your form');?>.</p>
 			<p class="button-controls">
-				<a class="button add-new-h2 ninja_new_field" id="ninja_new_textbox_<?php echo $ninja_forms_row['id'];?>" href="#">New Single-Line Textbox</a>
+				<a class="button add-new-h2 ninja_new_field" id="ninja_new_textbox_<?php echo $ninja_forms_row['id'];?>" href="#"><?php _e('New Single-Line Textbox');?></a>
 			</p>
 			<p class="button-controls">
-				<a class="button add-new-h2 ninja_new_field" id="ninja_new_checkbox_<?php echo $ninja_forms_row['id'];?>" href="#">New Checkbox</a>
+				<a class="button add-new-h2 ninja_new_field" id="ninja_new_checkbox_<?php echo $ninja_forms_row['id'];?>" href="#"><?php _e('New Checkbox');?></a>
 			</p>
 			<p class="button-controls">
-				<a class="button add-new-h2 ninja_new_field" id="ninja_new_textarea_<?php echo $ninja_forms_row['id'];?>" href="#">New Multi-Line Textbox</a>
+				<a class="button add-new-h2 ninja_new_field" id="ninja_new_textarea_<?php echo $ninja_forms_row['id'];?>" href="#"><?php _e('New Multi-Line Textbox');?></a>
 			</p>
 			<p class="button-controls">
-				<a class="button add-new-h2 ninja_new_field" id="ninja_new_list_<?php echo $ninja_forms_row['id'];?>" href="#">New List (Dropdown/Radio/Multi-Select)</a>
+				<a class="button add-new-h2 ninja_new_field" id="ninja_new_list_<?php echo $ninja_forms_row['id'];?>" href="#"><?php _e('New List (Dropdown/Radio/Multi-Select)');?></a>
 			</p>	
 			<p class="button-controls">
-				<a class="button add-new-h2 ninja_new_field" id="ninja_new_hidden_<?php echo $ninja_forms_row['id'];?>" href="#">New Hidden Field</a>
+				<a class="button add-new-h2 ninja_new_field" id="ninja_new_hidden_<?php echo $ninja_forms_row['id'];?>" href="#"><?php _e('New Hidden Field');?></a>
+			</p>
+			<p class="button-controls">
+				<a class="button add-new-h2 ninja_new_field" id="ninja_new_file_<?php echo $ninja_forms_row['id'];?>" href="#"><?php _e('New File Upload');?></a>
 			</p>
 			<?php
 			if($plugin_settings['admin_help'] == 'checked'){ ?>
-				<p><a href="#" class="ninja_help_open" name="custom_fields_help">Where's stuff like Firstname, Phone #, Date and E-mail address?</a></p>
-				<div class="ninja_help_text" id="custom_fields_help" style="display:none;" title="Custom Fields Help"><p>Ninja Forms gives you the flexibility to create any kind of field that you want using our powerful "Single-Line Textbox" masks.</p><p>Simply add a Single-Line Textbox, then select what kind of "masking" you'd like applied to that field. This means you can easily limit user's input to (999) 999-9999, or put in your own custom masks for the data that you need: 99-9-999.</p><p>You can even tell Ninja Forms to show the user a datepicker!</p>
+				<p><a href="#" class="ninja_help_open" name="custom_fields_help"><?php _e("Where's stuff like Firstname, Phone #, Date and E-mail address");?>?</a></p>
+				<div class="ninja_help_text" id="custom_fields_help" style="display:none;" title="Custom Fields Help"><p><?php _e('Ninja Forms gives you the flexibility to create any kind of field that you want using our powerful "Single-Line Textbox" masks');?>.</p><p><?php _e('Simply add a Single-Line Textbox, then select what kind of "masking" you\'d like applied to that field');?>. <?php _e('This means you can easily limit user\'s input to (999) 999-9999, or put in your own custom masks for the data that you need: 99-9-999');?>.</p><p><?php _e('You can even tell Ninja Forms to show the user a datepicker!');?></p>
 				</div>
 			<?php } ?>
 		</div>
@@ -240,18 +263,18 @@
 	<div id="layout-elements" class="postbox" name="field-settings-list" >
 	<div class="handlediv" id="handle-layout-fields" title="Click to toggle"><br></div>
 		<h3 >
-			<span>Layout Elements</span>
+			<span><?php _e('Layout Elements');?></span>
 		</h3>
 		<div class="inside" id="layout-fields" <?php if($layout_fields_state == 'closed' OR $echoed){ echo 'style="display:none;"'; }else{$echoed = true;}?>>
-			<p class="howto">You can add any number of these design elements to your form.</p>
+			<p class="howto"><?php _e('You can add any number of these design elements to your form');?>.</p>
 			<p class="button-controls">
-				<a class="button add-new-h2 ninja_new_field" id="ninja_new_hr_<?php echo $ninja_forms_row['id'];?>" href="#">Horizontal Rule</a>
+				<a class="button add-new-h2 ninja_new_field" id="ninja_new_hr_<?php echo $ninja_forms_row['id'];?>" href="#"><?php _e('Horizontal Rule');?></a>
 			</p>
 			<p class="button-controls">
-				<a class="button add-new-h2 ninja_new_field" id="ninja_heading_heading_<?php echo $ninja_forms_row['id'];?>" href="#">Heading</a>
+				<a class="button add-new-h2 ninja_new_field" id="ninja_heading_heading_<?php echo $ninja_forms_row['id'];?>" href="#"><?php _e('Heading');?></a>
 			</p>
 			<p class="button-controls">
-				<a class="button add-new-h2 ninja_new_field" id="ninja_new_desc_<?php echo $ninja_forms_row['id'];?>" href="#">Description/Text</a>
+				<a class="button add-new-h2 ninja_new_field" id="ninja_new_desc_<?php echo $ninja_forms_row['id'];?>" href="#"><?php _e('Description/Text');?></a>
 			</p>
 		</div>
 	</div>
@@ -280,27 +303,27 @@
 		<div id="export-subs" class="postbox" name="subs-settings-list">
 			<div class="handlediv" id="handle-subs-export" title="Click to toggle"><br></div>
 			<h3 >
-				<span>Export Submissions to .XLS</span>
+				<span><?php _e('Export Submissions to .XLS');?></span>
 			</h3>
 			<div class="inside" id="subs-export" <?php if($subs_export_state == 'closed' OR $echoed){ echo 'style="display:none;"'; }else{$echoed = true;}?>>
 			
-				<p class="howto">Using this feature, you can export your submissions as a SPREADSHEET. You can then view it in Microsoft Excel or Open Office.</p>
-				<p class="howto">Enter a date range or leave both boxes empty to export all records</p>
+				<p class="howto"><?php _e('Using this feature, you can export your submissions as a SPREADSHEET. You can then view it in Microsoft Excel or Open Office');?>.</p>
+				<p class="howto"><?php _e('Enter a date range or leave both boxes empty to export all records');?></p>
 					<?php 	$download_link = esc_url(add_query_arg(array('download_subs' => 'yes', 'form_id' => $form_id)));?>
 					<form name="export_subs" id="export_subs" method="post" action="<?php echo $download_link;?>">	
 					<input type="hidden" id="form_id" name="form_id" value="<?php echo $form_id;?>">
 				<p class="button-controls">
 				<table>
 					<tr>
-						<td>Begin Date:</td><td><input type="text" name="begin_date" id="begin_date" class="date" value="<?php echo $begin_date;?>"></td>
+						<td><?php _e('Begin Date');?>:</td><td><input type="text" name="begin_date" id="begin_date" class="date" value="<?php echo $begin_date;?>"></td>
 					</tr><tr>
-						<td>End Date:</td><td><input type="text" name="end_date" id="end_date" class="date" value="<?php echo $end_date;?>"></td>
+						<td><?php _e('End Date');?>:</td><td><input type="text" name="end_date" id="end_date" class="date" value="<?php echo $end_date;?>"></td>
 					</tr>
 				</table>
 				</p>
 					<input type="submit" name="submit" id="submit" value="submit" style="display:none;">
 					</form>
-					<p><input type="button" name="" id="export_subs_submit" value="Download"></p>
+					<p><input type="button" name="" id="export_subs_submit" value="<?php _e('Download');?>"></p>
 			</div>
 		</div>
 		<?php
@@ -310,15 +333,15 @@
 		<div id="manage-subs" class="postbox" name="subs-settings-list">
 		<div class="handlediv" id="handle-manage-sub" title="Click to toggle"><br></div>
 			<h3 >
-				<span>Manage Submissions</span>
+				<span><?php _e('Manage Submissions');?></span>
 			</h3>
 			<div class="inside" id="manage-sub" <?php if($manage_sub_state == 'closed' OR $echoed){ echo 'style="display:none;"'; }else{$echoed = true;}?>>
 				<p class="howto"></p>
 				<p class="button-controls">
-					<a href="#" id="purge_old_fields_<?php echo $form_id;?>" class="ninja_purge_old_fields">Purge old field data</a><?php if($plugin_settings['admin_help'] == 'checked'){ ?> <img id="purge_fields" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
+					<a href="#" id="purge_old_fields_<?php echo $form_id;?>" class="ninja_purge_old_fields"><?php _e('Purge old field data');?></a><?php if($plugin_settings['admin_help'] == 'checked'){ ?> <img id="purge_fields" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
 				</p>
 				<p class="button-controls">
-					<a href="#" id="delete_all_subs_<?php echo $form_id;?>" class="ninja_delete_all_subs">Delete all current submission data</a><?php if($plugin_settings['admin_help'] == 'checked'){ ?> <img id="delete_subs" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
+					<a href="#" id="delete_all_subs_<?php echo $form_id;?>" class="ninja_delete_all_subs"><?php _e('Delete all current submission data');?></a><?php if($plugin_settings['admin_help'] == 'checked'){ ?> <img id="delete_subs" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
 				</p>
 			</div>
 		</div>

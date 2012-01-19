@@ -261,8 +261,10 @@ function ninja_display_form_id($form_id){
 			}else{
 				$ninja_forms_subject = stripslashes($ninja_forms_row['subject']);
 			}
-			
-			echo "<div id='ninja_form'><p class='req-item-desc'>Items marked with \"<span class='required-item'>*</span>\" are required.</p>";		
+
+			echo "<div id='ninja_form'><p class='req-item-desc'>";
+			printf(__('Items marked with %s are required'), "<span class='required-item'>*</span>");
+			echo "</p>";	
 			
 			if($ninja_forms_show_title == 'checked'){
 				echo "<h2 class='ninja-forms-title'>$ninja_forms_title</h2>";
@@ -270,6 +272,7 @@ function ninja_display_form_id($form_id){
 			if($ninja_forms_show_desc == 'checked'){
 				echo "<p class='ninja-forms-desc'>$ninja_forms_desc</p>";
 			}
+
 			
 			$multi_count = '';
 			if($multi == 'checked'){
@@ -301,9 +304,13 @@ function ninja_display_form_id($form_id){
 			}
 			if($save_status == 'checked'){
 				if($user_id){
-					echo "<p><div><a href='#' id='ninja_login_button'>Click here to resume filling out a saved form</a></div></p>";
+					echo "<p><div><a href='#' id='ninja_login_button'>";
+					_e('Click here to resume filling out a saved form');
+					echo "</a></div></p>";
 				}else{
-					echo "<p><div><a href='#' id='ninja_show_continue_login'>Click here to resume filling out a saved form</a></div></p>";
+					echo "<p><div><a href='#' id='ninja_show_continue_login'>";
+					_e('Click here to resume filling out a saved form');
+					echo "</a></div></p>";
 				}
 			}
 			foreach($ninja_forms_fields as $field){
@@ -654,7 +661,9 @@ function ninja_display_form_id($form_id){
 					}
 					echo "</label>";
 					if($type == 'postcat' OR $type == 'posttags'){
-						echo "<label class='ninja-inst' for='ninja_create_cat'>Comma, Separated, List</label>";
+						echo "<label class='ninja-inst' for='ninja_create_cat'>";
+						_e('Comma, Separated, List');
+						echo "</label>";
 					}
 					if($show_help == 'checked'){
 						echo " <img id='ninja_field_".$id."_help' src='".NINJA_FORMS_URL."/images/question-ico.gif'> ";
@@ -689,28 +698,68 @@ function ninja_display_form_id($form_id){
 				}
 			}
 			if($save_status == 'checked'){
-				echo "<input id='ninja_save_progress' name='ninja_save_progress' type='button' value='Save Progress'>";
+				echo "<input id='ninja_save_progress' name='ninja_save_progress' type='button' value='";
+				_e('Save Progress');
+				echo "'>";
 			}			
 			//echo "</div>";
-			echo "<div id='ninja_form_overlay' title='Processing Form Submission'>Processing Submission<br /><a href='#' class='ninja_close_dialog'>Close</a></div></form></div>";
+			echo "<div id='ninja_form_overlay' title='";
+			_e('Processing Form Submission');
+			echo "'>Processing Submission<br /><a href='#' class='ninja_close_dialog'>";
+			_e('Close');
+			echo "</a></div></form></div>";
 			if($save_status == 'checked'){
-				echo "<div id='ninja_form_save_progress' title='Save Your Progress'>
-				<p>Email Address: <input type='text' id='ninja_save_email' name='ninja_save_email' value=''></p>
-				<p>Password: <input type='password' id='ninja_save_password1' name='ninja_save_password1' value=''></p>
-				<p>Re-enter Password: <input type='password' id='ninja_save_password2' name='ninja_save_password2' value=''></p>
-				<p><input type='button' name='' id='ninja_popup_save' value='Save Progress'> <input type='button' name='' id='ninja_cancel_save' value='Cancel'></p>
+				echo "<div id='ninja_form_save_progress' title='";
+				_e('Save Your Progress');
+			echo "'>
+				<p>";
+				_e('Email Address');
+			echo ": <input type='text' id='ninja_save_email' name='ninja_save_email' value=''></p>
+				<p>";
+				_e('Password');
+			echo ": <input type='password' id='ninja_save_password1' name='ninja_save_password1' value=''></p>
+				<p>";
+				_e('Re-enter Password');
+			echo ": <input type='password' id='ninja_save_password2' name='ninja_save_password2' value=''></p>
+				<p><input type='button' name='' id='ninja_popup_save' value='";
+				_e('Save Progress');
+			echo "'> <input type='button' name='' id='ninja_cancel_save' value='";
+				_e('Cancel');
+			echo "'></p>
 				
-				<div id='ninja_form_continue_login' title='Continue Saved Form'>
-				<p>Email Address: <input type='text' name='' id='ninja_login_email'></p>
-				<p>Password: <input type='password' name='' id='ninja_login_password'></p>
-				<p><a href='#' id='ninja_email_pass'>Forgot Password</a></p>
-				<p><input type='button' name='' id='ninja_login_button' value='Retrieve Saved Form'> <input type='button' name='' id='ninja_cancel_login' value='Cancel'></p>
+				<div id='ninja_form_continue_login' title='";
+				_e('Continue Saved Form');
+			echo "'>
+				<p>";
+				_e('Email Address');
+			echo ": <input type='text' name='' id='ninja_login_email'></p>
+				<p>";
+				_e('Password');
+			echo ": <input type='password' name='' id='ninja_login_password'></p>
+				<p><a href='#' id='ninja_email_pass'>";
+				_e('Forgot Password');
+			echo "</a></p>
+				<p><input type='button' name='' id='ninja_login_button' value='";
+				_e('Retrieve Saved Form');
+			echo "'> <input type='button' name='' id='ninja_cancel_login' value='";
+				_e('Cancel');
+			echo "'></p>
 				</div>
 				
-				<div id='ninja_forgot_pass' title='Retrieve Forgotten Password'>
-				<p>Please enter your email address. Your password will be sent to this address.</p>
-				<p>Email Address: <input type='text' name='' id='ninja_forgot_email'></p>
-				<p><input type='button' name='' id='ninja_forgot_button' value='Retrieve Password'></p>
+				<div id='ninja_forgot_pass' title='";
+				_e('Retrieve Forgotten Password');
+			echo "'>
+				<p>";
+				_e('Please enter your email address');
+			echo ". ";
+				_e('Your password will be sent to this address');
+			echo ".</p>
+				<p>";
+				_e('Email Address');
+			echo ": <input type='text' name='' id='ninja_forgot_email'></p>
+				<p><input type='button' name='' id='ninja_forgot_button' value='";
+				_e('Retrieve Password');
+			echo "'></p>
 				</div>
 				
 				";

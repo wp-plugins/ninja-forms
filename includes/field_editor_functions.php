@@ -119,20 +119,20 @@ function ninja_form_field_editor($field_id, $new_field){
 	}
 	$class = $field['class'];
 	if(!$class){
-		$class = "Comma,Separated,List";
+		$class = __("Comma,Separated,List");
 	}
 	$help = stripslashes($field['help']);
 	$li_label = "";
 	if($type == 'hr' ){
-		$li_label = 'Horizontal Rule';
+		$li_label = __('Horizontal Rule');
 	}elseif($type == 'desc'){
-		$li_label = 'Description Text';
+		$li_label = __('Description Text');
 	}elseif($type == 'spam'){
-		$li_label = 'Anti-Spam Question';
+		$li_label = __('Anti-Spam Question');
 	}elseif($type == 'progressbar'){
-		$li_label = 'Progress Bar';
+		$li_label = __('Progress Bar');
 	}elseif($type == 'steps'){
-		$li_label = 'Progress "Steps" Indicator';
+		$li_label = __('Progress "Steps" Indicator');
 	}
 	if($li_label == ""){
 		if($label != ''){
@@ -140,16 +140,16 @@ function ninja_form_field_editor($field_id, $new_field){
 		}else{
 			$li_label = $type;
 		}
-		$label_label = "Label";
+		$label_label = __("Label");
 	}else{
 		$label_label = $li_label;
 	}
 	if($type == 'hidden'){
-		$label_label = 'Field Name';
+		$label_label = __('Field Name');
 	}elseif($type == 'divider'){
-		$label_label = 'Section Name';
+		$label_label = __('Section Name');
 	}elseif($type == 'steps'){
-		$label_label = '"Step" Label';
+		$label_label = __('Step" Label');
 	}
 	if($new_field){
 		$li_class = "menu-item-edit-active";
@@ -188,10 +188,10 @@ function ninja_form_field_editor($field_id, $new_field){
 						<label for="field_<?php echo $id;?>[extra][label_pos]">
 							<?php _e('Label Position'); ?><br />
 							<select id="field_<?php echo $id;?>[extra][label_pos]" name="field_<?php echo $id;?>[extra][label_pos]" class="widefat ninja_label_pos">
-								<?php if($list_type != 'radio'){?><option value="left" <?php if($label_pos == 'left'){ echo 'selected';}?>>Left of Element</option><?php }?>
-								<?php if($list_type != 'radio'){?><option value="right" <?php if($label_pos == 'right'){ echo 'selected';}?> >Right of Element</option><?php }?> 								
-								<option value="above" <?php if($label_pos == 'above'){ echo 'selected';}?>>Above Element</option>
-								<?php if($list_type != 'radio' && $type != 'checkbox'){?><option value="inside" <?php if($label_pos == 'inside'){ echo 'selected';}?>>Inside Element</option><?php }?>
+								<?php if($list_type != 'radio'){?><option value="left" <?php if($label_pos == 'left'){ echo 'selected';}?>><?php _e('Left of Element');?></option><?php }?>
+								<?php if($list_type != 'radio'){?><option value="right" <?php if($label_pos == 'right'){ echo 'selected';}?>><?php _e('Right of Element');?></option><?php }?> 								
+								<option value="above" <?php if($label_pos == 'above'){ echo 'selected';}?>><?php _e('Above Element');?></option>
+								<?php if($list_type != 'radio' && $type != 'checkbox'){?><option value="inside" <?php if($label_pos == 'inside'){ echo 'selected';}?>><?php _e('Inside Element');?></option><?php }?>
 							</select>
 						</label>
 					</p>
@@ -229,7 +229,7 @@ function ninja_form_field_editor($field_id, $new_field){
 								<option value="(999) 999-9999" <?php if($mask == '(999) 999-9999'){ echo 'selected'; $custom = 'no';}?>><?php _e('Phone - (555) 555-5555'); ?></option>
 								<option value="99/99/9999" <?php if($mask == '99/99/9999'){ echo 'selected'; $custom = 'no';}?>><?php _e('Date - mm/dd/yyyy'); ?></option>
 								<option value="dollars" <?php if($mask == 'dollars'){ echo 'selected'; $custom = 'no';}?>><?php _e('Dollars - $10.99'); ?></option>
-								<option value="custom" <?php if($custom != 'no'){ echo 'selected';}?>><?php _e('Custom ->'); ?></option>
+								<option value="custom" <?php if($custom != 'no'){ echo 'selected';}?>><?php _e('Custom'); ?> -></option>
 							</select>
 						</label>
 					</p>
@@ -265,15 +265,15 @@ function ninja_form_field_editor($field_id, $new_field){
 						<label for="field_<?php echo $id;?>[extra][list_type]">
 							<?php _e( 'List Type' ); ?><br />
 							<select id="field_<?php echo $id;?>[extra][list_type]" name="field_<?php echo $id;?>[extra][list_type]" class="widefat ninja_list_type">
-								<option value="select" <?php if($list_type == 'select'){ echo 'selected';}?>>Dropdown</option>
-								<option value="multi" <?php if($list_type == 'multi'){ echo 'selected';}?>>Multi-Select</option>
-								<option value="radio" <?php if($list_type == 'radio'){ echo 'selected';}?>>Radio Buttons</option>
+								<option value="select" <?php if($list_type == 'select'){ echo 'selected';}?>><?php _e('Dropdown');?></option>
+								<option value="multi" <?php if($list_type == 'multi'){ echo 'selected';}?>><?php _e('Multi-Select');?></option>
+								<option value="radio" <?php if($list_type == 'radio'){ echo 'selected';}?>><?php _e('Radio Buttons');?></option>
 							</select>
 						</label>
 					</p>
 					<p class="description ">
 						<label for="field_<?php echo $id;?>[value]">
-							<?php _e( 'Values:' ); ?> <a href="#" id="add_select_item_<?php echo $id;?>" name="add_select_item_<?php echo $id;?>" class="ninja_add_select_item">Add New</a><br />
+							<?php _e( 'Values:' ); ?> <a href="#" id="add_select_item_<?php echo $id;?>" name="add_select_item_<?php echo $id;?>" class="ninja_add_select_item"><?php _e('Add New');?></a><br />
 							<ul id="select_items_<?php echo $id;?>" name="select_items_<?php echo $id;?>" class="ninja_select_items">
 								<?php
 									$x = 0;
@@ -284,9 +284,9 @@ function ninja_form_field_editor($field_id, $new_field){
 								?>
 								<li id="select_item_<?php echo $id;?>_<?php echo $x;?>" name="select_item_<?php echo $id;?>_<?php echo $x;?>">
 									<input type="text" class="code" name="field_<?php echo $id;?>[extra][list_item][<?php echo $x;?>]" id="field_<?php echo $id;?>[extra][list_item][<?php echo $x;?>]" value="<?php echo $value;?>" />
-									<span class="menu-item-handle">Drag | 
+									<span class="menu-item-handle"><?php _e('Drag');?> | 
 									<a href="#" id="remove_select_item_<?php echo $id;?>_<?php echo $x;?>" name="remove_select_item_<?php echo $id;?>_<?php echo $x;?>" class="deletion ninja_remove_select_item">Remove</a> | 
-									<label for="select_item_default_<?php echo $id;?>_<?php echo $x;?>">Selected</label> <input type="hidden" class="ninja_select_item_default" value="unchecked" name="select_item_default_<?php echo $id;?>_<?php echo $x;?>"><input type="checkbox" class="ninja_select_item_default" value="checked" id="select_item_default_<?php echo $id;?>_<?php echo $x;?>" name="select_item_default_<?php echo $id;?>_<?php echo $x;?>" <?php if($value == $list_default){ echo "checked";};?>></span>
+									<label for="select_item_default_<?php echo $id;?>_<?php echo $x;?>"><?php _e('Selected');?></label> <input type="hidden" class="ninja_select_item_default" value="unchecked" name="select_item_default_<?php echo $id;?>_<?php echo $x;?>"><input type="checkbox" class="ninja_select_item_default" value="checked" id="select_item_default_<?php echo $id;?>_<?php echo $x;?>" name="select_item_default_<?php echo $id;?>_<?php echo $x;?>" <?php if($value == $list_default){ echo "checked";};?>></span>
 								</li>
 								<?php
 											$x++;
@@ -322,13 +322,13 @@ function ninja_form_field_editor($field_id, $new_field){
 					</p>
 					<p class="description description-thin">
 						<label for="field_<?php echo $id;?>[extra][rte]">
-							<input type="hidden" name="field_<?php echo $id;?>[extra][rte]" value="unchecked"><input type="checkbox" id="field_<?php echo $id;?>[extra][rte]" name="field_<?php echo $id;?>[extra][rte]" value="checked" <?php echo $rte;?> class="ninja-rte-checkbox"> Show Rich Text Editor
+							<input type="hidden" name="field_<?php echo $id;?>[extra][rte]" value="unchecked"><input type="checkbox" id="field_<?php echo $id;?>[extra][rte]" name="field_<?php echo $id;?>[extra][rte]" value="checked" <?php echo $rte;?> class="ninja-rte-checkbox"> <?php _e('Show Rich Text Editor');?>
 						</label>
 						<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="" class="show_rte" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
 					</p>					
 					<p class="description description-thin">
 						<label for="field_<?php echo $id;?>[extra][media_upload]" id="field_<?php echo $id;?>[extra][media_upload]_cont" style="<?php if($rte != 'checked'){ echo "display:none";}?>">
-							<input type="hidden" name="field_<?php echo $id;?>[extra][media_upload]" value="unchecked"><input type="checkbox" id="field_<?php echo $id;?>[extra][media_upload]" name="field_<?php echo $id;?>[extra][media_upload]" value="checked" <?php echo $media_upload;?>> Allow Media Uploads
+							<input type="hidden" name="field_<?php echo $id;?>[extra][media_upload]" value="unchecked"><input type="checkbox" id="field_<?php echo $id;?>[extra][media_upload]" name="field_<?php echo $id;?>[extra][media_upload]" value="checked" <?php echo $media_upload;?>> <?php _e('Allow Media Uploads');?>
 							<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="" class="show_upload" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
 						</label>
 					</p>
@@ -367,10 +367,10 @@ function ninja_form_field_editor($field_id, $new_field){
 						<label for="field_<?php echo $id;?>[extra][label_pos]">
 							<?php _e('Label Position'); ?><br />
 							<select id="field_<?php echo $id;?>[extra][label_pos]" name="field_<?php echo $id;?>[extra][label_pos]" class="widefat ninja_label_pos">
-								<option value="left" <?php if($label_pos == 'left'){ echo 'selected';}?>>Left of Element</option>
-								<option value="right" <?php if($label_pos == 'right'){ echo 'selected';}?>>Right of Element</option>
-								<option value="above" <?php if($label_pos == 'above'){ echo 'selected';}?>>Above Element</option>
-								<option value="inside" <?php if($label_pos == 'inside'){ echo 'selected';}?>>Inside Element</option>
+								<option value="left" <?php if($label_pos == 'left'){ echo 'selected';}?>><?php _e('Left of Element');?></option>
+								<option value="right" <?php if($label_pos == 'right'){ echo 'selected';}?>><?php _e('Right of Element');?></option>
+								<option value="above" <?php if($label_pos == 'above'){ echo 'selected';}?>><?php _e('Above Element');?></option>
+								<option value="inside" <?php if($label_pos == 'inside'){ echo 'selected';}?>><?php _e('Inside Element');?></option>
 							</select>
 						</label>
 					</p>
@@ -421,8 +421,8 @@ function ninja_form_field_editor($field_id, $new_field){
 						<label for="field_<?php echo $id;?>[value]">
 							<?php _e('Value'); ?><br />
 							<select id="field_<?php echo $id;?>[value]" name="field_<?php echo $id;?>[value][select]" class="ninja_form_hidden">
-								<option value="ninja_user_ID" <?php if($value == 'ninja_user_ID'){ echo 'selected';}?>>User ID (If Logged In)</option>
-								<option value="ninja_custom" <?php if($value != 'ninja_user_ID'){ echo 'selected';}?>>Custom Value</option>
+								<option value="ninja_user_ID" <?php if($value == 'ninja_user_ID'){ echo 'selected';}?>><?php _e('User ID (If Logged In)');?></option>
+								<option value="ninja_custom" <?php if($value != 'ninja_user_ID'){ echo 'selected';}?>><?php _e('Custom Value');?></option>
 							</select>
 						</label>
 					</p>
@@ -453,13 +453,13 @@ function ninja_form_field_editor($field_id, $new_field){
 					?>
 						<p class="description description-thin">
 							<label for="field_<?php echo $id;?>[extra][rte]">
-								<input type="hidden" name="field_<?php echo $id;?>[extra][rte]" value="unchecked"><input type="checkbox" id="field_<?php echo $id;?>[extra][rte]" name="field_<?php echo $id;?>[extra][rte]" value="checked" <?php echo $rte;?> class="ninja-rte-checkbox"> Show Rich Text Editor
+								<input type="hidden" name="field_<?php echo $id;?>[extra][rte]" value="unchecked"><input type="checkbox" id="field_<?php echo $id;?>[extra][rte]" name="field_<?php echo $id;?>[extra][rte]" value="checked" <?php echo $rte;?> class="ninja-rte-checkbox"> <?php _e('Show Rich Text Editor');?>
 							</label>
 							<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="" class="show_rte" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
 						</p>
 						<p class="description description-thin">
 							<label for="field_<?php echo $id;?>[extra][media_upload]" id="field_<?php echo $id;?>[extra][media_upload]_cont" style="<?php if($rte != 'checked'){ echo "display:none";}?>">
-								<input type="hidden" name="field_<?php echo $id;?>[extra][media_upload]" value="unchecked"><input type="checkbox" id="field_<?php echo $id;?>[extra][media_upload]" name="field_<?php echo $id;?>[extra][media_upload]" value="checked" <?php echo $media_upload;?>> Allow Media Uploads
+								<input type="hidden" name="field_<?php echo $id;?>[extra][media_upload]" value="unchecked"><input type="checkbox" id="field_<?php echo $id;?>[extra][media_upload]" name="field_<?php echo $id;?>[extra][media_upload]" value="checked" <?php echo $media_upload;?>> <?php _e('Allow Media Uploads');?>
 								<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="" class="show_upload" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
 							</label>
 						</p>
@@ -474,7 +474,7 @@ function ninja_form_field_editor($field_id, $new_field){
 						?>
 						<p class="description description-wide">
 							<label for="field_<?php echo $id;?>[extra][create_cat]">
-								<input type="hidden" name="field_<?php echo $id;?>[extra][create_cat]" value="unchecked"><input type="checkbox" id="field_<?php echo $id;?>[extra][create_cat]" name="field_<?php echo $id;?>[extra][create_cat]" value="checked" <?php echo $create_cat;?>> Users Can Create Categories
+								<input type="hidden" name="field_<?php echo $id;?>[extra][create_cat]" value="unchecked"><input type="checkbox" id="field_<?php echo $id;?>[extra][create_cat]" name="field_<?php echo $id;?>[extra][create_cat]" value="checked" <?php echo $create_cat;?>> <?php _e('Users Can Create Categories');?>
 							</label>
 						</p>
 						<?php
@@ -488,20 +488,20 @@ function ninja_form_field_editor($field_id, $new_field){
 					?>
 					<p class="description description-wide">
 						<label for="field_<?php echo $id;?>[extra][upload_types]">
-							Comma Separated List of allowed file types. An empty list means all file types are accepted. (i.e. .jpg, .gif, .png, .pdf)
+							<?php _e('Comma Separated List of allowed file types. An empty list means all file types are accepted');?>. (i.e. .jpg, .gif, .png, .pdf)
 						</label>
 					</p>
 					<p class="description description-wide">
-						This is not fool-proof and can be tricked, please remember that there is always a danger in allowing users to upload files.
+						<?php _e('This is not fool-proof and can be tricked, please remember that there is always a danger in allowing users to upload files');?>.
 					</p>
 					
 					<p class="description description-wide">
 						<input type="text" class="code widefat" name="field_<?php echo $id;?>[extra][upload_types]" id="field_<?php echo $id;?>[extra][upload_types]" value="<?php echo $upload_types;?>">
 					</p>
-					<a href="#" id="upload_rename_<?php echo $id;?>" class="ninja-advanced">Advanced FIle Naming Options</a>
+					<a href="#" id="upload_rename_<?php echo $id;?>" class="ninja-advanced"><?php _e('Advanced FIle Naming Options');?></a>
 					<p class="description description-wide" id="upload_rename_<?php echo $id;?>_cont" <?php if(!$upload_rename){ echo 'style="display:none;"';}?>>
 						<label for="field_<?php echo $id;?>[extra][upload_rename]">
-							If you aren't sure you want to give the uploaded file a special name, please leave this box blank. <a href="#" name="rename_help" class="ninja_help_open">Help Renaming Files</a>
+							<?php _e("If you aren't sure you want to give the uploaded file a special name, please leave this box blank");?>. <a href="#" name="rename_help" class="ninja_help_open"><?php _e('Help Renaming Files');?></a>
 						</label>
 						<input type="text" class="code widefat" name="field_<?php echo $id;?>[extra][upload_rename]" id="field_<?php echo $id;?>[extra][upload_rename]" value="<?php echo $upload_rename;?>">
 					</p>
@@ -573,9 +573,9 @@ function ninja_form_field_editor($field_id, $new_field){
 			?>
 			<div class="button-controls ninja_post_options" id="" style="<?php if($ninja_post != "checked" AND ($type != 'posttitle' OR $type != 'postcontent' OR $type != 'postexcerpt' OR $type != 'postcat' OR $type != 'posttags')){ echo "display:none;";}?>">
 				<p class="description description-wide">
-					Select Post Meta Value
+					<?php _e('Select Post Meta Value');?>
 					<select id="field_<?php echo $id;?>[extra][meta_key]" name="field_<?php echo $id;?>[extra][meta_key]">
-						<option value="_new">-- New Meta Key</option>
+						<option value="_new">-- <?php _e('New Meta Key');?></option>
 						<?php
 							foreach($meta_array as $meta){
 								$meta = htmlentities($meta);

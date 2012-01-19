@@ -30,33 +30,6 @@ border-color: #DFDFDF;
 	margin-bottom: 10px;
 }
 
-.wrap-left {
-	float: left;
-	width: 60%;
-}
-.wrap-right {
-	background: #464646;
-	color: #fff;
-	float: right;
-	margin: 0 auto;
-	padding: 10px;
-	width: 263px;
-}
-.wrap-right img {
-	margin: 0 auto;
-}
-.wrap-right h2 {
-	color: #fff;
-	text-shadow: black 0 1px 0;
-}
-.wrap-right ul {
-	background: #fff;
-	color: #333;
-	list-style: disc;
-	list-style-position: inside;
-	padding: 20px;
-}
-
 #post-body-content .wp-switch-editor {
 	margin-top: -7px;
 }

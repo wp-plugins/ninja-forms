@@ -173,8 +173,11 @@ function ninja_purge_fields(){
 add_action('wp_ajax_ninja_save_settings_order', 'ninja_save_settings_order');
 function ninja_save_settings_order(){
 	$page = esc_html($_REQUEST['page']);
-	$order = esc_html($_REQUEST['order']);
-	$plugin_settings = get_option('ninja_forms_settings');
+	$order = $_REQUEST['order'];
+	//print_r($order);
+	$plugin_settings = get_option('ninja_forms_settings');	
+	//print_r($plugin_settings);	
+
 	if($page == 'form-settings-list'){
 		$plugin_settings['settings_sidebar_order'] = $order;
 	}elseif($page == 'field-settings-list'){
@@ -184,6 +187,7 @@ function ninja_save_settings_order(){
 	}
 	//print_r($plugin_settings);
 	update_option("ninja_forms_settings", $plugin_settings);
+
 	die();	
 }
 
