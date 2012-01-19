@@ -2,7 +2,7 @@
 /*
 Plugin Name: NinjaForms Lite
 Plugin URI: http://ninjaforms.com
-Description: NinjaForms Lite is the free version of NinjaForms, a webform builder with unparalleled ease of use and features. The Pro version has many more features. See the plugin settings page for more information.
+Description: NinjaForms is a webform builder with unparalleled ease of use and features.
 Version: 1.2.8
 Author: The WP Ninjas
 Author URI: http://wpninjas.net
@@ -26,16 +26,24 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
-global $version_compare;
 
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/ninja-forms");
 define("NINJA_FORMS_URL", WP_PLUGIN_URL."/ninja-forms");
-define("NINJA_FORMS_VERSION", "1.2.8");
+define("NINJA_FORMS_VERSION", "1.2.9");
 define("NINJA_FORMS_TYPE", "Lite");
 
 session_start();
 $_SESSION['NINJA_FORMS_DIR'] = NINJA_FORMS_DIR;
 $_SESSION['NINJA_FORMS_URL'] = NINJA_FORMS_URL;
+
+function ninja_forms_load_lang() {
+	$plugin_dir = basename(dirname(__FILE__));
+	$lang_dir = $plugin_dir.'/lang/';
+	load_plugin_textdomain( 'ninja-forms', false, $plugin_dir );
+}
+add_action('init', 'ninja_forms_load_lang');
+
+global $version_compare;
 
 $plugin_settings = get_option("ninja_forms_settings");
 
@@ -221,13 +229,15 @@ function ninja_initial_setup(){
 		$old_db_version = $new_db_version;
 	}
 	$fields_sidebar_order = array('custom-fields', 'defined-fields', 'layout-elements', 'multi-part', 'post-elements');
+	$settings_sidebar_order = array('subs-settings', 'append-page-settings', 'append-post-settings');
+	$subs_sidebar_order = array('export-subs', 'manage-subs');
 	//changes to our ninja_forms_settings for version 1.1
 	$current_version = $plugin_settings['version'];
 
 	$upload_dir = dirname(__FILE__);
 	$upload_dir = str_replace("includes", "", $upload_dir);
 	$upload_dir .= "/uploads/";
-	$upload_size = "1";
+	$upload_size = "1";	
 	
 
 
@@ -239,7 +249,7 @@ function ninja_initial_setup(){
 		To fix this, we'll reset the upload directory and
 		Check for these old names and alter the tables if necessary.
 	*/
-
+	
 	$old_forms_table_name = $wpdb->prefix . "wpnj_forms";
 	$old_forms_subs_table_name = $wpdb->prefix . "wpnj_forms_subs";
 	$old_forms_fields_table_name = $wpdb->prefix . "wpnj_forms_fields";

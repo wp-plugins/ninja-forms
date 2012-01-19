@@ -10,11 +10,11 @@ $wpdb->prepare("SELECT * FROM $ninja_forms_table_name ORDER BY title ASC")
 	<table class="widefat" cellspacing="0" id="all-plugins-table"> 
 	<thead> 
 		<tr> 
-			<th class="mange-column">Action</th> 
-			<th class="mange-column">Title</th>				
-			<th class="mange-column">Preview</th> 
-			<th class="mange-column">Submissions</th> 
-			<th class="mange-column">Shortcode</th> 
+			<th class="mange-column"><?php _e('Action');?></th> 
+			<th class="mange-column"><?php _e('Title');?></th>				
+			<th class="mange-column"><?php _e('Preview');?></th> 
+			<th class="mange-column"><?php _e('Submissions');?></th> 
+			<th class="mange-column"><?php _e('Shortcode');?></th> 
 			
 		</tr> 
 	</thead> 
@@ -30,10 +30,10 @@ $wpdb->prepare("SELECT * FROM $ninja_forms_table_name ORDER BY title ASC")
 			$download_link = esc_url(add_query_arg(array('download_subs' => 'yes', 'form_id' => $form_id)));
 		?>
 		<tr>
-			<td><a href="<?php echo $edit_link;?>">Edit</a> | <span class="delete"><a class="ninja_form_delete" href="#" id="<?php echo $form_id;?>"><?php _e('Delete'); ?></a></span></td>
+			<td><a href="<?php echo $edit_link;?>"><?php _e('Edit');?></a> | <span class="delete"><a class="ninja_form_delete" href="#" id="<?php echo $form_id;?>"><?php _e('Delete'); ?></a></span></td>
 			<td><?php echo $form_title;?></td>
-			<td><a href="<?php echo $preview_link;?>">Preview Form</a></td>
-			<td><a href="<?php echo $subs_link;?>">View Submissions</a> | <a href="<?php echo $download_link;?>">Download submissions as .xls</td>
+			<td><a href="<?php echo $preview_link;?>"><?php _e('Preview Form');?></a></td>
+			<td><a href="<?php echo $subs_link;?>"><?php _e('View Submissions');?></a> | <a href="<?php echo $download_link;?>"><?php _e('Download submissions as .xls');?></td>
 			<td>[ninja_display_form id=<?php echo $form_id;?>]</td>
 		</tr>
 		<?php 
@@ -41,7 +41,7 @@ $wpdb->prepare("SELECT * FROM $ninja_forms_table_name ORDER BY title ASC")
 		}else{
 		?>
 		<tr>
-			<td>No Forms Found. Would you like to <a class="button-secondary ninja_new_form" id="" name=""><?php esc_attr_e('Add A New One'); ?>?</a></td>
+			<td><?php _e('No Forms Found. Would you like to');?> <a class="button-secondary ninja_new_form" id="" name=""><?php _e('Add A New One'); ?>?</a></td>
 			<td></td>
 			<td></td>
 			<td></td>
@@ -55,11 +55,11 @@ $wpdb->prepare("SELECT * FROM $ninja_forms_table_name ORDER BY title ASC")
 
 <tfoot> 
 		<tr> 
-			<th class="mange-column">Action</th> 
-			<th class="mange-column">Title</th> 
-			<th class="mange-column">Preview</th> 
-			<th class="mange-column">Submissions</th> 
-			<th class="mange-column">Shortcode</th> 
+			<th class="mange-column"><?php _e('Action');?></th> 
+			<th class="mange-column"><?php _e('Title');?></th>				
+			<th class="mange-column"><?php _e('Preview');?></th> 
+			<th class="mange-column"><?php _e('Submissions');?></th> 
+			<th class="mange-column"><?php _e('Shortcode');?></th> 
 			
 		</tr> 
 	</tfoot> 

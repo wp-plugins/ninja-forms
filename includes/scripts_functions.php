@@ -61,7 +61,7 @@ function ninja_form_admin_js(){
 	
 	if($version_compare){
 		//wp_enqueue_script('ninja_forms_admin_js',
-		//NINJA_FORMS_URL .'/js/ninja_forms_admin.js',
+		//NINJA_FORMS_URL .'/js/dev/ninja_forms_admin.js',
 		//array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-ui-datepicker'), '', true);		
 		
 		wp_enqueue_script('ninja_forms_admin_js',
@@ -69,7 +69,7 @@ function ninja_form_admin_js(){
 		array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-ui-datepicker'), '', true);
 	}else{
 		wp_enqueue_script('ninja_forms_admin_js',
-		NINJA_FORMS_URL .'/js/ninja_forms_admin_3.1.js',
+		NINJA_FORMS_URL .'/js/min/ninja_forms_admin_3.1.min.js',
 		array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-dialog'), '', true);
 	}
 	wp_localize_script( 'ninja_forms_admin_js', 'settings', array( 'plugin_url' => NINJA_FORMS_URL, 'help_size' => $plugin_settings['help_size'], 'help_color' => $plugin_settings['help_color'], 'admin_help' => $plugin_settings['admin_help']) );
@@ -112,21 +112,21 @@ function ninja_form_display_js(){
 		}
 		
 		if($version_compare){
-			//wp_enqueue_script('ninja_forms_display-js',
-			//NINJA_FORMS_URL .'/js/min/ninja_forms_display.min.js',
-			//array('jquery', 'jquery-ui-core', 'jquery-ui-dialog', 'jquery-form'));	
-			
 			wp_enqueue_script('ninja_forms_display-js',
-			NINJA_FORMS_URL .'/js/dev/ninja_forms_display.js',
-			array('jquery', 'jquery-ui-core', 'jquery-ui-dialog', 'jquery-form'));			
-		}else{
+			NINJA_FORMS_URL .'/js/min/ninja_forms_display.min.js',
+			array('jquery', 'jquery-ui-core', 'jquery-ui-dialog', 'jquery-form'));	
+			
 			//wp_enqueue_script('ninja_forms_display-js',
-			//NINJA_FORMS_URL .'/js/min/ninja_forms_display_3.1.min.js',
+			//NINJA_FORMS_URL .'/js/dev/ninja_forms_display.js',
 			//array('jquery', 'jquery-ui-core', 'jquery-ui-dialog', 'jquery-form'));			
-			
+		}else{
 			wp_enqueue_script('ninja_forms_display-js',
-			NINJA_FORMS_URL .'/js/dev/ninja_forms_display_3.1.js',
-			array('jquery', 'jquery-ui-core', 'jquery-ui-dialog', 'jquery-form'));
+			NINJA_FORMS_URL .'/js/min/ninja_forms_display_3.1.min.js',
+			array('jquery', 'jquery-ui-core', 'jquery-ui-dialog', 'jquery-form'));			
+			
+			//wp_enqueue_script('ninja_forms_display-js',
+			//NINJA_FORMS_URL .'/js/dev/ninja_forms_display_3.1.js',
+			//array('jquery', 'jquery-ui-core', 'jquery-ui-dialog', 'jquery-form'));
 			
 			
 		}

@@ -44,8 +44,8 @@ $current_fields = array_values($current_fields);
 <table class="widefat tablesorter" cellspacing="0" id="ninja_subs_table"> 
 	<thead> 
 		<tr> 
-			<th class="mange-column" width="20%">Action</th> 
-			<th class="mange-column" width="20%">Date</th> 
+			<th class="mange-column" width="20%"><?php e_('Action');?></th> 
+			<th class="mange-column" width="20%"><?php e_('Date');?></th> 
 		<?php
 if($ninja_forms_fields_columns){
 	foreach($ninja_forms_fields_columns as $field){
@@ -96,7 +96,7 @@ if($ninja_forms_subs){
 		//Begin output of our main "visible" section.
 ?>
 <tr id="sub_<?php echo $sub['id'];?>_visible" class="sub_tr_<?php echo $sub['id'];?>">
-		<td width="20%"><span class="delete"><a href="#" id="sub_<?php echo $sub['id'];?>" class="ninja_delete_sub">Delete</a></span><?php if($current_fields || $old_values){ ?> | <a href="#" id="more_<?php echo $sub['id'];?>" class="ninja_sub_more">More</a><?php } ?></td>
+		<td width="20%"><span class="delete"><a href="#" id="sub_<?php echo $sub['id'];?>" class="ninja_delete_sub"><?php e_('Delete');?></a></span><?php if($current_fields || $old_values){ ?> | <a href="#" id="more_<?php echo $sub['id'];?>" class="ninja_sub_more"><?php e_('More');?></a><?php } ?></td>
 		<td  width="20%"><?php echo $date;?></td>
 		<?php
 		$field_value = array();
@@ -137,7 +137,7 @@ if($ninja_forms_subs){
 	?>
 <tr id="sub_<?php echo $sub['id'];?>_more" class="expand-child sub_tr_<?php echo $sub['id'];?>" style="display:none;">
 	<td colspan="2">
-		<strong>Other Fields:</strong><div class="other-fields" style="border-style:solid;border-width:1px;padding:5px">
+		<strong><?php e_('Other Fields');?>:</strong><div class="other-fields" style="border-style:solid;border-width:1px;padding:5px">
 	<?php
 			foreach($current_fields as $field){
 				foreach($form_values as $value){
@@ -170,7 +170,7 @@ if($ninja_forms_subs){
 	<?php
 		if($old_values){
 			?>
-			<strong>Old Values:</strong><div class="old-fields"  style="border-style:solid;border-width:1px;padding:5px">
+			<strong><?php e_('Old Values');?>:</strong><div class="old-fields"  style="border-style:solid;border-width:1px;padding:5px">
 			<?php
 			foreach($old_values as $value){
 				if(is_array($value['value'])){
@@ -211,7 +211,7 @@ if($ninja_forms_subs){
 	}else{ //If there are aren't any submissions.
 	?>
 	<tr>
-		<td>No Submissions Found</td>
+		<td><?php e_('No Submissions Found');?></td>
 	</tr>
 	<?php
 	}
@@ -220,8 +220,8 @@ if($ninja_forms_subs){
 	</tbody>
 	<tfoot> 
 		<tr> 
-			<th class="mange-column">Action</th> 
-			<th class="mange-column">Date</th> 
+			<th class="mange-column"><?php e_('Action');?></th> 
+			<th class="mange-column"><?php e_('Date');?></th> 
 		<?php
 	if($ninja_forms_fields_columns){
 		foreach($ninja_forms_fields_columns as $field){

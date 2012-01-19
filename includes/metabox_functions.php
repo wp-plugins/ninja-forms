@@ -48,7 +48,9 @@ function ninja_forms_inner_custom_box() {
 	echo '</label> ';
 	*/
 	echo '<select id="ninja_form_select" name="ninja_form_select">';
-	echo '<option value="0">--- None ---</option>';
+	echo '<option value="0">--- ';
+	_e('None');
+	echo '---</option>';
 	$ninja_all_forms = $wpdb->get_results(
 	$wpdb->prepare( "SELECT * FROM $ninja_forms_table_name")
 	, ARRAY_A);
