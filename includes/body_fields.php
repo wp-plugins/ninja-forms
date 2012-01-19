@@ -14,18 +14,18 @@ $action = esc_html($_REQUEST['action']);
 			<div class="major-publishing-actions">
 				<!--
 				<label class="menu-name-label howto open-label" for="menu-name">
-					<span><?php _e('Form Name'); ?></span>
-					<input name="menu-name" id="menu-name" type="text" class="menu-name regular-text menu-item-textbox input-with-default-title" title="<?php _e('Enter Form Name Here'); ?>" value="TeSt" />
+					<span><?php _e('Form Name', 'ninja-forms'); ?></span>
+					<input name="menu-name" id="menu-name" type="text" class="menu-name regular-text menu-item-textbox input-with-default-title" title="<?php _e('Enter Form Name Here', 'ninja-forms'); ?>" value="TeSt" />
 				</label>
 				<br class="clear" />
 				-->
 					
 				<div class="publishing-action">
-					<input class="button-primary menu-save ninja_save_data" name="save_menu" id="ninja_save_data_top" type="submit" value="<?php _e('Save Fields'); ?>" />
+					<input class="button-primary menu-save ninja_save_data" name="save_menu" id="ninja_save_data_top" type="submit" value="<?php _e('Save Fields', 'ninja-forms'); ?>" />
 				</div><!-- END .publishing-action -->
 				<!--
 				<div class="delete-action">
-					<a class="submitdelete deletion menu-delete" href="<?php echo esc_url( wp_nonce_url( admin_url('nav-menus.php?action=delete&amp;menu=' . $nav_menu_selected_id), 'delete-nav_menu-' . $nav_menu_selected_id ) ); ?>"><?php _e('Delete Menu'); ?></a>
+					<a class="submitdelete deletion menu-delete" href="<?php echo esc_url( wp_nonce_url( admin_url('nav-menus.php?action=delete&amp;menu=' . $nav_menu_selected_id), 'delete-nav_menu-' . $nav_menu_selected_id ) ); ?>"><?php _e('Delete Menu', 'ninja-forms'); ?></a>
 				</div><!-- END .delete-action -->
 				
 			</div><!-- END .major-publishing-actions -->
@@ -49,12 +49,12 @@ $action = esc_html($_REQUEST['action']);
 	<div id="nav-menu-footer">
 	<div class="major-publishing-actions">
 				<!----<label class="menu-name-label howto open-label">
-					<span><?php _e('Submit Button Text'); ?></span>
-					<input name="menu-name" id="menu-name" type="text" class="menu-name regular-text menu-item-textbox input-with-default-title" title="<?php _e('Enter Form Name Here'); ?>" value="Submit" />
+					<span><?php _e('Submit Button Text', 'ninja-forms'); ?></span>
+					<input name="menu-name" id="menu-name" type="text" class="menu-name regular-text menu-item-textbox input-with-default-title" title="<?php _e('Enter Form Name Here', 'ninja-forms'); ?>" value="Submit" />
 				</label>
 				---->
 				<div class="publishing-action">
-					<input class="button-primary menu-save ninja_save_data" name="save_menu" id="ninja_save_data_bot" type="submit" value="<?php _e('Save Fields'); ?>" />
+					<input class="button-primary menu-save ninja_save_data" name="save_menu" id="ninja_save_data_bot" type="submit" value="<?php _e('Save Fields', 'ninja-forms'); ?>" />
 				</div><!-- END .publishing-action -->
 	</div><!-- END #nav-menu-header -->
 	</div>
@@ -70,19 +70,19 @@ $action = esc_html($_REQUEST['action']);
 	?>
 </div>
 <div id="mask_help" class="ninja_help_text" title="Custom Mask Help" style="display:none;">
-		<p><?php _e('Any character you place in the "custom mask" box that is not in the list below will be automatically entered for the user as they type and will not be removeable');?>.</p>
-		</p><?php _e('These are the predefined masking characters');?>:
+		<p><?php _e('Any character you place in the "custom mask" box that is not in the list below will be automatically entered for the user as they type and will not be removeable', 'ninja-forms');?>.</p>
+		</p><?php _e('These are the predefined masking characters', 'ninja-forms');?>:
 			<ul>
-				<li><?php _e('a - Represents an alpha character (A-Z,a-z) - Only allows letters to be entered');?>.</lid>
-				<li><?php _e('9 - Represents a numeric character (0-9) - Only allows numbers to be entered');?>.</li>
-				<li><?php _e('* - Represents an alphanumeric character (A-Z,a-z,0-9) - This allows both numbers and letters to be entered');?>.</li>
+				<li><?php _e('a - Represents an alpha character (A-Z,a-z) - Only allows letters to be entered', 'ninja-forms');?>.</lid>
+				<li><?php _e('9 - Represents a numeric character (0-9) - Only allows numbers to be entered', 'ninja-forms');?>.</li>
+				<li><?php _e('* - Represents an alphanumeric character (A-Z,a-z,0-9) - This allows both numbers and letters to be entered', 'ninja-forms');?>.</li>
 			</ul>
 		</p>
 		<p>
-			<?php _e("So, if you wanted to a mask for an an American Social Security Number, you'd put 999-99-9999 into the box");?>. <?php _e("The 9's would represent any number, and the -'s would be automatically added");?>. <?php _e('This would prevent the user from putting in anything other than numbers');?>.
+			<?php _e("So, if you wanted to a mask for an an American Social Security Number, you'd put 999-99-9999 into the box", 'ninja-forms');?>. <?php _e("The 9's would represent any number, and the -'s would be automatically added", 'ninja-forms');?>. <?php _e('This would prevent the user from putting in anything other than numbers', 'ninja-forms');?>.
 		</p>
 		<p>
-			<?php _e('You can also combine these for specific applications');?>. <?php _e("For instance, if you had a product key that was in the form of A4B51.989.B.43C, you could mask it with: a9a99.999.a.99a, which would force all the a's to be letters and the 9's to be numbers");?>.
+			<?php _e('You can also combine these for specific applications', 'ninja-forms');?>. <?php _e("For instance, if you had a product key that was in the form of A4B51.989.B.43C, you could mask it with: a9a99.999.a.99a, which would force all the a's to be letters and the 9's to be numbers", 'ninja-forms');?>.
 		</p>
 </div>
 <?php

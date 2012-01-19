@@ -3,7 +3,7 @@
 Plugin Name: NinjaForms Lite
 Plugin URI: http://ninjaforms.com
 Description: NinjaForms is a webform builder with unparalleled ease of use and features.
-Version: 1.2.8
+Version: 1.2.9
 Author: The WP Ninjas
 Author URI: http://wpninjas.net
 */
@@ -111,7 +111,7 @@ function ninja_edit_forms(){
 	<div class="wrap">
 		<?php if($current_tab == 'fields'){ ?><form id="ninja_form_fields" name="" action="" method="post"><?php } ?>
 		<div id="icon-ninja-custom-forms" class="icon32"><img src="<?php echo NINJA_FORMS_URL;?>/images/wpnj-ninja-head.png"></div>
-		<h2 id="ninja_test"><?php esc_html_e('Ninja Forms '.NINJA_FORMS_TYPE); ?> <?php if($current_tab == 'list'){ ?><input class="button-secondary ninja_new_form" id="" name="" type="button" value="<?php esc_attr_e('Add New'); ?>" /><?php }elseif($form_id == 'new'){  esc_html_e('- Add A New Form'); }else{ esc_html_e(" - $form_title");}?><h2>
+		<h2 id="ninja_test"><?php _e('Ninja Forms', 'ninja-forms'); ?> <?php echo NINJA_FORMS_TYPE;?><?php if($current_tab == 'list'){ ?><input class="button-secondary ninja_new_form" id="" name="" type="button" value="<?php _e('Add New', 'ninja-forms'); ?>" /><?php }elseif($form_id == 'new'){  _e('- Add A New Form', 'ninja-forms'); }else{ echo $form_title;}?><h2>
 		<h3>
 			
 		</h3>

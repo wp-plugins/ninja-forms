@@ -14,7 +14,7 @@ add_action('save_post', 'ninja_forms_save_postdata');
 function ninja_forms_add_custom_box() {
 	add_meta_box( 
 		'ninja_forms_selector',
-		__( 'Append A Ninja Form', 'ninja_forms_textdomain' ),
+		__( 'Append A Ninja Form', 'ninja_forms_textdomain' , 'ninja-forms'),
 		'ninja_forms_inner_custom_box',
 		'post',
 		'side',
@@ -22,7 +22,7 @@ function ninja_forms_add_custom_box() {
 	);
 	add_meta_box(
 		'ninja_forms_selector',
-		__( 'Append A Ninja Form', 'ninja_forms_textdomain' ), 
+		__( 'Append A Ninja Form', 'ninja_forms_textdomain' , 'ninja-forms'), 
 		'ninja_forms_inner_custom_box',
 		'page',
 		'side',
@@ -49,7 +49,7 @@ function ninja_forms_inner_custom_box() {
 	*/
 	echo '<select id="ninja_form_select" name="ninja_form_select">';
 	echo '<option value="0">--- ';
-	_e('None');
+	_e('None', 'ninja-forms');
 	echo '---</option>';
 	$ninja_all_forms = $wpdb->get_results(
 	$wpdb->prepare( "SELECT * FROM $ninja_forms_table_name")

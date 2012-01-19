@@ -263,7 +263,7 @@ function ninja_display_form_id($form_id){
 			}
 
 			echo "<div id='ninja_form'><p class='req-item-desc'>";
-			printf(__('Items marked with %s are required'), "<span class='required-item'>*</span>");
+			printf(__('Items marked with %s are required', 'ninja-forms'), "<span class='required-item'>*</span>");
 			echo "</p>";	
 			
 			if($ninja_forms_show_title == 'checked'){
@@ -305,11 +305,11 @@ function ninja_display_form_id($form_id){
 			if($save_status == 'checked'){
 				if($user_id){
 					echo "<p><div><a href='#' id='ninja_login_button'>";
-					_e('Click here to resume filling out a saved form');
+					_e('Click here to resume filling out a saved form', 'ninja-forms');
 					echo "</a></div></p>";
 				}else{
 					echo "<p><div><a href='#' id='ninja_show_continue_login'>";
-					_e('Click here to resume filling out a saved form');
+					_e('Click here to resume filling out a saved form', 'ninja-forms');
 					echo "</a></div></p>";
 				}
 			}
@@ -662,7 +662,7 @@ function ninja_display_form_id($form_id){
 					echo "</label>";
 					if($type == 'postcat' OR $type == 'posttags'){
 						echo "<label class='ninja-inst' for='ninja_create_cat'>";
-						_e('Comma, Separated, List');
+						_e('Comma, Separated, List', 'ninja-forms');
 						echo "</label>";
 					}
 					if($show_help == 'checked'){
@@ -699,66 +699,66 @@ function ninja_display_form_id($form_id){
 			}
 			if($save_status == 'checked'){
 				echo "<input id='ninja_save_progress' name='ninja_save_progress' type='button' value='";
-				_e('Save Progress');
+				_e('Save Progress', 'ninja-forms');
 				echo "'>";
 			}			
 			//echo "</div>";
 			echo "<div id='ninja_form_overlay' title='";
-			_e('Processing Form Submission');
+			_e('Processing Form Submission', 'ninja-forms');
 			echo "'>Processing Submission<br /><a href='#' class='ninja_close_dialog'>";
-			_e('Close');
+			_e('Close', 'ninja-forms');
 			echo "</a></div></form></div>";
 			if($save_status == 'checked'){
 				echo "<div id='ninja_form_save_progress' title='";
-				_e('Save Your Progress');
+				_e('Save Your Progress', 'ninja-forms');
 			echo "'>
 				<p>";
-				_e('Email Address');
+				_e('Email Address', 'ninja-forms');
 			echo ": <input type='text' id='ninja_save_email' name='ninja_save_email' value=''></p>
 				<p>";
-				_e('Password');
+				_e('Password', 'ninja-forms');
 			echo ": <input type='password' id='ninja_save_password1' name='ninja_save_password1' value=''></p>
 				<p>";
-				_e('Re-enter Password');
+				_e('Re-enter Password', 'ninja-forms');
 			echo ": <input type='password' id='ninja_save_password2' name='ninja_save_password2' value=''></p>
 				<p><input type='button' name='' id='ninja_popup_save' value='";
-				_e('Save Progress');
+				_e('Save Progress', 'ninja-forms');
 			echo "'> <input type='button' name='' id='ninja_cancel_save' value='";
-				_e('Cancel');
+				_e('Cancel', 'ninja-forms');
 			echo "'></p>
 				
 				<div id='ninja_form_continue_login' title='";
-				_e('Continue Saved Form');
+				_e('Continue Saved Form', 'ninja-forms');
 			echo "'>
 				<p>";
-				_e('Email Address');
+				_e('Email Address', 'ninja-forms');
 			echo ": <input type='text' name='' id='ninja_login_email'></p>
 				<p>";
-				_e('Password');
+				_e('Password', 'ninja-forms');
 			echo ": <input type='password' name='' id='ninja_login_password'></p>
 				<p><a href='#' id='ninja_email_pass'>";
-				_e('Forgot Password');
+				_e('Forgot Password', 'ninja-forms');
 			echo "</a></p>
 				<p><input type='button' name='' id='ninja_login_button' value='";
-				_e('Retrieve Saved Form');
+				_e('Retrieve Saved Form', 'ninja-forms');
 			echo "'> <input type='button' name='' id='ninja_cancel_login' value='";
-				_e('Cancel');
+				_e('Cancel', 'ninja-forms');
 			echo "'></p>
 				</div>
 				
 				<div id='ninja_forgot_pass' title='";
-				_e('Retrieve Forgotten Password');
+				_e('Retrieve Forgotten Password', 'ninja-forms');
 			echo "'>
 				<p>";
-				_e('Please enter your email address');
+				_e('Please enter your email address', 'ninja-forms');
 			echo ". ";
-				_e('Your password will be sent to this address');
+				_e('Your password will be sent to this address', 'ninja-forms');
 			echo ".</p>
 				<p>";
-				_e('Email Address');
+				_e('Email Address', 'ninja-forms');
 			echo ": <input type='text' name='' id='ninja_forgot_email'></p>
 				<p><input type='button' name='' id='ninja_forgot_button' value='";
-				_e('Retrieve Password');
+				_e('Retrieve Password', 'ninja-forms');
 			echo "'></p>
 				</div>
 				
