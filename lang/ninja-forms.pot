@@ -4,26 +4,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  \n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/ninja-forms\n"
-"POT-Creation-Date: 2012-01-19 23:31:19+00:00\n"
+"POT-Creation-Date: 2012-01-20 15:12:50+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "PO-Revision-Date: 2012-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-
-#: ninja_forms.php:114
-msgid "Ninja Forms"
-msgstr ""
-
-#: ninja_forms.php:114 includes/sidebar.php:26
-#: includes/field_editor_functions.php:276
-msgid "Add New"
-msgstr ""
-
-#: ninja_forms.php:114
-msgid "- Add A New Form"
-msgstr ""
 
 #: includes/body_fields.php:17
 msgid "Form Name"
@@ -82,7 +69,7 @@ msgstr ""
 
 #: includes/body_fields.php:82
 msgid ""
-"The 9's would represent any number, and the -'s would be automatically added"
+"The 9s would represent any number, and the -s would be automatically added"
 msgstr ""
 
 #: includes/body_fields.php:82
@@ -97,7 +84,56 @@ msgstr ""
 msgid ""
 "For instance, if you had a product key that was in the form of A4B51.989."
 "B.43C, you could mask it with: a9a99.999.a.99a, which would force all the "
-"a's to be letters and the 9's to be numbers"
+"a's to be letters and the 9s to be numbers"
+msgstr ""
+
+#: includes/body_list.php:13 includes/body_list.php:58
+#: includes/body_subs.php:47 includes/body_subs.php:223
+msgid "Action"
+msgstr ""
+
+#: includes/body_list.php:14 includes/body_list.php:59
+msgid "Title"
+msgstr ""
+
+#: includes/body_list.php:15 includes/body_list.php:60
+msgid "Preview"
+msgstr ""
+
+#: includes/body_list.php:16 includes/body_list.php:61
+msgid "Submissions"
+msgstr ""
+
+#: includes/body_list.php:17 includes/body_list.php:62
+msgid "Shortcode"
+msgstr ""
+
+#: includes/body_list.php:33
+msgid "Edit"
+msgstr ""
+
+#: includes/body_list.php:33 includes/body_subs.php:99
+msgid "Delete"
+msgstr ""
+
+#: includes/body_list.php:35
+msgid "Preview Form"
+msgstr ""
+
+#: includes/body_list.php:36
+msgid "View Submissions"
+msgstr ""
+
+#: includes/body_list.php:36
+msgid "Download submissions as .xls"
+msgstr ""
+
+#: includes/body_list.php:44
+msgid "No Forms Found. Would you like to"
+msgstr ""
+
+#: includes/body_list.php:44
+msgid "Add A New One"
 msgstr ""
 
 #: includes/setup_vars.php:147 includes/setup_vars.php:149
@@ -114,6 +150,693 @@ msgstr ""
 
 #: includes/setup_vars.php:149
 msgid "Form Submissions"
+msgstr ""
+
+#: includes/plugin_settings.php:66
+msgid "Ninja Forms %s - Plugin Settings"
+msgstr ""
+
+#: includes/plugin_settings.php:68
+msgid "Version"
+msgstr ""
+
+#: includes/plugin_settings.php:69
+msgid "Database Version"
+msgstr ""
+
+#: includes/plugin_settings.php:73
+msgid "Use Ninja Forms Default Stylesheet"
+msgstr ""
+
+#: includes/plugin_settings.php:74
+msgid "Show Admin Help/Tips"
+msgstr ""
+
+#: includes/plugin_settings.php:75
+msgid "Form Help/Tips hover color scheme"
+msgstr ""
+
+#: includes/plugin_settings.php:81
+msgid "Help/Tip Box Size"
+msgstr ""
+
+#: includes/plugin_settings.php:83
+msgid "Mouse-over to see your changes"
+msgstr ""
+
+#: includes/plugin_settings.php:89
+msgid "Save Changes"
+msgstr ""
+
+#: includes/body_preview.php:11
+msgid ""
+"Because of different CSS settings, this preview of your form may appear "
+"different than what your end-user sees"
+msgstr ""
+
+#: includes/sidebar.php:5
+msgid "Navigation"
+msgstr ""
+
+#: includes/sidebar.php:9
+msgid "Jump To"
+msgstr ""
+
+#: includes/sidebar.php:11
+msgid "Select A Form"
+msgstr ""
+
+#: includes/sidebar.php:21
+msgid "New Form"
+msgstr ""
+
+#: includes/sidebar.php:26 includes/field_editor_functions.php:276
+#: ninja_forms.php:114
+msgid "Add New"
+msgstr ""
+
+#: includes/sidebar.php:55
+msgid "Submission Settings"
+msgstr ""
+
+#: includes/sidebar.php:61
+msgid "Save Form Submissions"
+msgstr ""
+
+#: includes/sidebar.php:67
+msgid "Email To User"
+msgstr ""
+
+#: includes/sidebar.php:73
+msgid "Submit via Ajax"
+msgstr ""
+
+#: includes/sidebar.php:77
+msgid "Select Landing Page"
+msgstr ""
+
+#: includes/sidebar.php:113
+msgid "Append To A Page"
+msgstr ""
+
+#: includes/sidebar.php:144
+msgid "Append To A Post"
+msgstr ""
+
+#: includes/sidebar.php:148
+msgid ""
+"In order to append/unappend a form to a post, please visit the post editing "
+"page"
+msgstr ""
+
+#: includes/sidebar.php:151
+msgid "This form is set to be appended to the following posts"
+msgstr ""
+
+#: includes/sidebar.php:194
+msgid "Pre-Defined Fields"
+msgstr ""
+
+#: includes/sidebar.php:197
+msgid ""
+"These fields are used within Ninja Forms to direct correspondance and detect "
+"spam. You can only have one of each in your forms"
+msgstr ""
+
+#: includes/sidebar.php:200 includes/field_editor_functions.php:131
+msgid "Anti-Spam Question"
+msgstr ""
+
+#: includes/sidebar.php:204
+msgid "Submit Button"
+msgstr ""
+
+#: includes/sidebar.php:229
+msgid "Custom Fields"
+msgstr ""
+
+#: includes/sidebar.php:232
+msgid "You can add any number of these fields to your form"
+msgstr ""
+
+#: includes/sidebar.php:234
+msgid "New Single-Line Textbox"
+msgstr ""
+
+#: includes/sidebar.php:237
+msgid "New Checkbox"
+msgstr ""
+
+#: includes/sidebar.php:240
+msgid "New Multi-Line Textbox"
+msgstr ""
+
+#: includes/sidebar.php:243
+msgid "New List (Dropdown/Radio/Multi-Select)"
+msgstr ""
+
+#: includes/sidebar.php:246
+msgid "New Hidden Field"
+msgstr ""
+
+#: includes/sidebar.php:249
+msgid "New File Upload"
+msgstr ""
+
+#: includes/sidebar.php:253
+msgid "Where's stuff like Firstname, Phone #, Date and E-mail address"
+msgstr ""
+
+#: includes/sidebar.php:254
+msgid ""
+"Ninja Forms gives you the flexibility to create any kind of field that you "
+"want using our powerful \"Single-Line Textbox\" masks"
+msgstr ""
+
+#: includes/sidebar.php:254
+msgid ""
+"Simply add a Single-Line Textbox, then select what kind of \"masking\" you'd "
+"like applied to that field"
+msgstr ""
+
+#: includes/sidebar.php:254
+msgid ""
+"This means you can easily limit user's input to (999) 999-9999, or put in "
+"your own custom masks for the data that you need: 99-9-999"
+msgstr ""
+
+#: includes/sidebar.php:254
+msgid "You can even tell Ninja Forms to show the user a datepicker!"
+msgstr ""
+
+#: includes/sidebar.php:266
+msgid "Layout Elements"
+msgstr ""
+
+#: includes/sidebar.php:269
+msgid "You can add any number of these design elements to your form"
+msgstr ""
+
+#: includes/sidebar.php:271 includes/field_editor_functions.php:127
+msgid "Horizontal Rule"
+msgstr ""
+
+#: includes/sidebar.php:274
+msgid "Heading"
+msgstr ""
+
+#: includes/sidebar.php:277
+msgid "Description/Text"
+msgstr ""
+
+#: includes/sidebar.php:306
+msgid "Export Submissions to .XLS"
+msgstr ""
+
+#: includes/sidebar.php:310
+msgid ""
+"Using this feature, you can export your submissions as a SPREADSHEET. You "
+"can then view it in Microsoft Excel or Open Office"
+msgstr ""
+
+#: includes/sidebar.php:311
+msgid "Enter a date range or leave both boxes empty to export all records"
+msgstr ""
+
+#: includes/sidebar.php:318
+msgid "Begin Date"
+msgstr ""
+
+#: includes/sidebar.php:320
+msgid "End Date"
+msgstr ""
+
+#: includes/sidebar.php:326
+msgid "Download"
+msgstr ""
+
+#: includes/sidebar.php:336
+msgid "Manage Submissions"
+msgstr ""
+
+#: includes/sidebar.php:341
+msgid "Purge old field data"
+msgstr ""
+
+#: includes/sidebar.php:344
+msgid "Delete all current submission data"
+msgstr ""
+
+#: includes/wp-editor-return.php:69
+msgid "HTML"
+msgstr ""
+
+#: includes/wp-editor-return.php:70
+msgid "Visual"
+msgstr ""
+
+#: includes/display_functions.php:266
+msgid "Items marked with %s are required"
+msgstr ""
+
+#: includes/display_functions.php:308 includes/display_functions.php:312
+msgid "Click here to resume filling out a saved form"
+msgstr ""
+
+#: includes/display_functions.php:665
+msgid "Comma, Separated, List"
+msgstr ""
+
+#: includes/display_functions.php:702 includes/display_functions.php:725
+msgid "Save Progress"
+msgstr ""
+
+#: includes/display_functions.php:707
+msgid "Processing Form Submission"
+msgstr ""
+
+#: includes/display_functions.php:709
+msgid "Close"
+msgstr ""
+
+#: includes/display_functions.php:713
+msgid "Save Your Progress"
+msgstr ""
+
+#: includes/display_functions.php:716 includes/display_functions.php:734
+#: includes/display_functions.php:758
+msgid "Email Address"
+msgstr ""
+
+#: includes/display_functions.php:719 includes/display_functions.php:737
+msgid "Password"
+msgstr ""
+
+#: includes/display_functions.php:722
+msgid "Re-enter Password"
+msgstr ""
+
+#: includes/display_functions.php:727 includes/display_functions.php:745
+msgid "Cancel"
+msgstr ""
+
+#: includes/display_functions.php:731
+msgid "Continue Saved Form"
+msgstr ""
+
+#: includes/display_functions.php:740
+msgid "Forgot Password"
+msgstr ""
+
+#: includes/display_functions.php:743
+msgid "Retrieve Saved Form"
+msgstr ""
+
+#: includes/display_functions.php:750
+msgid "Retrieve Forgotten Password"
+msgstr ""
+
+#: includes/display_functions.php:753
+msgid "Please enter your email address"
+msgstr ""
+
+#: includes/display_functions.php:755
+msgid "Your password will be sent to this address"
+msgstr ""
+
+#: includes/display_functions.php:761
+msgid "Retrieve Password"
+msgstr ""
+
+#: includes/body_subs.php:48 includes/body_subs.php:224
+msgid "Date"
+msgstr ""
+
+#: includes/body_subs.php:99
+msgid "More"
+msgstr ""
+
+#: includes/body_subs.php:140
+msgid "Other Fields"
+msgstr ""
+
+#: includes/body_subs.php:173
+msgid "Old Values"
+msgstr ""
+
+#: includes/body_subs.php:214
+msgid "No Submissions Found"
+msgstr ""
+
+#: includes/body_settings.php:13 includes/body_settings.php:180
+msgid "Save Form Settings"
+msgstr ""
+
+#: includes/body_settings.php:17
+msgid "Delete Form"
+msgstr ""
+
+#: includes/body_settings.php:27
+msgid "Basic Form Settings"
+msgstr ""
+
+#: includes/body_settings.php:30
+msgid "Form Title"
+msgstr ""
+
+#: includes/body_settings.php:33
+msgid "Show Form Title"
+msgstr ""
+
+#: includes/body_settings.php:39
+msgid "Form Description"
+msgstr ""
+
+#: includes/body_settings.php:51
+msgid "Show Form Description"
+msgstr ""
+
+#: includes/body_settings.php:57
+msgid "Form Subject"
+msgstr ""
+
+#: includes/body_settings.php:65
+msgid "Email Form Recipients"
+msgstr ""
+
+#: includes/body_settings.php:78 includes/field_editor_functions.php:599
+msgid "Remove"
+msgstr ""
+
+#: includes/body_settings.php:91
+msgid "Success Message"
+msgstr ""
+
+#: includes/body_settings.php:102 includes/body_settings.php:132
+msgid ""
+"If you want to include field data entered by the user, for instance a name, "
+"you can put that field's label in brackets. i.e. [Firstname] or [Last Name]"
+msgstr ""
+
+#: includes/body_settings.php:102 includes/body_settings.php:132
+msgid ""
+"This will tell Ninja Forms to replace the bracketed text with whatever input "
+"the user placed in that field. The label name must be entered exactly as you "
+"have it on the form field"
+msgstr ""
+
+#: includes/body_settings.php:108
+msgid "Advanced Email Settings"
+msgstr ""
+
+#: includes/body_settings.php:111
+msgid "Email Sent From"
+msgstr ""
+
+#: includes/body_settings.php:119
+msgid "E-mail Message"
+msgstr ""
+
+#: includes/body_settings.php:138
+msgid "Form fields to include"
+msgstr ""
+
+#: includes/body_settings.php:142
+msgid "Select All"
+msgstr ""
+
+#: includes/metabox_functions.php:17 includes/metabox_functions.php:25
+msgid "Append A Ninja Form"
+msgstr ""
+
+#: includes/metabox_functions.php:52 includes/field_editor_functions.php:209
+#: includes/field_editor_functions.php:228
+msgid "None"
+msgstr ""
+
+#: includes/field_editor_functions.php:122
+msgid "Comma,Separated,List"
+msgstr ""
+
+#: includes/field_editor_functions.php:129
+#: includes/field_editor_functions.php:383
+msgid "Description Text"
+msgstr ""
+
+#: includes/field_editor_functions.php:133
+msgid "Progress Bar"
+msgstr ""
+
+#: includes/field_editor_functions.php:135
+msgid "Progress \"Steps\" Indicator"
+msgstr ""
+
+#: includes/field_editor_functions.php:143
+msgid "Label"
+msgstr ""
+
+#: includes/field_editor_functions.php:148
+msgid "Field Name"
+msgstr ""
+
+#: includes/field_editor_functions.php:150
+msgid "Section Name"
+msgstr ""
+
+#: includes/field_editor_functions.php:152
+msgid "Step\" Label"
+msgstr ""
+
+#: includes/field_editor_functions.php:169
+msgid "Edit Menu Item"
+msgstr ""
+
+#: includes/field_editor_functions.php:189
+#: includes/field_editor_functions.php:368
+msgid "Label Position"
+msgstr ""
+
+#: includes/field_editor_functions.php:191
+#: includes/field_editor_functions.php:370
+msgid "Left of Element"
+msgstr ""
+
+#: includes/field_editor_functions.php:192
+#: includes/field_editor_functions.php:371
+msgid "Right of Element"
+msgstr ""
+
+#: includes/field_editor_functions.php:193
+#: includes/field_editor_functions.php:372
+msgid "Above Element"
+msgstr ""
+
+#: includes/field_editor_functions.php:194
+#: includes/field_editor_functions.php:373
+msgid "Inside Element"
+msgstr ""
+
+#: includes/field_editor_functions.php:207
+#: includes/field_editor_functions.php:219
+#: includes/field_editor_functions.php:306
+#: includes/field_editor_functions.php:319
+msgid "Default Value"
+msgstr ""
+
+#: includes/field_editor_functions.php:210
+msgid "User Firstname (If logged in)"
+msgstr ""
+
+#: includes/field_editor_functions.php:211
+msgid "User Lastname (If logged in)"
+msgstr ""
+
+#: includes/field_editor_functions.php:212
+msgid "User Email (If logged in)"
+msgstr ""
+
+#: includes/field_editor_functions.php:213
+#: includes/field_editor_functions.php:232
+msgid "Custom"
+msgstr ""
+
+#: includes/field_editor_functions.php:226
+msgid "Input Mask"
+msgstr ""
+
+#: includes/field_editor_functions.php:229
+msgid "Phone - (555) 555-5555"
+msgstr ""
+
+#: includes/field_editor_functions.php:230
+msgid "Date - mm/dd/yyyy"
+msgstr ""
+
+#: includes/field_editor_functions.php:231
+msgid "Dollars - $10.99"
+msgstr ""
+
+#: includes/field_editor_functions.php:238
+msgid "Custom Mask Definition"
+msgstr ""
+
+#: includes/field_editor_functions.php:244
+msgid "Date Picker?"
+msgstr ""
+
+#: includes/field_editor_functions.php:250
+msgid "Is this an email address?"
+msgstr ""
+
+#: includes/field_editor_functions.php:256
+msgid "Send a copy of the form to this address?"
+msgstr ""
+
+#: includes/field_editor_functions.php:266
+msgid "List Type"
+msgstr ""
+
+#: includes/field_editor_functions.php:268
+msgid "Dropdown"
+msgstr ""
+
+#: includes/field_editor_functions.php:269
+msgid "Multi-Select"
+msgstr ""
+
+#: includes/field_editor_functions.php:270
+msgid "Radio Buttons"
+msgstr ""
+
+#: includes/field_editor_functions.php:276
+msgid "Values:"
+msgstr ""
+
+#: includes/field_editor_functions.php:287
+msgid "Drag"
+msgstr ""
+
+#: includes/field_editor_functions.php:289
+msgid "Selected"
+msgstr ""
+
+#: includes/field_editor_functions.php:308
+msgid "Unchecked"
+msgstr ""
+
+#: includes/field_editor_functions.php:309
+msgid "Checked"
+msgstr ""
+
+#: includes/field_editor_functions.php:325
+#: includes/field_editor_functions.php:456
+msgid "Show Rich Text Editor"
+msgstr ""
+
+#: includes/field_editor_functions.php:331
+#: includes/field_editor_functions.php:462
+msgid "Allow Media Uploads"
+msgstr ""
+
+#: includes/field_editor_functions.php:346
+msgid "Heading Size:"
+msgstr ""
+
+#: includes/field_editor_functions.php:362
+msgid "Correct Answer"
+msgstr ""
+
+#: includes/field_editor_functions.php:403
+msgid "Description Container:"
+msgstr ""
+
+#: includes/field_editor_functions.php:422
+msgid "Value"
+msgstr ""
+
+#: includes/field_editor_functions.php:424
+msgid "User ID (If Logged In)"
+msgstr ""
+
+#: includes/field_editor_functions.php:425
+#: includes/field_editor_functions.php:430
+msgid "Custom Value"
+msgstr ""
+
+#: includes/field_editor_functions.php:477
+msgid "Users Can Create Categories"
+msgstr ""
+
+#: includes/field_editor_functions.php:491
+msgid ""
+"Comma Separated List of allowed file types. An empty list means all file "
+"types are accepted"
+msgstr ""
+
+#: includes/field_editor_functions.php:495
+msgid ""
+"This is not fool-proof and can be tricked, please remember that there is "
+"always a danger in allowing users to upload files"
+msgstr ""
+
+#: includes/field_editor_functions.php:501
+msgid "Advanced FIle Naming Options"
+msgstr ""
+
+#: includes/field_editor_functions.php:504
+msgid ""
+"If you aren't sure you want to give the uploaded file a special name, please "
+"leave this box blank"
+msgstr ""
+
+#: includes/field_editor_functions.php:504
+msgid "Help Renaming Files"
+msgstr ""
+
+#: includes/field_editor_functions.php:520
+msgid "Required?"
+msgstr ""
+
+#: includes/field_editor_functions.php:522
+msgid "Yes"
+msgstr ""
+
+#: includes/field_editor_functions.php:523
+msgid "No"
+msgstr ""
+
+#: includes/field_editor_functions.php:533
+msgid "Custom CSS Classes"
+msgstr ""
+
+#: includes/field_editor_functions.php:543
+msgid "Help Text"
+msgstr ""
+
+#: includes/field_editor_functions.php:547
+msgid "Show Help Text?"
+msgstr ""
+
+#: includes/field_editor_functions.php:551
+msgid ""
+"If \"help text\" is enabled, there will be a question mark %s placed next to "
+"the input field. Hovering over this question mark will show the help text."
+msgstr ""
+
+#: includes/field_editor_functions.php:576
+msgid "Select Post Meta Value"
+msgstr ""
+
+#: includes/field_editor_functions.php:578
+msgid "New Meta Key"
+msgstr ""
+
+#: ninja_forms.php:114
+msgid "Ninja Forms"
+msgstr ""
+
+#: ninja_forms.php:114
+msgid "- Add A New Form"
 msgstr ""
 
 #: includes/pro/fields-upload-help.php:2
@@ -339,666 +1062,4 @@ msgstr ""
 
 #: includes/pro/sidebar-post-elements.php:77
 msgid "Post Tags"
-msgstr ""
-
-#: includes/sidebar.php:5
-msgid "Navigation"
-msgstr ""
-
-#: includes/sidebar.php:9
-msgid "Jump To"
-msgstr ""
-
-#: includes/sidebar.php:11
-msgid "Select A Form"
-msgstr ""
-
-#: includes/sidebar.php:21
-msgid "New Form"
-msgstr ""
-
-#: includes/sidebar.php:55
-msgid "Submission Settings"
-msgstr ""
-
-#: includes/sidebar.php:61
-msgid "Save Form Submissions"
-msgstr ""
-
-#: includes/sidebar.php:67
-msgid "Email To User"
-msgstr ""
-
-#: includes/sidebar.php:73
-msgid "Submit via Ajax"
-msgstr ""
-
-#: includes/sidebar.php:77
-msgid "Select Landing Page"
-msgstr ""
-
-#: includes/sidebar.php:113
-msgid "Append To A Page"
-msgstr ""
-
-#: includes/sidebar.php:144
-msgid "Append To A Post"
-msgstr ""
-
-#: includes/sidebar.php:148
-msgid ""
-"In order to append/unappend a form to a post, please visit the post editing "
-"page"
-msgstr ""
-
-#: includes/sidebar.php:151
-msgid "This form is set to be appended to the following posts"
-msgstr ""
-
-#: includes/sidebar.php:194
-msgid "Pre-Defined Fields"
-msgstr ""
-
-#: includes/sidebar.php:197
-msgid ""
-"These fields are used within Ninja Forms to direct correspondance and detect "
-"spam. You can only have one of each in your forms"
-msgstr ""
-
-#: includes/sidebar.php:200 includes/field_editor_functions.php:131
-msgid "Anti-Spam Question"
-msgstr ""
-
-#: includes/sidebar.php:204
-msgid "Submit Button"
-msgstr ""
-
-#: includes/sidebar.php:229
-msgid "Custom Fields"
-msgstr ""
-
-#: includes/sidebar.php:232
-msgid "You can add any number of these fields to your form"
-msgstr ""
-
-#: includes/sidebar.php:234
-msgid "New Single-Line Textbox"
-msgstr ""
-
-#: includes/sidebar.php:237
-msgid "New Checkbox"
-msgstr ""
-
-#: includes/sidebar.php:240
-msgid "New Multi-Line Textbox"
-msgstr ""
-
-#: includes/sidebar.php:243
-msgid "New List (Dropdown/Radio/Multi-Select)"
-msgstr ""
-
-#: includes/sidebar.php:246
-msgid "New Hidden Field"
-msgstr ""
-
-#: includes/sidebar.php:249
-msgid "New File Upload"
-msgstr ""
-
-#: includes/sidebar.php:253
-msgid "Where's stuff like Firstname, Phone #, Date and E-mail address"
-msgstr ""
-
-#: includes/sidebar.php:254
-msgid ""
-"Ninja Forms gives you the flexibility to create any kind of field that you "
-"want using our powerful \"Single-Line Textbox\" masks"
-msgstr ""
-
-#: includes/sidebar.php:254
-msgid ""
-"Simply add a Single-Line Textbox, then select what kind of \"masking\" you'd "
-"like applied to that field"
-msgstr ""
-
-#: includes/sidebar.php:254
-msgid ""
-"This means you can easily limit user's input to (999) 999-9999, or put in "
-"your own custom masks for the data that you need: 99-9-999"
-msgstr ""
-
-#: includes/sidebar.php:254
-msgid "You can even tell Ninja Forms to show the user a datepicker!"
-msgstr ""
-
-#: includes/sidebar.php:266
-msgid "Layout Elements"
-msgstr ""
-
-#: includes/sidebar.php:269
-msgid "You can add any number of these design elements to your form"
-msgstr ""
-
-#: includes/sidebar.php:271 includes/field_editor_functions.php:127
-msgid "Horizontal Rule"
-msgstr ""
-
-#: includes/sidebar.php:274
-msgid "Heading"
-msgstr ""
-
-#: includes/sidebar.php:277
-msgid "Description/Text"
-msgstr ""
-
-#: includes/sidebar.php:306
-msgid "Export Submissions to .XLS"
-msgstr ""
-
-#: includes/sidebar.php:310
-msgid ""
-"Using this feature, you can export your submissions as a SPREADSHEET. You "
-"can then view it in Microsoft Excel or Open Office"
-msgstr ""
-
-#: includes/sidebar.php:311
-msgid "Enter a date range or leave both boxes empty to export all records"
-msgstr ""
-
-#: includes/sidebar.php:318
-msgid "Begin Date"
-msgstr ""
-
-#: includes/sidebar.php:320
-msgid "End Date"
-msgstr ""
-
-#: includes/sidebar.php:326
-msgid "Download"
-msgstr ""
-
-#: includes/sidebar.php:336
-msgid "Manage Submissions"
-msgstr ""
-
-#: includes/sidebar.php:341
-msgid "Purge old field data"
-msgstr ""
-
-#: includes/sidebar.php:344
-msgid "Delete all current submission data"
-msgstr ""
-
-#: includes/body_list.php:13 includes/body_list.php:58
-msgid "Action"
-msgstr ""
-
-#: includes/body_list.php:14 includes/body_list.php:59
-msgid "Title"
-msgstr ""
-
-#: includes/body_list.php:15 includes/body_list.php:60
-msgid "Preview"
-msgstr ""
-
-#: includes/body_list.php:16 includes/body_list.php:61
-msgid "Submissions"
-msgstr ""
-
-#: includes/body_list.php:17 includes/body_list.php:62
-msgid "Shortcode"
-msgstr ""
-
-#: includes/body_list.php:33
-msgid "Edit"
-msgstr ""
-
-#: includes/body_list.php:33
-msgid "Delete"
-msgstr ""
-
-#: includes/body_list.php:35
-msgid "Preview Form"
-msgstr ""
-
-#: includes/body_list.php:36
-msgid "View Submissions"
-msgstr ""
-
-#: includes/body_list.php:36
-msgid "Download submissions as .xls"
-msgstr ""
-
-#: includes/body_list.php:44
-msgid "No Forms Found. Would you like to"
-msgstr ""
-
-#: includes/body_list.php:44
-msgid "Add A New One"
-msgstr ""
-
-#: includes/body_preview.php:11
-msgid ""
-"Because of different CSS settings, this preview of your form may appear "
-"different than what your end-user sees"
-msgstr ""
-
-#: includes/field_editor_functions.php:122
-msgid "Comma,Separated,List"
-msgstr ""
-
-#: includes/field_editor_functions.php:129
-#: includes/field_editor_functions.php:383
-msgid "Description Text"
-msgstr ""
-
-#: includes/field_editor_functions.php:135
-msgid "Progress \"Steps\" Indicator"
-msgstr ""
-
-#: includes/field_editor_functions.php:143
-msgid "Label"
-msgstr ""
-
-#: includes/field_editor_functions.php:148
-msgid "Field Name"
-msgstr ""
-
-#: includes/field_editor_functions.php:150
-msgid "Section Name"
-msgstr ""
-
-#: includes/field_editor_functions.php:152
-msgid "Step\" Label"
-msgstr ""
-
-#: includes/field_editor_functions.php:169
-msgid "Edit Menu Item"
-msgstr ""
-
-#: includes/field_editor_functions.php:189
-#: includes/field_editor_functions.php:368
-msgid "Label Position"
-msgstr ""
-
-#: includes/field_editor_functions.php:191
-#: includes/field_editor_functions.php:370
-msgid "Left of Element"
-msgstr ""
-
-#: includes/field_editor_functions.php:192
-#: includes/field_editor_functions.php:371
-msgid "Right of Element"
-msgstr ""
-
-#: includes/field_editor_functions.php:193
-#: includes/field_editor_functions.php:372
-msgid "Above Element"
-msgstr ""
-
-#: includes/field_editor_functions.php:194
-#: includes/field_editor_functions.php:373
-msgid "Inside Element"
-msgstr ""
-
-#: includes/field_editor_functions.php:207
-#: includes/field_editor_functions.php:219
-#: includes/field_editor_functions.php:306
-#: includes/field_editor_functions.php:319
-msgid "Default Value"
-msgstr ""
-
-#: includes/field_editor_functions.php:209
-#: includes/field_editor_functions.php:228 includes/metabox_functions.php:52
-msgid "None"
-msgstr ""
-
-#: includes/field_editor_functions.php:210
-msgid "User Firstname (If logged in)"
-msgstr ""
-
-#: includes/field_editor_functions.php:211
-msgid "User Lastname (If logged in)"
-msgstr ""
-
-#: includes/field_editor_functions.php:212
-msgid "User Email (If logged in)"
-msgstr ""
-
-#: includes/field_editor_functions.php:213
-msgid "Custom ->"
-msgstr ""
-
-#: includes/field_editor_functions.php:226
-msgid "Input Mask"
-msgstr ""
-
-#: includes/field_editor_functions.php:229
-msgid "Phone - (555) 555-5555"
-msgstr ""
-
-#: includes/field_editor_functions.php:230
-msgid "Date - mm/dd/yyyy"
-msgstr ""
-
-#: includes/field_editor_functions.php:231
-msgid "Dollars - $10.99"
-msgstr ""
-
-#: includes/field_editor_functions.php:232
-msgid "Custom"
-msgstr ""
-
-#: includes/field_editor_functions.php:238
-msgid "Custom Mask Definition"
-msgstr ""
-
-#: includes/field_editor_functions.php:244
-msgid "Date Picker?"
-msgstr ""
-
-#: includes/field_editor_functions.php:250
-msgid "Is this an email address?"
-msgstr ""
-
-#: includes/field_editor_functions.php:256
-msgid "Send a copy of the form to this address?"
-msgstr ""
-
-#: includes/field_editor_functions.php:266
-msgid "List Type"
-msgstr ""
-
-#: includes/field_editor_functions.php:268
-msgid "Dropdown"
-msgstr ""
-
-#: includes/field_editor_functions.php:269
-msgid "Multi-Select"
-msgstr ""
-
-#: includes/field_editor_functions.php:270
-msgid "Radio Buttons"
-msgstr ""
-
-#: includes/field_editor_functions.php:276
-msgid "Values:"
-msgstr ""
-
-#: includes/field_editor_functions.php:287
-msgid "Drag"
-msgstr ""
-
-#: includes/field_editor_functions.php:289
-msgid "Selected"
-msgstr ""
-
-#: includes/field_editor_functions.php:308
-msgid "Unchecked"
-msgstr ""
-
-#: includes/field_editor_functions.php:309
-msgid "Checked"
-msgstr ""
-
-#: includes/field_editor_functions.php:325
-#: includes/field_editor_functions.php:456
-msgid "Show Rich Text Editor"
-msgstr ""
-
-#: includes/field_editor_functions.php:331
-#: includes/field_editor_functions.php:462
-msgid "Allow Media Uploads"
-msgstr ""
-
-#: includes/field_editor_functions.php:346
-msgid "Heading Size:"
-msgstr ""
-
-#: includes/field_editor_functions.php:362
-msgid "Correct Answer"
-msgstr ""
-
-#: includes/field_editor_functions.php:403
-msgid "Description Container:"
-msgstr ""
-
-#: includes/field_editor_functions.php:422
-msgid "Value"
-msgstr ""
-
-#: includes/field_editor_functions.php:424
-msgid "User ID (If Logged In)"
-msgstr ""
-
-#: includes/field_editor_functions.php:425
-#: includes/field_editor_functions.php:430
-msgid "Custom Value"
-msgstr ""
-
-#: includes/field_editor_functions.php:477
-msgid "Users Can Create Categories"
-msgstr ""
-
-#: includes/field_editor_functions.php:491
-msgid ""
-"Comma Separated List of allowed file types. An empty list means all file "
-"types are accepted"
-msgstr ""
-
-#: includes/field_editor_functions.php:495
-msgid ""
-"This is not fool-proof and can be tricked, please remember that there is "
-"always a danger in allowing users to upload files"
-msgstr ""
-
-#: includes/field_editor_functions.php:501
-msgid "Advanced FIle Naming Options"
-msgstr ""
-
-#: includes/field_editor_functions.php:504
-msgid ""
-"If you aren't sure you want to give the uploaded file a special name, please "
-"leave this box blank"
-msgstr ""
-
-#: includes/field_editor_functions.php:504
-msgid "Help Renaming Files"
-msgstr ""
-
-#: includes/field_editor_functions.php:520
-msgid "Required?"
-msgstr ""
-
-#: includes/field_editor_functions.php:522
-msgid "Yes"
-msgstr ""
-
-#: includes/field_editor_functions.php:523
-msgid "No"
-msgstr ""
-
-#: includes/field_editor_functions.php:533
-msgid "Custom CSS Classes"
-msgstr ""
-
-#: includes/field_editor_functions.php:543
-msgid "Help Text"
-msgstr ""
-
-#: includes/field_editor_functions.php:547
-msgid "Show Help Text?"
-msgstr ""
-
-#: includes/field_editor_functions.php:576
-msgid "Select Post Meta Value"
-msgstr ""
-
-#: includes/field_editor_functions.php:578
-msgid "New Meta Key"
-msgstr ""
-
-#: includes/field_editor_functions.php:599
-msgid "Remove"
-msgstr ""
-
-#: includes/wp-editor-return.php:69
-msgid "HTML"
-msgstr ""
-
-#: includes/wp-editor-return.php:70
-msgid "Visual"
-msgstr ""
-
-#: includes/body_settings.php:13 includes/body_settings.php:180
-msgid "Save Form Settings"
-msgstr ""
-
-#: includes/body_settings.php:17
-msgid "Delete Form"
-msgstr ""
-
-#: includes/body_settings.php:30
-msgid "Form Title:"
-msgstr ""
-
-#: includes/body_settings.php:39
-msgid "Form Description:"
-msgstr ""
-
-#: includes/body_settings.php:57
-msgid "Form Subject:"
-msgstr ""
-
-#: includes/body_settings.php:65
-msgid "Email Form Recipients"
-msgstr ""
-
-#: includes/body_settings.php:91
-msgid "Success Message:"
-msgstr ""
-
-#: includes/body_settings.php:111
-msgid "Email Sent From:"
-msgstr ""
-
-#: includes/body_settings.php:119
-msgid "E-mail Message:"
-msgstr ""
-
-#: includes/body_settings.php:138
-msgid "Form fields to include:"
-msgstr ""
-
-#: includes/plugin_settings.php:66
-msgid "Ninja Forms %s - Plugin Settings"
-msgstr ""
-
-#: includes/plugin_settings.php:68
-msgid "Version"
-msgstr ""
-
-#: includes/plugin_settings.php:69
-msgid "Database Version"
-msgstr ""
-
-#: includes/plugin_settings.php:73
-msgid "Use Ninja Forms Default Stylesheet"
-msgstr ""
-
-#: includes/plugin_settings.php:74
-msgid "Show Admin Help/Tips"
-msgstr ""
-
-#: includes/plugin_settings.php:75
-msgid "Form Help/Tips hover color scheme"
-msgstr ""
-
-#: includes/plugin_settings.php:81
-msgid "Help/Tip Box Size"
-msgstr ""
-
-#: includes/plugin_settings.php:83
-msgid "Mouse-over to see your changes"
-msgstr ""
-
-#: includes/plugin_settings.php:89
-msgid "Save Changes"
-msgstr ""
-
-#: includes/metabox_functions.php:17 includes/metabox_functions.php:25
-msgid "Append A Ninja Form"
-msgstr ""
-
-#: includes/display_functions.php:266
-msgid "Items marked with %s are required"
-msgstr ""
-
-#: includes/display_functions.php:308 includes/display_functions.php:312
-msgid "Click here to resume filling out a saved form"
-msgstr ""
-
-#: includes/display_functions.php:665
-msgid "Comma, Separated, List"
-msgstr ""
-
-#: includes/display_functions.php:702 includes/display_functions.php:725
-msgid "Save Progress"
-msgstr ""
-
-#: includes/display_functions.php:707
-msgid "Processing Form Submission"
-msgstr ""
-
-#: includes/display_functions.php:709
-msgid "Close"
-msgstr ""
-
-#: includes/display_functions.php:713
-msgid "Save Your Progress"
-msgstr ""
-
-#: includes/display_functions.php:716 includes/display_functions.php:734
-#: includes/display_functions.php:758
-msgid "Email Address"
-msgstr ""
-
-#: includes/display_functions.php:719 includes/display_functions.php:737
-msgid "Password"
-msgstr ""
-
-#: includes/display_functions.php:722
-msgid "Re-enter Password"
-msgstr ""
-
-#: includes/display_functions.php:727 includes/display_functions.php:745
-msgid "Cancel"
-msgstr ""
-
-#: includes/display_functions.php:731
-msgid "Continue Saved Form"
-msgstr ""
-
-#: includes/display_functions.php:740
-msgid "Forgot Password"
-msgstr ""
-
-#: includes/display_functions.php:743
-msgid "Retrieve Saved Form"
-msgstr ""
-
-#: includes/display_functions.php:750
-msgid "Retrieve Forgotten Password"
-msgstr ""
-
-#: includes/display_functions.php:753
-msgid "Please enter your email address"
-msgstr ""
-
-#: includes/display_functions.php:755
-msgid "Your password will be sent to this address"
-msgstr ""
-
-#: includes/display_functions.php:761
-msgid "Retrieve Password"
 msgstr ""

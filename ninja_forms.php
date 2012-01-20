@@ -3,7 +3,7 @@
 Plugin Name: NinjaForms Lite
 Plugin URI: http://ninjaforms.com
 Description: NinjaForms is a webform builder with unparalleled ease of use and features.
-Version: 1.2.9
+Version: 1.2.9.1
 Author: The WP Ninjas
 Author URI: http://wpninjas.net
 */
@@ -29,7 +29,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/ninja-forms");
 define("NINJA_FORMS_URL", WP_PLUGIN_URL."/ninja-forms");
-define("NINJA_FORMS_VERSION", "1.2.9");
+define("NINJA_FORMS_VERSION", "1.2.9.1");
 define("NINJA_FORMS_TYPE", "Lite");
 
 session_start();
