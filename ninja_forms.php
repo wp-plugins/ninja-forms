@@ -39,7 +39,7 @@ $_SESSION['NINJA_FORMS_URL'] = NINJA_FORMS_URL;
 function ninja_forms_load_lang() {
 	$plugin_dir = basename(dirname(__FILE__));
 	$lang_dir = $plugin_dir.'/lang/';
-	load_plugin_textdomain( 'ninja-forms', false, $plugin_dir );
+	load_plugin_textdomain( 'ninja-forms', false, $lang_dir );
 }
 add_action('init', 'ninja_forms_load_lang');
 
