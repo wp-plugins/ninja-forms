@@ -100,3 +100,6 @@ If you have any requests, please post them in the WordPress.org forum.
 = 1.2.9 =
 * Fixed a bug that was causing sidebar placement to be saved improperly.
 * Introduced localization code throughout Ninja Forms Lite. The POT file is located within the ninja-forms/lang/ directory.
+
+= 1.2.9.1 =
+*Fixed some typos which created problems with localization.
