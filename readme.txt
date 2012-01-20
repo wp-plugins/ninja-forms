@@ -4,12 +4,13 @@ Donate link: http://wpninjas.net
 Tags: form, forms
 Requires at least: 3.1
 Tested up to: 3.3
-Stable tag: 1.2.8
+Stable tag: 1.2.9
 
 Ninja Forms Lite is the free version of Ninja Forms Pro. Its drag and drop interface makes it easy to create both simple and complex forms.
 
 == Description ==
-*Update Notice* - Version 1.2.7 contains various security-related fixes. Users are strongly encouraged to download this version to fix any insecurities within Ninja Forms Lite.
+*Notice* - With Version 1.2.9 we are proud to announce that Ninja Forms Lite is ready to be localized. If you speak a non-English language, would you consider translating Ninja Forms into that language? If you would, please
+visit www.wpninjas.net and let us know! The POT file can be found in the ninja-forms/lang/ folder.
 
 Ninja Forms Lite is a fully-functional WordPress form creation plugin, with an interface designed to look right at home within your WordPress dashboard.
 
@@ -95,3 +96,7 @@ If you have any requests, please post them in the WordPress.org forum.
 
 = 1.2.8 =
 * Fixed a bug that would cause the form to not be emailed on some server setups.
+
+= 1.2.9 =
+* Fixed a bug that was causing sidebar placement to be saved improperly.
+* Introduced localization code throughout Ninja Forms Lite. The POT file is located within the ninja-forms/lang/ directory.
