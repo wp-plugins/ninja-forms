@@ -79,10 +79,10 @@ $action = esc_html($_REQUEST['action']);
 			</ul>
 		</p>
 		<p>
-			<?php _e("So, if you wanted to a mask for an an American Social Security Number, you'd put 999-99-9999 into the box", 'ninja-forms');?>. <?php _e("The 9's would represent any number, and the -'s would be automatically added", 'ninja-forms');?>. <?php _e('This would prevent the user from putting in anything other than numbers', 'ninja-forms');?>.
+			<?php _e('So, if you wanted to a mask for an an American Social Security Number, you\'d put 999-99-9999 into the box', 'ninja-forms');?>. <?php _e('The 9s would represent any number, and the -s would be automatically added', 'ninja-forms');?>. <?php _e('This would prevent the user from putting in anything other than numbers', 'ninja-forms');?>.
 		</p>
 		<p>
-			<?php _e('You can also combine these for specific applications', 'ninja-forms');?>. <?php _e("For instance, if you had a product key that was in the form of A4B51.989.B.43C, you could mask it with: a9a99.999.a.99a, which would force all the a's to be letters and the 9's to be numbers", 'ninja-forms');?>.
+			<?php _e('You can also combine these for specific applications', 'ninja-forms');?>. <?php _e('For instance, if you had a product key that was in the form of A4B51.989.B.43C, you could mask it with: a9a99.999.a.99a, which would force all the a\'s to be letters and the 9s to be numbers', 'ninja-forms');?>.
 		</p>
 </div>
 <?php

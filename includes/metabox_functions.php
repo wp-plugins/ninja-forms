@@ -44,7 +44,7 @@ function ninja_forms_inner_custom_box() {
 	// The actual fields for data entry
 	/*
 	echo '<label for="myplugin_new_field">';
-	   _e("Select A Form", 'ninja_forms_textdomain' );
+	   _e('Select A Form', 'ninja_forms' );
 	echo '</label> ';
 	*/
 	echo '<select id="ninja_form_select" name="ninja_form_select">';

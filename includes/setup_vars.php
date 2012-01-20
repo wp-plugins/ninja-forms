@@ -144,9 +144,9 @@ if(!$current_tab){
 }
 if($form_id == 'new'){
 	$current_tab = 'settings';
-	$tab_list = array('settings' => _e('Form Settings', 'ninja-forms'));
+	$tab_list = array('settings' => __('Form Settings', 'ninja-forms'));
 }else{
-	$tab_list = array("settings" => _e('Form Settings', 'ninja-forms'), "fields" => _e('Form Fields', 'ninja-forms'), "preview" => _e('Form Preview', 'ninja-forms'), 'subs' => _e('Form Submissions', 'ninja-forms'));					
+	$tab_list = array("settings" => __('Form Settings', 'ninja-forms'), "fields" => __('Form Fields', 'ninja-forms'), "preview" => __('Form Preview', 'ninja-forms'), 'subs' => __('Form Submissions', 'ninja-forms'));					
 }
 
 if($form_id == 'new'){
