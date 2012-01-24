@@ -154,18 +154,66 @@ if($form_id == 'new'){
 }else{
 	$form_title = $ninja_forms_row['title'];
 }
-$form_mailto = $ninja_forms_row['mailto'];
-$form_subject = stripslashes($ninja_forms_row['subject']);
-$form_msg = stripslashes($ninja_forms_row['success_msg']);
-$form_desc = stripslashes($ninja_forms_row['desc']);
-$email_msg = stripslashes($ninja_forms_row['email_msg']); 
-$email_from = $ninja_forms_row['email_from'];
-$email_fields = unserialize($ninja_forms_row['email_fields']);
-$show_title = $ninja_forms_row['show_title'];
-$show_desc = $ninja_forms_row['show_desc'];
-$multi = $ninja_forms_row['multi'];
-$ninja_post = $ninja_forms_row['post'];
-$multi_options = $ninja_forms_row['multi_options'];
+if(isset($ninja_forms_row['mailto'])){
+	$form_mailto = $ninja_forms_row['mailto'];
+}else{
+	$form_mailto = '';
+}
+if(isset($ninja_forms_row['subject'])){
+	$form_subject = stripslashes($ninja_forms_row['subject']);
+}else{
+	$form_subject = '';
+}
+if(isset($ninja_forms_row['success_msg'])){
+	$form_msg = stripslashes($ninja_forms_row['success_msg']);
+}else{
+	$form_msg = '';
+}
+if(isset($ninja_forms_row['desc'])){
+	$form_desc = stripslashes($ninja_forms_row['desc']);
+}else{
+	$form_desc = '';
+}
+if(isset($ninja_forms_row['email_msg'])){
+	$email_msg = stripslashes($ninja_forms_row['email_msg']); 
+}else{
+	$email_msg = '';
+}
+if(isset($ninja_forms_row['email_from'])){
+	$email_from = $ninja_forms_row['email_from'];
+}else{
+	$email_from = '';
+}
+if(isset($ninja_forms_row['email_fields'])){
+	$email_fields = unserialize($ninja_forms_row['email_fields']);
+}else{
+	$email_fields = '';
+}
+if(isset($ninja_forms_row['show_title'])){
+	$show_title = $ninja_forms_row['show_title'];
+}else{
+	$show_title = '';
+}
+if(isset($ninja_forms_row['show_desc'])){
+	$show_desc = $ninja_forms_row['show_desc'];
+}else{
+	$show_desc = '';
+}
+if(isset($ninja_forms_row['multi'])){
+	$multi = $ninja_forms_row['multi'];
+}else{
+	$multi = '';
+}
+if(isset($ninja_forms_row['post'])){
+	$ninja_post = $ninja_forms_row['post'];
+}else{
+	$ninja_post = '';
+}
+if(isset($ninja_forms_row['multi_options'])){
+	$multi_options = $ninja_forms_row['multi_options'];
+}else{
+	$multi_options = '';
+}
 if($multi_options){
 	$multi_options = unserialize($multi_options);
 }
@@ -200,7 +248,11 @@ if(!$next){
 if(!$previous){
 	$previous = 'Previous';
 }
-$post_options = $ninja_forms_row['post_options'];
+if(isset($ninja_forms_row['post_options'])){
+	$post_options = $ninja_forms_row['post_options'];
+}else{
+	$post_options = '';
+}
 if($post_options){
 	$post_options = unserialize($post_options);
 }else{
@@ -219,18 +271,36 @@ if($form_id == 'new'){
 }else{
 	$form_send_email = $ninja_forms_row['send_email'];
 }
-$form_landing_page= $ninja_forms_row['landing_page'];
+if(isset($ninja_forms_row['landing_page'])){
+	$form_landing_page= $ninja_forms_row['landing_page'];
+}else{
+	$form_landing_page = '';
+}
 if($form_id == 'new'){
 	$form_ajax = 'checked';
 }else{
 	$form_ajax = $ninja_forms_row['ajax'];
 }
-$save_status = $ninja_forms_row['save_status'];
-$save_satus_options = unserialize($ninja_forms_row['save_status_options']);
-$save_status_delete = $save_satus_options['delete'];
-$save_status_msg = stripslashes($save_satus_options['msg']);
-$form_append_page = unserialize($ninja_forms_row['append_page']);
+if(isset($ninja_forms_row['save_status'])){
+	$save_status = $ninja_forms_row['save_status'];
+}else{
+	$save_status = '';
+}
+if(isset($ninja_forms_row['save_status_options'])){
+	$save_status_options = unserialize($ninja_forms_row['save_status_options']);
+	$save_status_delete = $save_status_options['delete'];
+	$save_status_msg = stripslashes($save_status_options['msg']);
+}else{
+	$save_status_options = '';
+	$save_status_delete = '';
+	$save_status_msg = '';
+}
 
+if(isset($ninja_forms_row['append_page'])){
+	$form_append_page = unserialize($ninja_forms_row['append_page']);
+}else{
+	$form_append_page = '';
+}
 
 if($plugin_settings['admin_help'] == 'checked'){
 ?>
