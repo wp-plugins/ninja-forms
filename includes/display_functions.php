@@ -498,11 +498,11 @@ function ninja_display_form_id($form_id){
 									foreach($options_array as $option){
 										$option = stripslashes($option);
 										$option = htmlspecialchars($option, ENT_QUOTES); 
-										echo "<input type='radio' name='ninja_field_$id' id='ninja_field_".$id."_".$x."' value='$option'";
+										echo "<input type='radio' name='ninja_field_$id' id='ninja_field_".$id."_".$x."' value='$option' ";
 										if($extra['extra']['list_default'] == $option && $label_pos != 'inside'){
 											echo 'checked';
 										}
-										echo "><label for='ninja_field_".$id."_".$x."' class='radio-label'>$option</label>";
+										echo " ><label for='ninja_field_".$id."_".$x."' class='radio-label'>$option</label>";
 										$x++;
 									}
 								}
