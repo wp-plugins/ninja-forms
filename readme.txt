@@ -39,6 +39,7 @@ Upgrade to Ninja Forms Pro and get these additional features:
 	* Make long forms easier to manage by separating them into sections using multi-part forms.
 	* Give users the option to save their progress and come back to complete the form at a later date.
 	* Access to powerful pre and post processing hooks so you can manipulate the form data however you want.
+	* Allow users to upload files, with controls for naming and upload directory.
 
 Visit http://www.wpninjas.net/ to check out Ninja Forms Pro.
 	
