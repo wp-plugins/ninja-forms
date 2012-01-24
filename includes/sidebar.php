@@ -30,8 +30,12 @@
 	<?php 
 	switch($current_tab){
 		case 'settings':
-			if($_REQUEST['ninja_form_id']){
-				$action = esc_html($_REQUEST['action']);
+			if(isset($_REQUEST['ninja_form_id'])){
+				if(isset($_REQUEST['action'])){
+					$action = esc_html($_REQUEST['action']);
+				}else{
+					$action = '';
+				}
 			?>			
 				
 		<form id="ninja_form_settings" name="" action="" method="post">
@@ -245,10 +249,10 @@
 			<p class="button-controls">
 				<a class="button add-new-h2 ninja_new_field" id="ninja_new_hidden_<?php echo $ninja_forms_row['id'];?>" href="#"><?php _e('New Hidden Field', 'ninja-forms');?></a>
 			</p>
-			<p class="button-controls">
-				<a class="button add-new-h2 ninja_new_field" id="ninja_new_file_<?php echo $ninja_forms_row['id'];?>" href="#"><?php _e('New File Upload', 'ninja-forms');?></a>
-			</p>
 			<?php
+				if(NINJA_FORMS_TYPE == 'Pro'){
+					require_once(NINJA_FORMS_DIR."/includes/pro/sidebar-file-upload.php");
+				}
 			if($plugin_settings['admin_help'] == 'checked'){ ?>
 				<p><a href="#" class="ninja_help_open" name="custom_fields_help"><?php _e('Where\'s stuff like Firstname, Phone #, Date and E-mail address', 'ninja-forms');?>?</a></p>
 				<div class="ninja_help_text" id="custom_fields_help" style="display:none;" title="Custom Fields Help"><p><?php _e('Ninja Forms gives you the flexibility to create any kind of field that you want using our powerful "Single-Line Textbox" masks', 'ninja-forms');?>.</p><p><?php _e('Simply add a Single-Line Textbox, then select what kind of "masking" you\'d like applied to that field', 'ninja-forms');?>. <?php _e('This means you can easily limit user\'s input to (999) 999-9999, or put in your own custom masks for the data that you need: 99-9-999', 'ninja-forms');?>.</p><p><?php _e('You can even tell Ninja Forms to show the user a datepicker!', 'ninja-forms');?></p>
@@ -297,8 +301,17 @@
 		foreach($subs_sidebar_order as $order){
 			switch($order){
 				case 'export-subs':
-					$begin_date = esc_html($_REQUEST['begin_date']);
-					$end_date = esc_html($_REQUEST['end_date']);
+					if(isset($_REQUEST['begin_date'])){
+						$begin_date = esc_html($_REQUEST['begin_date']);
+					}else{
+						$begin_date = '';
+					}
+					if(isset($_REQUEST['end_date'])){
+						$end_date = esc_html($_REQUEST['end_date']);
+					}else{
+						$end_date = '';
+					}
+				
 				?>
 		<div id="export-subs" class="postbox" name="subs-settings-list">
 			<div class="handlediv" id="handle-subs-export" title="Click to toggle"><br></div>

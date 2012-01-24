@@ -42,13 +42,24 @@ function ninja_form_pre_process(){
 		$ninja_form['post_options'] = unserialize($ninja_forms_row['post_options']);
 		$ninja_form['save_status'] = $ninja_forms_row['save_status'];
 		$ninja_form['save_status_options'] = unserialize($ninja_forms_row['save_status_options']);
-		$ninja_form['create_cat'] = $_POST['ninja_create_cat'];	
+		if(isset($_POST['ninja_create_cat'])){
+			$ninja_form['create_cat'] = $_POST['ninja_create_cat'];	
+		}else{
+			$ninja_form['create_cat'] = '';
+		}
 		$ninja_form['save_button'] = $_POST['ninja_save_status'];
 		$ninja_form['save_email'] = $_POST['ninja_form_save_email'];
 		$ninja_form['save_password'] = $_POST['ninja_form_save_password'];
-		$ninja_form['form_continue'] = $_POST['ninja_form_form_continue'];
-		
-		$upload_dir = $plugin_settings['upload_dir'];
+		if(isset($_POST['ninja_form_form_continue'])){
+			$ninja_form['form_continue'] = $_POST['ninja_form_form_continue'];
+		}else{
+			$ninja_form['form_continue'] = '';
+		}
+		if(isset($plugin_settings['upload_dir'])){
+			$upload_dir = $plugin_settings['upload_dir'];
+		}else{
+			$upload_dir = '';
+		}
 		$form_title = ereg_replace("[^A-Za-z0-9]", "", $ninja_form['title']);
 		$upload_dir = str_replace("%formtitle%", $form_title, $upload_dir);
 		$upload_dir = str_replace("%date%", date('Y-m-d'), $upload_dir);
@@ -62,17 +73,20 @@ function ninja_form_pre_process(){
 		}
 		//$upload_dir = strtolower($upload_dir);
 		$ninja_forms_file_fields = $wpdb->get_results( 
-				$wpdb->prepare( "SELECT  FROM $ninja_forms_fields_table_name WHERE type = 'file' AND form_id = %d", $form_id)
+				$wpdb->prepare( "SELECT * FROM $ninja_forms_fields_table_name WHERE type = 'file' AND form_id = %d", $form_id)
 				, ARRAY_A); //Grab all of our file upload fields from the DB
-		foreach($ninja_forms_file_fields as $file){ 
-			if($_FILES['ninja_field_'.$file]['name']){ // Check the $_FILES superglobal for our file upload fields.
+		foreach($ninja_forms_file_fields as $file){
+			$id = $file['id'];
+			if($_FILES['ninja_field_'.$id]['name']){ // Check the $_FILES superglobal for our file upload fields.
 				$dir_array = explode('/', $upload_dir);
 				$upload_dir = "";
 				foreach($dir_array as $dir){
-					$upload_dir .= $dir."/";
-					//echo $upload_dir;
-					if(!is_dir($upload_dir)){
-						mkdir($upload_dir);
+					if($dir != ''){
+						$upload_dir .= $dir."/";
+						//echo $upload_dir;
+						if(!is_dir($upload_dir)){
+							mkdir($upload_dir);
+						}
 					}
 				}
 				
@@ -83,7 +97,7 @@ function ninja_form_pre_process(){
 				$name_format = unserialize($ninja_forms_fields_row['extra']);
 				$name_format = $name_format['extra']['upload_rename'];
 				if($name_format){
-					$orig_name = ereg_replace("[^A-Za-z0-9\.]", "", $_FILES['ninja_field_'.$file]['name']);
+					$orig_name = ereg_replace("[^A-Za-z0-9\.]", "", $_FILES['ninja_field_'.$id]['name']);
 					$orig_name = strtolower($orig_name);
 					$orig_name = explode(".", $orig_name);
 					$ext = $orig_name[count($orig_name)-1];
@@ -107,12 +121,12 @@ function ninja_form_pre_process(){
 					
 					$file_name .= ".$ext";
 				}else{
-					$file_name = ereg_replace("[^A-Za-z0-9\.]", "", $_FILES['ninja_field_'.$file]['name']);
+					$file_name = ereg_replace("[^A-Za-z0-9\.]", "", $_FILES['ninja_field_'.$id]['name']);
 				}
-				$_POST['ninja_field_'.$file] = $file_name;
-				$upload_file = $upload_dir . basename($file_name);
-				if (move_uploaded_file($_FILES['ninja_field_'.$file]['tmp_name'], $upload_file)) {
-					
+				$_POST['ninja_field_'.$id] = $file_name;
+				$upload_file = "/".$upload_dir . basename($file_name);
+				if (move_uploaded_file($_FILES['ninja_field_'.$id]['tmp_name'], $upload_file)) {
+
 				}else {
 					echo "<p class='ninja_error'>An error occured in uploading your file. Please try again</p>";
 				}
@@ -165,13 +179,20 @@ function ninja_form_pre_process(){
 add_action( 'wp_ajax_nopriv_ninja_form_process', 'ninja_form_process' );
 add_action( 'wp_ajax_ninja_form_process', 'ninja_form_process'); 
 function ninja_form_process(){
+	if(session_id() == '') {
+		session_start();
+	}
 	global $ninja_form, $ninja_post, $wpdb, $user_id;
 	$ninja_forms_table_name = $wpdb->prefix . "ninja_forms";
 	$ninja_forms_fields_table_name = $wpdb->prefix . "ninja_forms_fields";
 	$ninja_forms_subs_table_name = $wpdb->prefix . "ninja_forms_subs";
 	$nonce = $_REQUEST['ninja_forms_nonce'];
 	if(wp_verify_nonce($nonce, 'ninja_forms_submit')){
-		$spam = $_REQUEST['ninja_field_spam'];
+		if(isset($_REQUEST['ninja_field_spam'])){
+			$spam = $_REQUEST['ninja_field_spam'];
+		}else{
+			$spam = '';
+		}
 		$error = 'none';
 		foreach($_POST as $key => $val){
 			$key = str_replace("ninja_field_", "", $key);
@@ -183,7 +204,11 @@ function ninja_form_process(){
 				$id = $ninja_forms_fields_row['id'];
 				$type = $ninja_forms_fields_row['type'];
 				$extra = unserialize($ninja_forms_fields_row['extra']);
-				$upload_types = $extra['extra']['upload_types'];
+				if(isset($extra['extra']['upload_types'])){
+					$upload_types = $extra['extra']['upload_types'];
+				}else{
+					$upload_types = '';
+				}
 				if($type == 'file'){ //If the DB type is set to file upload, look in the $_FILES superglobal for the proper field name.
 					if($_FILES['ninja_field_'.$id]['name']){
 						$file_name = ereg_replace("[^A-Za-z0-9\.]", "", $_FILES['ninja_field_'.$id]['name']);
@@ -224,6 +249,15 @@ function ninja_form_process(){
 		if($error == 'none'){
 			ninja_form_pre_process();
 			do_action('ninja_form_process', $ninja_form, $ninja_post);
+			if($ninja_post){
+				foreach($ninja_post as $post){
+					$id = $post['id'];
+					$label = $post['label'];
+					$val = $post['value'];
+					$extra = $post['extra'];
+					$_SESSION['ninja_field_'.$label] = $val;
+				}
+			}
 			if($ninja_form['ajax_submit'] == 'checked'){
 				if($_POST['ninja_save_status'] != 'yes'){
 					$success_msg = $ninja_form['success_msg'];	
@@ -234,9 +268,7 @@ function ninja_form_process(){
 							$label = $post['label'];
 							$val = $post['value'];
 							$extra = $post['extra'];
-
 							$success_msg = str_replace("[$label]", $val, $success_msg);
-
 						}
 					}
 					echo $success_msg;
@@ -286,16 +318,23 @@ function ninja_mail_form($ninja_form, $ninja_post){
 		$form_mailto = explode(",", $form_mailto);
 		$msg = "<table>";
 		$user_msg = $msg;
-
+		$user_email = '';
 		foreach($ninja_post as $post){
 			$id = $post['id'];
 			$label = $post['label'];
 			$type = $post['type'];
 			$val = $post['value'];
 			$extra = $post['extra'];
-			$email = $extra['extra']['email'];
-			$field_send_email = $extra['extra']['send_email'];
-
+			if(isset($extra['extra']['email'])){
+				$email = $extra['extra']['email'];
+			}else{
+				$email = '';
+			}
+			if(isset($extra['extra']['send_email'])){
+				$field_send_email = $extra['extra']['send_email'];
+			}else{
+				$field_send_email = '';
+			}
 			
 			if($email_msg){
 				$email_msg = str_replace("[$label]", $val, $email_msg);
@@ -373,7 +412,9 @@ function ninja_mail_form($ninja_form, $ninja_post){
 
 function ninja_save_form($ninja_form, $ninja_post){
 	global $wpdb, $ninja_form, $ninja_post, $user_id;
-	session_start();
+	if(session_id() == '') {
+		session_start();
+	}
 	$ninja_forms_subs_table_name = $wpdb->prefix . "ninja_forms_subs";		
 	$save_status = 'incomplete';
 	$save_email = $ninja_form['save_email'];
@@ -390,7 +431,7 @@ function ninja_save_form($ninja_form, $ninja_post){
 	}
 	
 	if($ninja_form['save_button'] == 'yes'){
-		if($login_row AND !$_SESSION['ninja_forms_continue']){
+		if($login_row AND !isset($_SESSION['ninja_forms_continue'])){
 			echo '0_email-exists';
 			$insert = 'no';
 			$update = 'no';
@@ -404,7 +445,7 @@ function ninja_save_form($ninja_form, $ninja_post){
 			echo stripslashes($ninja_form['save_status_options']['msg']);
 		}
 	}else{
-		if($login_row AND $_SESSION['ninja_forms_continue']){
+		if($login_row AND isset($_SESSION['ninja_forms_continue'])){
 			$update = 'yes';
 			$insert = 'no';
 		}else{
@@ -443,9 +484,12 @@ function ninja_form_post($ninja_form, $ninja_post){
 		$email_fields = $ninja_form['email_fields'];
 		$ninja_create_post = $ninja_form['ninja_post'];
 		$post_options = $ninja_form['post_options'];
-		$ninja_form['post_cat'] = str_replace(", ", ",", $ninja_form['post_cat']);
+		if(isset($ninja_form['post_cat'])){
+			$ninja_form['post_cat'] = str_replace(", ", ",", $ninja_form['post_cat']);
+		}
+		$cats = '';
 		if(($post_options['login'] == 'checked' && $user_id) OR $post_options['login'] == 'unchecked'){
-			if(!$ninja_form['post_cat']){
+			if(!isset($ninja_form['post_cat'])){
 				$ninja_form['post_cat'] = array(0);
 			}
 			if($post_options['user'] != 0){
@@ -475,7 +519,7 @@ function ninja_form_post($ninja_form, $ninja_post){
 					}
 				}
 			}
-			if($cats){
+			if($cats != ''){
 				$cats = array_merge($cats, $ninja_form['post_cat']);
 			}else{
 				$cats = $ninja_form['post_cat'];

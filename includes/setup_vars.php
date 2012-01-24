@@ -184,8 +184,16 @@ if(isset($multi_options['steps_label'])){
 }else{
 	$steps_label = '';
 }
-$previous = $multi_options['previous'];
-$next = $multi_options['next'];
+if(isset($multi_options['previous'])){
+	$previous = $multi_options['previous'];
+}else{
+	$previous = '';
+}
+if(isset($multi_options['next'])){
+	$next = $multi_options['next'];
+}else{
+	$next = '';
+}
 if(!$next){
 	$next = 'Next';
 }

@@ -101,7 +101,7 @@ function ninja_form_field_editor($field_id, $new_field){
 	if(isset($extra['extra']['upload_types'])){
 		$upload_types = $extra['extra']['upload_types'];
 	}else{
-		$upoad_types = '';
+		$upload_types = '';
 	}
 	if(isset($extra['extra']['upload_rename'])){
 		$upload_rename = $extra['extra']['upload_rename'];

@@ -261,10 +261,6 @@ function ninja_display_form_id($form_id){
 			}else{
 				$ninja_forms_subject = stripslashes($ninja_forms_row['subject']);
 			}
-
-			echo "<div id='ninja_form'><p class='req-item-desc'>";
-			printf(__('Items marked with %s are required', 'ninja-forms'), "<span class='required-item'>*</span>");
-			echo "</p>";	
 			
 			if($ninja_forms_show_title == 'checked'){
 				echo "<h2 class='ninja-forms-title'>$ninja_forms_title</h2>";
@@ -272,8 +268,11 @@ function ninja_display_form_id($form_id){
 			if($ninja_forms_show_desc == 'checked'){
 				echo "<p class='ninja-forms-desc'>$ninja_forms_desc</p>";
 			}
-
 			
+			echo "<div id='ninja_form'><p class='req-item-desc'>";
+			printf(__('Items marked with %s are required', 'ninja-forms'), "<span class='required-item'>*</span>");
+			echo "</p>";	
+				
 			$multi_count = '';
 			if($multi == 'checked'){
 				$multi_count = 0;
@@ -458,15 +457,23 @@ function ninja_display_form_id($form_id){
 						echo "<input type='text' id='ninja_field_$id' name='ninja_field_$id' value='$value' class='ninja-text-box $type $classes $field_class' title='$label'>";
 						break;
 					case 'list':
-						$list_type = $extra['extra']['list_type'];
-						$options_array = $extra['extra']['list_item'];
+						if(isset($extra['extra']['list_type'])){
+							$list_type = $extra['extra']['list_type'];
+						}else{
+							$list_type = 'select';
+						}
+						if(isset($extra['extra']['list_item'])){
+							$options_array = $extra['extra']['list_item'];
+						}else{
+							$options_array = '';
+						}
 						if($list_type != 'radio'){
 							echo "<select ";
 							if($list_type == 'multi'){
 								echo "multiple='multiple' size=5";
 								echo " name='ninja_field_".$id."[]'";
 							}else{
-								echo "name='ninja_field_$id";
+								echo "name='ninja_field_$id'";
 							}
 							echo  " id='ninja_field_$id' class='ninja-select-box $classes $field_class'>";
 		
@@ -487,10 +494,16 @@ function ninja_display_form_id($form_id){
 							}
 							}else{
 								if($options_array){
+									$x = 0;
 									foreach($options_array as $option){
 										$option = stripslashes($option);
 										$option = htmlspecialchars($option, ENT_QUOTES); 
-										echo "<input type='radio' name='ninja_field_$id' id='ninja_field_$id' value='$option'><label for='ninja_field_$id' class='radio-label'>$option</label>";
+										echo "<input type='radio' name='ninja_field_$id' id='ninja_field_".$id."_".$x."' value='$option'";
+										if($extra['extra']['list_default'] == $option && $label_pos != 'inside'){
+											echo 'checked';
+										}
+										echo "><label for='ninja_field_".$id."_".$x."' class='radio-label'>$option</label>";
+										$x++;
 									}
 								}
 							}
@@ -768,6 +781,6 @@ function ninja_display_form_id($form_id){
 			}
 			}
 			add_filter('the_content', 'remove_bad_br_tags', 99);
-			return trim($output);
+			//return trim($output);
 		}
 }

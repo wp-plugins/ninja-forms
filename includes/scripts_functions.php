@@ -1,7 +1,7 @@
 <?php
 //Load up our WP Ninja Custom Form JS files.
 function ninja_form_admin_css(){
-	global $wp_version;
+	$wp_version = get_bloginfo('version');
 	if(isset($_REQUEST['tab'])){
 		$tab = esc_html($_REQUEST['tab']);
 	}else{
@@ -78,6 +78,7 @@ function ninja_form_admin_js(){
 add_action('init', 'ninja_form_display_js');
 function ninja_form_display_js(){
 	global $version_compare;
+	$wp_version = get_bloginfo('version');
 	if(isset($_REQUEST['tab'])){
 		$tab = esc_html($_REQUEST['tab']);
 	}else{
@@ -139,6 +140,7 @@ function ninja_form_display_js(){
 
 add_action('init', 'ninja_form_display_css');
 function ninja_form_display_css(){
+	$wp_version = get_bloginfo('version');
 	if(!is_admin()){
 		$plugin_settings = get_option("ninja_forms_settings");
 		$default_style = $plugin_settings['default_style'];

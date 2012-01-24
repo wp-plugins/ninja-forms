@@ -1,7 +1,11 @@
 <?php
 global $wp_editor, $wp_version;
 wp_nonce_field('ninja_save_form_fields','ninja_form_fields'); 
-$action = esc_html($_REQUEST['action']);
+if(isset($_REQUEST['action'])){
+	$action = esc_html($_REQUEST['action']);
+}else{
+	$action = '';
+}
 ?>	
 <input type="hidden" id="ninja_form_action" name="action" value="<?php echo $action;?>">
 <input type="hidden" name="submitted" value="yes">
