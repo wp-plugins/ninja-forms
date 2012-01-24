@@ -72,6 +72,7 @@ if($submitted == 'yes'){
 			}
 		}
 	}elseif($tab == 'settings'){
+		$email_fields = '';
 		if(check_admin_referer('ninja_save_form_settings','ninja_form_settings')){	
 			$append_page = '';
 			$form_id = $_REQUEST['ninja_form_id'];
