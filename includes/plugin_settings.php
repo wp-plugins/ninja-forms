@@ -88,4 +88,21 @@ $upload_mb = min($max_upload, $max_post, $memory_limit);
 /*               */ ?>
 <input class="button-primary ninja_save_data" type="submit" value="<?php _e('Save Changes', 'ninja-forms');?>">
 </form>	
+<?php
+	if(NINJA_FORMS_TYPE == 'Lite'){
+	?>
+<div class="wrap-right" >
+	<img src="<?php echo NINJA_FORMS_URL;?>/images/wpnj-logo-wt.png" width="263px" height="45px" />
+	<h2>Upgrade to Ninja Forms Pro for many more great features including...</h2>
+	<ul>
+		<li><a href="http://wpninjas.net/?p=827">Save User's Progress</a></li>
+		<li><a href="http://wpninjas.net/?p=825">Multi-Part Froms</a></li>
+		<li><a href="http://wpninjas.net/?p=542">Front-End Post Submission</a></li>
+		<li><a href="http://wpninjas.net/?p=510">1yr Premium Support</a></li>
+	</ul>
+	<a class="button-primary" href="http://wpninjas.net/?p=562">Upgrade Now!</a>
+</div>
+	<?php
+	}
+	?>
 </div>
