@@ -4,12 +4,15 @@ Donate link: http://wpninjas.net
 Tags: form, forms
 Requires at least: 3.1
 Tested up to: 3.3
-Stable tag: 1.2.9.2
+Stable tag: 1.3
 
 Ninja Forms Lite is the free version of Ninja Forms Pro. Its drag and drop interface makes it easy to create both simple and complex forms.
 
 == Description ==
-*Notice* - With Version 1.2.9.2 you can access all of the fields submitted by a user on your subesquent WP pages as $_SESSION['ninja_field_Your Label Name']. e.g. echo $_SESSION['ninja_field_First Name'];
+*Notice* - Version 1.3 uses a new help text tooltip which is faster and has a much smaller footprint. We've included a few tooltip color schemes in the "Plugin Settings" section, but
+since it uses no images, it's very easy to customize your tooltips with CSS.  As of this version you can also select whether or not NInja Forms should send emails as
+Plain Text or HTML. Finally, version 1.3 includes a new form field filter  (say that three times fast) which allows developers to modify each field before it is output to the user. Using this filter
+you can, for example, create dynamic select boxes. (For more information on this, please visit www.wpninjas.net)
 
 Ninja Forms Lite is a fully-functional WordPress form creation plugin, with an interface designed to look right at home within your WordPress dashboard.
 
@@ -23,6 +26,7 @@ With Ninja Forms, the WordPress Form builder plugin,  you can easily create almo
 Some of the features of Ninja Forms Lite:
 
 	* Create any type of restricted input field by using our easy to use filters.
+	* Easily add hover-over help text to any field.
 	* Add a spam filter to prevent those pesky bots from filling out your form.
 	* Save form submissions and download them in .xsl format.
 	* Show custom help text for any form field.
@@ -31,6 +35,7 @@ Some of the features of Ninja Forms Lite:
 	* Easily create dropdowns, multi-selects, checkboxs, radio buttons, etc. with our drag and drop interface.
 	* Attach a form to a page or post by simply checking a box, or use our shortcodes and functions to place your form anywhere you want.
 	* Fully customizable CSS, make your form look the way you want.
+	* Access user-submitted data on any subsequent WordPress posts or pages.
 	
 	
 Upgrade to Ninja Forms Pro and get these additional features:
@@ -108,3 +113,11 @@ If you have any requests, please post them in the WordPress.org forum.
 *Fixed some bugs some users were experiencing when activating Ninja Forms
 *Fixed PHP Notices
 *Developers can now access user submitted fields via $_SESSION variables like $_SESSION['ninja_field_Your Field Label']. e.g. echo $_SESSION['ninja_field_First Name'];
+
+= 1.3 =
+* New tooltips - smaller footpring, no images, more customizable via CSS and more flexible.
+* Plain-Text or HTML email type selection.
+* Field filter - The output of each field is now filtered through a WordPress filter. This allows developers to make dynamic changes to fields before they are output to the user.
+* Fixed a bug that caused a sidebar error for some users.
+* Fixed a bug that caused users to be redirected to the form list when creating a new form.
+* Fixed some bugs that were causing the hover-question mark to appear in odd places with some fields.
