@@ -52,7 +52,7 @@ if($submitted == 'yes'){
 							$update_array[$key] = $val;
 						}
 					}
-					if($extra){
+					if(isset($extra)){
 						$extra = serialize($extra);
 						$update_array['extra'] = $extra;
 						//print_r($extra);
@@ -161,7 +161,7 @@ if($submitted == 'yes'){
 				$wpdb->prepare( "SELECT id FROM $ninja_forms_table_name ORDER BY id DESC")
 				, ARRAY_A);
 				$form_id = $ninja_forms_results[0]['id'];
-				$link = add_query_arg(array('tab' => $current_tab, 'ninja_form_id' => $form_id));
+				$link = add_query_arg(array('tab' => $tab, 'ninja_form_id' => $form_id));
 				?>
 				<script language="javascript">
 					window.location = "<?php echo $link;?>";

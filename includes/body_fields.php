@@ -10,7 +10,6 @@ if(isset($_REQUEST['action'])){
 <input type="hidden" id="ninja_form_action" name="action" value="<?php echo $action;?>">
 <input type="hidden" name="submitted" value="yes">
 <input type="hidden" name="tab" value="fields">
-<input type="hidden" id="ninja_form_new" value="<?php echo $form_new;?>">
 <input type="hidden" id="ninja_form_id" name="ninja_form_id" value="<?php echo $form_id;?>">
 <input type="hidden" name="ninja_form_fields_order" id="ninja_form_fields_order" value="same">
 	<div id="nav-menu-header">
@@ -66,7 +65,7 @@ if(isset($_REQUEST['action'])){
 <div id="editor_cont" style="display:none;">
 	<?php
 	if(version_compare( $wp_version, '3.3-beta3-19254' , '<')){
-		echo $wp_editor->editor($value, "hidden_editor", array('media_buttons_context' => '<span>Insert a media file: </span>', 'upload_link_title' => 'Media Uploader - NinjaForms'), true);
+		echo $wp_editor->editor($value, "hidden_editor", array('media_buttons_context' => '<span>Insert a media file: </span>', 'upload_link_title' => 'Media Uploader - Ninja Forms'), true);
 	}else{
 		$args = array("media_buttons" => true);
 		wp_editor("", "hidden_editor" , $args);

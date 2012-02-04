@@ -79,7 +79,8 @@ function remove_bad_br_tags($content) {
 add_shortcode('ninja_display_form', 'ninja_forms_shortcode');
 
 function ninja_display_form_id($form_id){
-	global $wpdb, $current_user, $wp_editor, $wp_version;
+	global $wpdb, $current_user, $wp_editor, $wp_version, $ninja_forms_multi, $ninja_forms_divider, $ninja_forms_header_only, 
+	$ninja_forms_current_page, $ninja_forms_multi_count, $ninja_forms_first_section;
 	get_currentuserinfo();
 	$user_id = $current_user->ID;
 	$user_firstname = $current_user->user_firstname;
@@ -102,7 +103,7 @@ function ninja_display_form_id($form_id){
 	$ninja_forms_desc = stripslashes($ninja_forms_row['desc']);
 	$ninja_forms_show_title = $ninja_forms_row['show_title'];
 	$ninja_forms_show_desc = $ninja_forms_row['show_desc'];
-	$multi = $ninja_forms_row['multi'];
+	$ninja_forms_multi = $ninja_forms_row['multi'];
 	$ninja_post = $ninja_forms_row['post'];
 	$post_options = unserialize($ninja_forms_row['post_options']);
 	$multi_options = unserialize($ninja_forms_row['multi_options']);
@@ -122,15 +123,28 @@ function ninja_display_form_id($form_id){
 	}else{
 		$steps_label = '';
 	}
-	$previous = $multi_options['previous'];
-	$next = $multi_options['next'];
+	if(isset($multi_options['previous'])){
+		$previous = $multi_options['previous'];
+	}else{
+		$previous = '';
+	}
+	if(isset($multi_options['next'])){
+		$next = $multi_options['next'];		
+	}else{
+		$next = '';
+	}
+	if(isset($multi_options['next_req'])){
+		$next_req = $multi_options['next_req'];
+	}else{
+		$next_req = '';
+	}
 	if((($ninja_post == 'checked' && $post_options['login'] == 'checked') && $user_id) OR ($ninja_post == 'unchecked' OR $post_options['login'] == 'unchecked') OR $ninja_post == ""){	
 		if($ninja_forms_row){
 			$ninja_forms_fields_sections = $wpdb->get_row( 
 			$wpdb->prepare("SELECT * FROM $ninja_forms_fields_table_name WHERE type = 'divider' AND form_id = %d ORDER BY field_order ASC", $form_id)
 			, ARRAY_A);
 			if($ninja_forms_fields_sections){
-				$first_section = $ninja_forms_fields_sections['label'];
+				$ninja_forms_first_section = $ninja_forms_fields_sections['label'];
 			}
 			$ninja_forms_fields = $wpdb->get_results( 
 			$wpdb->prepare( "SELECT * FROM $ninja_forms_fields_table_name WHERE form_id = %d ORDER BY field_order ASC", $form_id)
@@ -139,12 +153,13 @@ function ninja_display_form_id($form_id){
 			echo "<span id='ninja_form_top'></span>";
 			echo "<script language='javascript'>
 				jQuery(document).ready(function($) {";
+			echo '$(".ninja-forms-help-text").tipTip({defaultPosition: "right", delay: 100, maxWidth: "'.$help_size.'px", edgeOffset: 10});';
 			foreach($ninja_forms_fields as $field){
 				$extra = unserialize($field['extra']);
 				$label = stripslashes($field['label']);
 				$label = htmlspecialchars($label, ENT_QUOTES);
 				$req = $field['req'];
-				$divider = '';
+				$ninja_forms_divider = '';
 				if(isset($extra['extra']['label_pos'])){
 					$label_pos = $extra['extra']['label_pos'];
 				}else{
@@ -214,44 +229,9 @@ function ninja_display_form_id($form_id){
 				if($datepicker == 'checked'){
 					echo '$("#ninja_field_'.$id.'").datepicker();';
 				}
-				if($show_help == 'checked'){
-					echo '$("#ninja_field_'.$id.'_help").CreateBubblePopup();';
-					echo '$("#ninja_field_'.$id.'_help").SetBubblePopupOptions({
-											innerHtml: "'.$help.'",
-											position: "right",
-											align: "middle",
-											tail: {
-													align:"center",
-													hidden: false
-													},
-													innerHtmlStyle: {
-																"width": "'.$help_size.'px"
-															},
-											themeName: 	"'.$help_color.'",
-											themePath: 	"'.NINJA_FORMS_URL.'/js/jquerybubblepopup-theme/",
-											closingDelay: 200
-									  });';
-					$preload_help = 'yes';
-				}else{
-					$preload_help = 'no';
-				}
+
 			}
 			echo "}); </script>";
-			if($preload_help == 'yes'){
-				echo '<div id="" class="" style="display:none;">
-					<img src="'.NINJA_FORMS_URL.'/js/jquerybubblepopup-theme/'.$help_color.'/bottom-left.png">
-					<img src="'.NINJA_FORMS_URL.'/js/jquerybubblepopup-theme/'.$help_color.'/bottom-middle.png">
-					<img src="'.NINJA_FORMS_URL.'/js/jquerybubblepopup-theme/'.$help_color.'/bottom-right.png">
-					<img src="'.NINJA_FORMS_URL.'/js/jquerybubblepopup-theme/'.$help_color.'/middle-left.png">
-					<img src="'.NINJA_FORMS_URL.'/js/jquerybubblepopup-theme/'.$help_color.'/middle-right.png">
-					<img src="'.NINJA_FORMS_URL.'/js/jquerybubblepopup-theme/'.$help_color.'/tail-bottom.png">
-					<img src="'.NINJA_FORMS_URL.'/js/jquerybubblepopup-theme/'.$help_color.'/tail-left.png">
-					<img src="'.NINJA_FORMS_URL.'/js/jquerybubblepopup-theme/'.$help_color.'/top-left.png">
-					<img src="'.NINJA_FORMS_URL.'/js/jquerybubblepopup-theme/'.$help_color.'/top-middle.png">
-					<img src="'.NINJA_FORMS_URL.'/js/jquerybubblepopup-theme/'.$help_color.'/top-right.png">
-					<img src="'.NINJA_FORMS_URL.'/images/icons.png">
-					</div>';
-			}
 		
 			if($ninja_forms_msg == ''){
 				$ninja_forms_msg = "Thank you for filling out this form!";
@@ -273,25 +253,26 @@ function ninja_display_form_id($form_id){
 			printf(__('Items marked with %s are required', 'ninja-forms'), "<span class='required-item'>*</span>");
 			echo "</p>";	
 				
-			$multi_count = '';
-			if($multi == 'checked'){
-				$multi_count = 0;
+			$ninja_forms_multi_count = '';
+			if($ninja_forms_multi == 'checked'){
+				$ninja_forms_multi_count = 0;
 				foreach($ninja_forms_fields as $field){
 					$type = $field['type'];
 					if($type == 'divider'){
-						$multi_count++;
+						$ninja_forms_multi_count++;
 					}
 				}
-				$current_page = 1;
-				$header_only = 'yes';
+				$ninja_forms_current_page = 1;
+				$ninja_forms_header_only = 'yes';
 			}
 		
 			echo "<form name='ninja_form_$form_id' id='ninja_form_$form_id' action='' method='post'>
 			<input type='hidden' name='ninja_form_id' id='ninja_form_id' value='$form_id'>
 			<input type='hidden' name='action' value='ninja_form_process'>
 			<input type='hidden' name='ninja_ajax_submit' id='ninja_ajax_submit' value='$ajax_submit'>
-			<input type='hidden' id='ninja_multi_form' value='$multi'>
-			<input type='hidden' id='ninja_multi_count' value='$multi_count'>
+			<input type='hidden' id='ninja_multi_form' value='$ninja_forms_multi'>
+			<input type='hidden' id='ninja_multi_count' value='$ninja_forms_multi_count'>
+			<input type='hidden' id='ninja_next_req' value='$next_req'>
 			<input type='hidden' id='ninja_save_status' name='ninja_save_status' value=''>
 			<input type='hidden' id='ninja_form_save_email' name='ninja_form_save_email' value=''>
 			<input type='hidden' id='ninja_form_save_password' name='ninja_form_save_password' value=''>
@@ -313,400 +294,24 @@ function ninja_display_form_id($form_id){
 				}
 			}
 			foreach($ninja_forms_fields as $field){
-				$id = $field['id'];
-				$label = stripslashes($field['label']);
-				$label = htmlspecialchars($label, ENT_QUOTES);
-				$type = $field['type'];
-				$value =stripslashes($field['value']);
-				if($value == 'none'){
-					$value = '';
-				}
-				$req = $field['req'];
-				$extra = unserialize($field['extra']);
-				if(isset($extra['extra']['email_confirm'])){
-					$email_confirm = $extra['extra']['email_confirm'];
-				}else{
-					$email_confirm = '';
-				}
-				if(isset($extra['extra']['mask'])){
-					$mask = $extra['extra']['mask'];
-				}else{
-					$mask = '';
-				}
-				if(isset($extra['extra']['show_help'])){
-					$show_help = $extra['extra']['show_help'];
-				}else{
-					$show_help = '';
-				}
-				$classes = $field['class'];
-				if(isset($extra['extra']['label_pos'])){
-					$label_pos = $extra['extra']['label_pos'];
-				}else{
-					$label_pos = '';
-				}
+				//ninja_forms_display_field($field['id'], $form_id);
 
-				if($label_pos == ''){
-					$label_pos = 'left';
-				}
-
-				if(isset($extra['extra']['list_type'])){
-					$list_type = $extra['extra']['list_type'];
-				}else{
-					$list_type = '';
-				}
-				$label_class = '';
-				$field_class = '';
-				$wrap_class = '';
-				
-				if($classes != 'Comma,Separated,List' && $classes != ''){
-					$classes_array = explode(',' , $classes);
-					foreach($classes_array as $class){
-						$label_class .= "$class-label ";
-						$field_class .= "$class-field ";
-						$wrap_class .= "$class-wrap ";
-					}
-				}
-				if(isset($extra['extra']['media_upload'])){
-					$media_upload = $extra['extra']['media_upload'];
-				}else{
-					$media_upload = '';
-				}
-				$classes = "";
-				if(isset($extra['extra']['rte'])){
-					$rte = $extra['extra']['rte'];
-				}else{
-					$rte = '';
-				}
-				if($rte == 'checked'){
-					$classes .= ' ninja-rte';
-				}
-				if(isset($extra['extra']['email'])){
-					$email = $extra['extra']['email'];
-				}else{
-					$email = '';
-				}
-				if($email){
-					$classes .= ' email ';
-				}
-				if($req == 1){
-					$req = 'ninja_req';
-					$classes .= ' ninja_req'; 
-				}
-				
-				if($type == 'spam'){
-					//$label = "Anti-Spam Question: ".$label;
-					$label_class .= " text-label";
-				}
-				if($type == 'textbox'){
-					$label_class .= " text-label";
-				}
-				if($type == 'checkbox'){
-					$label_class .= " checkbox-label";
-				}
-				if($type == 'textarea'){
-					$label_class .= " text-label";
-				}
-				$class_type = $type;
-				if($list_type != ''){
-					$class_type = $list_type;
-				}else{
-					$class_type = $type;
-				}
-				if($type != 'divider'){
-					echo "<div class='span-$class_type-label-$label_pos field-group $wrap_class'>"; // Label and Element Surrounding DIV
-				}
-				if($type != 'heading' && $type != 'hr' && $type != 'desc' && $type != 'submit' && $type != 'hidden' && $type != 'divider' && $type != 'progressbar' && $type != 'steps' ){
-					if(($type != 'posttitle' && $type != 'postcontent' && $type != 'postexcerpt' && $type != 'postcat' && $type != 'posttags') OR ($ninja_post == 'checked')){
-						if($label_pos == 'left' OR $label_pos == 'above'){
-							echo "<label class='$label_class label-$label_pos' for='ninja_field_$id'>$label";
-							if($req == 'ninja_req' ){
-								echo "<span class='required-item'>*</span>";
-							}
-							echo "</label>";
-							if($show_help == 'checked' && $label_pos == 'above'){
-								echo " <img id='ninja_field_".$id."_help' src='".NINJA_FORMS_URL."/images/question-ico.gif'>";
-							}	
-						}elseif($label_pos == 'inside'){
-							$value = $label;
-							$classes .= " label-inside";
-						}
-					}
-				}
-				switch($type){
-					case 'textbox':
-						if($value == 'ninja_user_firstname'){
-							if($user_firstname){
-								$value = $user_firstname;
-							}else{
-								$value = "";
-							}
-						}elseif($value == 'ninja_user_lastname'){
-							if($user_lastname){
-								$value = $user_lastname;
-							}else{
-								$value = "";
-							}
-						}elseif($value == 'ninja_user_email'){
-							if($user_email){
-								$value = $user_email;
-							}else{
-								$value = "";
-							}					
-						}
-
-						echo "<input type='text' id='ninja_field_$id' name='ninja_field_$id' value='$value' class='ninja-text-box $type $classes $field_class' title='$label'>";
-						break;
-					case 'list':
-						if(isset($extra['extra']['list_type'])){
-							$list_type = $extra['extra']['list_type'];
-						}else{
-							$list_type = 'select';
-						}
-						if(isset($extra['extra']['list_item'])){
-							$options_array = $extra['extra']['list_item'];
-						}else{
-							$options_array = '';
-						}
-						if($list_type != 'radio'){
-							echo "<select ";
-							if($list_type == 'multi'){
-								echo "multiple='multiple' size=5";
-								echo " name='ninja_field_".$id."[]'";
-							}else{
-								echo "name='ninja_field_$id'";
-							}
-							echo  " id='ninja_field_$id' class='ninja-select-box $classes $field_class'>";
-		
-							if($label_pos == 'inside'){
-								echo "<option value='' selected>$label</option>";
-							}
-							if($options_array){
-								foreach($options_array as $option){
-									$option = stripslashes($option);
-									$option = htmlspecialchars($option, ENT_QUOTES); 
-									echo "<option value='$option'";
-									if($extra['extra']['list_default'] == $option && $label_pos != 'inside'){
-										echo 'selected';
-									}
-									echo " >$option</option>";
-								}
-								echo "</select>";
-							}
-							}else{
-								if($options_array){
-									$x = 0;
-									foreach($options_array as $option){
-										$option = stripslashes($option);
-										$option = htmlspecialchars($option, ENT_QUOTES); 
-										echo "<input type='radio' name='ninja_field_$id' id='ninja_field_".$id."_".$x."' value='$option' ";
-										if($extra['extra']['list_default'] == $option && $label_pos != 'inside'){
-											echo 'checked';
-										}
-										echo " ><label for='ninja_field_".$id."_".$x."' class='radio-label'>$option</label>";
-										$x++;
-									}
-								}
-							}
-						break;
-					case 'checkbox':
-						if($value == 'checked'){
-							$checked = 'checked';
-						}else{
-							$checked = '';
-						}
-						echo "<input type='hidden' value='unchecked'  name='ninja_field_$id' $checked>";
-						echo "<input type='checkbox' value='checked'  id='ninja_field_$id'  name='ninja_field_$id' $checked class='ninja-check-box $classes $field_class'>";
-						break;
-					case 'textarea':
-						if($rte == 'checked'){
-							if($media_upload == 'checked'){
-								$media_upload = true;
-							}else{
-								$media_upload = false;
-							}
-							if(version_compare( $wp_version, '3.3-beta3-19254' , '<')){
-								echo $wp_editor->editor($value, "ninja_field_$id", array('media_buttons_context' => '<span>Insert a media file: </span>', 'upload_link_title' => 'Media Uploader - NinjaForms'), $media_upload);
-							}else{
-								$args = array("media_buttons" => $media_upload);
-								wp_editor($value, "ninja_field_$id", $args);
-							}
-						}else{
-							echo "<textarea  id='ninja_field_$id' name='ninja_field_$id' class='ninja-textarea $classes $field_class'  title='$label'>$value</textarea>";
-						}
-						break;	
-					case 'hr':
-						echo "<hr class='ninja_form_hr $classes $field_class'>";
-						break;
-					case 'heading':
-						echo "<$value class='ninja_form_heading $classes $field_class'>$label</$value>";
-						break;
-					case 'spam':
-						echo "<input type='text' id='ninja_field_spam' name='ninja_field_spam' class='ninja-text-box $classes $field_class'  title='$label'";
-						if($label_pos == 'inside'){
-							echo "value='$value'";
-						}
-						echo ">";
-						break;
-					case 'desc':
-						echo "<p class='ninja-form-desc $classes $field_class'>$value</p>";
-						break;
-					case 'submit':
-						echo "<input id='ninja_submit' name='ninja_submit' type='submit' value ='$label' class='$classes $field_class'>";
-						break;
-					case 'hidden':
-						if($value == 'ninja_user_ID'){
-							if($user_id){
-								$value = $user_id;
-							}else{
-								$value = "User Not Logged In";
-							}
-						}
-						echo "<input type='hidden' name='ninja_field_$id' value='$value'>";
-						break;
-					case 'divider':
-						if($multi == 'checked'){
-							$divider = 'yes';
-
-							if($header_only == 'yes'){
-								echo "<div id='ninja_multi_page_$current_page'>";
-								echo "<input type='hidden' id='ninja_multi_name_$current_page' style='display:none;' value='$label'>";
-								$header_only = 'no';
-							}else{
-								echo "<div class='ninja-controls'>";						
-								if($current_page != 1){
-									echo "<input type='button' id='ninja_page_$current_page' class='ninja_multi_form_previous' value='$previous'> ";
-								}
-								if($current_page != $multi_count){
-									echo "<input type='button' id='ninja_page_$current_page' class='ninja_multi_form_next' value='$next'>";						
-								}
-								echo"</div>";
-								echo"</div>";
-								$current_page++;	
-								echo "<div id='ninja_multi_page_$current_page' style='display:none;'>";
-								echo "<input type='hidden' id='ninja_multi_name_$current_page' style='display:none;' value='$label'>";
-							}
-						}
-						break;
-					case 'progressbar':
-						if($multi == 'checked'){
-							echo "<input type='hidden' id='ninja_multi_progress' value='checked'>";
-							echo "<div id='progressbar'></div>";
-						}
-					break;
-					
-					case 'steps':
-						if($multi == 'checked'){
-							echo "<p class = 'ninja_progress'>$label <span id='ninja_multi_step'>1</span> of $multi_count - <span id='ninja_multi_name'>$first_section</span></p>";
-						}
-					break;
-					
-					case 'posttitle':
-						if($ninja_post == 'checked'){
-							echo "<input type='text' id='ninja_field_$id' name='ninja_field_$id' value='$value' class='ninja-text-box $type $classes $field_class' title='$label'>";
-						}
-					break;				
-					
-					case 'postcontent':
-						if($ninja_post == 'checked'){
-							if($rte == 'checked'){
-								if($media_upload == 'checked'){
-									$media_upload = true;
-								}else{
-									$media_upload = false;
-								}
-								if(version_compare( $wp_version, '3.3-beta3-19254' , '<')){
-									echo $wp_editor->editor($value, "ninja_field_$id", array('media_buttons_context' => '<span>Insert a media file: </span>', 'upload_link_title' => 'Media Uploader - NinjaForms'), $media_upload);
-								}else{
-									$args = array("media_buttons" => $media_upload);
-									echo wp_editor($value, "ninja_field_$id");
-								}
-							}else{
-								echo "<textarea name='ninja_field_$id' id='ninja_field_$id' class='ninja-textarea $classes $field_class ninja_rich_text'>$value</textarea>";
-							}
-						}
-					break;				
-					
-					case 'postexcerpt':
-						if($ninja_post == 'checked'){
-							echo "<textarea name='ninja_field_$id' id='ninja_field_$id' class='ninja-textarea $classes $field_class'></textarea>";
-						}
-					break;				
-					
-					case 'postcat':
-						if($ninja_post == 'checked'){
-							$create_cat = $extra['extra']['create_cat'];
-							$dropdown = wp_dropdown_categories(array('hide_empty' => 0, 'name' => "ninja_field_". $id."[]", 'id' => "ninja_field_$id", 'hierarchical' => true, 'echo' => false, 'orderby' => 'name'));
-							$dropdown = str_replace("id='ninja_field_".$id."'", "id='ninja_field_".$id."' multiple='multiple'", $dropdown);
-							echo $dropdown;
-							
-							//echo "CREATE CAT $create_cat";
-							if($create_cat == 'checked'){
-								echo "<p><label class='text-label label-left $label_class' for='ninja_create_cat'>And/Or, Create New</label> <input type='text' name='ninja_create_cat' id='ninja_create_cat'>";
-								if($label_pos != "right"){
-									echo "<label class='ninja-inst' for='ninja_create_cat'>Comma, Separated, List</label>";
-								}
-								echo "</p>";
-								
-							}
-						}
-					break;				
-					
-					case 'posttags':
-						if($ninja_post == 'checked'){
-							echo "<input type='text' name='ninja_field_$id' id='ninja_field_$id' class='ninja-text-box $type $classes $field_class' title='$label'>";
-							if($label_pos != "right"){
-								echo "<label class='ninja-inst' for='ninja_field_$id'>Comma, Separated, List</label>";
-							}
-						}
-					break;
-					
-					case 'file':
-						echo "<input type='hidden' name='MAX_FILE_SIZE' value='$upload_size'/>";
-						echo "<input type='file' name='ninja_field_$id' id='ninja_field_$id' class='ninja-text-box $type $classes $field_class'>";
-						echo "<input type='hidden' name='ninja_field_$id' value='file'>";						
-					break;
-				} // End $type Switch Case
-				
-				if($label_pos == 'right'){
-					echo "<label class='$label_class' for='ninja_field_$id'>$label";
-					if($req == 'ninja_req' ){
-						echo "<span class='required-item'>*</span>";
-					}
-					echo "</label>";
-					if($type == 'postcat' OR $type == 'posttags'){
-						echo "<label class='ninja-inst' for='ninja_create_cat'>";
-						_e('Comma, Separated, List', 'ninja-forms');
-						echo "</label>";
-					}
-					if($show_help == 'checked'){
-						echo " <img id='ninja_field_".$id."_help' src='".NINJA_FORMS_URL."/images/question-ico.gif'> ";
-					}	
-				}elseif($label_pos == 'inside'){
-					if($req == 'ninja_req' ){
-						echo "<span class='required-item'>*</span>";
-					}
-					if($show_help == 'checked'){
-						echo " <img id='ninja_field_".$id."_help' src='".NINJA_FORMS_URL."/images/question-ico.gif'> ";
-					}	
-				}
-				if($label_pos == 'left' && $show_help == 'checked'){
-					echo " <img id='ninja_field_".$id."_help' src='".NINJA_FORMS_URL."/images/question-ico.gif'> ";
-				}
-				if($type != 'divider'){
-					echo "</div>";	 // Label and Element surrounding DIV
-				}
+				$field_output = ninja_return_echo('ninja_forms_display_field', $field['id'], $form_id);
+				$field_output = stripslashes($field_output);
+				$field_output =  apply_filters('ninja_forms_field_'.$field['id'], $field_output);				
+				echo $field_output;
 			} // End Fields FOR EACH
 
-			if($multi == 'checked'){
+			if($ninja_forms_multi == 'checked'){
 				echo"<div id='ninja-controls'>";
-				if($current_page != 1){
-					echo "<input type='button' id='ninja_page_$current_page' class='ninja_multi_form_previous' value='$previous'> ";
+				if($ninja_forms_current_page != 1){
+					echo "<input type='button' id='ninja_page_$ninja_forms_current_page' class='ninja_multi_form_previous' value='$previous'> ";
 				}
-				if($current_page != $multi_count){
-					echo "<input type='button' id='ninja_page_$current_page' class='ninja_multi_form_next' value='$next'> ";						
+				if($ninja_forms_current_page != $ninja_forms_multi_count){
+					echo "<input type='button' id='ninja_page_$ninja_forms_current_page' class='ninja_multi_form_next' value='$next'> ";						
 				}
 				echo"</div>";
-				if($divider == 'yes'){
+				if($ninja_forms_divider == 'yes'){
 					echo"</div>";
 				}
 			}
@@ -783,4 +388,447 @@ function ninja_display_form_id($form_id){
 			add_filter('the_content', 'remove_bad_br_tags', 99);
 			//return trim($output);
 		}
+}
+
+function ninja_forms_display_field($id, $form_id){
+	global $wpdb, $current_user, $wp_editor, $wp_version, $ninja_forms_multi, $ninja_forms_divider, $ninja_forms_header_only, 
+	$ninja_forms_current_page, $ninja_forms_multi_count, $ninja_forms_first_section;
+	
+	$ninja_forms_table_name = $wpdb->prefix . "ninja_forms";
+	$ninja_forms_fields_table_name = $wpdb->prefix . "ninja_forms_fields";
+	$plugin_settings = get_option("ninja_forms_settings");
+	$help_color = $plugin_settings['help_color'];
+	$help_size = $plugin_settings['help_size'];
+	$upload_size = $plugin_settings['upload_size'] * 1000000;
+	$ninja_forms_row = $wpdb->get_row( 
+	$wpdb->prepare("SELECT * FROM $ninja_forms_table_name WHERE id = %d", $form_id)
+	, ARRAY_A);
+	$ajax_submit = $ninja_forms_row['ajax'];
+	$landing_page = $ninja_forms_row['landing_page'];
+	$ninja_forms_title = stripslashes($ninja_forms_row['title']);
+	$ninja_forms_msg = stripslashes($ninja_forms_row['success_msg']);
+	$ninja_forms_desc = stripslashes($ninja_forms_row['desc']);
+	$ninja_forms_show_title = $ninja_forms_row['show_title'];
+	$ninja_forms_show_desc = $ninja_forms_row['show_desc'];
+	$ninja_forms_multi = $ninja_forms_row['multi'];
+	$ninja_post = $ninja_forms_row['post'];
+	$post_options = unserialize($ninja_forms_row['post_options']);
+	$multi_options = unserialize($ninja_forms_row['multi_options']);
+	$save_status = $ninja_forms_row['save_status'];
+	$field =  $wpdb->get_row( 
+	$wpdb->prepare("SELECT * FROM $ninja_forms_fields_table_name WHERE id = %d", $id)
+	, ARRAY_A);
+	if(isset($multi_options['progress_bar'])){
+		$progress_bar = $multi_options['progress_bar'];
+	}else{
+		$progress_bar = '';
+	}
+	if(isset($multi_options['show_steps'])){
+		$show_steps = $multi_options['show_steps'];
+	}else{
+		$show_steps = '';
+	}
+	if(isset($multi_options['steps_label'])){
+		$steps_label = $multi_options['steps_label'];
+	}else{
+		$steps_label = '';
+	}
+	if(isset($multi_options['previous'])){
+		$previous = $multi_options['previous'];
+	}else{
+		$previous = '';
+	}
+	if(isset($multi_options['next'])){
+		$next = $multi_options['next'];		
+	}else{
+		$next = '';
+	}
+	if(isset($multi_options['next_req'])){
+		$next_req = $multi_options['next_req'];
+	}else{
+		$next_req = '';
+	}
+	$label = stripslashes($field['label']);
+	$label = htmlspecialchars($label, ENT_QUOTES);
+	$type = $field['type'];
+	$value =stripslashes($field['value']);
+	$help = stripslashes($field['help']);
+	$help = htmlspecialchars($help, ENT_QUOTES);
+	if($value == 'none'){
+		$value = '';
+	}
+	$req = $field['req'];
+	$extra = unserialize($field['extra']);
+	if(isset($extra['extra']['email_confirm'])){
+		$email_confirm = $extra['extra']['email_confirm'];
+	}else{
+		$email_confirm = '';
+	}
+	if(isset($extra['extra']['mask'])){
+		$mask = $extra['extra']['mask'];
+	}else{
+		$mask = '';
+	}
+	if(isset($extra['extra']['show_help'])){
+		$show_help = $extra['extra']['show_help'];
+	}else{
+		$show_help = '';
+	}
+	$classes = $field['class'];
+	if(isset($extra['extra']['label_pos'])){
+		$label_pos = $extra['extra']['label_pos'];
+	}else{
+		$label_pos = '';
+	}
+
+	if($label_pos == ''){
+		$label_pos = 'left';
+	}
+
+	if(isset($extra['extra']['list_type'])){
+		$list_type = $extra['extra']['list_type'];
+	}else{
+		$list_type = '';
+	}
+	$label_class = '';
+	$field_class = '';
+	$wrap_class = '';
+	
+	if($classes != 'Comma,Separated,List' && $classes != ''){
+		$classes_array = explode(',' , $classes);
+		foreach($classes_array as $class){
+			$label_class .= "$class-label ";
+			$field_class .= "$class-field ";
+			$wrap_class .= "$class-wrap ";
+		}
+	}
+	if(isset($extra['extra']['media_upload'])){
+		$media_upload = $extra['extra']['media_upload'];
+	}else{
+		$media_upload = '';
+	}
+	$classes = "";
+	if(isset($extra['extra']['rte'])){
+		$rte = $extra['extra']['rte'];
+	}else{
+		$rte = '';
+	}
+	if($rte == 'checked'){
+		$classes .= ' ninja-rte';
+	}
+	if(isset($extra['extra']['email'])){
+		$email = $extra['extra']['email'];
+	}else{
+		$email = '';
+	}
+	if($email){
+		$classes .= ' email ';
+	}
+	if($req == 1){
+		$req = 'ninja_req';
+		$classes .= ' ninja_req'; 
+	}
+	
+	if($type == 'spam'){
+		//$label = "Anti-Spam Question: ".$label;
+		$label_class .= " text-label";
+	}
+	if($type == 'textbox'){
+		$label_class .= " text-label";
+	}
+	if($type == 'checkbox'){
+		$label_class .= " checkbox-label";
+	}
+	if($type == 'textarea'){
+		$label_class .= " text-label";
+	}
+	$class_type = $type;
+	if($list_type != ''){
+		$class_type = $list_type;
+	}else{
+		$class_type = $type;
+	}
+	if($type != 'divider'){
+		echo "<div class='span-$class_type-label-$label_pos field-group $wrap_class'>"; // Label and Element Surrounding DIV
+	}
+	if($type != 'heading' && $type != 'hr' && $type != 'desc' && $type != 'submit' && $type != 'hidden' && $type != 'divider' && $type != 'progressbar' && $type != 'steps' ){
+		if(($type != 'posttitle' && $type != 'postcontent' && $type != 'postexcerpt' && $type != 'postcat' && $type != 'posttags') OR ($ninja_post == 'checked')){
+			if($label_pos == 'left' OR $label_pos == 'above'){
+				echo "<label class='$label_class label-$label_pos' for='ninja_field_$id'>$label";
+				if($req == 'ninja_req' ){
+					echo "<span class='required-item'>*</span>";
+				}
+				echo "</label>";
+				if($show_help == 'checked' && $label_pos == 'above'){
+					echo " <img id='ninja_field_".$id."_help' class='ninja-forms-help-text' src='".NINJA_FORMS_URL."/images/question-ico.gif' title='".$help."'>";
+				}	
+			}elseif($label_pos == 'inside'){
+				$value = $label;
+				$classes .= " label-inside";
+			}
+		}
+	}
+	switch($type){
+		case 'textbox':
+			if($value == 'ninja_user_firstname'){
+				if($user_firstname){
+					$value = $user_firstname;
+				}else{
+					$value = "";
+				}
+			}elseif($value == 'ninja_user_lastname'){
+				if($user_lastname){
+					$value = $user_lastname;
+				}else{
+					$value = "";
+				}
+			}elseif($value == 'ninja_user_email'){
+				if($user_email){
+					$value = $user_email;
+				}else{
+					$value = "";
+				}					
+			}
+
+			echo "<input type='text' id='ninja_field_$id' name='ninja_field_$id' value='$value' class='ninja-text-box $type $classes $field_class' title='$label'>";
+			break;
+		case 'list':
+			if(isset($extra['extra']['list_type'])){
+				$list_type = $extra['extra']['list_type'];
+			}else{
+				$list_type = 'select';
+			}
+			if(isset($extra['extra']['list_item'])){
+				$options_array = $extra['extra']['list_item'];
+			}else{
+				$options_array = '';
+			}
+			if($list_type != 'radio'){
+				echo "<select ";
+				if($list_type == 'multi'){
+					echo "multiple='multiple' size=5";
+					echo " name='ninja_field_".$id."[]'";
+				}else{
+					echo "name='ninja_field_$id'";
+				}
+				echo  " id='ninja_field_$id' class='ninja-select-box $classes $field_class'>";
+
+				if($label_pos == 'inside'){
+					echo "<option value='' selected>$label</option>";
+				}
+				if($options_array){
+					foreach($options_array as $option){
+						$option = stripslashes($option);
+						$option = htmlspecialchars($option, ENT_QUOTES); 
+						echo "<option value='$option'";
+						if($extra['extra']['list_default'] == $option && $label_pos != 'inside'){
+							echo 'selected';
+						}
+						echo " >$option</option>";
+					}
+				}
+				echo "</select>";
+			}else{
+				if($options_array){
+					$x = 0;
+					foreach($options_array as $option){
+						$option = stripslashes($option);
+						$option = htmlspecialchars($option, ENT_QUOTES); 
+						echo "<input type='radio' name='ninja_field_$id' id='ninja_field_".$id."_".$x."' value='$option' ";
+						if($extra['extra']['list_default'] == $option && $label_pos != 'inside'){
+							echo 'checked';
+						}
+						echo " ><label for='ninja_field_".$id."_".$x."' class='radio-label'>$option</label>";
+						$x++;
+					}
+				}
+			}
+			break;
+		case 'checkbox':
+			if($value == 'checked'){
+				$checked = 'checked';
+			}else{
+				$checked = '';
+			}
+			echo "<input type='hidden' value='unchecked'  name='ninja_field_$id' $checked>";
+			echo "<input type='checkbox' value='checked'  id='ninja_field_$id'  name='ninja_field_$id' $checked class='ninja-check-box $classes $field_class'>";
+			break;
+		case 'textarea':
+			if($rte == 'checked'){
+				if($media_upload == 'checked'){
+					$media_upload = true;
+				}else{
+					$media_upload = false;
+				}
+				if(version_compare( $wp_version, '3.3-beta3-19254' , '<')){
+					echo $wp_editor->editor($value, "ninja_field_$id", array('media_buttons_context' => '<span>Insert a media file: </span>', 'upload_link_title' => 'Media Uploader - Ninja Forms'), $media_upload);
+				}else{
+					$args = array("media_buttons" => $media_upload);
+					wp_editor($value, "ninja_field_$id", $args);
+				}
+			}else{
+				echo "<textarea  id='ninja_field_$id' name='ninja_field_$id' class='ninja-textarea $classes $field_class'  title='$label'>$value</textarea>";
+			}
+			break;	
+		case 'hr':
+			echo "<hr class='ninja_form_hr $classes $field_class'>";
+			break;
+		case 'heading':
+			echo "<$value class='ninja_form_heading $classes $field_class'>$label</$value>";
+			break;
+		case 'spam':
+			echo "<input type='text' id='ninja_field_spam' name='ninja_field_spam' class='ninja-text-box $classes $field_class'  title='$label'";
+			if($label_pos == 'inside'){
+				echo "value='$value'";
+			}
+			echo ">";
+			break;
+		case 'desc':
+			echo "<p class='ninja-form-desc $classes $field_class'>$value</p>";
+			break;
+		case 'submit':
+			echo "<input id='ninja_submit' name='ninja_submit' type='submit' value ='$label' class='$classes $field_class'>";
+			break;
+		case 'hidden':
+			if($value == 'ninja_user_ID'){
+				if($user_id){
+					$value = $user_id;
+				}else{
+					$value = "User Not Logged In";
+				}
+			}
+			echo "<input type='hidden' name='ninja_field_$id' value='$value'>";
+			break;
+		case 'divider':
+			if($ninja_forms_multi == 'checked'){
+				$ninja_forms_divider = 'yes';
+
+				if($ninja_forms_header_only == 'yes'){
+					echo "<div id='ninja_multi_page_$ninja_forms_current_page'>";
+					echo "<input type='hidden' id='ninja_multi_name_$ninja_forms_current_page' style='display:none;' value='$label'>";
+					$ninja_forms_header_only = 'no';
+				}else{
+					echo "<div class='ninja-controls'>";						
+					if($ninja_forms_current_page != 1){
+						echo "<input type='button' id='ninja_page_$ninja_forms_current_page' class='ninja_multi_form_previous' value='$previous'> ";
+					}
+					if($ninja_forms_current_page != $ninja_forms_multi_count){
+						echo "<input type='button' id='ninja_page_$ninja_forms_current_page' class='ninja_multi_form_next' value='$next'>";						
+					}
+					echo"</div>";
+					echo"</div>";
+					$ninja_forms_current_page++;	
+					echo "<div id='ninja_multi_page_$ninja_forms_current_page' style='display:none;'>";
+					echo "<input type='hidden' id='ninja_multi_name_$ninja_forms_current_page' style='display:none;' value='$label'>";
+				}
+			}
+			break;
+		case 'progressbar':
+			if($ninja_forms_multi == 'checked'){
+				echo "<input type='hidden' id='ninja_multi_progress' value='checked'>";
+				echo "<div id='progressbar'></div>";
+			}
+		break;
+		
+		case 'steps':
+			if($ninja_forms_multi == 'checked'){
+				echo "<p class = 'ninja_progress'>$label <span id='ninja_multi_step'>1</span> of $ninja_forms_multi_count - <span id='ninja_multi_name'>$ninja_forms_first_section</span></p>";
+			}
+		break;
+		
+		case 'posttitle':
+			if($ninja_post == 'checked'){
+				echo "<input type='text' id='ninja_field_$id' name='ninja_field_$id' value='$value' class='ninja-text-box $type $classes $field_class' title='$label'>";
+			}
+		break;				
+		
+		case 'postcontent':
+			if($ninja_post == 'checked'){
+				if($rte == 'checked'){
+					if($media_upload == 'checked'){
+						$media_upload = true;
+					}else{
+						$media_upload = false;
+					}
+					if(version_compare( $wp_version, '3.3-beta3-19254' , '<')){
+						echo $wp_editor->editor($value, "ninja_field_$id", array('media_buttons_context' => '<span>Insert a media file: </span>', 'upload_link_title' => 'Media Uploader - Ninja Forms'), $media_upload);
+					}else{
+						$args = array("media_buttons" => $media_upload);
+						echo wp_editor($value, "ninja_field_$id");
+					}
+				}else{
+					echo "<textarea name='ninja_field_$id' id='ninja_field_$id' class='ninja-textarea $classes $field_class ninja_rich_text'>$value</textarea>";
+				}
+			}
+		break;				
+		
+		case 'postexcerpt':
+			if($ninja_post == 'checked'){
+				echo "<textarea name='ninja_field_$id' id='ninja_field_$id' class='ninja-textarea $classes $field_class'></textarea>";
+			}
+		break;				
+		
+		case 'postcat':
+			if($ninja_post == 'checked'){
+				$create_cat = $extra['extra']['create_cat'];
+				$dropdown = wp_dropdown_categories(array('hide_empty' => 0, 'name' => "ninja_field_". $id."[]", 'id' => "ninja_field_$id", 'hierarchical' => true, 'echo' => false, 'orderby' => 'name'));
+				$dropdown = str_replace("id='ninja_field_".$id."'", "id='ninja_field_".$id."' multiple='multiple'", $dropdown);
+				echo $dropdown;
+				
+				//echo "CREATE CAT $create_cat";
+				if($create_cat == 'checked'){
+					echo "<p><label class='text-label label-left $label_class' for='ninja_create_cat'>And/Or, Create New</label> <input type='text' name='ninja_create_cat' id='ninja_create_cat'>";
+					if($label_pos != "right"){
+						echo "<label class='ninja-inst' for='ninja_create_cat'>Comma, Separated, List</label>";
+					}
+					echo "</p>";
+					
+				}
+			}
+		break;				
+		
+		case 'posttags':
+			if($ninja_post == 'checked'){
+				echo "<input type='text' name='ninja_field_$id' id='ninja_field_$id' class='ninja-text-box $type $classes $field_class' title='$label'>";
+				if($label_pos != "right"){
+					echo "<label class='ninja-inst' for='ninja_field_$id'>Comma, Separated, List</label>";
+				}
+			}
+		break;
+		
+		case 'file':
+			echo "<input type='hidden' name='MAX_FILE_SIZE' value='$upload_size'/>";
+			echo "<input type='file' name='ninja_field_$id' id='ninja_field_$id' class='ninja-text-box $type $classes $field_class'>";
+			echo "<input type='hidden' name='ninja_field_$id' value='file'>";						
+		break;
+	} // End $type Switch Case
+	
+	if($label_pos == 'right'){
+		echo "<label class='$label_class' for='ninja_field_$id'>$label";
+		if($req == 'ninja_req' ){
+			echo "<span class='required-item'>*</span>";
+		}
+		echo "</label>";
+		if($type == 'postcat' OR $type == 'posttags'){
+			echo "<label class='ninja-inst' for='ninja_create_cat'>";
+			_e('Comma, Separated, List', 'ninja-forms');
+			echo "</label>";
+		}
+		if($show_help == 'checked'){
+			echo " <img id='ninja_field_".$id."_help' class='ninja-forms-help-text' src='".NINJA_FORMS_URL."/images/question-ico.gif' title='".$help."'> ";
+		}	
+	}elseif($label_pos == 'inside'){
+		if($req == 'ninja_req' ){
+			echo "<span class='required-item'>*</span>";
+		}
+		if($show_help == 'checked'){
+			echo " <img id='ninja_field_".$id."_help' class='ninja-forms-help-text' src='".NINJA_FORMS_URL."/images/question-ico.gif' title='".$help."'> ";
+		}	
+	}
+	if($label_pos == 'left' && $show_help == 'checked'){
+		echo " <img id='ninja_field_".$id."_help' class='ninja-forms-help-text' src='".NINJA_FORMS_URL."/images/question-ico.gif' title='".$help."'> ";
+	}
+	if($type != 'divider'){
+		echo "</div>";	 // Label and Element surrounding DIV
+	}
 }

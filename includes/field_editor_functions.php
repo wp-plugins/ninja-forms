@@ -175,6 +175,9 @@ function ninja_form_field_editor($field_id, $new_field){
 		<?php
 		if($type != 'hr' && $type != 'desc' && $type != 'progressbar'){
 		?>
+					<p class="code description-wide">
+						Field ID: <?php echo $id; ?><br />
+					</p>
 					<p class="description description-wide">
 						<label for="field_<?php echo $id;?>[label]">
 							<?php echo $label_label; ?><br />
@@ -249,13 +252,13 @@ function ninja_form_field_editor($field_id, $new_field){
 							<label for="field_<?php echo $id;?>[extra][email]">
 							<?php _e( 'Is this an email address?' , 'ninja-forms'); ?>
 							<input type="checkbox" value="checked" name="field_<?php echo $id;?>[extra][email]" id="field_<?php echo $id;?>[extra][email]" class="ninja_email" <?php echo $email;?>>
-						</label> <?php if($plugin_settings['admin_help'] == 'checked'){ ?><img class="extra_email" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"> <?php } ?>
+						</label> <?php if($plugin_settings['admin_help'] == 'checked'){ ?><img class="ninja-forms-help-text" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="If this box is checked, Ninja Forms will validate this input as an email address."> <?php } ?>
 					</p>
 					<p class="description description-wide">
 							<label for="field_<?php echo $id;?>[extra][send_email]" id="field_send_email_<?php echo $id;?>_cont" style="<?php if($email != 'checked'){ echo 'display:none;';}?>">
 							<?php _e( 'Send a copy of the form to this address?' , 'ninja-forms'); ?>
 							<input type="checkbox" value="checked" name="field_<?php echo $id;?>[extra][send_email]" id="field_<?php echo $id;?>[extra][send_email]" class="ninja_email" <?php echo $send_email;?>> 
-						 <?php if($plugin_settings['admin_help'] == 'checked'){ ?><img class="send_email" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"> <?php } ?></label> 
+						 <?php if($plugin_settings['admin_help'] == 'checked'){ ?><img class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="If this box is checked, Ninja Forms will send a copy of this form (and any messages attached) to this address."> <?php } ?></label> 
 					</p>
 					<?php
 					break; //End TextBox Editor Output.
@@ -324,12 +327,12 @@ function ninja_form_field_editor($field_id, $new_field){
 						<label for="field_<?php echo $id;?>[extra][rte]">
 							<input type="hidden" name="field_<?php echo $id;?>[extra][rte]" value="unchecked"><input type="checkbox" id="field_<?php echo $id;?>[extra][rte]" name="field_<?php echo $id;?>[extra][rte]" value="checked" <?php echo $rte;?> class="ninja-rte-checkbox"> <?php _e('Show Rich Text Editor', 'ninja-forms');?>
 						</label>
-						<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="" class="show_rte" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
+						<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="If this box is checked, Ninja Forms will use a Rich Text Editor in place of a standard multi-line textarea."><?php } ?>
 					</p>					
 					<p class="description description-thin">
 						<label for="field_<?php echo $id;?>[extra][media_upload]" id="field_<?php echo $id;?>[extra][media_upload]_cont" style="<?php if($rte != 'checked'){ echo "display:none";}?>">
 							<input type="hidden" name="field_<?php echo $id;?>[extra][media_upload]" value="unchecked"><input type="checkbox" id="field_<?php echo $id;?>[extra][media_upload]" name="field_<?php echo $id;?>[extra][media_upload]" value="checked" <?php echo $media_upload;?>> <?php _e('Allow Media Uploads', 'ninja-forms');?>
-							<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="" class="show_upload" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
+							<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="If this box is checked, Ninja Forms will allow users to upload and insert media into the post content. Use with caution."><?php } ?>
 						</label>
 					</p>
 					<?php
@@ -389,7 +392,7 @@ function ninja_form_field_editor($field_id, $new_field){
 						
 					}else{
 						if(version_compare( $wp_version, '3.3-beta3-19254' , '<')){
-							echo $wp_editor->editor($value, "field_".$id."[value]", array('media_buttons_context' => '<span>Insert a media file: </span>', 'upload_link_title' => 'Media Uploader - NinjaForms'), true);
+							echo $wp_editor->editor($value, "field_".$id."[value]", array('media_buttons_context' => '<span>Insert a media file: </span>', 'upload_link_title' => 'Media Uploader - Ninja Forms'), true);
 						}else{
 							$args = array("media_buttons" => true);
 							wp_editor($value, "field_".$id."[value]" , $args);
@@ -455,12 +458,12 @@ function ninja_form_field_editor($field_id, $new_field){
 							<label for="field_<?php echo $id;?>[extra][rte]">
 								<input type="hidden" name="field_<?php echo $id;?>[extra][rte]" value="unchecked"><input type="checkbox" id="field_<?php echo $id;?>[extra][rte]" name="field_<?php echo $id;?>[extra][rte]" value="checked" <?php echo $rte;?> class="ninja-rte-checkbox"> <?php _e('Show Rich Text Editor', 'ninja-forms');?>
 							</label>
-							<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="" class="show_rte" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
+							<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="" class="ninja-forms-help-text" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="If this box is checked, Ninja Forms will use a Rich Text Editor in place of a standard multi-line textarea."><?php } ?>
 						</p>
 						<p class="description description-thin">
 							<label for="field_<?php echo $id;?>[extra][media_upload]" id="field_<?php echo $id;?>[extra][media_upload]_cont" style="<?php if($rte != 'checked'){ echo "display:none";}?>">
 								<input type="hidden" name="field_<?php echo $id;?>[extra][media_upload]" value="unchecked"><input type="checkbox" id="field_<?php echo $id;?>[extra][media_upload]" name="field_<?php echo $id;?>[extra][media_upload]" value="checked" <?php echo $media_upload;?>> <?php _e('Allow Media Uploads', 'ninja-forms');?>
-								<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="" class="show_upload" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
+								<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="" class="ninja-forms-help-text" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="If this box is checked, Ninja Forms will allow users to upload and insert media into the post content. Use with caution."><?php } ?>
 							</label>
 						</p>
 					<?php
@@ -589,7 +592,7 @@ function ninja_form_field_editor($field_id, $new_field){
 							}
 						?>
 					</select>
-					<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img class="meta_key" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"> <?php } ?>
+					<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img class="ninja-forms-help-text" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="Since Ninja Forms will be making a Post from this form, what meta_key should this field be attached to?"> <?php } ?>
 				</p>
 			</div>
 			<?php

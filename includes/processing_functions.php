@@ -38,6 +38,7 @@ function ninja_form_pre_process(){
 		$ninja_form['save_subs'] = $ninja_forms_row['save_subs'];
 		$ninja_form['email_msg'] = stripslashes($ninja_forms_row['email_msg']);
 		$ninja_form['email_fields'] = unserialize($ninja_forms_row['email_fields']);
+		$ninja_form['email_type'] = $ninja_forms_row['email_type'];
 		$ninja_form['ninja_post'] = $ninja_forms_row['post'];
 		$ninja_form['post_options'] = unserialize($ninja_forms_row['post_options']);
 		$ninja_form['save_status'] = $ninja_forms_row['save_status'];
@@ -167,6 +168,18 @@ function ninja_form_pre_process(){
 				$x++;
 			}
 		} //end foreach statement
+		if(!isset($ninja_form['post_title'])){
+			$ninja_form['post_title'] = 'Post Added by Ninja Forms';
+		}		
+		if(!isset($ninja_form['post_content'])){
+			$ninja_form['post_content'] = 'Post Added by Ninja Forms';
+		}		
+		if(!isset($ninja_form['post_tags'])){
+			$ninja_form['post_tags'] = '';
+		}		
+		if(!isset($ninja_form['post_excerpt'])){
+			$ninja_form['post_excerpt'] = '';
+		}
 		//print_r($ninja_post);
 		do_action('ninja_form_pre_process', $ninja_form, $ninja_post);
 		foreach($ninja_all_forms as $form){
@@ -196,7 +209,9 @@ function ninja_form_process(){
 		$error = 'none';
 		foreach($_POST as $key => $val){
 			$key = str_replace("ninja_field_", "", $key);
-			$val = stripslashes($val);
+			if(!is_array($val)){
+				$val = stripslashes($val);
+			}
 			$ninja_forms_fields_row = $wpdb->get_row( 
 			$wpdb->prepare( "SELECT * FROM $ninja_forms_fields_table_name WHERE id = %d", $key)
 			, ARRAY_A); //Check the DB to make sure we have a registered file
@@ -268,7 +283,9 @@ function ninja_form_process(){
 							$label = $post['label'];
 							$val = $post['value'];
 							$extra = $post['extra'];
-							$success_msg = str_replace("[$label]", $val, $success_msg);
+							if(!is_array($val)){
+								$success_msg = str_replace("[$label]", $val, $success_msg);
+							}
 						}
 					}
 					echo $success_msg;
@@ -309,14 +326,26 @@ function ninja_mail_form($ninja_form, $ninja_post){
 		$ajax_submit = $ninja_form['ajax_submit'];
 		$email_msg = $ninja_form['email_msg'];
 		$email_fields = $ninja_form['email_fields'];
-			
+		$email_type = $ninja_form['email_type'];
+		$msg = '';
+		$user_msg = '';
+		$headers = '';
 		if($form_subject == ''){
 			$form_subject = $form_title;
+		}
+		if($email_type == 'text'){
+			$email_msg = str_replace("<p>", "\r\n", $email_msg);
+			$email_msg = str_replace("</p>", "", $email_msg);
+			$email_msg = str_replace("<br>", "\r\n", $email_msg);
+			$email_msg = str_replace("<br />", "\r\n", $email_msg);
+			$email_msg = strip_tags($email_msg);
 		}
 		
 		//Do we have any admin email addresses and/or are we sending an email to the user?
 		$form_mailto = explode(",", $form_mailto);
-		$msg = "<table>";
+		if($email_type == 'html'){
+			$msg = "<table>";
+		}
 		$user_msg = $msg;
 		$user_email = '';
 		foreach($ninja_post as $post){
@@ -347,14 +376,26 @@ function ninja_mail_form($ninja_form, $ninja_post){
 				$x = 0;
 				foreach($val as $v){
 					if($x == 0){
-						$msg .= "<tr><td>".$label.":</td><td>".$v."</td></tr>";											
+						if($email_type == 'html'){
+							$msg .= "<tr><td>".$label.":</td><td>".$v."</td></tr>";
+						}else{
+							$msg .= $label." - ".$v."\r\n";
+						}
 					}else{
-						$msg .= "<tr><td>&nbsp;</td><td>".$v."</td></tr>";	
+						if($email_type == 'html'){
+							$msg .= "<tr><td>&nbsp;</td><td>".$v."</td></tr>";
+						}else{
+							$msg .= "--- ".$v."\r\n";
+						}
 					}
 					$x++;
 				}
 			}else{
-				$msg .= "<tr><td>".$label.":</td><td>".$val."</td></tr>";	
+				if($email_type == 'html'){
+					$msg .= "<tr><td>".$label.":</td><td>".$val."</td></tr>";
+				}else{
+					$msg .= $label." - ".$val."\r\n";
+				}
 			}
 			if($type != 'hidden'){
 				if($email_fields){
@@ -364,14 +405,26 @@ function ninja_mail_form($ninja_form, $ninja_post){
 								$x = 0;
 								foreach($val as $v){
 									if($x == 0){
-										$user_msg .= "<tr><td>".$label.":</td><td>".$v."</td></tr>";											
+										if($email_type == 'html'){
+											$user_msg .= "<tr><td>".$label.":</td><td>".$v."</td></tr>";
+										}else{
+											$user_msg .= $label." - ".$v."\r\n";
+										}
 									}else{
-										$user_msg .= "<tr><td>&nbsp;</td><td>".$v."</td></tr>";	
+										if($email_type == 'html'){	
+											$user_msg .= "<tr><td>&nbsp;</td><td>".$v."</td></tr>";
+										}else{
+											$user_msg .= "--- ".$v."\r\n";										
+										}
 									}
 									$x++;
 								}
 							}else{
-								$user_msg .= "<tr><td>".$label.":</td><td>".$val."</td></tr>";	
+								if($email_type == 'html'){
+									$user_msg .= "<tr><td>".$label.":</td><td>".$val."</td></tr>";
+								}else{
+									$user_msg .= $label." - ".$val."\r\n";									
+								}
 							}
 							break;
 						}
@@ -379,10 +432,19 @@ function ninja_mail_form($ninja_form, $ninja_post){
 				}
 			}
 		} //end $post foreach.
-		$msg .= "</table>";
-		$user_msg .= "</table>";
-		$headers  = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		if($email_type == 'html'){
+			$msg .= "</table>";
+			$user_msg .= "</table>";
+		}else{
+			$msg .= "\r\n";
+			$user_msg .= "\r\n";
+		}
+		$headers .= "MIME-Version: 1.0\r\n";
+		if($email_type == 'html'){
+			$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+		}else{
+			$headers .= "Content-type: text/plain; charset=iso-8859-1\r\n";
+		}
 		$headers .= 'From: '.$email_from . "\r\n";
 		if($form_mailto != ''){ 
 			foreach($form_mailto as $recipient){
@@ -394,7 +456,11 @@ function ninja_mail_form($ninja_form, $ninja_post){
 			}
 		}
 		if($email_msg != ''){
-			$user_msg = "<p>$email_msg</p>$user_msg";
+			if($email_type == 'html'){
+				$user_msg = "<p>$email_msg</p><h3>Submitted Fields:</h3>$user_msg";
+			}else{
+				$user_msg = $email_msg." \r\n\r\nSubmitted Fields: \r\n".$user_msg;			
+			}
 		}
 		if($send_email == 'checked'){
 			if($user_email){

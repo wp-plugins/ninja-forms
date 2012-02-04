@@ -78,7 +78,9 @@ if(isset($plugin_settings['manage-sub'])){
 }
 //print_r($plugin_settings);
 
-
+$fields_sidebar_order = array('custom-fields', 'defined-fields', 'layout-elements', 'multi-part', 'post-elements');
+$settings_sidebar_order = array('subs-settings', 'append-page-settings', 'append-post-settings');
+$subs_sidebar_order = array('export-subs', 'manage-subs');
 
 if($form_id != 'new'){
 	$ninja_forms_row = $wpdb->get_row( 
@@ -189,6 +191,11 @@ if(isset($ninja_forms_row['email_fields'])){
 }else{
 	$email_fields = '';
 }
+if(isset($ninja_forms_row['email_type'])){
+	$email_type = $ninja_forms_row['email_type'];
+}else{
+	$email_type = 'html';
+}
 if(isset($ninja_forms_row['show_title'])){
 	$show_title = $ninja_forms_row['show_title'];
 }else{
@@ -235,18 +242,17 @@ if(isset($multi_options['steps_label'])){
 if(isset($multi_options['previous'])){
 	$previous = $multi_options['previous'];
 }else{
-	$previous = '';
+	$previous = 'Previous';
 }
 if(isset($multi_options['next'])){
 	$next = $multi_options['next'];
 }else{
-	$next = '';
-}
-if(!$next){
 	$next = 'Next';
 }
-if(!$previous){
-	$previous = 'Previous';
+if(isset($multi_options['next_req'])){
+	$next_req = $multi_options['next_req'];
+}else{
+	$next_req = 'checked';
 }
 if(isset($ninja_forms_row['post_options'])){
 	$post_options = $ninja_forms_row['post_options'];
@@ -300,22 +306,4 @@ if(isset($ninja_forms_row['append_page'])){
 	$form_append_page = unserialize($ninja_forms_row['append_page']);
 }else{
 	$form_append_page = '';
-}
-
-if($plugin_settings['admin_help'] == 'checked'){
-?>
-<div id="" class="" style="display:none;">
-	<img src="<?php echo NINJA_FORMS_URL;?>/js/jquerybubblepopup-theme/all-black/bottom-left.png">
-	<img src="<?php echo NINJA_FORMS_URL;?>/js/jquerybubblepopup-theme/all-black/bottom-middle.png">
-	<img src="<?php echo NINJA_FORMS_URL;?>/js/jquerybubblepopup-theme/all-black/bottom-right.png">
-	<img src="<?php echo NINJA_FORMS_URL;?>/js/jquerybubblepopup-theme/all-black/middle-left.png">
-	<img src="<?php echo NINJA_FORMS_URL;?>/js/jquerybubblepopup-theme/all-black/middle-right.png">
-	<img src="<?php echo NINJA_FORMS_URL;?>/js/jquerybubblepopup-theme/all-black/tail-left.png">
-	<img src="<?php echo NINJA_FORMS_URL;?>/js/jquerybubblepopup-theme/all-black/tail-top.png">
-	<img src="<?php echo NINJA_FORMS_URL;?>/js/jquerybubblepopup-theme/all-black/top-left.png">
-	<img src="<?php echo NINJA_FORMS_URL;?>/js/jquerybubblepopup-theme/all-black/top-middle.png">
-	<img src="<?php echo NINJA_FORMS_URL;?>/js/jquerybubblepopup-theme/all-black/top-right.png">
-</div>
-<?php
-		}
-		
+}	

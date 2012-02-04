@@ -43,7 +43,6 @@
 		<input type="hidden" id="ninja_form_action" name="action" value="<?php echo $action;?>">
 		<input type="hidden" name="submitted" value="yes">
 		<input type="hidden" name="tab" value="settings">
-		<input type="hidden" id="ninja_form_new" value="<?php echo $form_new;?>">
 		<input type="hidden" id="ninja_form_id" name="ninja_form_id" value="<?php echo $form_id;?>">
 		<input type="hidden" name="ninja_form_fields_order" id="ninja_form_fields_order" value="same">
 	<span id="form-settings-list" class="ninja-settings-list">
@@ -63,19 +62,19 @@
 			<p class="button-controls">
 				<input type="hidden" name="form_<?php echo $form_id;?>[save_subs]" value="unchecked"><input type="checkbox" name="form_<?php echo $form_id;?>[save_subs]" id="form_<?php echo $form_id;?>[save_subs]" value="checked" <?php echo $form_save_subs;?>>
 				 <label for="form_<?php echo $form_id;?>[save_subs]"><?php _e('Save Form Submissions', 'ninja-forms');?></label>
-				<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="save_subs" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
+				<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="save_subs" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="If this box is checked, Ninja Forms will save all user submissions."><?php } ?>
 			</p>					
 			<p class="button-controls">
 				
 				<input type="hidden" name="form_<?php echo $form_id;?>[send_email]" value="unchecked"><input type="checkbox" class="ninja_form_send_email" name="form_<?php echo $form_id;?>[send_email]" id="form_<?php echo $form_id;?>[send_email]" value="checked" <?php echo $form_send_email;?>>
 				 <label for="form_<?php echo $form_id;?>[send_email]"><?php _e('Email To User', 'ninja-forms');?></label>
-				<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="send_email" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
+				<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="send_email" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="If this box is checked, Ninja Forms will send an email to the user. Requires use of the 'Email' Pre-defined Field."><?php } ?>
 			</p>
 			<p class="button-controls">
 				
 				<input type="hidden" name="form_<?php echo $form_id;?>[ajax]" value="unchecked"><input type="checkbox" name="form_<?php echo $form_id;?>[ajax]" id="form_<?php echo $form_id;?>[ajax]" value="checked" class="ninja_form_ajax" <?php echo $form_ajax;?>>
 				 <label for="form_<?php echo $form_id;?>[ajax]"><?php _e('Submit via Ajax', 'ninja-forms');?></label>
-				<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="ajax" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
+				<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="ajax" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="If this box is checked, Ninja Forms will submit the form without reloading the page. After a successful submission, the user will see the success message you have entered to the right."><?php } ?>
 			</p>						
 			<p class="button-controls">
 				<label for="form_<?php echo $form_id;?>[landing_page]" id="form_<?php echo $form_id;?>[landing_page][label]" style="<?php if($form_ajax == 'checked'){ echo 'display:none;';}?>"><?php _e('Select Landing Page', 'ninja-forms');?>:
@@ -95,7 +94,7 @@
 						  }
 						 ?>
 					</select>
-				<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="landing_page" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
+				<?php if($plugin_settings['admin_help'] == 'checked'){ ?><img id="landing_page" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="Since we aren't submitting via Ajax, what page should users be redirected to after successfully submitting the form?"><?php } ?>
 				</label>
 				
 			</p>
@@ -114,7 +113,7 @@
 	<div id="append-page-settings" class="postbox" name="form-settings-list">
 	<div class="handlediv" id="handle-page-settings" title="Click to toggle"><br></div>
 		<h3 >
-			<span><?php _e('Append To A Page', 'ninja-forms');?><?php if($plugin_settings['admin_help'] == 'checked'){ ?> <img id="append_page" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?></span>
+			<span><?php _e('Append To A Page', 'ninja-forms');?><?php if($plugin_settings['admin_help'] == 'checked'){ ?> <img id="append_page" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="If you want to automatically attach this form to a page, check the appropriate box below. It will be added after any page content and before the comments section (if there is one)."><?php } ?></span>
 		</h3>
 		<div class="inside" id="page-settings" <?php if($page_settings_state == 'closed' OR $echoed){ echo 'style="display:none;"'; }else{$echoed = true;}?>>
 			<p class="button-controls">
@@ -218,7 +217,6 @@
 		}
 	break;
 	case 'post-elements':
-		$post_types = get_post_types();
 		if(NINJA_FORMS_TYPE == 'Pro'){
 			require_once(NINJA_FORMS_DIR."/includes/pro/sidebar-post-elements.php");
 		}
@@ -351,10 +349,10 @@
 			<div class="inside" id="manage-sub" <?php if($manage_sub_state == 'closed' OR $echoed){ echo 'style="display:none;"'; }else{$echoed = true;}?>>
 				<p class="howto"></p>
 				<p class="button-controls">
-					<a href="#" id="purge_old_fields_<?php echo $form_id;?>" class="ninja_purge_old_fields"><?php _e('Purge old field data', 'ninja-forms');?></a><?php if($plugin_settings['admin_help'] == 'checked'){ ?> <img id="purge_fields" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
+					<a href="#" id="purge_old_fields_<?php echo $form_id;?>" class="ninja_purge_old_fields"><?php _e('Purge old field data', 'ninja-forms');?></a><?php if($plugin_settings['admin_help'] == 'checked'){ ?> <img id="purge_fields" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="If users submit a form, and later you remove a field from that same form, their submission will contain 'old fields'. Ninja Forms remembers the values they submitted for those fields and will display those to you. This link will remove all of these 'old values'."><?php } ?>
 				</p>
 				<p class="button-controls">
-					<a href="#" id="delete_all_subs_<?php echo $form_id;?>" class="ninja_delete_all_subs"><?php _e('Delete all current submission data', 'ninja-forms');?></a><?php if($plugin_settings['admin_help'] == 'checked'){ ?> <img id="delete_subs" src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif"><?php } ?>
+					<a href="#" id="delete_all_subs_<?php echo $form_id;?>" class="ninja_delete_all_subs"><?php _e('Delete all current submission data', 'ninja-forms');?></a><?php if($plugin_settings['admin_help'] == 'checked'){ ?> <img id="delete_subs" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="This link will remove all user submissions for this form. Be careful, this can't be undone."><?php } ?>
 				</p>
 			</div>
 		</div>

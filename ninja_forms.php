@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: NinjaForms Lite
+Plugin Name: Ninja Forms Lite
 Plugin URI: http://ninjaforms.com
-Description: NinjaForms is a webform builder with unparalleled ease of use and features.
-Version: 1.2.9.2
+Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
+Version: 1.3
 Author: The WP Ninjas
 Author URI: http://wpninjas.net
 */
@@ -25,11 +25,31 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+Ninja Forms also uses the following jQuery plugins. Their licenses can be found in their respective files.
+
+	jQuery TipTip Tooltip v1.3
+	code.drewwilson.com/entry/tiptip-jquery-plugin
+	www.drewwilson.com	
+	Copyright 2010 Drew Wilson
+	
+	jQuery MaskedInput v.1.3
+	http://digitalbush.co
+	Copyright (c) 2007-2011 Josh Bush
+	
+	jQuery Tablesorter Plugin v.2.0.5
+	http://tablesorter.com
+	Copyright (c) Christian Bach 2012
+	
+	jQuery AutoNumeric Plugin v.1.7.4-B
+	http://www.decorplanit.com/plugin/
+	By: Bob Knothe And okolov Yura aka funny_falcon
+	
 */
 global $version_compare, $wpdb, $wp_version;
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/ninja-forms");
 define("NINJA_FORMS_URL", WP_PLUGIN_URL."/ninja-forms");
-define("NINJA_FORMS_VERSION", "1.2.9.2");
+define("NINJA_FORMS_VERSION", "1.3");
 define("NINJA_FORMS_TYPE", "Lite");
 
 if(session_id() == '') {
@@ -57,8 +77,8 @@ if(isset($plugin_settings['version'])){
 }else{
 	$current_version = '';
 }
-if(version_compare(NINJA_FORMS_VERSION, '1.2.4' , '<')){
-	ninja_initial_setup();
+if(version_compare(NINJA_FORMS_VERSION, '1.2.9.3' , '<')){
+	ninja_forms_initial_setup();
 }
 
 
@@ -194,7 +214,7 @@ require_once(NINJA_FORMS_DIR."/includes/ajax_functions.php");
 require_once(NINJA_FORMS_DIR."/includes/processing_functions.php");
 require_once(NINJA_FORMS_DIR."/includes/output_xls.php");
 
-function ninja_initial_setup(){
+function ninja_forms_initial_setup(){
 
 	global $wpdb;
 	//Get the tablenames
@@ -294,6 +314,7 @@ function ninja_initial_setup(){
 		email_from longtext NOT NULL,
 		email_msg longtext NOT NULL,
 		email_fields longtext NOT NULL,
+		email_type mediumtext NOT NULL,
 		multi mediumtext NOT NULL,
 		multi_options longtext NOT NULL,
 		post mediumtext NOT NULL,
@@ -331,6 +352,14 @@ function ninja_initial_setup(){
 
 		$first_form = $wpdb->insert( $ninja_forms_table_name, array( 'title' => $title, 'show_title' => $show_title, 'desc' => $desc, 'show_desc' => $show_desc, 'mailto' => $mailto, 'subject' => $subject, 'new' => $new, 'success_msg' => $success_msg, 'save_subs' => $save_subs, 'send_email' => $send_email, 'ajax' => $ajax, 'landing_page' => $landing_page, 'append_page' => $append_page, 'email_from' => $email_from, 'email_msg' => $email_msg, 'email_fields' => $email_fields, 'multi' => $multi, 'multi_options' => $multi_options, 'post' => $post, 'post_options' => $post_options, 'save_status' => $save_status, 'save_status_options' => $save_status_options) );
 	}
+	
+	if(version_compare( NINJA_FORMS_VERSION, '1.2.9.3' , '<')){
+		if($wpdb->get_var("SHOW COLUMNS FROM $ninja_forms_table_name LIKE 'email_type'") != 'email_type') {
+			$sql = "ALTER TABLE  $ninja_forms_table_name ADD email_type mediumtext NOT NULL";
+			$wpdb->query($sql);
+		}
+	}	
+	
 	if(version_compare( $old_db_version, '1.2' , '<')){
 		if($wpdb->get_var("SHOW COLUMNS FROM $ninja_forms_table_name LIKE 'save_status'") != 'save_status') {
 			$sql = "ALTER TABLE  $ninja_forms_table_name ADD save_status VARCHAR(10) NOT NULL";
@@ -417,4 +446,4 @@ function ninja_initial_setup(){
 	wp_schedule_event(time(), 'daily', 'ninja_delete_incomplete');
 }
 
-register_activation_hook( __FILE__, 'ninja_initial_setup' );
+register_activation_hook( __FILE__, 'ninja_forms_initial_setup' );
