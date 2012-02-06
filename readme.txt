@@ -4,15 +4,12 @@ Donate link: http://wpninjas.net
 Tags: form, forms
 Requires at least: 3.1
 Tested up to: 3.3
-Stable tag: 1.3
+Stable tag: 1.3.1
 
 Ninja Forms Lite is the free version of Ninja Forms Pro. Its drag and drop interface makes it easy to create both simple and complex forms.
 
 == Description ==
-*Notice* - Version 1.3 uses a new help text tooltip which is faster and has a much smaller footprint. We've included a few tooltip color schemes in the "Plugin Settings" section, but
-since it uses no images, it's very easy to customize your tooltips with CSS.  As of this version you can also select whether or not NInja Forms should send emails as
-Plain Text or HTML. Finally, version 1.3 includes a new form field filter  (say that three times fast) which allows developers to modify each field before it is output to the user. Using this filter
-you can, for example, create dynamic select boxes. (For more information on this, please visit www.wpninjas.net)
+*Notice* - Version 1.3.1 fixes a bug some users were having creating new forms. If this applies to you, please upload this version and deactivate then reactivate Ninja Forms.
 
 Ninja Forms Lite is a fully-functional WordPress form creation plugin, with an interface designed to look right at home within your WordPress dashboard.
 
@@ -121,3 +118,6 @@ If you have any requests, please post them in the WordPress.org forum.
 * Fixed a bug that caused a sidebar error for some users.
 * Fixed a bug that caused users to be redirected to the form list when creating a new form.
 * Fixed some bugs that were causing the hover-question mark to appear in odd places with some fields.
+
+= 1.3.1 =
+* Fixed a bug that was preventing some users from creating new forms.
