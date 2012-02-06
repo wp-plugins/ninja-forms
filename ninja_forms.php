@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms Lite
 Plugin URI: http://ninjaforms.com
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 1.3
+Version: 1.3.1
 Author: The WP Ninjas
 Author URI: http://wpninjas.net
 */
@@ -49,7 +49,7 @@ Ninja Forms also uses the following jQuery plugins. Their licenses can be found 
 global $version_compare, $wpdb, $wp_version;
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/ninja-forms");
 define("NINJA_FORMS_URL", WP_PLUGIN_URL."/ninja-forms");
-define("NINJA_FORMS_VERSION", "1.3");
+define("NINJA_FORMS_VERSION", "1.3.1");
 define("NINJA_FORMS_TYPE", "Lite");
 
 if(session_id() == '') {
@@ -77,7 +77,7 @@ if(isset($plugin_settings['version'])){
 }else{
 	$current_version = '';
 }
-if(version_compare(NINJA_FORMS_VERSION, '1.2.9.3' , '<')){
+if(version_compare($current_version, '1.3.1' , '<')){
 	ninja_forms_initial_setup();
 }
 
@@ -259,7 +259,6 @@ function ninja_forms_initial_setup(){
 	$fields_sidebar_order = array('custom-fields', 'defined-fields', 'layout-elements', 'multi-part', 'post-elements');
 	$settings_sidebar_order = array('subs-settings', 'append-page-settings', 'append-post-settings');
 	$subs_sidebar_order = array('export-subs', 'manage-subs');
-	//changes to our ninja_forms_settings for version 1.1
 	$current_version = $plugin_settings['version'];
 
 	$upload_dir = dirname(__FILE__);
@@ -353,12 +352,12 @@ function ninja_forms_initial_setup(){
 		$first_form = $wpdb->insert( $ninja_forms_table_name, array( 'title' => $title, 'show_title' => $show_title, 'desc' => $desc, 'show_desc' => $show_desc, 'mailto' => $mailto, 'subject' => $subject, 'new' => $new, 'success_msg' => $success_msg, 'save_subs' => $save_subs, 'send_email' => $send_email, 'ajax' => $ajax, 'landing_page' => $landing_page, 'append_page' => $append_page, 'email_from' => $email_from, 'email_msg' => $email_msg, 'email_fields' => $email_fields, 'multi' => $multi, 'multi_options' => $multi_options, 'post' => $post, 'post_options' => $post_options, 'save_status' => $save_status, 'save_status_options' => $save_status_options) );
 	}
 	
-	if(version_compare( NINJA_FORMS_VERSION, '1.2.9.3' , '<')){
-		if($wpdb->get_var("SHOW COLUMNS FROM $ninja_forms_table_name LIKE 'email_type'") != 'email_type') {
-			$sql = "ALTER TABLE  $ninja_forms_table_name ADD email_type mediumtext NOT NULL";
-			$wpdb->query($sql);
-		}
-	}	
+
+	if($wpdb->get_var("SHOW COLUMNS FROM $ninja_forms_table_name LIKE 'email_type'") != 'email_type') {
+		$sql = "ALTER TABLE  $ninja_forms_table_name ADD email_type mediumtext NOT NULL";
+		$wpdb->query($sql);
+	}
+
 	
 	if(version_compare( $old_db_version, '1.2' , '<')){
 		if($wpdb->get_var("SHOW COLUMNS FROM $ninja_forms_table_name LIKE 'save_status'") != 'save_status') {

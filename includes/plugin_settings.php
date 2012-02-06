@@ -31,8 +31,7 @@ $upload_mb = min($max_upload, $max_post, $memory_limit);
 <div id="icon-ninja-custom-forms" class="icon32"><img src="<?php echo NINJA_FORMS_URL;?>/images/wpnj-ninja-head.png"></div>
 <h2><?php printf(__('Ninja Forms %s - Plugin Settings', 'ninja-forms'), NINJA_FORMS_TYPE);?></h2>
 
-<h3><?php _e('Version', 'ninja-forms');?> <?php echo $plugin_settings['version'];?></h3>
-<h3><?php _e('Database Version', 'ninja-forms');?> <?php echo $plugin_settings['db_version'];?></h3>
+<h3><?php _e('Version', 'ninja-forms');?> <?php echo NINJA_FORMS_VERSION;?></h3>
 <form id="" name="" action="" method="post">
 <?php wp_nonce_field('ninja_save_plugin_settings','ninja_plugin_settings'); ?>
 <input type="hidden" name="submitted" value="yes">
