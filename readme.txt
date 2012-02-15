@@ -4,7 +4,7 @@ Donate link: http://wpninjas.net
 Tags: form, forms
 Requires at least: 3.1
 Tested up to: 3.3
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 
 Ninja Forms Lite is the free version of Ninja Forms Pro. Its drag and drop interface makes it easy to create both simple and complex forms.
 
@@ -121,3 +121,6 @@ If you have any requests, please post them in the WordPress.org forum.
 
 = 1.3.1 =
 * Fixed a bug that was preventing some users from creating new forms.
+
+= 1.3.2 =
+* Fixed a bug that was causing hidden fields to not populate with user_id properly.
