@@ -393,7 +393,8 @@ function ninja_display_form_id($form_id){
 function ninja_forms_display_field($id, $form_id){
 	global $wpdb, $current_user, $wp_editor, $wp_version, $ninja_forms_multi, $ninja_forms_divider, $ninja_forms_header_only, 
 	$ninja_forms_current_page, $ninja_forms_multi_count, $ninja_forms_first_section;
-	
+	get_currentuserinfo();
+	$user_id = $current_user->ID;
 	$ninja_forms_table_name = $wpdb->prefix . "ninja_forms";
 	$ninja_forms_fields_table_name = $wpdb->prefix . "ninja_forms_fields";
 	$plugin_settings = get_option("ninja_forms_settings");
