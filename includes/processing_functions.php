@@ -2,13 +2,23 @@
 function ninja_form_pre_process(){
 	global $wpdb, $ninja_form, $ninja_post, $user_id;
 	$plugin_settings = get_option("ninja_forms_settings");
-	$form_id = $_REQUEST['ninja_form_id'];
-	$user_id = $_REQUEST['ninja_user_id'];
+	if(isset($_REQUEST['ninja_form_id'])){
+		$form_id = $_REQUEST['ninja_form_id'];
+	}else{
+		$form_id = '';
+	}
+	if(isset($_REQUEST['ninja_user_id'])){
+		$user_id = $_REQUEST['ninja_user_id'];			
+	}else{
+		$user_id = '';
+	}
 	$nonce = $_REQUEST['ninja_forms_nonce'];
 	if(wp_verify_nonce($nonce, 'ninja_forms_submit')){
 		if($user_id){
 			$user_info = get_userdata($user_id);
 			$user_name = $user_info->user_nicename;
+		}else{
+			$user_name = '';
 		}
 		$ninja_forms_table_name = $wpdb->prefix . "ninja_forms";	
 		$ninja_forms_fields_table_name = $wpdb->prefix . "ninja_forms_fields";
@@ -57,7 +67,7 @@ function ninja_form_pre_process(){
 			$ninja_form['form_continue'] = '';
 		}
 		if(isset($plugin_settings['upload_dir'])){
-			$upload_dir = $plugin_settings['upload_dir'];
+			$upload_dir = stripslashes($plugin_settings['upload_dir']);
 		}else{
 			$upload_dir = '';
 		}
@@ -80,18 +90,20 @@ function ninja_form_pre_process(){
 			$id = $file['id'];
 			if($_FILES['ninja_field_'.$id]['name']){ // Check the $_FILES superglobal for our file upload fields.
 				$dir_array = explode('/', $upload_dir);
-				$upload_dir = "";
-				foreach($dir_array as $dir){
-					if($dir != ''){
-						$upload_dir .= $dir."/";
-						//echo $upload_dir;
+				$upload_dir = "/";
+			
+				foreach($dir_array as $directory){
+					//echo $directory;
+					if($directory != ''){
+						$upload_dir .= $directory."/";
+						//echo $upload_dir . '<br />';
 						if(!is_dir($upload_dir)){
 							mkdir($upload_dir);
 						}
 					}
 				}
-				
-				$this_id = str_replace("ninja_field_", "", $key);
+
+				$this_id = str_replace("ninja_field_", "", $id);
 				$ninja_forms_fields_row = $wpdb->get_row( 
 				$wpdb->prepare( "SELECT * FROM $ninja_forms_fields_table_name WHERE id = %d", $this_id)
 				, ARRAY_A);
@@ -132,6 +144,7 @@ function ninja_form_pre_process(){
 					echo "<p class='ninja_error'>An error occured in uploading your file. Please try again</p>";
 				}
 			}
+			
 		}
 		
 		$x = 1;
@@ -231,19 +244,27 @@ function ninja_form_process(){
 						$ext = explode(".", $file_name);
 						$ext = $ext[count($ext)-1];
 						if($upload_types && !strpos($upload_types, $ext)){
-							$error .= $id."_file-type-error|";
+							$error .= $id."_file-type-error|ninja_forms|";
 						}
 						if($_FILES['ninja_field_'.$id]['error'] == 2){
-							$error .= $id."_file-size-error|";
+							$error .= $id."_file-size-error|ninja_forms|";
 						}
 					}
 				}
 			}
 		} //end foreach statement
 		
-		
-		$form_id = $_REQUEST['ninja_form_id'];
-		$user_id = $_REQUEST['ninja_user_id'];
+		if(isset($_REQUEST['ninja_form_id'])){
+			$form_id = $_REQUEST['ninja_form_id'];
+		}else{
+			$form_id = '';
+		}
+		if(isset($_REQUEST['ninja_user_id'])){
+			$user_id = $_REQUEST['ninja_user_id'];			
+		}else{
+			$user_id = '';
+		}
+
 		$ninja_forms_table_name = $wpdb->prefix . "ninja_forms";	
 		$ninja_spam_field = $wpdb->get_row( 
 			$wpdb->prepare("SELECT * FROM $ninja_forms_fields_table_name WHERE form_id = %d AND type = 'spam'", $form_id)
@@ -253,7 +274,7 @@ function ninja_form_process(){
 			if($spam == $ninja_spam_field['value']){
 				
 			}else{
-				$error .= "0_spam-error|";
+				$error .= "0_spam-error|ninja_forms|";
 			}
 		}else{
 			
@@ -319,7 +340,11 @@ function ninja_mail_form($ninja_form, $ninja_post){
 		$form_desc = $ninja_form['desc'];
 		$success_msg = $ninja_form['success_msg'];
 		$send_email = $ninja_form['send_email'];
-		$form_mailto = $ninja_form['mailto'];
+		if(isset($ninja_form['mailto']) AND $ninja_form['mailto'] != ''){
+			$form_mailto = $ninja_form['mailto'];
+		}else{
+			$form_mailto = '';
+		}
 		$form_subject = $ninja_form['subject'];
 		$email_from = $ninja_form['from'];
 		$landing_page = $ninja_form['landing_page'];
@@ -342,7 +367,9 @@ function ninja_mail_form($ninja_form, $ninja_post){
 		}
 		
 		//Do we have any admin email addresses and/or are we sending an email to the user?
-		$form_mailto = explode(",", $form_mailto);
+		if($form_mailto != ''){
+			$form_mailto = explode(",", $form_mailto);
+		}
 		if($email_type == 'html'){
 			$msg = "<table>";
 		}
@@ -441,9 +468,9 @@ function ninja_mail_form($ninja_form, $ninja_post){
 		}
 		$headers .= "MIME-Version: 1.0\r\n";
 		if($email_type == 'html'){
-			$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+			$headers .= "Content-Type: text/html; charset=utf-8\r\n";
 		}else{
-			$headers .= "Content-type: text/plain; charset=iso-8859-1\r\n";
+			$headers .= "Content-type: text/plain; charset=utf-8\r\n";
 		}
 		$headers .= 'From: '.$email_from . "\r\n";
 		if($form_mailto != ''){ 

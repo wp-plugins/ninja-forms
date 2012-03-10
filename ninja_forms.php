@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms Lite
 Plugin URI: http://ninjaforms.com
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 1.3.2
+Version: 1.3.3
 Author: The WP Ninjas
 Author URI: http://wpninjas.net
 */
@@ -49,7 +49,7 @@ Ninja Forms also uses the following jQuery plugins. Their licenses can be found 
 global $version_compare, $wpdb, $wp_version;
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/ninja-forms");
 define("NINJA_FORMS_URL", WP_PLUGIN_URL."/ninja-forms");
-define("NINJA_FORMS_VERSION", "1.3.2");
+define("NINJA_FORMS_VERSION", "1.3.3");
 define("NINJA_FORMS_TYPE", "Lite");
 
 if(session_id() == '') {
@@ -81,6 +81,19 @@ if(version_compare($current_version, '1.3.1' , '<')){
 	ninja_forms_initial_setup();
 }
 
+if(NINJA_FORMS_TYPE == 'Pro'){
+	add_filter( 'http_request_args', 'ninja_forms_ignore_repo', 5, 2 );
+}
+
+function ninja_forms_ignore_repo( $r, $url ) {
+	if ( 0 !== strpos( $url, 'http://api.wordpress.org/plugins/update-check' ) )
+		return $r; // Not a plugin update request. Bail immediately.
+	$plugins = unserialize( $r['body']['plugins'] );
+	unset( $plugins->plugins[ plugin_basename( __FILE__ ) ] );
+	unset( $plugins->active[ array_search( plugin_basename( __FILE__ ), $plugins->active ) ] );
+	$r['body']['plugins'] = serialize( $plugins );
+	return $r;
+}
 
 /*
 if($plugin_settings['product_key'] != ''){

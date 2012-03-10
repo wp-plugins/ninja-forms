@@ -209,14 +209,24 @@ function ninja_form_login(){
 	global $wpdb, $current_user;
 	get_currentuserinfo();
 	$current_userid = $current_user->ID;
-	session_start();
+	if(session_id() == '') {
+		session_start();
+	}
 	$ninja_forms_subs = $wpdb->prefix."ninja_forms_subs";
 	$ninja_forms_fields = $wpdb->prefix."ninja_forms_fields";
 	$email = esc_html($_REQUEST['email']);
 	$password = esc_html($_REQUEST['password']);
 	$password = md5($password);
-	$form_id = esc_html($_REQUEST['form_id']);
-	$user_id = esc_html($_REQUEST['user_id']);
+	if(isset($_REQUEST['form_id'])){
+		$form_id = esc_html($_REQUEST['form_id']);
+	}else{
+		$form_id = '';
+	}
+	if(isset($_REQUEST['user_id'])){
+		$user_id = esc_html($_REQUEST['user_id']);
+	}else{
+		$user_id = '';
+	}
 	if($user_id){
 		if($user_id == $current_userid){
 			$login_row = $wpdb->get_row($wpdb->prepare("SELECT * FROM $ninja_forms_subs WHERE user_id = %d AND form_id = %d AND sub_status = 'incomplete'", $user_id, $form_id), ARRAY_A);
@@ -236,7 +246,11 @@ function ninja_form_login(){
 			$field_row = $wpdb->get_row($wpdb->prepare("SELECT * FROM $ninja_forms_fields WHERE id = %d", $field['id']), ARRAY_A);
 			$type = $field_row['type'];
 			$extra = unserialize($field_row['extra']);
-			$list_type = $extra['extra']['list_type'];
+			if(isset($extra['extra']['list_type'])){
+				$list_type = $extra['extra']['list_type'];
+			}else{
+				$list_type = '';
+			}
 			if(is_array($field['value'])){
 				$value = '';
 				foreach($field['value'] as $item){

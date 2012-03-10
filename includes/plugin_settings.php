@@ -30,7 +30,7 @@ $upload_mb = min($max_upload, $max_post, $memory_limit);
 <div class="wrap">
 <div id="icon-ninja-custom-forms" class="icon32"><img src="<?php echo NINJA_FORMS_URL;?>/images/wpnj-ninja-head.png"></div>
 <h2><?php printf(__('Ninja Forms %s - Plugin Settings', 'ninja-forms'), NINJA_FORMS_TYPE);?></h2>
-
+<div class="wrap-left">
 <h3><?php _e('Version', 'ninja-forms');?> <?php echo NINJA_FORMS_VERSION;?></h3>
 <form id="" name="" action="" method="post">
 <?php wp_nonce_field('ninja_save_plugin_settings','ninja_plugin_settings'); ?>
@@ -56,10 +56,11 @@ $upload_mb = min($max_upload, $max_post, $memory_limit);
 /*               */ ?>
 <input class="button-primary ninja_save_data" type="submit" value="<?php _e('Save Changes', 'ninja-forms');?>">
 </form>	
+</div>
 <?php
 	if(NINJA_FORMS_TYPE == 'Lite'){
 	?>
-<div class="wrap-right" >
+<div class="wrap-right">
 	<img src="<?php echo NINJA_FORMS_URL;?>/images/wpnj-logo-wt.png" width="263px" height="45px" />
 	<h2>Upgrade to Ninja Forms Pro for many more great features including...</h2>
 	<ul>
