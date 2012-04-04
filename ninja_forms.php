@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms Lite
 Plugin URI: http://ninjaforms.com
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 1.3.3
+Version: 1.3.4
 Author: The WP Ninjas
 Author URI: http://wpninjas.net
 */
@@ -49,7 +49,7 @@ Ninja Forms also uses the following jQuery plugins. Their licenses can be found 
 global $version_compare, $wpdb, $wp_version;
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/ninja-forms");
 define("NINJA_FORMS_URL", WP_PLUGIN_URL."/ninja-forms");
-define("NINJA_FORMS_VERSION", "1.3.3");
+define("NINJA_FORMS_VERSION", "1.3.4");
 define("NINJA_FORMS_TYPE", "Lite");
 
 if(session_id() == '') {

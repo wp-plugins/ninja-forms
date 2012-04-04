@@ -266,18 +266,18 @@ function ninja_display_form_id($form_id){
 				$ninja_forms_header_only = 'yes';
 			}
 		
-			echo "<form name='ninja_form_$form_id' id='ninja_form_$form_id' action='' method='post'>
-			<input type='hidden' name='ninja_form_id' id='ninja_form_id' value='$form_id'>
-			<input type='hidden' name='action' value='ninja_form_process'>
-			<input type='hidden' name='ninja_ajax_submit' id='ninja_ajax_submit' value='$ajax_submit'>
-			<input type='hidden' id='ninja_multi_form' value='$ninja_forms_multi'>
-			<input type='hidden' id='ninja_multi_count' value='$ninja_forms_multi_count'>
-			<input type='hidden' id='ninja_next_req' value='$next_req'>
-			<input type='hidden' id='ninja_save_status' name='ninja_save_status' value=''>
-			<input type='hidden' id='ninja_form_save_email' name='ninja_form_save_email' value=''>
-			<input type='hidden' id='ninja_form_save_password' name='ninja_form_save_password' value=''>
-			<input type='hidden' id='ninja_form_continue' name='ninja_form_continue' value=''>
-			";
+			echo "<form name='ninja_form_$form_id' id='ninja_form_$form_id' action='' method='post'>";
+			echo "<input type='hidden' name='ninja_form_id' id='ninja_form_id' value='$form_id'>";
+			echo "<input type='hidden' name='action' value='ninja_form_process'>";
+			echo "<input type='hidden' name='ninja_ajax_submit' id='ninja_ajax_submit' value='$ajax_submit'>";
+			echo "<input type='hidden' id='ninja_multi_form' value='$ninja_forms_multi'>";
+			echo "<input type='hidden' id='ninja_multi_count' value='$ninja_forms_multi_count'>";
+			echo "<input type='hidden' id='ninja_next_req' value='$next_req'>";
+			echo "<input type='hidden' id='ninja_save_status' name='ninja_save_status' value=''>";
+			echo "<input type='hidden' id='ninja_form_save_email' name='ninja_form_save_email' value=''>";
+			echo "<input type='hidden' id='ninja_form_save_password' name='ninja_form_save_password' value=''>";
+			echo "<input type='hidden' id='ninja_form_continue' name='ninja_form_continue' value=''>";
+			
 			wp_nonce_field('ninja_forms_submit','ninja_forms_nonce');
 			if($user_id){
 				echo "<input type='hidden' id='ninja_user_id' name='ninja_user_id' value='$user_id'>";
@@ -395,6 +395,9 @@ function ninja_forms_display_field($id, $form_id){
 	$ninja_forms_current_page, $ninja_forms_multi_count, $ninja_forms_first_section;
 	get_currentuserinfo();
 	$user_id = $current_user->ID;
+	$user_firstname = $current_user->user_firstname;
+	$user_lastname = $current_user->user_lastname;
+	$user_email = $current_user->user_email;
 	$ninja_forms_table_name = $wpdb->prefix . "ninja_forms";
 	$ninja_forms_fields_table_name = $wpdb->prefix . "ninja_forms_fields";
 	$plugin_settings = get_option("ninja_forms_settings");
@@ -450,7 +453,7 @@ function ninja_forms_display_field($id, $form_id){
 		$next_req = '';
 	}
 	$label = stripslashes($field['label']);
-	$label = htmlspecialchars($label, ENT_QUOTES);
+	$label = htmlspecialchars_decode($label, ENT_QUOTES);
 	$type = $field['type'];
 	$value =stripslashes($field['value']);
 	$help = stripslashes($field['help']);

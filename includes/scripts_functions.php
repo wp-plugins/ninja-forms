@@ -75,7 +75,7 @@ function ninja_form_admin_js(){
 	}else{
 		wp_enqueue_script('ninja_forms_admin_js',
 		NINJA_FORMS_URL .'/js/min/ninja_forms_admin_3.1.min.js',
-		array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-dialog'), '', true);
+		array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-dialog', 'jquery-ui-datepicker'), '', true);
 	}
 	wp_localize_script( 'ninja_forms_admin_js', 'settings', array( 'plugin_url' => NINJA_FORMS_URL, 'help_size' => $plugin_settings['help_size'], 'help_color' => $plugin_settings['help_color'], 'admin_help' => $plugin_settings['admin_help']) );
 }
@@ -120,7 +120,7 @@ function ninja_form_display_js(){
 		if($version_compare){
 			wp_enqueue_script('ninja_forms_display-js',
 			NINJA_FORMS_URL .'/js/min/ninja_forms_display.min.js',
-			array('jquery', 'jquery-ui-core', 'jquery-ui-dialog', 'jquery-form'));	
+			array('jquery', 'jquery-ui-core', 'jquery-ui-dialog', 'jquery-form', 'jquery-ui-datepicker'));	
 			
 			//wp_enqueue_script('ninja_forms_display-js',
 			//NINJA_FORMS_URL .'/js/dev/ninja_forms_display.js',
@@ -128,7 +128,7 @@ function ninja_form_display_js(){
 		}else{
 			wp_enqueue_script('ninja_forms_display-js',
 			NINJA_FORMS_URL .'/js/min/ninja_forms_display_3.1.min.js',
-			array('jquery', 'jquery-ui-core', 'jquery-ui-dialog', 'jquery-form'));			
+			array('jquery', 'jquery-ui-core', 'jquery-ui-dialog', 'jquery-form', 'jquery-ui-datepicker'));			
 			
 			//wp_enqueue_script('ninja_forms_display-js',
 			//NINJA_FORMS_URL .'/js/dev/ninja_forms_display_3.1.js',
@@ -136,7 +136,27 @@ function ninja_form_display_js(){
 			
 			
 		}
-		wp_localize_script( 'ninja_forms_display-js', 'ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+		$ninja_forms_general_error = __('There were errors with your submission. Please correct these errors before continuing.', 'ninja-forms');
+		$ninja_forms_required = __('Please ensure that all required fields are filled out properly.', 'ninja-forms');
+		$ninja_forms_spam_error = __('Please answer the anti-spam question correctly.', 'ninja-forms');
+		$ninja_forms_file_size_error = __('One or more files are larger than the allowed filesize.', 'ninja-forms');
+		$ninja_forms_file_type_error = __('Please ensure all files are of a valid type.', 'ninja-forms');
+		$ninja_forms_exists_error = __('A form is already saved with that email address. Please login to make changes to that form', 'ninja-forms');
+		$ninja_forms_saved_error = __('A saved copy of this form has not been found.', 'ninja-forms');
+		$ninja_forms_login_error = __('Invalid Email/Password Combination. Please try again', 'ninja-forms');
+		$ninja_forms_password_match_error = __('Your passwords do not match', 'ninja-forms');
+		$ninja_forms_password_blank_error = __("Password fields can't be blank.", 'ninja-forms');
+		$ninja_forms_uploaded_file = __("Password fields can't be blank.", 'ninja-forms');
+		$ninja_forms_email_not_found = __('Email address not found.', 'ninja-forms');
+		$ninja_forms_password_reset = __('Your password has been emailed.', 'ninja-forms');
+		$ninja_forms_wait = __('Please Wait...', 'ninja-forms');
+		
+		wp_localize_script( 'ninja_forms_display-js', 'ajax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ), 'ninja_forms_required' => $ninja_forms_required,
+		'ninja_forms_general_error' => $ninja_forms_general_error, 'ninja_forms_spam_error' => $ninja_forms_spam_error, 'ninja_forms_file_type_error' => $ninja_forms_file_type_error,
+		'ninja_forms_file_size_error' => $ninja_forms_file_size_error, 'ninja_forms_exists_error' => $ninja_forms_exists_error, 'ninja_forms_saved_error' => $ninja_forms_saved_error,
+		'ninja_forms_login_error' => $ninja_forms_login_error, 'ninja_forms_password_match_error' => $ninja_forms_password_match_error, 'ninja_forms_password_blank_error' => $ninja_forms_password_blank_error,
+		'ninja_forms_uploaded_file' => $ninja_forms_uploaded_file, 'ninja_forms_email_not_found' => $ninja_forms_email_not_found, 'ninja_forms_password_reset' => $ninja_forms_password_reset,
+		'ninja_forms_wait' => $ninja_forms_wait) );
 		wp_localize_script( 'ninja_forms_js-js', 'plugin', array( 'url' => WP_PLUGIN_URL ));
 
 	}

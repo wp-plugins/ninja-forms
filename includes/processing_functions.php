@@ -1,6 +1,12 @@
 <?php
 function ninja_form_pre_process(){
 	global $wpdb, $ninja_form, $ninja_post, $user_id;
+	$server_os = strtoupper(PHP_OS);
+	 if(substr($server_os,0,3) == "WIN")    {
+        $server_os = 'win';
+    }else{
+        $server_os = 'other';
+    }
 	$plugin_settings = get_option("ninja_forms_settings");
 	if(isset($_REQUEST['ninja_form_id'])){
 		$form_id = $_REQUEST['ninja_form_id'];
@@ -89,15 +95,24 @@ function ninja_form_pre_process(){
 		foreach($ninja_forms_file_fields as $file){
 			$id = $file['id'];
 			if($_FILES['ninja_field_'.$id]['name']){ // Check the $_FILES superglobal for our file upload fields.
-				$dir_array = explode('/', $upload_dir);
-				$upload_dir = "/";
+				if ($server_os == 'win') { 
+					$dir_array = explode('\\', $upload_dir);
+					$upload_dir = '';
+				} else { 
+					$dir_array = explode('/', $upload_dir);
+					$upload_dir = "/";
+				}
 			
 				foreach($dir_array as $directory){
 					//echo $directory;
 					if($directory != ''){
-						$upload_dir .= $directory."/";
+						if ($server_os == 'win') { 
+							$upload_dir .= $directory."\\";
+						}else{
+							$upload_dir .= $directory."/";
+						}
 						//echo $upload_dir . '<br />';
-						if(!is_dir($upload_dir)){
+						if(!is_dir($upload_dir) AND !file_exists($upload_dir)){
 							mkdir($upload_dir);
 						}
 					}
@@ -137,7 +152,12 @@ function ninja_form_pre_process(){
 					$file_name = ereg_replace("[^A-Za-z0-9\.]", "", $_FILES['ninja_field_'.$id]['name']);
 				}
 				$_POST['ninja_field_'.$id] = $file_name;
-				$upload_file = "/".$upload_dir . basename($file_name);
+				if($server_os == 'win'){
+					$upload_file = "/".$upload_dir . basename($file_name);				
+				}else{
+					$upload_file = $upload_dir . basename($file_name);				
+				}
+
 				if (move_uploaded_file($_FILES['ninja_field_'.$id]['tmp_name'], $upload_file)) {
 
 				}else {

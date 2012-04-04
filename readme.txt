@@ -1,4 +1,4 @@
-=== Ninja Forms Lite ===
+=== Ninja Forms Pro ===
 Contributors: kstover, jameslaws
 Donate link: http://wpninjas.net
 Tags: form, forms
@@ -82,32 +82,17 @@ If you have any requests, please post them in the WordPress.org forum.
 
 == Changelog ==
 
-= 1.2.4 =
-* First version of Ninja Forms Lite released.
+= 1.3.4 =
+* Fixed various bugs including IE7 errors, success message errors, and added additional translation phrases to the POT file.
 
-= 1.2.5 =
-* Fixed a bug some users were experiencing with a bad require_once() call.
+= 1.3.3 = 
+* Fixed a bug that caused some users to experience errors when using certain characters in success messages.
 
-= 1.2.6 =
-* Fixed some major security-related bugs, please ensure that you are using this version.
+= 1.3.2 =
+* Fixed a bug that was preventing the hidden user_id field from populating properly.
 
-= 1.2.7 =
-* Fixed a bug caused by the inability of the programmer to type correctly.
-
-= 1.2.8 =
-* Fixed a bug that would cause the form to not be emailed on some server setups.
-
-= 1.2.9 =
-* Fixed a bug that was causing sidebar placement to be saved improperly.
-* Introduced localization code throughout Ninja Forms Lite. The POT file is located within the ninja-forms/lang/ directory.
-
-= 1.2.9.1 =
-*Fixed some typos which created problems with localization.
-
-= 1.2.9.2 =
-*Fixed some bugs some users were experiencing when activating Ninja Forms
-*Fixed PHP Notices
-*Developers can now access user submitted fields via $_SESSION variables like $_SESSION['ninja_field_Your Field Label']. e.g. echo $_SESSION['ninja_field_First Name'];
+= 1.3.1 =
+* Fixed a bug that was preventing some users from creating new forms.
 
 = 1.3 =
 * New tooltips - smaller footpring, no images, more customizable via CSS and more flexible.
@@ -117,11 +102,29 @@ If you have any requests, please post them in the WordPress.org forum.
 * Fixed a bug that caused users to be redirected to the form list when creating a new form.
 * Fixed some bugs that were causing the hover-question mark to appear in odd places with some fields.
 
-= 1.3.1 =
-* Fixed a bug that was preventing some users from creating new forms.
+= 1.2.9.2 =
+*Fixed some bugs some users were experiencing when activating Ninja Forms
+*Fixed PHP Notices
+*Developers can now access user submitted fields via $_SESSION variables like $_SESSION['ninja_field_Your Field Label']. e.g. echo $_SESSION['ninja_field_First Name'];
 
-= 1.3.2 =
-* Fixed a bug that was preventing the hidden user_id field from populating properly.
+= 1.2.9.1 =
+*Fixed some typos which created problems with localization.
 
-= 1.3.3 = 
-* Fixed a bug that caused some users to experience errors when using certain characters in success messages.
+= 1.2.9 =
+* Fixed a bug that was causing sidebar placement to be saved improperly.
+* Introduced localization code throughout Ninja Forms Lite. The POT file is located within the ninja-forms/lang/ directory.
+
+= 1.2.8 =
+* Fixed a bug that would cause the form to not be emailed on some server setups.
+
+= 1.2.7 =
+* Fixed a bug caused by the inability of the programmer to type correctly.
+
+= 1.2.6 =
+* Fixed some major security-related bugs, please ensure that you are using this version.
+
+= 1.2.5 =
+* Fixed a bug some users were experiencing with a bad require_once() call.
+
+= 1.2.4 =
+* First version of Ninja Forms Lite released.

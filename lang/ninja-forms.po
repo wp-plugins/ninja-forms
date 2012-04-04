@@ -2,26 +2,28 @@
 # This file is distributed under the same license as the  package.
 msgid ""
 msgstr ""
-"Project-Id-Version:  \n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/ninja-forms\n"
 "POT-Creation-Date: 2012-01-20 15:12:50+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2012-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2012-03-01 08:20-0500\n"
+"Last-Translator: James <james@wpninjas.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
 #: includes/body_fields.php:17
 msgid "Form Name"
-msgstr ""
+msgstr "Test"
 
-#: includes/body_fields.php:18 includes/body_fields.php:53
+#: includes/body_fields.php:18
+#: includes/body_fields.php:53
 #: includes/body_settings.php:176
 msgid "Enter Form Name Here"
 msgstr ""
 
-#: includes/body_fields.php:24 includes/body_fields.php:57
+#: includes/body_fields.php:24
+#: includes/body_fields.php:57
 msgid "Save Fields"
 msgstr ""
 
@@ -29,15 +31,13 @@ msgstr ""
 msgid "Delete Menu"
 msgstr ""
 
-#: includes/body_fields.php:52 includes/body_settings.php:175
+#: includes/body_fields.php:52
+#: includes/body_settings.php:175
 msgid "Submit Button Text"
 msgstr ""
 
 #: includes/body_fields.php:73
-msgid ""
-"Any character you place in the \"custom mask\" box that is not in the list "
-"below will be automatically entered for the user as they type and will not "
-"be removeable"
+msgid "Any character you place in the \"custom mask\" box that is not in the list below will be automatically entered for the user as they type and will not be removeable"
 msgstr ""
 
 #: includes/body_fields.php:74
@@ -45,31 +45,23 @@ msgid "These are the predefined masking characters"
 msgstr ""
 
 #: includes/body_fields.php:76
-msgid ""
-"a - Represents an alpha character (A-Z,a-z) - Only allows letters to be "
-"entered"
+msgid "a - Represents an alpha character (A-Z,a-z) - Only allows letters to be entered"
 msgstr ""
 
 #: includes/body_fields.php:77
-msgid ""
-"9 - Represents a numeric character (0-9) - Only allows numbers to be entered"
+msgid "9 - Represents a numeric character (0-9) - Only allows numbers to be entered"
 msgstr ""
 
 #: includes/body_fields.php:78
-msgid ""
-"* - Represents an alphanumeric character (A-Z,a-z,0-9) - This allows both "
-"numbers and letters to be entered"
+msgid "* - Represents an alphanumeric character (A-Z,a-z,0-9) - This allows both numbers and letters to be entered"
 msgstr ""
 
 #: includes/body_fields.php:82
-msgid ""
-"So, if you wanted to a mask for an an American Social Security Number, you'd "
-"put 999-99-9999 into the box"
+msgid "So, if you wanted to a mask for an an American Social Security Number, you'd put 999-99-9999 into the box"
 msgstr ""
 
 #: includes/body_fields.php:82
-msgid ""
-"The 9s would represent any number, and the -s would be automatically added"
+msgid "The 9s would represent any number, and the -s would be automatically added"
 msgstr ""
 
 #: includes/body_fields.php:82
@@ -81,30 +73,33 @@ msgid "You can also combine these for specific applications"
 msgstr ""
 
 #: includes/body_fields.php:85
-msgid ""
-"For instance, if you had a product key that was in the form of A4B51.989."
-"B.43C, you could mask it with: a9a99.999.a.99a, which would force all the "
-"a's to be letters and the 9s to be numbers"
+msgid "For instance, if you had a product key that was in the form of A4B51.989.B.43C, you could mask it with: a9a99.999.a.99a, which would force all the a's to be letters and the 9s to be numbers"
 msgstr ""
 
-#: includes/body_list.php:13 includes/body_list.php:58
-#: includes/body_subs.php:47 includes/body_subs.php:223
+#: includes/body_list.php:13
+#: includes/body_list.php:58
+#: includes/body_subs.php:47
+#: includes/body_subs.php:223
 msgid "Action"
 msgstr ""
 
-#: includes/body_list.php:14 includes/body_list.php:59
+#: includes/body_list.php:14
+#: includes/body_list.php:59
 msgid "Title"
 msgstr ""
 
-#: includes/body_list.php:15 includes/body_list.php:60
+#: includes/body_list.php:15
+#: includes/body_list.php:60
 msgid "Preview"
 msgstr ""
 
-#: includes/body_list.php:16 includes/body_list.php:61
+#: includes/body_list.php:16
+#: includes/body_list.php:61
 msgid "Submissions"
 msgstr ""
 
-#: includes/body_list.php:17 includes/body_list.php:62
+#: includes/body_list.php:17
+#: includes/body_list.php:62
 msgid "Shortcode"
 msgstr ""
 
@@ -112,7 +107,8 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: includes/body_list.php:33 includes/body_subs.php:99
+#: includes/body_list.php:33
+#: includes/body_subs.php:99
 msgid "Delete"
 msgstr ""
 
@@ -136,7 +132,8 @@ msgstr ""
 msgid "Add A New One"
 msgstr ""
 
-#: includes/setup_vars.php:147 includes/setup_vars.php:149
+#: includes/setup_vars.php:147
+#: includes/setup_vars.php:149
 msgid "Form Settings"
 msgstr ""
 
@@ -189,9 +186,7 @@ msgid "Save Changes"
 msgstr ""
 
 #: includes/body_preview.php:11
-msgid ""
-"Because of different CSS settings, this preview of your form may appear "
-"different than what your end-user sees"
+msgid "Because of different CSS settings, this preview of your form may appear different than what your end-user sees"
 msgstr ""
 
 #: includes/sidebar.php:5
@@ -210,7 +205,8 @@ msgstr ""
 msgid "New Form"
 msgstr ""
 
-#: includes/sidebar.php:26 includes/field_editor_functions.php:276
+#: includes/sidebar.php:26
+#: includes/field_editor_functions.php:276
 #: ninja_forms.php:114
 msgid "Add New"
 msgstr ""
@@ -244,9 +240,7 @@ msgid "Append To A Post"
 msgstr ""
 
 #: includes/sidebar.php:148
-msgid ""
-"In order to append/unappend a form to a post, please visit the post editing "
-"page"
+msgid "In order to append/unappend a form to a post, please visit the post editing page"
 msgstr ""
 
 #: includes/sidebar.php:151
@@ -258,12 +252,11 @@ msgid "Pre-Defined Fields"
 msgstr ""
 
 #: includes/sidebar.php:197
-msgid ""
-"These fields are used within Ninja Forms to direct correspondance and detect "
-"spam. You can only have one of each in your forms"
+msgid "These fields are used within Ninja Forms to direct correspondance and detect spam. You can only have one of each in your forms"
 msgstr ""
 
-#: includes/sidebar.php:200 includes/field_editor_functions.php:131
+#: includes/sidebar.php:200
+#: includes/field_editor_functions.php:131
 msgid "Anti-Spam Question"
 msgstr ""
 
@@ -308,21 +301,15 @@ msgid "Where's stuff like Firstname, Phone #, Date and E-mail address"
 msgstr ""
 
 #: includes/sidebar.php:254
-msgid ""
-"Ninja Forms gives you the flexibility to create any kind of field that you "
-"want using our powerful \"Single-Line Textbox\" masks"
+msgid "Ninja Forms gives you the flexibility to create any kind of field that you want using our powerful \"Single-Line Textbox\" masks"
 msgstr ""
 
 #: includes/sidebar.php:254
-msgid ""
-"Simply add a Single-Line Textbox, then select what kind of \"masking\" you'd "
-"like applied to that field"
+msgid "Simply add a Single-Line Textbox, then select what kind of \"masking\" you'd like applied to that field"
 msgstr ""
 
 #: includes/sidebar.php:254
-msgid ""
-"This means you can easily limit user's input to (999) 999-9999, or put in "
-"your own custom masks for the data that you need: 99-9-999"
+msgid "This means you can easily limit user's input to (999) 999-9999, or put in your own custom masks for the data that you need: 99-9-999"
 msgstr ""
 
 #: includes/sidebar.php:254
@@ -337,7 +324,8 @@ msgstr ""
 msgid "You can add any number of these design elements to your form"
 msgstr ""
 
-#: includes/sidebar.php:271 includes/field_editor_functions.php:127
+#: includes/sidebar.php:271
+#: includes/field_editor_functions.php:127
 msgid "Horizontal Rule"
 msgstr ""
 
@@ -354,9 +342,7 @@ msgid "Export Submissions to .XLS"
 msgstr ""
 
 #: includes/sidebar.php:310
-msgid ""
-"Using this feature, you can export your submissions as a SPREADSHEET. You "
-"can then view it in Microsoft Excel or Open Office"
+msgid "Using this feature, you can export your submissions as a SPREADSHEET. You can then view it in Microsoft Excel or Open Office"
 msgstr ""
 
 #: includes/sidebar.php:311
@@ -399,7 +385,8 @@ msgstr ""
 msgid "Items marked with %s are required"
 msgstr ""
 
-#: includes/display_functions.php:308 includes/display_functions.php:312
+#: includes/display_functions.php:308
+#: includes/display_functions.php:312
 msgid "Click here to resume filling out a saved form"
 msgstr ""
 
@@ -407,7 +394,8 @@ msgstr ""
 msgid "Comma, Separated, List"
 msgstr ""
 
-#: includes/display_functions.php:702 includes/display_functions.php:725
+#: includes/display_functions.php:702
+#: includes/display_functions.php:725
 msgid "Save Progress"
 msgstr ""
 
@@ -423,12 +411,14 @@ msgstr ""
 msgid "Save Your Progress"
 msgstr ""
 
-#: includes/display_functions.php:716 includes/display_functions.php:734
+#: includes/display_functions.php:716
+#: includes/display_functions.php:734
 #: includes/display_functions.php:758
 msgid "Email Address"
 msgstr ""
 
-#: includes/display_functions.php:719 includes/display_functions.php:737
+#: includes/display_functions.php:719
+#: includes/display_functions.php:737
 msgid "Password"
 msgstr ""
 
@@ -436,7 +426,8 @@ msgstr ""
 msgid "Re-enter Password"
 msgstr ""
 
-#: includes/display_functions.php:727 includes/display_functions.php:745
+#: includes/display_functions.php:727
+#: includes/display_functions.php:745
 msgid "Cancel"
 msgstr ""
 
@@ -468,7 +459,8 @@ msgstr ""
 msgid "Retrieve Password"
 msgstr ""
 
-#: includes/body_subs.php:48 includes/body_subs.php:224
+#: includes/body_subs.php:48
+#: includes/body_subs.php:224
 msgid "Date"
 msgstr ""
 
@@ -488,7 +480,8 @@ msgstr ""
 msgid "No Submissions Found"
 msgstr ""
 
-#: includes/body_settings.php:13 includes/body_settings.php:180
+#: includes/body_settings.php:13
+#: includes/body_settings.php:180
 msgid "Save Form Settings"
 msgstr ""
 
@@ -524,7 +517,8 @@ msgstr ""
 msgid "Email Form Recipients"
 msgstr ""
 
-#: includes/body_settings.php:78 includes/field_editor_functions.php:599
+#: includes/body_settings.php:78
+#: includes/field_editor_functions.php:599
 msgid "Remove"
 msgstr ""
 
@@ -532,17 +526,14 @@ msgstr ""
 msgid "Success Message"
 msgstr ""
 
-#: includes/body_settings.php:102 includes/body_settings.php:132
-msgid ""
-"If you want to include field data entered by the user, for instance a name, "
-"you can put that field's label in brackets. i.e. [Firstname] or [Last Name]"
+#: includes/body_settings.php:102
+#: includes/body_settings.php:132
+msgid "If you want to include field data entered by the user, for instance a name, you can put that field's label in brackets. i.e. [Firstname] or [Last Name]"
 msgstr ""
 
-#: includes/body_settings.php:102 includes/body_settings.php:132
-msgid ""
-"This will tell Ninja Forms to replace the bracketed text with whatever input "
-"the user placed in that field. The label name must be entered exactly as you "
-"have it on the form field"
+#: includes/body_settings.php:102
+#: includes/body_settings.php:132
+msgid "This will tell Ninja Forms to replace the bracketed text with whatever input the user placed in that field. The label name must be entered exactly as you have it on the form field"
 msgstr ""
 
 #: includes/body_settings.php:108
@@ -565,11 +556,13 @@ msgstr ""
 msgid "Select All"
 msgstr ""
 
-#: includes/metabox_functions.php:17 includes/metabox_functions.php:25
+#: includes/metabox_functions.php:17
+#: includes/metabox_functions.php:25
 msgid "Append A Ninja Form"
 msgstr ""
 
-#: includes/metabox_functions.php:52 includes/field_editor_functions.php:209
+#: includes/metabox_functions.php:52
+#: includes/field_editor_functions.php:209
 #: includes/field_editor_functions.php:228
 msgid "None"
 msgstr ""
@@ -581,10 +574,6 @@ msgstr ""
 #: includes/field_editor_functions.php:129
 #: includes/field_editor_functions.php:383
 msgid "Description Text"
-msgstr ""
-
-#: includes/field_editor_functions.php:133
-msgid "Progress Bar"
 msgstr ""
 
 #: includes/field_editor_functions.php:135
@@ -768,15 +757,11 @@ msgid "Users Can Create Categories"
 msgstr ""
 
 #: includes/field_editor_functions.php:491
-msgid ""
-"Comma Separated List of allowed file types. An empty list means all file "
-"types are accepted"
+msgid "Comma Separated List of allowed file types. An empty list means all file types are accepted"
 msgstr ""
 
 #: includes/field_editor_functions.php:495
-msgid ""
-"This is not fool-proof and can be tricked, please remember that there is "
-"always a danger in allowing users to upload files"
+msgid "This is not fool-proof and can be tricked, please remember that there is always a danger in allowing users to upload files"
 msgstr ""
 
 #: includes/field_editor_functions.php:501
@@ -784,9 +769,7 @@ msgid "Advanced FIle Naming Options"
 msgstr ""
 
 #: includes/field_editor_functions.php:504
-msgid ""
-"If you aren't sure you want to give the uploaded file a special name, please "
-"leave this box blank"
+msgid "If you aren't sure you want to give the uploaded file a special name, please leave this box blank"
 msgstr ""
 
 #: includes/field_editor_functions.php:504
@@ -818,9 +801,7 @@ msgid "Show Help Text?"
 msgstr ""
 
 #: includes/field_editor_functions.php:551
-msgid ""
-"If \"help text\" is enabled, there will be a question mark %s placed next to "
-"the input field. Hovering over this question mark will show the help text."
+msgid "If \"help text\" is enabled, there will be a question mark %s placed next to the input field. Hovering over this question mark will show the help text."
 msgstr ""
 
 #: includes/field_editor_functions.php:576
@@ -840,15 +821,11 @@ msgid "- Add A New Form"
 msgstr ""
 
 #: includes/pro/fields-upload-help.php:2
-msgid ""
-"If you leave the advanced rename box empty, the uploaded file will retain "
-"the original user's filename. (With any special characters removed.)"
+msgid "If you leave the advanced rename box empty, the uploaded file will retain the original user's filename. (With any special characters removed.)"
 msgstr ""
 
 #: includes/pro/fields-upload-help.php:3
-msgid ""
-"If you want to rename the file, however, you can. These are the conventions "
-"that NinjaForms understands, and their effect."
+msgid "If you want to rename the file, however, you can. These are the conventions that NinjaForms understands, and their effect."
 msgstr ""
 
 #: includes/pro/fields-upload-help.php:5
@@ -880,9 +857,7 @@ msgid "Today's year in yyyy format."
 msgstr ""
 
 #: includes/pro/fields-upload-help.php:15
-msgid ""
-"Any characters other than letters, numbers, dashes (-) and those on the list "
-"above will be removed. This includes spaces."
+msgid "Any characters other than letters, numbers, dashes (-) and those on the list above will be removed. This includes spaces."
 msgstr ""
 
 #: includes/pro/fields-upload-help.php:18
@@ -946,9 +921,7 @@ msgid "Multi-part Forms"
 msgstr ""
 
 #: includes/pro/sidebar-multi-part.php:7
-msgid ""
-"If you want your form to be a multi-part form, check the box below and "
-"define your options"
+msgid "If you want your form to be a multi-part form, check the box below and define your options"
 msgstr ""
 
 #: includes/pro/sidebar-multi-part.php:9
@@ -964,9 +937,7 @@ msgid "Next Button Label"
 msgstr ""
 
 #: includes/pro/sidebar-multi-part.php:21
-msgid ""
-"These are multi-form specific fields. Hover over the ? near each for an "
-"explaination"
+msgid "These are multi-form specific fields. Hover over the ? near each for an explaination"
 msgstr ""
 
 #: includes/pro/sidebar-multi-part.php:23
@@ -1007,9 +978,7 @@ msgid "Post Elements"
 msgstr ""
 
 #: includes/pro/sidebar-post-elements.php:7
-msgid ""
-"If you want NinjaForms to create a post from user input, check the box below "
-"and then insert Post-specific fields"
+msgid "If you want NinjaForms to create a post from user input, check the box below and then insert Post-specific fields"
 msgstr ""
 
 #: includes/pro/sidebar-post-elements.php:10
@@ -1063,3 +1032,4 @@ msgstr ""
 #: includes/pro/sidebar-post-elements.php:77
 msgid "Post Tags"
 msgstr ""
+

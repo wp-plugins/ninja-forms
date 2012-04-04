@@ -38,11 +38,13 @@ if($submitted == 'yes'){
 				$field_type = $ninja_forms_fields_row['type'];
 				//echo $field_type;
 				if(isset($_REQUEST[$field])){
+					$_REQUEST[$field]['label'] = htmlspecialchars($_REQUEST[$field]['label']);
 					$field_array = $_REQUEST[$field];
+					//print_r($_REQUEST[$field]);
 				}else{
 					$field_array = '';
 				}
-				//echo $field_array;
+				//print_r($field_array);
 
 				if($field_array){
 					foreach($field_array as $key => $val){
