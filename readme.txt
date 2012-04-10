@@ -1,4 +1,4 @@
-=== Ninja Forms Pro ===
+=== Ninja Forms Lite ===
 Contributors: kstover, jameslaws
 Donate link: http://wpninjas.net
 Tags: form, forms
