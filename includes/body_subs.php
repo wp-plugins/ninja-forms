@@ -1,8 +1,15 @@
 <?php
 $ninja_forms_subs_table_name = $wpdb->prefix . "ninja_forms_subs";
+/*
 $ninja_forms_subs = $wpdb->get_results( 
 $wpdb->prepare("SELECT * FROM $ninja_forms_subs_table_name WHERE form_id = %d AND sub_status = 'complete' ORDER BY id DESC", $form_id)
 , ARRAY_A);
+*/
+
+$ninja_forms_subs = $wpdb->get_results( 
+$wpdb->prepare("SELECT * FROM $ninja_forms_subs_table_name WHERE form_id = %d ORDER BY id DESC", $form_id)
+, ARRAY_A);
+
 $ninja_forms_fields_columns = $wpdb->get_results( 
 $wpdb->prepare("SELECT * FROM $ninja_forms_fields_table_name WHERE form_id = %d AND type <> 'hr' AND type <> 'heading' AND type <> 'desc'  AND type <> 'submit' AND type <> 'spam' AND type <> 'divider' AND type <> 'progressbar' AND type <> 'steps' AND type <> 'postcontent' ORDER BY field_order ASC LIMIT 3", $form_id)
 , ARRAY_A);
@@ -44,8 +51,9 @@ $current_fields = array_values($current_fields);
 <table class="widefat tablesorter" cellspacing="0" id="ninja_subs_table"> 
 	<thead> 
 		<tr> 
-			<th class="mange-column" width="20%"><?php _e('Action', 'ninja-forms');?></th> 
-			<th class="mange-column" width="20%"><?php _e('Date', 'ninja-forms');?></th> 
+			<th class="mange-column" width="10%"><?php _e('Action', 'ninja-forms');?></th> 
+			<th class="mange-column" width="20%"><?php _e('Date', 'ninja-forms');?></th>
+			<th class="mange-column" width="20%"><?php _e('Sub Status', 'ninja-forms');?></th>
 		<?php
 if($ninja_forms_fields_columns){
 	foreach($ninja_forms_fields_columns as $field){
@@ -63,13 +71,16 @@ if($ninja_forms_subs){
 	foreach($ninja_forms_subs as $sub){
 		$form_values = unserialize($sub['form_values']);
 		$date = date("m/d/Y g:ia", strtotime($sub['date_updated']));
+		$status = $sub['sub_status'];
 		//$date = $sub['date'];
 		$sub_id = $sub['id'];
 		$found = '';
 		//Grab the first key from the form values array. It will not always be 0.
-		foreach($form_values as $key => $val){
-			$x = $key;
-			break;
+		if(is_array($form_values)){
+			foreach($form_values as $key => $val){
+				$x = $key;
+				break;
+			}
 		}
 		//Figure out if we have any values for fields that have been deleted.
 		$old_values = $form_values;
@@ -90,28 +101,32 @@ if($ninja_forms_subs){
 				}
 			} // Foreach Old Value
 		} //If Form Values exists
-		$old_values = array_values($old_values);
-
+		if(is_array($old_values)){
+			$old_values = array_values($old_values);
+		}
 		//End old value checking.
 		//Begin output of our main "visible" section.
 ?>
 <tr id="sub_<?php echo $sub['id'];?>_visible" class="sub_tr_<?php echo $sub['id'];?>">
-		<td width="20%"><span class="delete"><a href="#" id="sub_<?php echo $sub['id'];?>" class="ninja_delete_sub"><?php _e('Delete', 'ninja-forms');?></a></span><?php if($current_fields || $old_values){ ?> | <a href="#" id="more_<?php echo $sub['id'];?>" class="ninja_sub_more"><?php _e('More', 'ninja-forms');?></a><?php } ?></td>
-		<td  width="20%"><?php echo $date;?></td>
+		<td width="5%"><span class="delete"><a href="#" id="sub_<?php echo $sub['id'];?>" class="ninja_delete_sub"><?php _e('Delete', 'ninja-forms');?></a></span><?php if($current_fields || $old_values){ ?> | <a href="#" id="more_<?php echo $sub['id'];?>" class="ninja_sub_more"><?php _e('More', 'ninja-forms');?></a><?php } ?></td>
+		<td width="20%"><?php echo $date;?></td>
+		<td width="20%"><?php echo $status;?></td>
 		<?php
 		$field_value = array();
 		$x = 0;
 		foreach($ninja_forms_fields_columns as $fields){
 			//$field_value[] = $fields['id'];
-			foreach($form_values as $value){
-				if($fields['id'] == $value['id']){
-					$field_value[$x] = $value['value'];
-					break; //we found our value, break the foreach statement.
-				}else{
-					$field_value[$x] = '----';
+			if(is_array($form_values)){
+				foreach($form_values as $value){
+					if($fields['id'] == $value['id']){
+						$field_value[$x] = $value['value'];
+						break; //we found our value, break the foreach statement.
+					}else{
+						$field_value[$x] = '----';
+					}
 				}
+				$x++;
 			}
-			$x++;
 		}
 		foreach($field_value as $value){
 			if($value == ''){
@@ -221,7 +236,8 @@ if($ninja_forms_subs){
 	<tfoot> 
 		<tr> 
 			<th class="mange-column"><?php _e('Action', 'ninja-forms');?></th> 
-			<th class="mange-column"><?php _e('Date', 'ninja-forms');?></th> 
+			<th class="mange-column"><?php _e('Date', 'ninja-forms');?></th>
+			<th class="mange-column"><?php _e('Status', 'ninja-forms');?></th> 
 		<?php
 	if($ninja_forms_fields_columns){
 		foreach($ninja_forms_fields_columns as $field){

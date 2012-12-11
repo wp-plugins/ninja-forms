@@ -8,7 +8,7 @@ function ninja_form_append($content){
 		$ninja_forms_table_name = $wpdb->prefix . "ninja_forms";
 		$post_id = get_the_ID();	
 		$ninja_all_forms = $wpdb->get_results( 
-		$wpdb->prepare("SELECT * FROM $ninja_forms_table_name"), ARRAY_A);
+		$wpdb->prepare("SELECT * FROM $ninja_forms_table_name", false), ARRAY_A);
 
 		foreach($ninja_all_forms as $form){
 			$form_id = $form['id'];
@@ -152,8 +152,8 @@ function ninja_display_form_id($form_id){
 
 			echo "<span id='ninja_form_top'></span>";
 			echo "<script language='javascript'>
-				jQuery(document).ready(function($) {";
-			echo '$(".ninja-forms-help-text").tipTip({defaultPosition: "right", delay: 100, maxWidth: "'.$help_size.'px", edgeOffset: 10});';
+				jQuery(document).ready(function() {";
+			echo 'jQuery(".ninja-forms-help-text").tipTip({defaultPosition: "right", delay: 100, maxWidth: "'.$help_size.'px", edgeOffset: 10});';
 			foreach($ninja_forms_fields as $field){
 				$extra = unserialize($field['extra']);
 				$label = stripslashes($field['label']);
@@ -190,44 +190,44 @@ function ninja_display_form_id($form_id){
 				}
 				if($mask != 'none' && $mask != ''){
 					if($mask == 'dollars'){
-						echo '$("#ninja_field_'.$id.'").autoNumeric({aSign: "$"});';
+						echo 'jQuery("#ninja_field_'.$id.'").autoNumeric({aSign: "$"});';
 					}else{
-						echo '$("#ninja_field_'.$id.'").mask("'.$mask.'");';
+						echo 'jQuery("#ninja_field_'.$id.'").mask("'.$mask.'");';
 					}
 				}
 				if($label_pos == 'inside' && $type != 'list' && $type != 'spam'){
-					echo '$("#ninja_field_'.$id.'").val("'.$label.'");';
-					echo '$("#ninja_field_'.$id.'").focus(function(){
-						if($(this).val() == "'.$label.'"){
-							$(this).removeClass("label-inside");
-							$(this).val("");
+					echo 'jQuery("#ninja_field_'.$id.'").val("'.$label.'");';
+					echo 'jQuery("#ninja_field_'.$id.'").focus(function(){
+						if(jQuery(this).val() == "'.$label.'"){
+							jQuery(this).removeClass("label-inside");
+							jQuery(this).val("");
 						}
 					});';
-					echo '$("#ninja_field_'.$id.'").blur(function(){
-						if($(this).val() == ""){
-							$(this).addClass("label-inside");
-							$(this).val("'.$label.'");
+					echo 'jQuery("#ninja_field_'.$id.'").blur(function(){
+						if(jQuery(this).val() == ""){
+							jQuery(this).addClass("label-inside");
+							jQuery(this).val("'.$label.'");
 						}
 					});';
 				}
 				if($label_pos == 'inside' && $type == 'spam'){
-					echo '$("#ninja_field_spam").val("'.$label.'");';
-					echo '$("#ninja_field_spam").focus(function(){
-						if($(this).val() == "'.$label.'"){
-							$(this).removeClass("label-inside");
-							$(this).val("");
+					echo 'jQuery("#ninja_field_spam").val("'.$label.'");';
+					echo 'jQuery("#ninja_field_spam").focus(function(){
+						if(jQuery(this).val() == "'.$label.'"){
+							jQuery(this).removeClass("label-inside");
+							jQuery(this).val("");
 						}
 					});';
-					echo '$("#ninja_field_spam").blur(function(){
-						if($(this).val() == ""){
-							$(this).addClass("label-inside");
-							$(this).val("'.$label.'");
+					echo 'jQuery("#ninja_field_spam").blur(function(){
+						if(jQuery(this).val() == ""){
+							jQuery(this).addClass("label-inside");
+							jQuery(this).val("'.$label.'");
 						}
 					});';
 				
 				}
 				if($datepicker == 'checked'){
-					echo '$("#ninja_field_'.$id.'").datepicker();';
+					echo 'jQuery("#ninja_field_'.$id.'").datepicker();';
 				}
 
 			}
@@ -266,7 +266,7 @@ function ninja_display_form_id($form_id){
 				$ninja_forms_header_only = 'yes';
 			}
 		
-			echo "<form name='ninja_form_$form_id' id='ninja_form_$form_id' action='' method='post'>";
+			echo "<form name='ninja_form_$form_id' id='ninja_form_$form_id' action='".admin_url( 'admin-ajax.php' )."' method='post' enctype='multipart/form-data'>";
 			echo "<input type='hidden' name='ninja_form_id' id='ninja_form_id' value='$form_id'>";
 			echo "<input type='hidden' name='action' value='ninja_form_process'>";
 			echo "<input type='hidden' name='ninja_ajax_submit' id='ninja_ajax_submit' value='$ajax_submit'>";
@@ -393,6 +393,7 @@ function ninja_display_form_id($form_id){
 function ninja_forms_display_field($id, $form_id){
 	global $wpdb, $current_user, $wp_editor, $wp_version, $ninja_forms_multi, $ninja_forms_divider, $ninja_forms_header_only, 
 	$ninja_forms_current_page, $ninja_forms_multi_count, $ninja_forms_first_section;
+	$exclude_cats = '';
 	get_currentuserinfo();
 	$user_id = $current_user->ID;
 	$user_firstname = $current_user->user_firstname;
@@ -638,7 +639,7 @@ function ninja_forms_display_field($id, $form_id){
 					foreach($options_array as $option){
 						$option = stripslashes($option);
 						$option = htmlspecialchars($option, ENT_QUOTES); 
-						echo "<input type='radio' name='ninja_field_$id' id='ninja_field_".$id."_".$x."' value='$option' ";
+						echo "<input type='radio' name='ninja_field_$id' id='ninja_field_".$id."_".$x."' value='$option' class='$classes $field_class'";
 						if($extra['extra']['list_default'] == $option && $label_pos != 'inside'){
 							echo 'checked';
 						}
@@ -775,7 +776,7 @@ function ninja_forms_display_field($id, $form_id){
 		case 'postcat':
 			if($ninja_post == 'checked'){
 				$create_cat = $extra['extra']['create_cat'];
-				$dropdown = wp_dropdown_categories(array('hide_empty' => 0, 'name' => "ninja_field_". $id."[]", 'id' => "ninja_field_$id", 'hierarchical' => true, 'echo' => false, 'orderby' => 'name'));
+				$dropdown = wp_dropdown_categories(array('hide_empty' => 0, 'name' => "ninja_field_". $id."[]", 'id' => "ninja_field_$id", 'hierarchical' => true, 'echo' => false, 'orderby' => 'name', 'exclude' => $exclude_cats));
 				$dropdown = str_replace("id='ninja_field_".$id."'", "id='ninja_field_".$id."' multiple='multiple'", $dropdown);
 				echo $dropdown;
 				

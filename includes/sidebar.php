@@ -327,10 +327,14 @@
 				<table>
 					<tr>
 						<td><?php _e('Begin Date', 'ninja-forms');?>:</td><td><input type="text" name="begin_date" id="begin_date" class="date" value="<?php echo $begin_date;?>"></td>
-					</tr><tr>
+					</tr>
+					<tr>
 						<td><?php _e('End Date', 'ninja-forms');?>:</td><td><input type="text" name="end_date" id="end_date" class="date" value="<?php echo $end_date;?>"></td>
 					</tr>
 				</table>
+				<p>
+					<input type="checkbox" name="show_incomplete" value="1" id="show_incomplete"> <label for="show_incomplete">Include incomplete saved entries</label>
+				</p>
 				</p>
 					<input type="submit" name="submit" id="submit" value="submit" style="display:none;">
 					</form>

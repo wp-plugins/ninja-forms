@@ -108,6 +108,16 @@ function ninja_form_field_editor($field_id, $new_field){
 	}else{
 		$upload_rename = '';
 	}
+	if(isset($extra['extra']['featured_image'])){
+		$featured_image = $extra['extra']['featured_image'];
+	}else{
+		$featured_image = '';
+	}
+	if(isset($extra['extra']['email_attachment'])){
+		$email_attachment = $extra['extra']['email_attachment'];
+	}else{
+		$email_attachment = '';
+	}
 	//print_r($items);
 	
 	if($type == 'submit'){
@@ -507,6 +517,14 @@ function ninja_form_field_editor($field_id, $new_field){
 							<?php _e('If you aren\'t sure you want to give the uploaded file a special name, please leave this box blank', 'ninja-forms');?>. <a href="#" name="rename_help" class="ninja_help_open"><?php _e('Help Renaming Files', 'ninja-forms');?></a>
 						</label>
 						<input type="text" class="code widefat" name="field_<?php echo $id;?>[extra][upload_rename]" id="field_<?php echo $id;?>[extra][upload_rename]" value="<?php echo $upload_rename;?>">
+					</p>
+					<p class="description-wide" id="">
+						<input type="hidden" value="0" name="field_<?php echo $id;?>[extra][featured_image]">
+						<input type="checkbox" value="1" name="field_<?php echo $id;?>[extra][featured_image]" id="field_<?php echo $id;?>[extra][featured_image]" <?php if($featured_image == 1){ echo 'checked';}?>><label for="field_<?php echo $id;?>[extra][featured_image]"> Set as featured image (Only works if this form is set to create a post and the file is an image file.</label>
+					</p>
+					<p class="description-wide" id="">
+						<input type="hidden" value="0" name="field_<?php echo $id;?>[extra][email_attachment]">
+						<input type="checkbox" value="1" name="field_<?php echo $id;?>[extra][email_attachment]" id="field_<?php echo $id;?>[extra][email_attachment]" <?php if($email_attachment == 1){ echo 'checked';}?>><label for="field_<?php echo $id;?>[extra][email_attachment]"> Attach this file to the email sent to administrators?</label>
 					</p>
 					<?php
 					break;

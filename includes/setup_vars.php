@@ -136,7 +136,7 @@ if($form_id != 'new'){
 
 }
 $ninja_all_forms = $wpdb->get_results( 
-$wpdb->prepare( "SELECT * FROM $ninja_forms_table_name ORDER BY title ASC")
+$wpdb->prepare( "SELECT * FROM $ninja_forms_table_name ORDER BY title ASC", false)
 , ARRAY_A);
 
 

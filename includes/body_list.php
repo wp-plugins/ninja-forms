@@ -1,7 +1,7 @@
 <?php
 
 $ninja_all_forms = $wpdb->get_results( 
-$wpdb->prepare("SELECT * FROM $ninja_forms_table_name ORDER BY title ASC")
+$wpdb->prepare("SELECT * FROM $ninja_forms_table_name ORDER BY title ASC", false)
 , ARRAY_A);
 
 
@@ -33,7 +33,7 @@ $wpdb->prepare("SELECT * FROM $ninja_forms_table_name ORDER BY title ASC")
 			<td><a href="<?php echo $edit_link;?>"><?php _e('Edit', 'ninja-forms');?></a> | <span class="delete"><a class="ninja_form_delete" href="#" id="<?php echo $form_id;?>"><?php _e('Delete', 'ninja-forms'); ?></a></span></td>
 			<td><?php echo $form_title;?></td>
 			<td><a href="<?php echo $preview_link;?>"><?php _e('Preview Form', 'ninja-forms');?></a></td>
-			<td><a href="<?php echo $subs_link;?>"><?php _e('View Submissions', 'ninja-forms');?></a> | <a href="<?php echo $download_link;?>"><?php _e('Download submissions as .xls', 'ninja-forms');?></td>
+			<td><a href="<?php echo $subs_link;?>"><?php _e('View Submissions', 'ninja-forms');?></a> | <a href="<?php echo $download_link;?>"><?php _e('Download submissions as .csv', 'ninja-forms');?></td>
 			<td>[ninja_display_form id=<?php echo $form_id;?>]</td>
 		</tr>
 		<?php 

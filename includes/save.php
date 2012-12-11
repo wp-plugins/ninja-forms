@@ -160,7 +160,7 @@ if($submitted == 'yes'){
 				//print_r($update_array);
 				$wpdb->insert($ninja_forms_table_name, $update_array);
 				$ninja_forms_results = $wpdb->get_results( 
-				$wpdb->prepare( "SELECT id FROM $ninja_forms_table_name ORDER BY id DESC")
+				$wpdb->prepare( "SELECT id FROM $ninja_forms_table_name ORDER BY id DESC", false)
 				, ARRAY_A);
 				$form_id = $ninja_forms_results[0]['id'];
 				$link = add_query_arg(array('tab' => $tab, 'ninja_form_id' => $form_id));

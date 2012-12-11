@@ -52,7 +52,7 @@ function ninja_forms_inner_custom_box() {
 	_e('None', 'ninja-forms');
 	echo '---</option>';
 	$ninja_all_forms = $wpdb->get_results(
-	$wpdb->prepare( "SELECT * FROM $ninja_forms_table_name")
+	$wpdb->prepare( "SELECT * FROM $ninja_forms_table_name", false)
 	, ARRAY_A);
 	foreach($ninja_all_forms as $form){
 		$append_page = unserialize($form['append_page']);
@@ -107,7 +107,7 @@ function ninja_forms_save_postdata( $post_id ) {
 		$ninja_forms_table_name = $wpdb->prefix . "ninja_forms";	
 
 		$ninja_all_forms = $wpdb->get_results( 
-		$wpdb->prepare("SELECT * FROM $ninja_forms_table_name")
+		$wpdb->prepare("SELECT * FROM $ninja_forms_table_name", false)
 		, ARRAY_A);
 		foreach($ninja_all_forms as $row){
 			$row_id = $row['id'];

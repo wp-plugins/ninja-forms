@@ -14,7 +14,6 @@ function ninja_new_field(){
 	global $wpdb;
 	$ninja_forms_fields_table_name = $wpdb->prefix . "ninja_forms_fields";
 
-	$field_id = $_POST['id'];
 	$type = $_POST['type'];
 	$form_id = $_POST['form_id'];
 
@@ -52,7 +51,7 @@ function ninja_new_field(){
 	
 	$new_row = $wpdb->insert( $ninja_forms_fields_table_name, array( 'label' => $label, 'type' => $type, 'form_id' => $form_id, 'value' => $value, 'field_order' => $field_order, 'req' => $req, 'extra' => $extra,  'class' => $class, 'help' => $help ) );
 	$ninja_forms_fields_row = $wpdb->get_row( 
-	$wpdb->prepare("SELECT id FROM $ninja_forms_fields_table_name ORDER BY id DESC")
+	$wpdb->prepare("SELECT id FROM $ninja_forms_fields_table_name ORDER BY id DESC", false)
 	, ARRAY_A);
 	$id = $ninja_forms_fields_row['id'];
 	echo "$id<----new----ninja----field---->";
@@ -264,7 +263,8 @@ function ninja_form_login(){
 				$value = $field['value'];
 			}
 			if($field_row){
-				$value = str_replace('"', "&quot;", $value);
+				//$value = htmlspecialchars($value);
+				$value = str_replace('<br />','<br />\\',nl2br($value));
 			echo '{
 				"id":"'.$field['id'].'",
 				"value":"'.$value.'",

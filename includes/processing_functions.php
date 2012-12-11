@@ -35,7 +35,7 @@ function ninja_form_pre_process(){
 		$wpdb->prepare("SELECT * FROM $ninja_forms_fields_table_name WHERE form_id = %d AND type = 'spam'", $form_id)
 		, ARRAY_A);
 		$ninja_all_forms = $wpdb->get_results( 
-		$wpdb->prepare( "SELECT * FROM $ninja_forms_table_name")
+		$wpdb->prepare( "SELECT * FROM $ninja_forms_table_name", false)
 		, ARRAY_A);
 
 		$ninja_form = array();
@@ -59,6 +59,7 @@ function ninja_form_pre_process(){
 		$ninja_form['post_options'] = unserialize($ninja_forms_row['post_options']);
 		$ninja_form['save_status'] = $ninja_forms_row['save_status'];
 		$ninja_form['save_status_options'] = unserialize($ninja_forms_row['save_status_options']);
+		$ninja_form['admin_msg'] = '';
 		if(isset($_POST['ninja_create_cat'])){
 			$ninja_form['create_cat'] = $_POST['ninja_create_cat'];	
 		}else{
@@ -88,7 +89,7 @@ function ninja_form_pre_process(){
 			$user_name = strtolower($user_name);
 			$upload_dir = str_replace("%username%", $user_name, $upload_dir);
 		}
-		//$upload_dir = strtolower($upload_dir);
+
 		$ninja_forms_file_fields = $wpdb->get_results( 
 				$wpdb->prepare( "SELECT * FROM $ninja_forms_fields_table_name WHERE type = 'file' AND form_id = %d", $form_id)
 				, ARRAY_A); //Grab all of our file upload fields from the DB
@@ -102,16 +103,13 @@ function ninja_form_pre_process(){
 					$dir_array = explode('/', $upload_dir);
 					$upload_dir = "/";
 				}
-			
 				foreach($dir_array as $directory){
-					//echo $directory;
 					if($directory != ''){
 						if ($server_os == 'win') { 
 							$upload_dir .= $directory."\\";
 						}else{
 							$upload_dir .= $directory."/";
 						}
-						//echo $upload_dir . '<br />';
 						if(!is_dir($upload_dir) AND !file_exists($upload_dir)){
 							mkdir($upload_dir);
 						}
@@ -151,9 +149,10 @@ function ninja_form_pre_process(){
 				}else{
 					$file_name = ereg_replace("[^A-Za-z0-9\.]", "", $_FILES['ninja_field_'.$id]['name']);
 				}
-				$_POST['ninja_field_'.$id] = $file_name;
+				$_POST['ninja_field_'.$id] = $upload_dir.$file_name;
 				if($server_os == 'win'){
-					$upload_file = "/".$upload_dir . basename($file_name);				
+					//$upload_file = "/".$upload_dir . basename($file_name);
+					$upload_file = $upload_dir . basename($file_name);	
 				}else{
 					$upload_file = $upload_dir . basename($file_name);				
 				}
@@ -355,6 +354,17 @@ add_action('ninja_form_process', 'ninja_form_post',12,2);
 function ninja_mail_form($ninja_form, $ninja_post){
 	global $wpdb, $ninja_form, $ninja_post, $user_id;
 	if($ninja_form['save_button'] != 'yes'){
+		$files = array();
+		foreach($ninja_post as $post){
+			if(isset($post['extra']['extra']['email_attachment'])){
+				$email_attachment = $post['extra']['extra']['email_attachment'];
+			}else{
+				$email_attachment = 0;
+			}
+			if($post['type'] == 'file' AND $email_attachment == 1){
+				$files[] = $post['value'];
+			}
+		}
 		$form_id = $ninja_form['id'];
 		$form_title = $ninja_form['title'];
 		$form_desc = $ninja_form['desc'];
@@ -365,6 +375,7 @@ function ninja_mail_form($ninja_form, $ninja_post){
 		}else{
 			$form_mailto = '';
 		}
+
 		$form_subject = $ninja_form['subject'];
 		$email_from = $ninja_form['from'];
 		$landing_page = $ninja_form['landing_page'];
@@ -372,7 +383,7 @@ function ninja_mail_form($ninja_form, $ninja_post){
 		$email_msg = $ninja_form['email_msg'];
 		$email_fields = $ninja_form['email_fields'];
 		$email_type = $ninja_form['email_type'];
-		$msg = '';
+		$msg = $ninja_form['admin_msg'];
 		$user_msg = '';
 		$headers = '';
 		if($form_subject == ''){
@@ -391,7 +402,7 @@ function ninja_mail_form($ninja_form, $ninja_post){
 			$form_mailto = explode(",", $form_mailto);
 		}
 		if($email_type == 'html'){
-			$msg = "<table>";
+			$msg .= "<table>";
 		}
 		$user_msg = $msg;
 		$user_email = '';
@@ -486,16 +497,19 @@ function ninja_mail_form($ninja_form, $ninja_post){
 			$msg .= "\r\n";
 			$user_msg .= "\r\n";
 		}
-		$headers .= "MIME-Version: 1.0\r\n";
+
+		$headers .= "\nMIME-Version: 1.0\n";
+		$headers .= 'From: '.$email_from . "\r\n";
+
 		if($email_type == 'html'){
 			$headers .= "Content-Type: text/html; charset=utf-8\r\n";
 		}else{
 			$headers .= "Content-type: text/plain; charset=utf-8\r\n";
 		}
-		$headers .= 'From: '.$email_from . "\r\n";
+
 		if($form_mailto != ''){ 
 			foreach($form_mailto as $recipient){
-				if (mail($recipient, $form_subject, $msg, $headers)){
+				if (wp_mail($recipient, $form_subject, $msg, $headers, $files)){
 					$mailed = 1;
 				}else{
 					$mailed = 0;
@@ -512,7 +526,7 @@ function ninja_mail_form($ninja_form, $ninja_post){
 		if($send_email == 'checked'){
 			if($user_email){
 				foreach($user_email as $user_email){
-					if (mail($user_email, $form_subject, $user_msg, $headers)){
+					if (wp_mail($user_email, $form_subject, $user_msg, $headers)){
 						$mailed = 1;
 					}else{
 						$mailed = 0;
@@ -597,6 +611,13 @@ function ninja_form_post($ninja_form, $ninja_post){
 		$email_fields = $ninja_form['email_fields'];
 		$ninja_create_post = $ninja_form['ninja_post'];
 		$post_options = $ninja_form['post_options'];
+		if($user_id){
+			$user_info = get_userdata($user_id);
+			$user_name = $user_info->user_nicename;
+		}else{
+			$user_name = '';
+		}
+
 		if(isset($ninja_form['post_cat'])){
 			$ninja_form['post_cat'] = str_replace(", ", ",", $ninja_form['post_cat']);
 		}
@@ -656,7 +677,11 @@ function ninja_form_post($ninja_form, $ninja_post){
 						//print_r($item);
 						//echo "<br>";
 						$extra = $item['extra'];
-						$meta_key = $extra['extra']['meta_key'];
+						if(isset($extra['extra']['meta_key'])){
+							$meta_key = $extra['extra']['meta_key'];
+						}else{
+							$meta_key = '';
+						}
 						if($meta_key == '_new'){
 							$meta_key = str_replace(' ', '_', $item['label']);
 							$meta_key = strtolower($meta_key);
@@ -664,10 +689,60 @@ function ninja_form_post($ninja_form, $ninja_post){
 						add_post_meta($new_post_id, $meta_key, $item['value']);
 					}
 				}
+
+				if(is_array($ninja_post)){
+					foreach($ninja_post as $field){
+						if($field['type'] == 'file'){
+							if(is_array($field['extra'])){
+								if($field['extra']['extra']['featured_image'] == 1){
+									if(isset($plugin_settings['upload_dir'])){
+										$upload_dir = stripslashes($plugin_settings['upload_dir']);
+									}else{
+										$upload_dir = '';
+									}
+									$form_title = ereg_replace("[^A-Za-z0-9]", "", $ninja_form['title']);
+									$upload_dir = str_replace("%formtitle%", $form_title, $upload_dir);
+									$upload_dir = str_replace("%date%", date('Y-m-d'), $upload_dir);
+									$upload_dir = str_replace("%month%", date('m'), $upload_dir);
+									$upload_dir = str_replace("%day%", date('d'), $upload_dir);
+									$upload_dir = str_replace("%year%", date('Y'), $upload_dir);
+									if($user_name){
+										$user_name = ereg_replace("[^A-Za-z0-9]", "", $user_name);
+										$user_name = strtolower($user_name);
+										$upload_dir = str_replace("%username%", $user_name, $upload_dir);
+									}
+									$filename = $upload_dir.$field['value'];
+									ninja_set_featured_image($new_post_id, $filename);
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}
 }
+
+
+function ninja_set_featured_image($post_id,$filename) {
+	$wp_filetype = wp_check_filetype(basename($filename), null );
+	$attachment = array(
+		'post_mime_type' => $wp_filetype['type'],
+		'post_title' => preg_replace('/\.[^.]+$/', '', basename($filename)),
+		'post_content' => '',
+		'post_status' => 'inherit'
+	);
+	$attach_id = wp_insert_attachment( $attachment, $filename, $post_id );
+	// you must first include the image.php file
+	// for the function wp_generate_attachment_metadata() to work
+	require_once(ABSPATH . "wp-admin" . '/includes/image.php');
+	$attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
+	if (wp_update_attachment_metadata( $attach_id,  $attach_data )) {
+		// set as featured image
+		return update_post_meta($post_id, '_thumbnail_id', $attach_id);
+	}
+}
+
 
 function ninja_get_subs_by_user($user_id, $form_id = 'none'){
 	global $wpdb;
