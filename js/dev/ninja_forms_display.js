@@ -325,7 +325,7 @@ jQuery(document).ready(function() {
 		var password = jQuery("#ninja_login_password").val();
 		var form_id = jQuery("#ninja_form_id").val();
 		var user_id = jQuery("#ninja_user_id").val();
-		$.post(ajax.ajaxurl, { form_id: form_id, email: email, password: password, user_id: user_id, action:"ninja_form_login"}, function(data){
+		jQuery.post(ajax.ajaxurl, { form_id: form_id, email: email, password: password, user_id: user_id, action:"ninja_form_login"}, function(data){
 			//alert(data);
 			if(data == 'fail'){
 				if(user_id){
@@ -337,7 +337,7 @@ jQuery(document).ready(function() {
 				data = data.split('-ninja-');
 				var sub_id = data[0];
 				var obj = eval('(' + data[1] + ')');
-				$.each(obj.fields, function(i,data){
+				jQuery.each(obj.fields, function(i,data){
 					var value = data.value.replace("&quot;", '"');
 					if(data.type == 'textbox' || data.list_type == 'select' || data.type == 'posttitle' || data.type == 'posttags'){
 						jQuery("#ninja_field_" + data.id).val(value);
@@ -379,7 +379,7 @@ jQuery(document).ready(function() {
 	jQuery("#ninja_forgot_button").click(function(){
 		var form_id = jQuery("#ninja_form_id").val();
 		var email = jQuery("#ninja_forgot_email").val();
-		$.post(ajax.ajaxurl, { form_id: form_id, email: email, action:"ninja_email_pass"}, function(data){
+		jQuery.post(ajax.ajaxurl, { form_id: form_id, email: email, action:"ninja_email_pass"}, function(data){
 			if(data == 'fail'){
 				alert(ajax.ninja_forms_email_not_found);
 			}else{
