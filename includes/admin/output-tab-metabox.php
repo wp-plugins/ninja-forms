@@ -90,7 +90,10 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 			}else{
 				$value = $default_value;
 			}
-			if($s['type'] == 'text'){ ?>
+			//$value = ninja_forms_esc_html_deep( $value );
+			if($s['type'] == 'text'){ 
+				$value = ninja_forms_esc_html_deep( $value );
+				?>
 				<tr>
 					<th>
 						<?php echo $label; ?>
@@ -208,7 +211,9 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 						</th>
 					</tr>
 				<?php }
-			}elseif($s['type'] == 'textarea'){ ?>
+			}elseif($s['type'] == 'textarea'){ 
+				$value = ninja_forms_esc_html_deep( $value );
+				?>
 				<tr>
 					<th>
 						<?php echo $label; ?>

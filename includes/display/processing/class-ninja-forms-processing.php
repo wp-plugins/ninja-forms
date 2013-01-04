@@ -159,7 +159,8 @@ class Ninja_Forms_Processing {
 				}
 				$this->data['form']['admin_attachments'] = array();
 				$this->data['form']['user_attachments'] = array();
-			}		
+			}	
+
 		}
 	}
 

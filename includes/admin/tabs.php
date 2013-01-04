@@ -28,6 +28,16 @@ function ninja_forms_display_tabs(){
 					$link = '';
 				}
 
+				if( isset( $tab['url'] ) ){
+					$link = $tab['url'];
+				}
+
+				if( isset( $tab['target'] ) ){
+					$target = $tab['target'];
+				}else{
+					$target = '';
+				}
+
 				if($tab['show_this_tab_link']){
 					if($current_tab == $slug){
 						?>
@@ -35,7 +45,7 @@ function ninja_forms_display_tabs(){
 						<?php
 					}else{
 						?>
-							<a href="<?php echo $link;?>" class="nav-tab <?php echo $tab['inactive_class'];?>"><?php echo $tab['name'];?></a>
+							<a href="<?php echo $link;?>" target="<?php echo $target;?>" class="nav-tab <?php echo $tab['inactive_class'];?>"><?php echo $tab['name'];?></a>
 						<?php
 					}
 				}

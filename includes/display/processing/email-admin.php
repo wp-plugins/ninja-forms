@@ -7,6 +7,8 @@ function ninja_forms_register_email_admin(){
 function ninja_forms_email_admin(){
 	global $ninja_forms_processing;
 
+	do_action( 'ninja_forms_email_admin' );
+
 	$form_ID = $ninja_forms_processing->get_form_ID();
 	$form_title = $ninja_forms_processing->get_form_setting('form_title');
 	$admin_mailto = $ninja_forms_processing->get_form_setting('admin_mailto');

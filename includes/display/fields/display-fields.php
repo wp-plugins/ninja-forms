@@ -11,6 +11,7 @@ function ninja_forms_register_display_fields(){
 function ninja_forms_display_fields($form_id){
 	global $ninja_forms_fields, $ninja_forms_processing, $current_user;
 	get_currentuserinfo();
+	//var_dump( $ninja_forms_processing );
 
 	if(isset($current_user)){
 		$user_id = $current_user->ID;
@@ -44,7 +45,7 @@ function ninja_forms_display_fields($form_id){
 
 				//Check to see if we are currently editing a form submission.
 				//If we are, then $display_function should be set to the sub_edit_function instead.
-				if(isset($ninja_forms_processing)){
+				if( is_object( $ninja_forms_processing)){
 					$sub_id = $ninja_forms_processing->get_form_setting('sub_id');
 				}else if(isset($_REQUEST['sub_id'])){
 					$sub_id = $_REQUEST['sub_id'];
@@ -180,7 +181,7 @@ function ninja_forms_get_field_wrap_class($field_id){
 		$field_wrap_class .= ' '.$custom_class.'-wrap';
 	}
 
-	if(isset($ninja_forms_processing) AND is_array($ninja_forms_processing->get_errors_by_location($field_id))){
+	if( is_object( $ninja_forms_processing) AND is_array($ninja_forms_processing->get_errors_by_location($field_id))){
 		foreach($ninja_forms_processing->get_errors_by_location($field_id) as $error){
 			$field_wrap_class .= ' ninja-forms-error';
 			break;

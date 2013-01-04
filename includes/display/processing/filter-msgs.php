@@ -15,8 +15,6 @@ function ninja_forms_filter_msgs(){
 	$email_msg = $ninja_forms_processing->get_form_setting('user_email_msg');
 	$save_msg = $ninja_forms_processing->get_form_setting('save_msg');
 
-	echo "Email message ".$email_msg;
-
 	//Loop through each submitted form field and replace any instances of [label] within Success Message, Admin email message, and user email message with the value.
 	if($ninja_forms_processing->get_all_fields()){
 		foreach($ninja_forms_processing->get_all_fields() as $key => $val){
@@ -43,6 +41,8 @@ function ninja_forms_filter_msgs(){
 			$admin_email = str_replace('['.$label.']', $user_value, $admin_email);
 			$email_msg = str_replace('['.$label.']', $user_value, $email_msg);
 			$save_msg = str_replace('['.$label.']', $user_value, $save_msg);
+			$admin_subject = str_replace('['.$label.']', $user_value, $admin_subject);
+			$user_subject = str_replace('['.$label.']', $user_value, $user_subject);
 
 
 		}

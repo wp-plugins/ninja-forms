@@ -23,14 +23,14 @@ if( isset( $form_row['data']['ajax'] ) ){
 		$display = '';
 	}
 	?>
-	<div id="ninja_forms_form_<?php echo $form_id;?>_response_msg" style="<?php echo $display;?>" class="">
+	<div id="ninja_forms_form_<?php echo $form_id;?>_response_msg" style="<?php echo $display;?>" class="ninja-forms-response-msg">
 	<?php
-		if(isset($ninja_forms_processing) AND $ninja_forms_processing->get_errors_by_location('general')){
+		if( is_object( $ninja_forms_processing) AND $ninja_forms_processing->get_errors_by_location('general')){
 			foreach($ninja_forms_processing->get_errors_by_location('general') as $error){
 				echo '<p>'.$error['msg'].'</p>';
 			}
 		}
-		if(isset($ninja_forms_processing) AND $ninja_forms_processing->get_all_success_msgs()){
+		if( is_object( $ninja_forms_processing) AND $ninja_forms_processing->get_all_success_msgs()){
 			foreach($ninja_forms_processing->get_all_success_msgs() as $success){
 				echo $success;
 			}

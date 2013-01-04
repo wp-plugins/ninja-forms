@@ -67,6 +67,7 @@ define( 'NINJA_FORMS_EDD_SL_ITEM_NAME', 'Ninja Forms Alpha' ); // IMPORTANT: cha
 require_once(NINJA_FORMS_DIR."/includes/database.php");
 require_once(NINJA_FORMS_DIR."/includes/activation.php");
 require_once(NINJA_FORMS_DIR."/includes/register.php");
+require_once(NINJA_FORMS_DIR."/includes/shortcode.php");
 require_once(NINJA_FORMS_DIR."/includes/admin/scripts.php");
 require_once(NINJA_FORMS_DIR."/includes/display/scripts.php");
 require_once(NINJA_FORMS_DIR."/includes/admin/sidebar.php");
@@ -158,6 +159,10 @@ require_once(NINJA_FORMS_DIR."/includes/admin/pages/ninja-forms/tabs/field-setti
 require_once(NINJA_FORMS_DIR."/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/fav-fields.php");
 require_once(NINJA_FORMS_DIR."/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/template-fields.php");
 require_once(NINJA_FORMS_DIR."/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/layout-fields.php");
+
+/* Form Preview */
+require_once(NINJA_FORMS_DIR."/includes/admin/pages/ninja-forms/tabs/form-preview/form-preview.php");
+
 
 /* * * * ninja-forms-settings - Settings Page
 

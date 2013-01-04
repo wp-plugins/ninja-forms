@@ -1,8 +1,14 @@
 <?php
 add_action('init', 'ninja_forms_register_filter_email_add_fields');
 function ninja_forms_register_filter_email_add_fields(){
+	global $ninja_forms_processing;
+	if( is_object( $ninja_forms_processing ) ){
+		if( $ninja_forms_processing->get_form_setting( 'user_email_fields' ) == 1 ){
+			add_filter('ninja_forms_user_email', 'ninja_forms_filter_email_add_fields');
+		}
+	}
 	add_filter('ninja_forms_admin_email', 'ninja_forms_filter_email_add_fields');	
-	add_filter('ninja_forms_user_email', 'ninja_forms_filter_email_add_fields');	
+	
 }
 
 function ninja_forms_filter_email_add_fields($message){

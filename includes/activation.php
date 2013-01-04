@@ -385,7 +385,16 @@ function ninja_forms_activation_old_forms_check(){
 							}
 
 							$forms[$x]['field'][$y]['type'] = $field_type;
-							$forms[$x]['field'][$y]['data']['default_value'] = $field['value'];
+							if( isset( $field['value'] ) ){
+								$default_value = $field['value'];
+							}else{
+								$default_value = '';
+							}
+
+							if( $default_value == 'none' ){
+								$default_value = '';
+							}
+							$forms[$x]['field'][$y]['data']['default_value'] = $default_value;
 							$forms[$x]['field'][$y]['data']['req'] = $field['req'];
 							$forms[$x]['field'][$y]['data']['class'] = $field['class'];
 							$forms[$x]['field'][$y]['data']['help_text'] = $field['help'];

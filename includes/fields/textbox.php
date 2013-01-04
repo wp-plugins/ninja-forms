@@ -64,6 +64,9 @@ function ninja_forms_field_text_edit( $field_id, $data ){
 	}else{
 		$default_value = '';
 	}
+	if( $default_value == 'none' ){
+		$default_value = '';
+	}
 
 	?>
 	<div class="description description-thin">
@@ -72,7 +75,7 @@ function ninja_forms_field_text_edit( $field_id, $data ){
 			<?php _e( 'Default Value' , 'ninja-forms'); ?>
 		</label><br />
 			<select id="default_value_<?php echo $field_id;?>" name="" class="widefat ninja-forms-_text-default-value">
-				<option value="" <?php if($default_value == 'none' OR $default_value == ''){ echo 'selected'; $custom = 'no';}?>><?php _e('None', 'ninja-forms'); ?></option>
+				<option value="" <?php if( $default_value == ''){ echo 'selected'; $custom = 'no';}?>><?php _e('None', 'ninja-forms'); ?></option>
 				<option value="_user_firstname" <?php if($default_value == '_user_firstname'){ echo 'selected'; $custom = 'no';}?>><?php _e('User Firstname (If logged in)', 'ninja-forms'); ?></option>
 				<option value="_user_lastname" <?php if($default_value == '_user_lastname'){ echo 'selected'; $custom = 'no';}?>><?php _e('User Lastname (If logged in)', 'ninja-forms'); ?></option>
 				<option value="_user_display_name" <?php if($default_value == '_user_display_name'){ echo 'selected'; $custom = 'no';}?>><?php _e('User Display Name (If logged in)', 'ninja-forms'); ?></option>

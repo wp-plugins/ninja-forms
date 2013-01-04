@@ -1,9 +1,10 @@
 <?php
 add_action( 'ninja_forms_display_js', 'ninja_forms_display_js', 10, 2 );
 function ninja_forms_display_js($form_id, $local_vars = ''){
-	global $post, $ninja_forms_js_form_settings;
+	global $post;
 
 	//if(!is_admin()){
+	/*
 		if( $form_id != '' AND (isset($_REQUEST['preview']) AND $_REQUEST['preview'] == 'true' ) OR ( is_admin() ) ){
 			$form_ids = array($form_id);
 		}else{
@@ -12,7 +13,7 @@ function ninja_forms_display_js($form_id, $local_vars = ''){
 		}
 
 		if(is_array($form_ids) AND !empty($form_ids)){
-
+	*/
 			$form_row = ninja_forms_get_form_by_id($form_id);
 			if( isset( $form_row['data']['ajax'] ) ){
 				$ajax = $form_row['data']['ajax'];
@@ -22,7 +23,7 @@ function ninja_forms_display_js($form_id, $local_vars = ''){
 
 			$ninja_forms_js_form_settings[$form_id]['ajax'] = $ajax;			
 						
-			if(count($ninja_forms_js_form_settings) == count($form_ids)){
+			//if(count($ninja_forms_js_form_settings) == count($form_ids)){
 
 				$plugin_settings = get_option("ninja_forms_settings");
 				if(isset($plugin_settings['date_format'])){
@@ -65,8 +66,8 @@ function ninja_forms_display_js($form_id, $local_vars = ''){
 				wp_enqueue_script( 'jquery-qtip',
 					NINJA_FORMS_URL .'/js/min/jquery.qtip.min.js',
 					array( 'jquery', 'jquery-ui-position' ) );				
-			}	
-		}
+			//}	
+		//}
 	//}
 }
 

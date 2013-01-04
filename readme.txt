@@ -4,7 +4,7 @@ Donate link: http://wpninjas.com
 Tags: form, forms
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 2.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 
 == Description ==
@@ -40,8 +40,11 @@ To see up to date screenshots, visit the [Ninja Forms](http://wpninjas.com/ninja
 This section describes how to install the plugin and get it working.
 
 1. Upload the `ninja-forms` directory to your `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Visit the 'Forms' menu item in your admin sidebar
+2. Activate the plugin through the 'Plugins' menu in WordPress
+3. Visit the 'Forms' menu item in your admin sidebar
+
+Shortcodes have been re-implemented. They are used like so: [ninja_forms_display_form id=3] where 3 is the ID number of the form you want to display.
+
 
 == Use ==
 
@@ -51,13 +54,26 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 = 2.0 =
 
-Version 2.0 is a complete rebuild. If you are a Pro user you should have receieved some additional license keys and links to extension downloads to enhance Ninja Forms. HTML output may have been altered slightly as well so you public form may not look as you intend with this new version without some minor changes. If you need help with anything like that please let us know at wpninja.com and we will try and assist you very quickly.
+Version 2.0 is a complete rebuild. If you are a Pro user you should have receieved some additional license keys and links to extension downloads to enhance Ninja Forms. HTML output may have been altered slightly as well so you public form may not look as you intend with this new version without some minor changes. If you need help with anything like that please let us know at wpninjas.com and we will try and assist you very quickly.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+= 2.0.1 =
+* Lots of bug fixes.
+
+* Filter User and Admin email subject line for [bracketed] labels.
+* Add an action hook to User and Email sending.
+* Add an option to the "user email" section for attaching user submitted values.
+* "Settings saved" now appears properly when saving plugin settings.
+* Fixed a bug with including display js and css for core and extensions.
+* Removed the label "Error message shown when all fields are empty." This wasn't used anyway.
+* Added Shortcodes. They can be used like: [ninja_forms_display_form id=3].
+* Fixed a bug where saving plugin settings would break upon HTML entry.
+* Replaced isset( $ninja_forms_processing with is_object( $ninja_forms_processing.
+* Fixed several activation bugs.
 
 = 2.0 =
 * Version 2.0 is a major leap forward for Ninja Forms. It is much more stable and developer friendly than previous versions of the plugin.

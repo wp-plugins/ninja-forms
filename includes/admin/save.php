@@ -2,7 +2,7 @@
 add_action( 'init', 'ninja_forms_admin_save', 999 );
 
 function ninja_forms_admin_save(){
-	global $ninja_forms_tabs, $ninja_forms_sidebars, $ninja_forms_tabs_metaboxes;
+	global $ninja_forms_tabs, $ninja_forms_sidebars, $ninja_forms_tabs_metaboxes, $ninja_forms_admin_update_message;
 	if(!empty($_POST) AND !empty($_POST['_ninja_forms_admin_submit']) AND $_POST['_ninja_forms_admin_submit'] != ''){
 		if(wp_verify_nonce($_POST['_ninja_forms_admin_submit'],'_ninja_forms_save') AND check_admin_referer('_ninja_forms_save','_ninja_forms_admin_submit')){
 			$current_page = $_REQUEST['page'];
@@ -19,6 +19,7 @@ function ninja_forms_admin_save(){
 			}
 
 			$data_array = ninja_forms_stripslashes_deep( $data_array );
+			//$data_array = ninja_forms_esc_html_deep( $data_array );
 
 			//Call any save functions registered to metaboxes
 			if( isset( $ninja_forms_tabs_metaboxes[$current_page][$current_tab] ) AND is_array( $ninja_forms_tabs_metaboxes[$current_page][$current_tab] ) AND !empty( $ninja_forms_tabs_metaboxes[$current_page][$current_tab] ) ){
@@ -33,6 +34,7 @@ function ninja_forms_admin_save(){
 						$arguments['data'] = $data_array;
 						if($save_function != ''){
 							call_user_func_array($save_function, $arguments);
+							$ninja_forms_admin_update_message = __( 'Settings Saved', 'ninja-forms' );
 						}
 					}
 					if( isset( $opts['settings'] ) AND !empty( $opts['settings'] ) ){
@@ -44,6 +46,7 @@ function ninja_forms_admin_save(){
 								$arguments['data'] = $data_array;
 								if( $setting['save_function'] != '' ){
 									call_user_func_array($setting['save_function'], $arguments);
+									$ninja_forms_admin_update_message = __( 'Settings Saved', 'ninja-forms' );
 								}
 							}
 						}
@@ -61,6 +64,7 @@ function ninja_forms_admin_save(){
 			$arguments['data'] = $data_array;
 			if($save_function != ''){
 				call_user_func_array($save_function, $arguments);
+				$ninja_forms_admin_update_message = __( 'Settings Saved', 'ninja-forms' );
 			}
 			if(isset($ninja_forms_sidebars[$current_page][$current_tab]) AND is_array($ninja_forms_sidebars[$current_page][$current_tab])){
 				foreach($ninja_forms_sidebars[$current_page][$current_tab] as $slug => $sidebar){
@@ -72,6 +76,7 @@ function ninja_forms_admin_save(){
 						$arguments['data'] = $data_array;
 						if($save_function != ''){
 							call_user_func_array($save_function, $arguments);
+							$ninja_forms_admin_update_message = __( 'Settings Saved', 'ninja-forms' );
 						}
 					}
 				}

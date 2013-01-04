@@ -10,7 +10,7 @@ function ninja_forms_display_hidden_fields($form_id){
 	<input type="hidden" name="_ninja_forms_display_submit" value="1">
 	<input type="hidden" name="_form_id"  id="_form_id" value="<?php echo $form_id;?>">
 	<?php
-	if(isset($ninja_forms_processing) AND $ninja_forms_processing->get_all_errors()){
+	if( is_object( $ninja_forms_processing) AND $ninja_forms_processing->get_all_errors()){
 		?>
 		<input type="hidden" id="ninja_forms_processing_error" value="1">
 		<?php

@@ -22,7 +22,7 @@ function ninja_forms_filter_restore_progress( $data, $field_id ){
 		$user_id = '';
 	}
 
-	if( isset( $ninja_forms_processing ) ){
+	if( is_object( $ninja_forms_processing ) ){
 		$clear_form = $ninja_forms_processing->get_form_setting( 'clear_complete' );
 		$process_complete = $ninja_forms_processing->get_form_setting( 'processing_complete' );
 		if( $process_complete != 1 OR ( $process_complete == 1 AND $clear_form != 1 ) ){

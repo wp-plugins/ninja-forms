@@ -33,12 +33,14 @@ function ninja_forms_register_label_settings_metabox(){
 				'name' => 'req_field_symbol',
 				'type' => 'text',
 				'label' => __('Required field symbol', 'ninja-forms'),
-			),			
+			),
+			/*		
 			array(
 				'name' => 'req_error_label',
 				'type' => 'text',
 				'label' => __('Error message given if all required fields are not completed', 'ninja-forms'),
 			),
+			*/
 			array(
 				'name' => 'req_field_error',
 				'type' => 'text',

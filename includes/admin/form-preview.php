@@ -20,7 +20,7 @@ function ninja_forms_preview_form() {
 
 
 
-function ninja_forms_preview_link( $form_id = '' ) {
+function ninja_forms_preview_link( $form_id = '', $echo = true ) {
 	if( $form_id == '' ){
 		if( isset( $_REQUEST['form_id'] ) ){
 			$form_id = $_REQUEST['form_id'];
@@ -40,7 +40,11 @@ function ninja_forms_preview_link( $form_id = '' ) {
 		$page_id = $form_data['data']['append_page'];
 	}
 
-	$preview_link = '<a target="_blank" href="' . $base . '/?page_id=' . $page_id . '&preview=true&form_id=' . $form_id . '">Preview Form</a>';
+	if( $echo ){
+		$preview_link = '<a target="_blank" href="' . $base . '/?page_id=' . $page_id . '&preview=true&form_id=' . $form_id . '">Preview Form</a>';
+	}else{
+		$preview_link = $base . '/?page_id=' . $page_id . '&preview=true&form_id=' . $form_id;
+	}
 
 	return $preview_link;
 

@@ -7,6 +7,8 @@ function ninja_forms_register_email_user(){
 function ninja_forms_email_user(){
 	global $ninja_forms_processing;
 
+	do_action( 'ninja_forms_email_user' );
+
 	$form_ID = $ninja_forms_processing->get_form_ID();
 	$form_title = $ninja_forms_processing->get_form_setting('form_title');
 	$user_mailto = array();

@@ -10,12 +10,12 @@ function ninja_forms_register_field_checkbox(){
 				'type' => 'select', //What type of input should this be?
 				'options' => array(
 					array(
-						'name' => 'Checked',
-						'value' => 'checked',
-					),
-					array(
 						'name' => 'Unchecked',
 						'value' => 'unchecked',
+					),					
+					array(
+						'name' => 'Checked',
+						'value' => 'checked',
 					),
 				),
 				'name' => 'default_value', //What should it be named. This should always be a programmatic name, not a label.
