@@ -11,9 +11,11 @@ function ninja_forms_filter_msgs(){
 	$admin_subject = $ninja_forms_processing->get_form_setting('admin_subject');
 	$user_subject = $ninja_forms_processing->get_form_setting('user_subject');
 	$success_msg = $ninja_forms_processing->get_form_setting('success_msg');
-	$admin_email = $ninja_forms_processing->get_form_setting('admin_email');
-	$email_msg = $ninja_forms_processing->get_form_setting('user_email');
+	$admin_email = $ninja_forms_processing->get_form_setting('admin_email_msg');
+	$email_msg = $ninja_forms_processing->get_form_setting('user_email_msg');
 	$save_msg = $ninja_forms_processing->get_form_setting('save_msg');
+
+	echo "Email message ".$email_msg;
 
 	//Loop through each submitted form field and replace any instances of [label] within Success Message, Admin email message, and user email message with the value.
 	if($ninja_forms_processing->get_all_fields()){
@@ -41,13 +43,16 @@ function ninja_forms_filter_msgs(){
 			$admin_email = str_replace('['.$label.']', $user_value, $admin_email);
 			$email_msg = str_replace('['.$label.']', $user_value, $email_msg);
 			$save_msg = str_replace('['.$label.']', $user_value, $save_msg);
+
+
 		}
-	}	
+	}
+
 	//Call any functions which may be attached to the filter for our message fields
 	$ninja_forms_processing->update_form_setting('admin_subject', apply_filters('ninja_forms_admin_subject', $admin_subject));
 	$ninja_forms_processing->update_form_setting('user_subject', apply_filters('ninja_forms_user_subject', $user_subject));
 	$ninja_forms_processing->update_form_setting('success_msg', apply_filters('ninja_forms_success_msg', $success_msg));
-	$ninja_forms_processing->update_form_setting('admin_email', apply_filters('ninja_forms_admin_email', $admin_email));
-	$ninja_forms_processing->update_form_setting('user_email', apply_filters('ninja_forms_user_email', $email_msg));
+	$ninja_forms_processing->update_form_setting('admin_email_msg', apply_filters('ninja_forms_admin_email', $admin_email));
+	$ninja_forms_processing->update_form_setting('user_email_msg', apply_filters('ninja_forms_user_email', $email_msg));
 	$ninja_forms_processing->update_form_setting('save_msg', apply_filters('ninja_forms_save_msg', $save_msg));
 }

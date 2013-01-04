@@ -2,6 +2,7 @@
 add_action('init', 'ninja_forms_register_filter_email_add_fields');
 function ninja_forms_register_filter_email_add_fields(){
 	add_filter('ninja_forms_admin_email', 'ninja_forms_filter_email_add_fields');	
+	add_filter('ninja_forms_user_email', 'ninja_forms_filter_email_add_fields');	
 }
 
 function ninja_forms_filter_email_add_fields($message){

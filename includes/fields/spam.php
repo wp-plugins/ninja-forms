@@ -124,9 +124,8 @@ function ninja_forms_field_spam_pre_process( $field_id, $user_value ){
 
 	$form_row = ninja_forms_get_form_by_field_id($field_id);
 	$form_id = $form_row['id'];
-	echo "outside";
+
 	if( $ninja_forms_processing->get_action() != 'save' AND $ninja_forms_processing->get_action() != 'mp_save' AND !isset($_POST['_wp_login']) AND $user_value != $spam_answer){
-		echo "inside";
 		if(isset($ninja_forms_processing)){
 			$ninja_forms_processing->add_error('spam-general', $spam_error, 'general');
 			$ninja_forms_processing->add_error('spam-'.$field_id, $spam_error, $field_id);

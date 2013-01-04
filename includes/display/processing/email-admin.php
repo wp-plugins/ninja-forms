@@ -19,7 +19,7 @@ function ninja_forms_email_admin(){
 		$subject = $form_title;
 	}
 	if(!$message){
-		$message = __('Thenk you for filling out this form.', 'ninja-forms');
+		$message = __('Thank you for filling out this form.', 'ninja-forms');
 	}
 	if(!$email_from){
 		$email_from = '';
@@ -28,7 +28,8 @@ function ninja_forms_email_admin(){
 		$email_type = '';
 	}
 	
-	$message = apply_filters('ninja_forms_admin_email', $message);
+
+	//$message = apply_filters('ninja_forms_admin_email', $message);
 
 	$email_from = htmlspecialchars_decode($email_from);
 	$email_from = htmlspecialchars_decode($email_from);

@@ -150,8 +150,8 @@ class Ninja_Forms_Processing {
 				foreach($form_data as $key => $val){
 					if(!is_array($val)){
 						$value = stripslashes($val);
-						$value = esc_html($value);
-						$value = htmlspecialchars($value);
+						//$value = esc_html($value);
+						//$value = htmlspecialchars($value);
 					}else{
 						$value = $val;
 					}
