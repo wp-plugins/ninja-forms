@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms
 Plugin URI: http://ninjaforms.com
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 2.0
+Version: 2.0.1
 Author: The WP Ninjas
 Author URI: http://wpninjas.net
 */
@@ -58,7 +58,7 @@ define("NINJA_FORMS_SUBS_TABLE_NAME", $wpdb->prefix . "ninja_forms_subs");
 /*
 // this is the URL our updater / license checker pings. This should be the URL of the site with EDD installed
 define( 'NINJA_FORMS_EDD_SL_STORE_URL', 'http://wpninjas.com' ); // IMPORTANT: change the name of this constant to something unique to prevent conflicts with other plugins using this system
- 
+
 // the name of your product. This is the title of your product in EDD and should match the download title in EDD exactly
 define( 'NINJA_FORMS_EDD_SL_ITEM_NAME', 'Ninja Forms Alpha' ); // IMPORTANT: change the name of this constant to something unique to prevent conflicts with other plugins using this system
 */
@@ -88,7 +88,7 @@ require_once(NINJA_FORMS_DIR."/includes/admin/form-preview.php");
 //Require EDD autoupdate file
 if( !class_exists( 'EDD_SL_Plugin_Updater' ) ) {
 	// load our custom updater if it doesn't already exist
-	require_once(NINJA_FORMS_DIR."/includes/EDD_SL_Plugin_Updater.php");	
+	require_once(NINJA_FORMS_DIR."/includes/EDD_SL_Plugin_Updater.php");
 }
 */
 
@@ -254,9 +254,9 @@ if( isset( $plugin_settings['license_key'] ) ){
 	$license_key = '';
 }
 
- 
+
 // setup the updater
-$edd_updater = new EDD_SL_Plugin_Updater( NINJA_FORMS_EDD_SL_STORE_URL, __FILE__, array( 
+$edd_updater = new EDD_SL_Plugin_Updater( NINJA_FORMS_EDD_SL_STORE_URL, __FILE__, array(
 		'version' 	=> NINJA_FORMS_VERSION, 		// current version number
 		'license' 	=> $license_key, 	// license key (used get_option above to retrieve from DB)
 		'item_name'     => NINJA_FORMS_EDD_SL_ITEM_NAME, 	// name of this plugin
@@ -282,9 +282,9 @@ function ninja_forms_activate_license() {
 
 	if($license != ''){
 		// data to send in our API request
-		$api_params = array( 
-			'edd_action'=> 'activate_license', 
-			'license' 	=> $license, 
+		$api_params = array(
+			'edd_action'=> 'activate_license',
+			'license' 	=> $license,
 			'item_name' => urlencode( NINJA_FORMS_EDD_SL_ITEM_NAME ) // the name of our product in EDD
 		);
 
