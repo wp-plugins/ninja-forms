@@ -270,7 +270,13 @@ function ninja_forms_admin_email($form_id, $data){
 
 function ninja_forms_save_form_settings($form_id, $data){
 	global $wpdb, $ninja_forms_admin_update_message;
-	$data_array = array('data' => serialize($data));
+	$form_row = ninja_forms_get_form_by_id( $form_id );
+	$form_data = $form_row['data'];
+
+	foreach( $data as $key => $val ){
+		$form_data[$key] = $val;
+	}
+	$data_array = array('data' => serialize($form_data));
 	if($form_id != 'new'){
 		$wpdb->update( NINJA_FORMS_TABLE_NAME, $data_array, array( 'id' => $form_id ));
 	}else{

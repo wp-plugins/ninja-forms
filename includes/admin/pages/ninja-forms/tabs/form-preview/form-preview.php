@@ -1,6 +1,6 @@
 <?php
 
-add_action('init', 'ninja_forms_register_tab_form_preview');
+add_action('init', 'ninja_forms_register_tab_form_preview', 1001);
 
 function ninja_forms_register_tab_form_preview(){
 	if(isset($_REQUEST['form_id'])){

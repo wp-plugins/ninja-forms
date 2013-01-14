@@ -4,7 +4,7 @@ Donate link: http://wpninjas.com
 Tags: form, forms
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPLv2 or later
 
 == Description ==
@@ -61,6 +61,15 @@ Version 2.0 is a complete rebuild. If you are a Pro user you should have receiev
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+= 2.0.2 =
+* Fixed several bugs including:
+* A bug that caused multiple forms to a single page broke some JS
+* Various export bugs. Exporting submissions should work properly.
+* Various activation bugs.
+* Varous bugs on the admin/back-end.
+
+* Added widget functionality. You can now add Ninja Forms to your sidebars via a widget.
+
 = 2.0.1 =
 * Lots of bug fixes.
 

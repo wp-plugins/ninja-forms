@@ -14,6 +14,7 @@ function ninja_forms_register_tab_general_settings(){
 add_action('init', 'ninja_forms_register_general_settings_metabox');
 
 function ninja_forms_register_general_settings_metabox(){
+	
 	$plugin_settings = get_option( 'ninja_forms_settings' );
 	$current_version = $plugin_settings['version'];
 	$args = array(

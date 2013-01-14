@@ -184,8 +184,18 @@ function ninja_forms_activation(){
  	if( is_array( $forms ) AND !empty( $forms ) ){
  		foreach( $forms as $form ){
 	 		$form['data'] = serialize( $form['data'] );
-	 		$form_fields = $form['field'];
-	 		$form_subs = $form['subs'];
+	 		if ( isset( $form['field'] ) ){
+	 			$form_fields = $form['field'];
+	 		}else{
+	 			$form_fields = '';
+	 		}
+	 		
+	 		if( isset( $form['subs'] ) ){
+	 			$form_subs = $form['subs'];
+	 		}else{
+	 			$form_subs = '';
+	 		}
+	 		
 	 		unset( $form['field'] );
 	 		unset( $form['subs'] );
 
@@ -196,13 +206,16 @@ function ninja_forms_activation(){
 				for( $x=0; $x < count( $form_fields ); $x++ ) { 
 					$form_fields[$x]['form_id'] = $form_id;
 					$form_fields[$x]['data'] = serialize( $form_fields[$x]['data'] );
-					$form_fields[$x]['id'] = NULL;
-					$old_id = $form_fields[$x]['old_id'];
-					unset( $form_fields[$x]['old_id'] );
+					unset( $form_fields[$x]['id'] );
+					if( isset( $form_fields[$x]['old_id'] ) ){
+						$old_id = $form_fields[$x]['old_id'];
+						unset( $form_fields[$x]['old_id'] );						
+					}
 					$wpdb->insert( NINJA_FORMS_FIELDS_TABLE_NAME, $form_fields[$x] );
 					$new_id = $wpdb->insert_id;
 					if( is_array( $form_subs ) AND !empty( $form_subs ) ){
-						for ($i=0; $i < count( $form_subs ); $i++) { 
+						for ($i=0; $i < count( $form_subs ); $i++) {
+							$form_subs[$i]['form_id'] = $form_id;
 							if( is_array( $form_subs[$i]['data'] ) AND !empty( $form_subs[$i]['data'] ) ){
 								for ($y=0; $y < count( $form_subs[$i]['data'] ); $y++){
 									if( isset( $form_subs[$i]['data'][$y]['old_id'] ) AND $form_subs[$i]['data'][$y]['old_id'] == $old_id ){
@@ -233,7 +246,7 @@ function ninja_forms_activation_old_forms_check(){
 
 	$current_version = $plugin_settings['version'];
 
-	if( version_compare( $current_version, '2.0' , '<' ) ){
+	//if( version_compare( $current_version, '2.0' , '<' ) ){
 
 		if($wpdb->get_var("SHOW COLUMNS FROM ".NINJA_FORMS_TABLE_NAME." LIKE 'title'") == 'title') {
 			$all_forms = $wpdb->get_results( "SELECT * FROM ".NINJA_FORMS_TABLE_NAME, ARRAY_A );
@@ -316,6 +329,17 @@ function ninja_forms_activation_old_forms_check(){
 
 							$field['extra'] = unserialize( $field['extra'] );
 
+							if( isset( $field['value'] ) ){
+								$default_value = $field['value'];
+							}else{
+								$default_value = '';
+							}
+
+							if( $default_value == 'none' ){
+								$default_value = '';
+							}
+
+
 							switch( $field_type ){
 								case 'textbox':
 									$field_type = '_text';
@@ -334,6 +358,8 @@ function ninja_forms_activation_old_forms_check(){
 									$field_type = '_hr';
 									break;
 								case 'heading':
+									$default_value = $field['label'];
+									$forms[$x]['field'][$y]['data']['label'] = 'Text';
 									$field_type = '_desc';
 									break;
 								case 'spam':
@@ -385,15 +411,7 @@ function ninja_forms_activation_old_forms_check(){
 							}
 
 							$forms[$x]['field'][$y]['type'] = $field_type;
-							if( isset( $field['value'] ) ){
-								$default_value = $field['value'];
-							}else{
-								$default_value = '';
-							}
 
-							if( $default_value == 'none' ){
-								$default_value = '';
-							}
 							$forms[$x]['field'][$y]['data']['default_value'] = $default_value;
 							$forms[$x]['field'][$y]['data']['req'] = $field['req'];
 							$forms[$x]['field'][$y]['data']['class'] = $field['class'];
@@ -487,6 +505,8 @@ function ninja_forms_activation_old_forms_check(){
 										wp_mail( $sub['email'], $reg_subject, $reg_msg . $password );
 									}
 								}
+							}else{
+								$forms[$x]['subs'][$i]['action'] = 'submit';
 							}
 							
 
@@ -523,8 +543,8 @@ function ninja_forms_activation_old_forms_check(){
 		}else{
 			return false;
 		}
-	}else{
-		return false;
-	}
+	//}else{
+		//return false;
+	//}
 	return $forms;
 }

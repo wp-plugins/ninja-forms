@@ -27,10 +27,7 @@ function ninja_forms_display_fields($form_id){
 		foreach($field_results as $field){
 			if( isset( $ninja_forms_fields[$field['type']] ) ){
 				$type = $ninja_forms_fields[$field['type']];
-				if(strpos($field['type'], '_') === 0){
-					$type_slug = substr($field['type'], 1);
-				}
-				$type_slug = 'ninja-forms-'.$type_slug;
+				
 				$field_id = $field['id'];
 				if(isset($field['data']['req'])){
 					$req = $field['data']['req'];
@@ -82,6 +79,8 @@ function ninja_forms_display_fields($form_id){
 						$label_pos = '';
 					}
 
+					do_action( 'ninja_forms_display_before_field', $field_id, $data );
+
 					//Check to see if display_wrap has been disabled. If it hasn't, show the wrapping DIV.
 					if($display_wrap){
 						$field_wrap_class = ninja_forms_get_field_wrap_class($field_id);
@@ -103,12 +102,12 @@ function ninja_forms_display_fields($form_id){
 
 					//Check to see if there is a registered display function. If so, call it.
 					if($display_function != ''){
-						do_action( 'ninja_forms_display_before_field', $field_id, $data );
-
+						
+						do_action( 'ninja_forms_display_before_field_function', $field_id, $data );
 						$arguments['field_id'] = $field_id;
 						$arguments['data'] = $data;
 						call_user_func_array($display_function, $arguments);
-						do_action( 'ninja_forms_display_after_field', $field_id, $data );
+						do_action( 'ninja_forms_display_after_field_function', $field_id, $data );
 						if( $label_pos == 'left'){
 							do_action( 'ninja_forms_display_field_help', $field_id, $data );
 						}
@@ -131,6 +130,7 @@ function ninja_forms_display_fields($form_id){
 						<?php
 						do_action( 'ninja_forms_display_after_closing_field_wrap', $field_id, $data );
 					}
+					do_action( 'ninja_forms_display_after_field', $field_id, $data );
 				}
 			}
 		}
@@ -150,9 +150,11 @@ function ninja_forms_get_field_wrap_class($field_id){
 	$data = $field_row['data'];
 
 	$type_slug = $field_row['type'];
+	
 	if(strpos($type_slug, "_") === 0){
 		$type_slug = substr($type_slug, 1);
 	}
+	
 	$field_wrap_class .= " ".$type_slug."-wrap";
 	if(isset($data['label_pos'])){
 		$label_pos = $data['label_pos'];

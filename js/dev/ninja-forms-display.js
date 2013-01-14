@@ -1,8 +1,11 @@
 jQuery(document).ready(function(jQuery) {
 	
-	jQuery(".ninja-forms-form").bind("keypress", function(e) {
+	jQuery(".ninja-forms-form input").bind("keypress", function(e) {
 		if (e.keyCode == 13) {
-			return false;
+			var type = jQuery(this).attr("type");
+			if( type != "textarea" ){
+				return false;
+			}
 		}
 	});
 
@@ -33,7 +36,9 @@ jQuery(document).ready(function(jQuery) {
 
 	/* * * End Help Hover JS * * */
 
+
 	/* * * Begin ajaxForms JS * * */
+	/*
 	jQuery(".ninja-forms-form").each(function(){
 		var form_id = this.id.replace("ninja_forms_form_", "");
 		var ajax = ninja_forms_settings.form_settings[form_id].ajax;

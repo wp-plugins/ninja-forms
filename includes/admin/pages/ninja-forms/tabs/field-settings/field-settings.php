@@ -56,7 +56,12 @@ function ninja_forms_save_field_settings($form_id, $data){
 		foreach($data as $field_id => $vals){
 			$field_id = str_replace('ninja_forms_field_', '', $field_id);
 			$order = $order_array[$field_id];
-			$data_array = array('data' => serialize($vals), 'order' => $order);
+			$field_row = ninja_forms_get_field_by_id( $field_id );
+			$field_data = $field_row['data'];
+			foreach( $vals as $k => $v ){
+				$field_data[$k] = $v;
+			}
+			$data_array = array('data' => serialize( $field_data ), 'order' => $order);
 			$wpdb->update( NINJA_FORMS_FIELDS_TABLE_NAME, $data_array, array( 'id' => $field_id ));
 		}
 	}

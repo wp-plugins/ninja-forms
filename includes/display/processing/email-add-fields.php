@@ -88,6 +88,6 @@ function ninja_forms_filter_email_add_fields($message){
 			$message .= "</table>";
 		}
 	}
-	//$message .= 'HELLO STUPID WORLD!';
+	
 	return $message;
 }

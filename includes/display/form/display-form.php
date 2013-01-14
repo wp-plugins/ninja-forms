@@ -63,9 +63,12 @@ function ninja_forms_display_form($form_id = ''){
 	//Get the settings telling us whether or not we should clear/hide the completed form.
 	//Check to see if the form_id has been sent.
 	if($form_id == ''){
+		$function = false;
 		if(isset($_REQUEST['form_id'])){ //If it hasn't, set it to our requested form_id. Sometimes this function can be called without an expressly passed form_id.
 			$form_id = $_REQUEST['form_id'];
 		}
+	}else{
+		$function = true;
 	}
 	if($form_id != ''){ //Make sure that we have an active form_id.
 		$form_row = ninja_forms_get_form_by_id($form_id);

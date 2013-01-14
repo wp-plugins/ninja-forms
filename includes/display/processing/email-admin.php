@@ -31,8 +31,6 @@ function ninja_forms_email_admin(){
 	}
 	
 
-	//$message = apply_filters('ninja_forms_admin_email', $message);
-
 	$email_from = htmlspecialchars_decode($email_from);
 	$email_from = htmlspecialchars_decode($email_from);
 

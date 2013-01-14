@@ -53,7 +53,7 @@ function ninja_forms_admin(){
 	}
 
 	?>
-	<form id="" enctype="multipart/form-data" method="post" name="" action="">
+	<form id="ninja_forms_admin" enctype="multipart/form-data" method="post" name="" action="">
 		<input type="hidden" name="_page" id="_page" value="<?php echo $current_page;?>">
 		<input type="hidden" name="_tab" id="_tab" value="<?php echo $current_tab;?>">
 		<input type="hidden" name="_form_id"  id="_form_id" value="<?php echo $form_id;?>">

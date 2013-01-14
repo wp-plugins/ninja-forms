@@ -42,8 +42,8 @@ function ninja_forms_edit_field_label_pos($field_id){
 			$label_pos = '';
 		}
 		$options = array(
-			array('name' => 'Above Element', 'value' => 'above'),
 			array('name' => 'Left of Element', 'value' => 'left'),
+			array('name' => 'Above Element', 'value' => 'above'),
 			array('name' => 'Below Element', 'value' => 'below'),
 			array('name' => 'Right of Element', 'value' => 'right'),
 			array('name' => 'Inside Element', 'value' => 'inside'),

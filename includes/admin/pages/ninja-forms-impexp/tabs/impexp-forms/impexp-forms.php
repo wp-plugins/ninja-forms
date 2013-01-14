@@ -46,9 +46,11 @@ function ninja_forms_register_exp_forms_metabox(){
 	$form_select = array();
 	if(is_array($form_results) AND !empty($form_results)){
 		foreach($form_results as $form){
-			$data = $form['data'];
-			$form_title = $data['form_title'];
-			array_push($form_select, array('name' => $form_title, 'value' => $form['id']));
+			if( isset( $form['data'] ) ){
+				$data = $form['data'];
+				$form_title = $data['form_title'];
+				array_push($form_select, array('name' => $form_title, 'value' => $form['id']));
+			}
 		}
 	}
 	$args = array(

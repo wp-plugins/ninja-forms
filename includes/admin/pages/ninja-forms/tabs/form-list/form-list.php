@@ -167,7 +167,7 @@ function ninja_forms_tab_form_list($form_id, $data){
 						<span class="edit"><a href="<?php echo $edit_link;?>">Edit</a> | </span>
 						<span class="trash"><a class="ninja-forms-delete-form" title="Delete this form" href="#" id="ninja_forms_delete_form_<?php echo $form_id;?>">Delete</a> | </span>
 						<span class="export"><a href="<?php echo $export_link;?>" title="Export Form">Export</a> | </span>
-						<span class="preview"><?php echo ninja_forms_preview_link( $form_id ); ?> | </span>
+						<span class="bleep"><?php echo ninja_forms_preview_link( $form_id ); ?> | </span>
 						<span class="subs"><a href="<?php echo $subs_link;?>" class="" title="View Submissions">View Submissions</a></span>
 					</div>
 				</td>

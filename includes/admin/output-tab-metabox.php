@@ -99,7 +99,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 						<?php echo $label; ?>
 					</th>
 					<td>
-						<input type="text" class="code widefat" name="<?php echo $name;?>" id="" value="<?php echo $value;?>" />
+						<input type="text" class="code widefat <?php echo $class;?>" name="<?php echo $name;?>" id="" value="<?php echo $value;?>" />
 						<?php if($help_text != ''){ ?>
 						<a href="#" class="tooltip">
 						    <img id="" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="">
@@ -117,7 +117,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 						<?php echo $label; ?>
 					</th>
 					<td>
-						<select name="<?php echo $name;?>">
+						<select name="<?php echo $name;?>" class="<?php echo $class;?>">
 							<?php
 							if(is_array($s['options']) AND !empty($s['options'])){
 								foreach($s['options'] as $option){
@@ -146,7 +146,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 					</th>
 					<td>
 						<input type="hidden" name="<?php echo $name;?>" value="0">
-						<input type="checkbox" name="<?php echo $name;?>" value="1" <?php checked($value, 1);?> id="<?php echo $name;?>">
+						<input type="checkbox" name="<?php echo $name;?>" value="1" <?php checked($value, 1);?> id="<?php echo $name;?>" class="<?php echo $class;?>">
 						<?php if($help_text != ''){ ?>
 							<a href="#" class="tooltip">
 							    <img id="" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="">
@@ -180,7 +180,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 								<label for="<?php echo $option_name;?>"><?php echo $option_name;?></label>
 							</th>
 							<td>
-								<input type="checkbox" class="ninja-forms-<?php echo $name;?>" name="<?php echo $name;?>[]" value="<?php echo $option_value;?> " <?php checked($value, $option_value);?> id="<?php echo $option_name;?>">
+								<input type="checkbox" class="ninja-forms-<?php echo $name;?> <?php echo $class;?>" name="<?php echo $name;?>[]" value="<?php echo $option_value;?> " <?php checked($value, $option_value);?> id="<?php echo $option_name;?>">
 							</td>
 						</tr>
 						<?php
@@ -194,7 +194,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 							<?php echo $desc;?>
 						</th>
 							<?php foreach($s['options'] as $option){ ?>
-								<input type="radio" name="<?php echo $name;?>" value="<?php echo $option['value'];?>" id="<?php echo $name."_".$x;?>" <?php checked($value, $option['value']);?>> <label for="<?php echo $name."_".$x;?>"><?php echo $option['name'];?></label>
+								<input type="radio" name="<?php echo $name;?>" value="<?php echo $option['value'];?>" id="<?php echo $name."_".$x;?>" <?php checked($value, $option['value']);?> class="<?php echo $class;?>"> <label for="<?php echo $name."_".$x;?>"><?php echo $option['name'];?></label>
 									<?php if($help_text != ''){ ?>
 										<a href="#" class="tooltip">
 										    <img id="" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="">
@@ -219,7 +219,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 						<?php echo $label; ?>
 					</th>
 					<td>
-						<textarea name="<?php echo $name;?>"><?php echo $value;?></textarea>
+						<textarea name="<?php echo $name;?>" class="<?php echo $class;?>"><?php echo $value;?></textarea>
 					</td>
 				</tr>
 				<?php
@@ -252,7 +252,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 				<tr>
 					<td colspan="2">
 						<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size;?>" />
-						<input type="file" name="<?php echo $name;?>" id="<?php echo $id;?>">
+						<input type="file" name="<?php echo $name;?>" id="<?php echo $id;?>" class="<?php echo $class;?>">
 					</td>
 				</tr>
 				<?php
@@ -268,8 +268,18 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 				</tr>
 				<?php
 			}
-			?>
-	<?php
+			if( $desc != '' AND $s['type'] != 'desc' ){
+				?>
+				<tr>
+					<th>
+						
+					</th>
+					<td class="howto">
+						<?php echo $desc;?>
+					</td>
+				</tr>
+				<?php
+			}
 		}
 	}else if($display_function != ''){
 		$arguments['form_id'] = $form_id;

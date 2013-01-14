@@ -28,6 +28,7 @@ function ninja_forms_export_subs_to_csv($sub_ids = ''){
 	//Set the label array to a blank
 	$label_array = array();
 	$value_array = array();
+	$sub_id_array = array();
 	
 	$label_array[0][] = "Date";
 	if(is_array($field_results) AND !empty($field_results)){
@@ -50,6 +51,7 @@ function ninja_forms_export_subs_to_csv($sub_ids = ''){
 		$x = 0;
 		foreach($sub_ids as $id){
 			$sub_row = ninja_forms_get_sub_by_id($id);
+			$sub_id_array[$x] = $id;
 			$date_updated = date($date_format, strtotime($sub_row['date_updated']));
 			$value_array[$x][] = $date_updated;
 			if(is_array($sub_row['data']) AND !empty($sub_row['data'])){
@@ -74,13 +76,14 @@ function ninja_forms_export_subs_to_csv($sub_ids = ''){
 					}
 				}
 			}
-			$x++;
+			$x++;				
 		}
 	}
 
-
 	$value_array = ninja_forms_stripslashes_deep( $value_array );
+	$value_array = apply_filters( 'ninja_forms_export_subs_value_array', $value_array, $sub_id_array );
 	$label_array = ninja_forms_stripslashes_deep( $label_array );
+	$label_array = apply_filters( 'ninja_forms_export_subs_label_array', $label_array, $sub_id_array );
 
 	$array = array($label_array, $value_array);
 	$today = date($date_format);
@@ -93,7 +96,6 @@ function ninja_forms_export_subs_to_csv($sub_ids = ''){
 	echo str_putcsv($array);
 
 	die();
-
 
 }
 

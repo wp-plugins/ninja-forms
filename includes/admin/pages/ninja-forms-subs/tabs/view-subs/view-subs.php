@@ -73,6 +73,7 @@ function ninja_forms_tab_view_subs(){
 			'form_id' => $form_id,
 			'begin_date' => $begin_date,
 			'end_date' => $end_date,
+			//'status' => 1,
 			//'11' => '05/06/2012',
 		);
 		$sub_results = ninja_forms_get_subs( $args );
@@ -111,7 +112,7 @@ function ninja_forms_tab_view_subs(){
 				$end = $sub_count;
 			}else{
 				$end = $current_page * $limit;
-				$end = $end - 1;
+				//$end = $end - 1;
 			}
 
 			if( $end > $sub_count ){
@@ -250,6 +251,7 @@ function ninja_forms_tab_view_subs(){
 				<tbody id="ninja_forms_subs_tbody">
 		<?php
 		if( is_array( $sub_results ) AND !empty( $sub_results ) AND $edit_sub_form != 1 AND $current_page <= $page_count ){
+
 			for ($i = $start; $i < $end; $i++) {
 				$sub = $sub_results[$i];
 				$data = $sub['data'];
@@ -534,9 +536,11 @@ function ninja_forms_save_view_subs($form_id, $data){
 					'form_id' => $form_id,
 					'begin_date' => $begin_date,
 					'end_date' => $end_date,
+					//'status' => 1,
 					//'4' => 'unchecked',
 				);
 				$sub_results = ninja_forms_get_subs($args);
+				$sub_results = apply_filters( 'ninja_forms_download_all_subs_results', $sub_results );
 				if(is_array($sub_results) AND !empty($sub_results)){
 					$sub_ids = array();
 					foreach($sub_results as $sub){

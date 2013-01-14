@@ -25,6 +25,8 @@
  *		get_field_value('field_ID') - Used to access the submitted data by field_ID.
  *		update_field_value('field_ID', 'new_value') - Used to change the value submitted by the user. If the field does not exist, it will be created.
  *		remove_field_value('field_ID') - Used to delete values submitted by the user.
+ *		get_field_settings('field_ID') - Used to get all of the back-end data related to the field (type, label, required, show_help, etc.).
+ *		update_field_settings('field_ID', $data) - Used to temporarily update the back-end data related to the field. This is NOT permanent and will only affect the current form processing.
  *		
  * Extra Fields Methods (These are fields that begin with an _ and aren't Ninja Forms Fields )
  * 		get_all_extras() - Returns an array of all extra form inputs.
@@ -126,6 +128,8 @@ class Ninja_Forms_Processing {
 							$val = ninja_forms_esc_html_deep( $val );
 							
 							$this->data['fields'][$field_ID] = $val;
+							$field_row = ninja_forms_get_field_by_id( $field_ID );
+							$this->data['field_data'][$field_ID] = $field_row;
 						}
 					}
 				}else{
@@ -268,6 +272,30 @@ class Ninja_Forms_Processing {
 		}
 	}
 
+	/**
+	 * Retrieve field data by field ID. This data includes all of the information entered in the admin back-end.
+	 *
+	 */
+	function get_field_settings($field_ID = '') {
+		if(empty($this->data) OR $field_ID == '' OR !isset($this->data['field_data'][$field_ID])){
+			return false;
+		}else{
+			return $this->data['field_data'][$field_ID];			
+		}
+	}
+
+	/**
+	 * Update field data by field ID. This data includes all of the informatoin entered into the admin back-end. (Please note that the changes made with these methods only affect the current process and DO NOT permanently change these settings):
+	 *
+	 */
+	function update_field_settings($field_ID = '', $new_value = '') {
+		if(empty($this->data) OR $field_ID == ''){
+			return false;
+		}else{
+			$this->data['field_data'][$field_ID] = $new_value;
+			return true;
+		}
+	}
 
 	/**
 	 * Extra Form Values Methods

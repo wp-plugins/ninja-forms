@@ -48,8 +48,6 @@ function ninja_forms_email_user(){
 		$email_type = '';
 	}
 
-	//$message = apply_filters('ninja_forms_user_email', $message);
-
 	$email_from = htmlspecialchars_decode($email_from);
 	$email_from = htmlspecialchars_decode($email_from);
 

@@ -98,11 +98,14 @@ function ninja_forms_field_checkbox_display($field_id, $data){
 //Checkbox Pre-Processing Function
 function ninja_forms_field_checkbox_pre_process( $field_id, $user_value ){
 	global $ninja_forms_processing;
-	if( $user_value == 1 ){
-		$user_value = 'checked';
-	}else{
-		$user_value = 'unchecked';
+	if( $user_value != 'checked' AND $user_value != 'unchecked' ){
+		if( $user_value == 1 ){
+				$user_value = 'checked';
+		}else{
+			$user_value = 'unchecked';
+		}
 	}
+	
 
 	if( $ninja_forms_processing->get_field_value( $field_id ) !== false ){
 		$ninja_forms_processing->update_field_value( $field_id, $user_value );

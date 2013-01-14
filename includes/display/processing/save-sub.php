@@ -38,6 +38,7 @@ function ninja_forms_save_sub(){
 			'user_id' => $user_id,
 			'action' => $action,
 			'data' => serialize( $sub_data ),
+			'status' => 1,
 		);
 
 		$args = apply_filters( 'ninja_forms_save_sub_args', $args );

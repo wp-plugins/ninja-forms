@@ -229,8 +229,10 @@ jQuery(document).ready(function($) {
 		
 		if(this.value != ''){
 			$("#ninja_forms_field_" + id + "_datepicker").prop('checked', false);
-			$("#ninja_forms_field_" + id + "_email").prop("checked", false);
-			$("#ninja_forms_field_" + id + "_send_email").prop("checked", false);
+			if(this.value != '_user_email'){
+				$("#ninja_forms_field_" + id + "_email").prop("checked", false);
+				$("#ninja_forms_field_" + id + "_send_email").prop("checked", false);				
+			}
 		}
 	});
 	
@@ -267,7 +269,8 @@ jQuery(document).ready(function($) {
 		var id = this.id.replace("ninja_forms_field_", "");
 		id = id.replace("_datepicker", "");
 		if(this.checked == true){
-			$("#ninja_forms_field_" + id + "_default_value").val("");
+			alert('DATEPICKER');
+			//$("#ninja_forms_field_" + id + "_default_value").val("");
 			$("#ninja_forms_field_" + id + "_mask").val("");
 			$("#default_value_" + id).val("");
 			$("#default_value_label_" + id).hide();
@@ -279,14 +282,17 @@ jQuery(document).ready(function($) {
 	});	
 	
 	// Email
+
 	$(".ninja-forms-_text-email").live("change", function(){
 		var id = this.id.replace("ninja_forms_field_", "");
 		id = id.replace("_email", "");
 		if(this.checked == true){
-			$("#ninja_forms_field_" + id + "_default_value").val("");
+			if( $("#ninja_forms_field_" + id + "_default_value").val() != '_user_email' ){
+				$("#ninja_forms_field_" + id + "_default_value").val("");
+				$("#default_value_" + id).val("");
+				$("#default_value_label_" + id).hide();
+			}
 			$("#ninja_forms_field_" + id + "_mask").val("");
-			$("#default_value_" + id).val("");
-			$("#default_value_label_" + id).hide();
 			$("#mask_" + id).val("");
 			$("#mask_label_" + id).hide();
 			$("#ninja_forms_field_" + id + "_datepicker").prop("checked", false);
@@ -294,17 +300,19 @@ jQuery(document).ready(function($) {
 			$("#ninja_forms_field_" + id + "_send_email").prop("checked", false);
 		}
 	});
-	
+
 	// Send Email
 	$(".ninja-forms-_text-send_email").live("change", function(){
 		var id = this.id.replace("ninja_forms_field_", "");
 		id = id.replace("_send_email", "");
 		if(this.checked == true){
 			$("#ninja_forms_field_" + id + "_email").prop("checked", true);
-			$("#ninja_forms_field_" + id + "_default_value").val("");
+			if( $("#ninja_forms_field_" + id + "_default_value").val() != '_user_email' ){
+				$("#ninja_forms_field_" + id + "_default_value").val("");
+				$("#default_value_" + id).val("");
+				$("#default_value_label_" + id).hide();				
+			}
 			$("#ninja_forms_field_" + id + "_mask").val("");
-			$("#default_value_" + id).val("");
-			$("#default_value_label_" + id).hide();
 			$("#mask_" + id).val("");
 			$("#mask_label_" + id).hide();
 			$("#ninja_forms_field_" + id + "_datepicker").prop("checked", false);

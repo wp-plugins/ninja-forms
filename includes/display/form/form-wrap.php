@@ -26,7 +26,7 @@ function ninja_forms_display_open_form_wrap($form_id){
 	}
 
 	?>
-	<div id="ninja_forms_form_<?php echo $form_id;?>_wrap" style="<?php echo $display;?>">
+	<div id="ninja_forms_form_<?php echo $form_id;?>_wrap" style="<?php echo $display;?>" class="ninja-forms-form-wrap">
 	<?php
 }
 
