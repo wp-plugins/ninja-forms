@@ -125,7 +125,7 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				'name' => 'success_msg',
 				'type' => 'rte',
 				'label' => __('Success Message', 'ninja-forms'),
-				'desc' => __('If you want to include field data entered by the user, for instance a name, you can put that field\'s label in brackets. i.e. [Firstname] or [Last Name]. This will tell Ninja Forms to replace the bracketed text with whatever input the user placed in that field. The label name must be entered exactly as you have it on the form field', 'ninja-forms'),
+				'desc' => __('If you want to include field data entered by the user, for instance a name, you can use the following shortcode: [ninja_forms_field id=23] where 23 is the ID of the field you want to insert. This will tell Ninja Forms to replace the bracketed text with whatever input the user placed in that field. You can find the field ID when you expand the field for editing.', 'ninja-forms'),
 			),
 		),
 	);
@@ -188,7 +188,7 @@ function ninja_forms_register_form_settings_user_email_metabox(){
 				'name' => 'user_email_msg',
 				'type' => 'rte',
 				'label' => __('Email message sent to the user', 'ninja-forms'),
-				'desc' => __('If you want to include field data entered by the user, for instance a name, you can put that field\'s label in brackets. i.e. [Firstname] or [Last Name]. This will tell Ninja Forms to replace the bracketed text with whatever input the user placed in that field. The label name must be entered exactly as you have it on the form field', 'ninja-forms'),
+				'desc' => __('If you want to include field data entered by the user, for instance a name, you can use the following shortcode: [ninja_forms_field id=23] where 23 is the ID of the field you want to insert. This will tell Ninja Forms to replace the bracketed text with whatever input the user placed in that field. You can find the field ID when you expand the field for editing.', 'ninja-forms'),
 			),
 			array(
 				'name' => 'user_email_fields',
@@ -225,7 +225,7 @@ function ninja_forms_register_form_settings_admin_email_metabox(){
 				'name' => 'admin_email_msg',
 				'type' => 'rte',
 				'label' => __( 'Admin Email Message', 'ninja-forms' ),
-				'desc' => __( 'If you want to include field data entered by the user, for instance a name, you can put that field\'s label in brackets. i.e. [Firstname] or [Last Name]. This will tell Ninja Forms to replace the bracketed text with whatever input the user placed in that field. The label name must be entered exactly as you have it on the form field', 'ninja-forms' ),
+				'desc' => __('If you want to include field data entered by the user, for instance a name, you can use the following shortcode: [ninja_forms_field id=23] where 23 is the ID of the field you want to insert. This will tell Ninja Forms to replace the bracketed text with whatever input the user placed in that field. You can find the field ID when you expand the field for editing.', 'ninja-forms'),
 			),
 			array(
 				'name' => 'admin_email_fields',
