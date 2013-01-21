@@ -21,7 +21,7 @@ function ninja_forms_register_field_list(){
 			),
 		),
 		'display_function' => 'ninja_forms_field_list_display',		
-		'group' => '',	
+		'group' => 'standard_fields',	
 		'edit_label' => true,
 		'edit_label_pos' => true,
 		'edit_req' => true,
@@ -62,6 +62,7 @@ function ninja_forms_register_field_list(){
 				'type' => 'list',
 			),
 		),
+		'type_dropdown_function' => 'ninja_forms_field_list_type_dropdown',
 	);
 	
 	ninja_forms_register_field('_list', $args);
@@ -347,8 +348,10 @@ function ninja_forms_field_list_display($field_id, $data){
 				if($list_show_value == 0){
 					$value = $label;
 				}
-			
-				if($selected_value == $value){
+
+				if( is_array( $selected_value ) AND in_array($value, $selected_value) ){
+					$checked = 'checked';
+				}else if($selected_value == $value){
 					$checked = 'checked';
 				}else{
 					$checked = '';
@@ -518,4 +521,38 @@ function ninja_forms_field_list_option_output($field_id, $x, $option = '', $hidd
 		</div>
 	
 	<?php
+}
+
+function ninja_forms_field_list_type_dropdown( $selected = '' ){
+
+	if( $selected == '_list_dropdown' ){
+		$dropdown = 'selected="selected"';
+	}else{
+		$dropdown = '';
+	}
+
+	if( $selected == '_list_radio' ){
+		$radio = 'selected="selected"';
+	}else{
+		$radio = '';
+	}
+
+	if( $selected == '_list_checkbox' ){
+		$checkbox = 'selected="selected"';
+	}else{
+		$checkbox = '';
+	}
+
+	if( $selected == '_list_multi' ){
+		$multi = 'selected="selected"';
+	}else{
+		$multi = '';
+	}
+
+	$output = '<option value="list" disabled>List</option>
+	<option value="_list_dropdown" '.$dropdown.'>&nbsp;&nbsp;&nbsp;&nbsp;Dropdown</option>
+	<option value="_list_radio" '.$radio.'>&nbsp;&nbsp;&nbsp;&nbsp;Radio Buttons</option>
+	<option value="_list_checkbox" '.$checkbox.'>&nbsp;&nbsp;&nbsp;&nbsp;Checkboxes</option>
+	<option value="_list_multi" '.$multi.'>&nbsp;&nbsp;&nbsp;&nbsp;Multi-Select</option>';
+	return $output;
 }

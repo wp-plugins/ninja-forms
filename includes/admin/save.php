@@ -20,6 +20,17 @@ function ninja_forms_admin_save(){
 
 			$data_array = ninja_forms_stripslashes_deep( $data_array );
 			//$data_array = ninja_forms_esc_html_deep( $data_array );
+			// Get the save function of our current tab and call it, passing the data that has been posted.
+			$save_function = $ninja_forms_tabs[$current_page][$current_tab]['save_function'];
+			$arguments = func_get_args();
+			array_shift($arguments); // We need to remove the first arg ($function_name)
+			if(isset($form_id)){
+				$arguments['form_id'] = $form_id;
+			}
+			$arguments['data'] = $data_array;
+			if($save_function != ''){
+				$ninja_forms_admin_update_message = call_user_func_array($save_function, $arguments);
+			}
 
 			//Call any save functions registered to metaboxes
 			if( isset( $ninja_forms_tabs_metaboxes[$current_page][$current_tab] ) AND is_array( $ninja_forms_tabs_metaboxes[$current_page][$current_tab] ) AND !empty( $ninja_forms_tabs_metaboxes[$current_page][$current_tab] ) ){
@@ -33,10 +44,14 @@ function ninja_forms_admin_save(){
 						}
 						$arguments['data'] = $data_array;
 						if($save_function != ''){
-							call_user_func_array($save_function, $arguments);
-							$ninja_forms_admin_update_message = __( 'Settings Saved', 'ninja-forms' );
+							if( $ninja_forms_admin_update_message != '' ){
+								$ninja_forms_admin_update_message .= ' ';
+							}
+							$ninja_forms_admin_update_message .= call_user_func_array($save_function, $arguments);
 						}
 					}
+					
+					// Get the save function of our options, if set, and call them, passing the data that has been posted.
 					if( isset( $opts['settings'] ) AND !empty( $opts['settings'] ) ){
 						foreach( $opts['settings'] as $setting ){
 							if( isset( $setting['save_function'] ) ){
@@ -45,8 +60,10 @@ function ninja_forms_admin_save(){
 								}
 								$arguments['data'] = $data_array;
 								if( $setting['save_function'] != '' ){
-									call_user_func_array($setting['save_function'], $arguments);
-									$ninja_forms_admin_update_message = __( 'Settings Saved', 'ninja-forms' );
+									if( $ninja_forms_admin_update_message != '' ){
+										$ninja_forms_admin_update_message .= ' ';
+									}
+									$ninja_forms_admin_update_message .= call_user_func_array($setting['save_function'], $arguments);
 								}
 							}
 						}
@@ -54,29 +71,22 @@ function ninja_forms_admin_save(){
 				}
 			}
 
-
-			$save_function = $ninja_forms_tabs[$current_page][$current_tab]['save_function'];
-			$arguments = func_get_args();
-			array_shift($arguments); // We need to remove the first arg ($function_name)
-			if(isset($form_id)){
-				$arguments['form_id'] = $form_id;
-			}
-			$arguments['data'] = $data_array;
-			if($save_function != ''){
-				call_user_func_array($save_function, $arguments);
-				$ninja_forms_admin_update_message = __( 'Settings Saved', 'ninja-forms' );
-			}
+			// Get the save function of our current sidebars, if present, and call them, passing the data that has been posted.
 			if(isset($ninja_forms_sidebars[$current_page][$current_tab]) AND is_array($ninja_forms_sidebars[$current_page][$current_tab])){
 				foreach($ninja_forms_sidebars[$current_page][$current_tab] as $slug => $sidebar){
 					if($sidebar['save_function'] != ''){
 						$save_function = $sidebar['save_function'];
 						$arguments = func_get_args();
 						array_shift($arguments); // We need to remove the first arg ($function_name)
-						$arguments['form_id'] = $form_id;
+						if( isset( $form_id ) ){
+							$arguments['form_id'] = $form_id;
+						}
 						$arguments['data'] = $data_array;
 						if($save_function != ''){
-							call_user_func_array($save_function, $arguments);
-							$ninja_forms_admin_update_message = __( 'Settings Saved', 'ninja-forms' );
+							if( $ninja_forms_admin_update_message != '' ){
+								$ninja_forms_admin_update_message .= ' ';
+							}
+							$ninja_forms_admin_update_message .= call_user_func_array($save_function, $arguments);
 						}
 					}
 				}

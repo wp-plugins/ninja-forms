@@ -48,7 +48,7 @@ function ninja_forms_display_field_label( $field_id, $data ){
 			$req_span = '';
 		}
 		?>
-		<label for="ninja_forms_field_<?php echo $field_id;?>"><?php echo $label;?> <?php echo $req_span;?>
+		<label for="ninja_forms_field_<?php echo $field_id;?>" id="ninja_forms_field_<?php echo $field_id;?>_label"><?php echo $label;?> <?php echo $req_span;?>
 		<?php
 		if( $label_pos != 'left' ){
 			do_action( 'ninja_forms_display_field_help', $field_id, $data );

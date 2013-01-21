@@ -73,6 +73,7 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				'label' => __('Save form submissions?', 'ninja-forms'),
 				'display_function' => '',
 				'help' => __('', 'ninja-forms'),
+				'default_value' => 1,
 			),			
 			/*
 			array(
@@ -109,6 +110,7 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				'label' => __('Clear successfully completed form?', 'ninja-forms'),
 				'display_function' => '',
 				'help' => __('If this box is checked, Ninja Forms will clear the form after it has been successfully submitted.', 'ninja-forms'),
+				'default_value' => 1,
 			),
 			array(
 				'name' => 'hide_complete',
@@ -117,6 +119,7 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				'label' => __('Hide successfully completed form?', 'ninja-forms'),
 				'display_function' => '',
 				'help' => __('If this box is checked, Ninja Forms will hide the form after it has been successfully submitted.', 'ninja-forms'),
+				'default_value' => 1,
 			),
 			array(
 				'name' => 'success_msg',
@@ -139,12 +142,12 @@ function ninja_forms_register_form_settings_basic_email_metabox(){
 		'display_function' => '',
 		'state' => 'closed',
 		'settings' => array(
-			array(
-				'name' => 'send_email',
-				'type' => 'checkbox',
-				'label' => __('Send email to user?', 'ninja-forms'),
-				'desc' => __('Requires the use of an email field.', 'ninja-forms'),
-			),				
+			//array(
+				//'name' => 'send_email',
+				//'type' => 'checkbox',
+				//'label' => __('Send email to user?', 'ninja-forms'),
+				//'desc' => __('Requires the use of an email field.', 'ninja-forms'),
+			//),				
 			array(
 				'name' => 'email_from',
 				'type' => 'text',
@@ -197,33 +200,39 @@ function ninja_forms_register_form_settings_user_email_metabox(){
 	ninja_forms_register_tab_metabox($args);
 }
 
-add_action('init', 'ninja_forms_register_form_settings_admin_email_metabox');
+add_action( 'init', 'ninja_forms_register_form_settings_admin_email_metabox' );
 function ninja_forms_register_form_settings_admin_email_metabox(){
 	$args = array(
 		'page' => 'ninja-forms',
 		'tab' => 'form_settings',
 		'slug' => 'admin_email',
-		'title' => __('Administrator Email', 'ninja-forms'),
+		'title' => __( 'Administrator Email', 'ninja-forms' ),
 		'display_function' => '',
 		'state' => 'closed',
 		'settings' => array(
 			array(
 				'name' => 'admin_mailto',
 				'type' => '',
-				'label' => __('Administrator Email Addresses', 'ninja-forms'),
+				'label' => __( 'Administrator Email Addresses', 'ninja-forms' ),
 				'display_function' => 'ninja_forms_admin_email',
 			),			
 			array(
 				'name' => 'admin_subject',
 				'type' => 'text',
-				'label' => __('Admin Subject', 'ninja-forms'),
+				'label' => __( 'Admin Subject', 'ninja-forms' ),
 			),			
 			array(
 				'name' => 'admin_email_msg',
 				'type' => 'rte',
-				'label' => __('Admin Email Message', 'ninja-forms'),
-				'desc' => __('If you want to include field data entered by the user, for instance a name, you can put that field\'s label in brackets. i.e. [Firstname] or [Last Name]. This will tell Ninja Forms to replace the bracketed text with whatever input the user placed in that field. The label name must be entered exactly as you have it on the form field', 'ninja-forms'),
-			),		
+				'label' => __( 'Admin Email Message', 'ninja-forms' ),
+				'desc' => __( 'If you want to include field data entered by the user, for instance a name, you can put that field\'s label in brackets. i.e. [Firstname] or [Last Name]. This will tell Ninja Forms to replace the bracketed text with whatever input the user placed in that field. The label name must be entered exactly as you have it on the form field', 'ninja-forms' ),
+			),
+			array(
+				'name' => 'admin_email_fields',
+				'type' => 'checkbox',
+				'label' => __( 'Include a list of fields?', 'ninja-forms' ),
+				'default_value' => 1,
+			),	
 		),
 	);
 	ninja_forms_register_tab_metabox($args);
@@ -285,5 +294,6 @@ function ninja_forms_save_form_settings($form_id, $data){
 		do_action( 'ninja_forms_save_new_form_settings', $wpdb->insert_id, $data );
 		header( "Location: ".$redirect );		
 	}
-	$ninja_forms_admin_update_message = __( 'Form Settings Saved', 'ninja-forms' );
+	$update_msg = __( 'Form Settings Saved', 'ninja-forms' );
+	return $update_msg;
 }

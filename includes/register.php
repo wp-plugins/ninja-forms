@@ -104,6 +104,14 @@ function ninja_forms_register_field($slug, $args = array()){
 	}
 }
 
+function ninja_forms_register_field_type_group( $slug, $args ){
+	global $ninja_forms_field_type_groups;
+
+	foreach( $args as $key => $val ){
+		$ninja_forms_field_type_groups[$slug][$key] = $val;
+	}
+}
+
 function ninja_forms_register_tab($slug, $args){
 	global $ninja_forms_tabs;
 	
@@ -175,19 +183,8 @@ function ninja_forms_register_sidebar($slug, $args){
 		$args['order'] = '';
 	}
 
-	if(isset($args['options']) AND is_array($args['options']) AND !empty($args['options'])){
-
-		$tmp_array = array();
-
-		foreach($args['options'] as $option){
-			foreach($option as $o_slug => $o){
-				$tmp_array[$o_slug] = $o;
-			}
-		}
-
-		$args['options'] = $tmp_array;
-	}else{
-		$args['options'] = '';
+	if( !isset( $args['settings'] ) ){
+		$args['settings'] = '';
 	}
 
 	if(!is_array($ninja_forms_sidebars)){
@@ -219,12 +216,12 @@ function ninja_forms_register_sidebar_option($slug, $args){
 		$args['display_function'] = '';
 	}
 
-	if( !isset( $args['options'] ) ){
-		$args['options'] = '';
+	if( !isset( $args['name'] ) ){
+		$args['name'] = '';
 	}
 
 	foreach($args as $key => $val){
-		$ninja_forms_sidebars[$page][$tab][$sidebar]['options'][$slug][$key] = $val;
+		$ninja_forms_sidebars[$page][$tab][$sidebar]['settings'][$slug][$key] = $val;
 	}
 }
 

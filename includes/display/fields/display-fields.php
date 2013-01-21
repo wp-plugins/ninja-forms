@@ -59,7 +59,7 @@ function ninja_forms_display_fields($form_id){
 
 
 				//These filters can be used to temporarily modify the settings of a field, i.e. default_value.
-				$data = apply_filters('ninja_forms_field', $data, $field_id);
+				$data = apply_filters( 'ninja_forms_field', $data, $field_id );
 				//Check the show_field value of our $data array. If it is set to false, don't output the field.
 				if(isset($data['show_field'])){
 					$show_field = $data['show_field'];

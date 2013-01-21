@@ -4,7 +4,7 @@ Donate link: http://wpninjas.com
 Tags: form, forms
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GPLv2 or later
 
 == Description ==
@@ -61,6 +61,24 @@ Version 2.0 is a complete rebuild. If you are a Pro user you should have receiev
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+= 2.0.3 =
+* Features:
+* Added a checkbox to allow the appending of field values to administrator emails.
+* Save form settings is now checked by default when creating a form.
+* Hide form after successful submission is now checked by default when creating a new form.
+* Changed the [label] system to [ninja_forms_field id=3] where 3 is the field ID that you want to insert.
+
+* Changes:
+*Changed the way that "settings saved" messages appear. When creating a save function on the admin-backend, you can now return the update message you wish users to see.
+
+* Bugs:
+* Fixed a bug that caused design elements, especially text fields, from showing on multi-part forms.
+* Fixed a bug in the backend admin system that was causing problems with the Uploads Browser/Upload Settings tabs.
+* To prevent conflicts with other plugins, we removed the position declaration from the admin menu hook. This means that the Forms link will now float to the bottom of the admin menu.
+* Fixed a bug that was causing help text to be repeated underneath sections of the Form Settings Tab.
+* Fixed a bug that prevented list-based checkboxes from showing up properly when editing submissions.
+* Fixed a bug that was causing required checkboxes not to validate properly.
+
 = 2.0.2 =
 * Fixed several bugs including:
 * A bug that caused multiple forms to a single page broke some JS

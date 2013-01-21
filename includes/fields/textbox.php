@@ -25,7 +25,7 @@ function ninja_forms_register_field_textbox(){
 		),
 		'display_function' => 'ninja_forms_field_text_display',
 		'save_function' => '',
-		'group' => '',
+		'group' => 'standard_fields',
 		'edit_label' => true,
 		'edit_label_pos' => true,
 		'edit_req' => true,

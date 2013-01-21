@@ -97,6 +97,7 @@ class Ninja_Forms_Processing {
 	 *
 	 */
 	function setup_submitted_vars() {
+		global $ninja_forms_fields;
 		$form_ID = $this->data['form_ID'];
 
 		//Get our plugin settings
@@ -106,6 +107,26 @@ class Ninja_Forms_Processing {
 		if(empty($this->data)){
 			return '';
 		}else{
+
+			/*
+			//Loop through our field list and add any fields that have process_field set to false.
+			//Anything that saves/edits/uses $ninja_forms_processing to get field should check the process_field value before doing anything.
+			$all_fields = ninja_forms_get_fields_by_form_id( $form_ID );
+			if( is_array( $all_fields ) AND !empty( $all_fields ) ){
+				foreach( $all_fields as $field ){
+					$field_ID = $field['id'];
+					$field_type = $field['type'];
+					if( !$ninja_forms_fields[$field_type]['process_field'] ){
+						if( isset( $field['data']['default_value'] ) ){
+							$this->data['fields'][$field_ID] = $field['data']['default_value'];
+							$this->data['field_data'][$field_ID] = $field;
+						}
+					}
+				}
+			}
+			*/
+
+			//Loop through the $_POST'd field values and add them to our global variable.
 			foreach($_POST as $key => $val){
 				if(substr($key, 0, 1) != '_'){
 					$process_field = strpos($key, 'ninja_forms_field_');

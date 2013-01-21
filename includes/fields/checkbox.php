@@ -25,7 +25,7 @@ function ninja_forms_register_field_checkbox(){
 		),
 		//'edit_function' => 'ninja_forms_field_checkbox_edit',
 		'display_function' => 'ninja_forms_field_checkbox_display',		
-		'group' => '',	
+		'group' => 'standard_fields',	
 		'edit_label' => true,
 		'edit_label_pos' => true,
 		'edit_req' => true,
@@ -66,7 +66,7 @@ function ninja_forms_register_field_checkbox(){
 				),
 			),
 		),
-		'pre_process' => 'ninja_forms_field_checkbox_pre_process',
+		'process' => 'ninja_forms_field_checkbox_pre_process',
 		'edit_sub_pre_process' => 'ninja_forms_field_checkbox_pre_process',
 	);
 	

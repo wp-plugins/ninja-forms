@@ -230,7 +230,6 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 					</th>
 					<td>
 						<?php wp_editor($value, $name); ?>
-						<?php echo $desc; ?>
 					</td>
 				</tr>
 				<?php
@@ -266,6 +265,10 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 						<?php echo $desc;?>
 					</td>
 				</tr>
+				<?php
+			}else if( $s['type'] == 'hidden' ){
+				?>
+				<input type="hidden" name="<?php echo $name;?>" value="<?php echo $value;?>">
 				<?php
 			}
 			if( $desc != '' AND $s['type'] != 'desc' ){

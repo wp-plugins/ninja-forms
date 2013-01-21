@@ -34,7 +34,7 @@ function ninja_forms_register_field_desc(){
 			),
 		),
 		'display_function' => 'ninja_forms_field_desc_display',
-		'group' => '',
+		'group' => 'layout_elements',
 		'display_label' => false,
 		'display_wrap' => true,
 		'edit_label' => false,
@@ -68,5 +68,4 @@ function ninja_forms_field_desc_display($field_id, $data){
 	?>
 	<<?php echo $desc_el;?> class="<?php echo $field_class;?>" id="ninja_forms_field_<?php echo $field_id;?>"><?php echo $default_value;?></<?php echo $desc_el;?>>
 	<?php
-
 }

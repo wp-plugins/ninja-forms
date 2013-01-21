@@ -73,4 +73,6 @@ function ninja_forms_save_label_settings($data){
 		$plugin_settings[$key] = $val;
 	}
 	update_option("ninja_forms_settings", $plugin_settings);
+	$update_msg = __( 'Settings Saved', 'ninja-forms' );
+	return $update_msg;
 }

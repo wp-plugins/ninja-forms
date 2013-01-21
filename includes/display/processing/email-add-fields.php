@@ -4,21 +4,26 @@ function ninja_forms_register_filter_email_add_fields(){
 	global $ninja_forms_processing;
 	if( is_object( $ninja_forms_processing ) ){
 		if( $ninja_forms_processing->get_form_setting( 'user_email_fields' ) == 1 ){
-			add_filter('ninja_forms_user_email', 'ninja_forms_filter_email_add_fields');
+			add_filter( 'ninja_forms_user_email', 'ninja_forms_filter_email_add_fields' );
 		}
 	}
-	add_filter('ninja_forms_admin_email', 'ninja_forms_filter_email_add_fields');	
+
+	if( is_object( $ninja_forms_processing ) ){
+		if( $ninja_forms_processing->get_form_setting( 'admin_email_fields' ) == 1 ){
+			add_filter( 'ninja_forms_admin_email', 'ninja_forms_filter_email_add_fields' );
+		}
+	}
 	
 }
 
-function ninja_forms_filter_email_add_fields($message){
+function ninja_forms_filter_email_add_fields( $message ){
 	global $ninja_forms_processing, $ninja_forms_fields;
 	$all_fields = $ninja_forms_processing->get_all_fields();
-	$email_type = $ninja_forms_processing->get_form_setting('email_type');
+	$email_type = $ninja_forms_processing->get_form_setting( 'email_type' );
 	if(is_array($all_fields) AND !empty($all_fields)){
 		if($email_type == 'html'){
 			$message .= "<br><br>";
-			$message .= __('User Submitted Values:', 'ninja-forms');
+			$message .= __( 'User Submitted Values:', 'ninja-forms' );
 			$message .= "<table>";
 		}else{
 			$message = str_replace("<p>", "\r\n", $message);
@@ -30,12 +35,12 @@ function ninja_forms_filter_email_add_fields($message){
 			$message .= __('User Submitted Values:', 'ninja-forms');
 			$message .= "\r\n";
 		}
-		foreach($all_fields as $field_id => $user_value){
-			$field_row = ninja_forms_get_field_by_id($field_id);
+		foreach( $all_fields as $field_id => $user_value ){
+			$field_row = ninja_forms_get_field_by_id( $field_id );
 			$field_label = $field_row['data']['label'];
 			$field_type = $field_row['type'];
-			if($ninja_forms_fields[$field_type]['process_field']){
-				if(is_array($user_value) AND !empty($user_value)){
+			if( $ninja_forms_fields[$field_type]['process_field'] ){
+				if( is_array( $user_value ) AND !empty( $user_value ) ){
 					$x = 0;
 					foreach($user_value as $val){
 						if(!is_array($val)){

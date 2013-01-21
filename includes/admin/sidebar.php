@@ -57,8 +57,8 @@ function ninja_forms_display_sidebars($data){
 					call_user_func_array($sidebar_callback, $arguments);
 				}
 
-				if(isset($sidebar['options']) AND !empty($sidebar['options'])){
-					foreach($sidebar['options'] as $option_slug => $option){
+				if(isset($sidebar['settings']) AND !empty($sidebar['settings'])){
+					foreach($sidebar['settings'] as $option){
 						?>
 						<p class="field-controls">
 						<?php
@@ -66,8 +66,10 @@ function ninja_forms_display_sidebars($data){
 							call_user_func_array($option['display_function'], $arguments);
 						}else{
 
-							if(isset($data[$option_slug])){
-								$value = $data[$option_slug];
+							$name = $option['name'];
+
+							if( isset( $data[$name] ) ){
+								$value = $data[$name];
 							}else{
 								$value = '';
 							}
@@ -80,22 +82,22 @@ function ninja_forms_display_sidebars($data){
 							switch($option['type']){
 								case 'checkbox':
 									?>
-									<input type="hidden" name="<?php echo $option_slug;?>" value="0">
-									<input type="checkbox" name="<?php echo $option_slug;?>" id="<?php echo $option_slug;?>" value="1" <?php checked(1, $value);?>>
-									<label for="<?php echo $option_slug;?>"><?php _e($option['label'], 'ninja-forms');?></label>
+									<input type="hidden" name="<?php echo $name;?>" value="0">
+									<input type="checkbox" name="<?php echo $name;?>" id="<?php echo $name;?>" value="1" <?php checked(1, $value);?>>
+									<label for="<?php echo $name;?>"><?php _e($option['label'], 'ninja-forms');?></label>
 									<?php
 									break;
 								case 'radio':
 									?>
-									<label for="<?php echo $option_slug;?>"><?php _e($option['label'], 'ninja-forms');?></label>
+									<label for="<?php echo $name;?>"><?php _e($option['label'], 'ninja-forms');?></label>
 									<br>
 									<?php
 									if(isset($option['options'])){
 											$x = 0;
 											foreach($option['options'] as $option){
 												?>
-												<input type="radio" id="<?php echo $option_slug.'_'.$x;?>" value="<?php echo $option['value'];?>" <?php checked($option['value'], $value);?> name="<?php echo $option_slug;?>">
-												<label for="<?php echo $option_slug.'_'.$x;?>"><?php echo $option['name'];?></label>
+												<input type="radio" id="<?php echo $name.'_'.$x;?>" value="<?php echo $option['value'];?>" <?php checked($option['value'], $value);?> name="<?php echo $name;?>">
+												<label for="<?php echo $name.'_'.$x;?>"><?php echo $option['name'];?></label>
 												<br>
 												<?php
 												$x++;
@@ -104,8 +106,8 @@ function ninja_forms_display_sidebars($data){
 									break;
 								case 'select':
 									?>
-									<label for="<?php echo $option_slug;?>"><?php _e($option['label'], 'ninja-forms');?></label>
-									<select name="<?php echo $option_slug;?>" id="<?php echo $option_slug;?>">
+									<label for="<?php echo $name;?>"><?php _e($option['label'], 'ninja-forms');?></label>
+									<select name="<?php echo $name;?>" id="<?php echo $name;?>">
 										<?php
 										if(isset($option['options'])){
 											foreach($option['options'] as $option){
@@ -120,15 +122,15 @@ function ninja_forms_display_sidebars($data){
 									break;
 								case 'text':
 									?>
-									<label for="<?php echo $option_slug;?>"><?php _e($option['label'], 'ninja-forms');?></label>									
-									<input type="text" name="<?php echo $option_slug;?>" id="<?php echo $option_slug;?>" value="<?php echo $value;?>">
+									<label for="<?php echo $name;?>"><?php _e($option['label'], 'ninja-forms');?></label>									
+									<input type="text" name="<?php echo $name;?>" id="<?php echo $name;?>" value="<?php echo $value;?>">
 									<?php
 									break;
 								case 'textarea':
 									?>
-									<label for="<?php echo $option_slug;?>"><?php _e($option['label'], 'ninja-forms');?></label>
+									<label for="<?php echo $name;?>"><?php _e($option['label'], 'ninja-forms');?></label>
 									<br>
-									<textarea name="<?php echo $option_slug;?>" id="<?php echo $option_slug;?>"><?php echo $value;?></textarea>	
+									<textarea name="<?php echo $name;?>" id="<?php echo $name;?>"><?php echo $value;?></textarea>	
 									<?php
 									break;
 								case 'submit':

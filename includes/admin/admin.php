@@ -3,7 +3,7 @@
 add_action( 'admin_menu', 'ninja_forms_add_menu' );
 function ninja_forms_add_menu(){
 	$plugins_url = plugins_url();
-	$page = add_menu_page("Ninja Forms" , "Forms", "administrator", "ninja-forms", "ninja_forms_admin", NINJA_FORMS_URL."/images/ninja-head-ico-small.png", 55);
+	$page = add_menu_page("Ninja Forms" , "Forms", "administrator", "ninja-forms", "ninja_forms_admin", NINJA_FORMS_URL."/images/ninja-head-ico-small.png" );
 	$all_forms = add_submenu_page("ninja-forms", "Forms", "All Forms", "administrator", "ninja-forms", "ninja_forms_admin");
 	$new_form = add_submenu_page("ninja-forms", "Add New", "Add New", "administrator", "ninja-forms&tab=form_settings&form_id=new", "ninja_forms_admin");
 	$subs = add_submenu_page("ninja-forms", "Submissions", "Submissions", "administrator", "ninja-forms-subs", "ninja_forms_admin");
@@ -104,6 +104,7 @@ function ninja_forms_admin(){
 					<div id="post-body-content">
 						<?php
 
+						//Check to see if the registered tab has a display function registered.
 						if(isset($ninja_forms_tabs[$current_page][$current_tab]['display_function']) AND $ninja_forms_tabs[$current_page][$current_tab]['display_function'] != ''){
 							$tab_callback = $ninja_forms_tabs[$current_page][$current_tab]['display_function'];
 							$arguments = func_get_args();
@@ -113,10 +114,17 @@ function ninja_forms_admin(){
 							call_user_func_array($tab_callback, $arguments);
 						}
 
+						//Check to see if the registered tab has an metaboxes registered to it.
 						if(isset($ninja_forms_tabs_metaboxes[$current_page][$current_tab]) AND !empty($ninja_forms_tabs_metaboxes[$current_page][$current_tab])){
+							?>
+							<div id="ninja_forms_admin_metaboxes">
+							<?php
 							foreach($ninja_forms_tabs_metaboxes[$current_page][$current_tab] as $slug => $metabox){
 								ninja_forms_output_tab_metabox($form_id, $slug, $metabox);
 							}
+							?>
+							</div>
+							<?php
 						}
 
 						?>

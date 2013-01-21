@@ -8,7 +8,7 @@ function ninja_forms_register_field_hiddenbox(){
 		'edit_function' => 'ninja_forms_field_hidden_edit',
 		'display_function' => 'ninja_forms_field_hidden_display',
 		'save_function' => 'ninja_forms_field_hidden_save',
-		'group' => '',	
+		'group' => 'standard_fields',	
 		'edit_label' => true,
 		'edit_label_pos' => false,
 		'edit_req' => false,

@@ -24,8 +24,8 @@ function ninja_forms_save_sub(){
 				$field_row = ninja_forms_get_field_by_id($field_id);
 				$field_type = $field_row['type'];
 				$save_sub = $ninja_forms_fields[$field_type]['save_sub'];
-				
-				if($save_sub){
+
+				if( $save_sub ){
 					ninja_forms_remove_from_array($sub_data, "field_id", $field_id, TRUE);
 					$user_value = apply_filters('ninja_forms_save_sub', $user_value, $field_id);
 					array_push( $sub_data, array( 'field_id' => $field_id, 'user_value' => $user_value ) );

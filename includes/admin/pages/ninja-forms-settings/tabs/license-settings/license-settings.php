@@ -40,4 +40,6 @@ function ninja_forms_save_license_settings($data){
 	}
 
 	update_option( 'ninja_forms_settings', $plugin_settings);
+	$update_msg = __( 'Licenses Saved', 'ninja-forms' );
+	return $update_msg;
 }

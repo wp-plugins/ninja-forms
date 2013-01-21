@@ -364,6 +364,7 @@ function ninja_forms_activation_old_forms_check(){
 									break;
 								case 'spam':
 									$field_type = '_spam';
+									$forms[$x]['field'][$y]['data']['spam_answer'] = $default_value;
 									break;
 								case 'desc':
 									$field_type = '_desc';

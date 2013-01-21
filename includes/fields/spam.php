@@ -6,7 +6,7 @@ function ninja_forms_register_field_spam(){
 		'name' => 'Anti-Spam',
 		'edit_function' => '',
 		'display_function' => 'ninja_forms_field_spam_display',		
-		'group' => '',	
+		'group' => 'standard_fields',	
 		'edit_label' => false,
 		'edit_label_pos' => true,
 		'edit_req' => false,

@@ -6,7 +6,7 @@ function ninja_forms_register_field_submit(){
 		'name' => 'Submit',
 		'edit_function' => 'ninja_forms_field_submit_edit',
 		'display_function' => 'ninja_forms_field_submit_display',		
-		'group' => '',	
+		'group' => 'standard_fields',	
 		'edit_label' => true,
 		'edit_label_pos' => false,
 		'edit_req' => false,

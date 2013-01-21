@@ -7,7 +7,7 @@ function ninja_forms_register_field_hr(){
 		'sidebar' => 'layout_fields',		
 		'edit_function' => '',
 		'display_function' => 'ninja_forms_field_hr_display',
-		'group' => '',	
+		'group' => 'layout_elements',	
 		'display_label' => false,
 		'display_wrap' => true,
 		'edit_label' => false,
