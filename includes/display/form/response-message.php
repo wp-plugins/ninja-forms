@@ -5,7 +5,7 @@
 **/
 add_action( 'init', 'ninja_forms_register_before_form_wrap' );
 function ninja_forms_register_before_form_wrap(){
-	add_action( 'ninja_forms_display_before_form_wrap', 'ninja_forms_display_response_message' );
+	add_action( 'ninja_forms_display_before_form', 'ninja_forms_display_response_message', 10 );
 }
 
 function ninja_forms_display_response_message($form_id){
@@ -17,25 +17,27 @@ if( isset( $form_row['data']['ajax'] ) ){
 	}else{
 		$ajax = 0;
 	}
-	if($ajax == 0 AND (isset($ninja_forms_processing) AND !$ninja_forms_processing->get_all_errors() AND !$ninja_forms_processing->get_all_success_msgs())){
+	if($ajax == 0 AND ( is_object( $ninja_forms_processing ) AND !$ninja_forms_processing->get_all_errors() AND !$ninja_forms_processing->get_all_success_msgs())){
 		$display = 'display:none;';
 	}else{
 		$display = '';
 	}
 	?>
-	<div id="ninja_forms_form_<?php echo $form_id;?>_response_msg" style="<?php echo $display;?>" class="ninja-forms-response-msg">
 	<?php
 		if( is_object( $ninja_forms_processing) AND $ninja_forms_processing->get_errors_by_location('general')){
-			foreach($ninja_forms_processing->get_errors_by_location('general') as $error){
-				echo '<p>'.$error['msg'].'</p>';
-			}
+			echo '<div id="ninja_forms_form_' . $form_id . '_response_msg" style="' . $display . '" class="ninja-forms-response-msg ninja-forms-error-msg">';
+				foreach($ninja_forms_processing->get_errors_by_location('general') as $error){
+					echo $error['msg'];
+				}
+			echo '</div>';
 		}
 		if( is_object( $ninja_forms_processing) AND $ninja_forms_processing->get_all_success_msgs()){
-			foreach($ninja_forms_processing->get_all_success_msgs() as $success){
-				echo $success;
-			}
+			echo '<div id="ninja_forms_form_' . $form_id . '_response_msg" style="' . $display . '" class="ninja-forms-response-msg ninja-forms-success-msg">';
+				foreach($ninja_forms_processing->get_all_success_msgs() as $success){
+					echo $success;
+				}
+			echo '</div>';
 		}
 		?>
-	</div>
 	<?php
 }

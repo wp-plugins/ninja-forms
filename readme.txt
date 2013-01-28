@@ -4,7 +4,7 @@ Donate link: http://wpninjas.com
 Tags: form, forms
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 2.0.3
+Stable tag: 2.0.4
 License: GPLv2 or later
 
 == Description ==
@@ -23,11 +23,12 @@ Ninja Forms is a full-featured form building solution for WordPress. It allows y
 
 = In addition to these features, extensions are available at our website: [Ninja Forms Extensions](http://wpninjas.com/downloads/category/ninja-forms/) =
 
-* File Uploads - Allow users to upload files and store those files within a searchable database.
-* Multi-Part Forms - Break up those long, complex forms into multiple pages.
-* Save User Progress - Let your users save their progress and return later to finish filling out the form.
-* Conditional Logic - Create "smart" forms that show or hide fields based upon user input. Even add a value to a dropdown list when a user selects a specific value from another list.
-* Front-End Posting - Use Ninja Forms to create posts from the front-end. These can be added to any post type, including custom post types, and users can select categories and tags.
+* [File Uploads](http://wpninjas.com/downloads/file-uploads/) - Allow users to upload files and store those files within a searchable database.
+* [Multi-Part Forms](http://wpninjas.com/downloads/multi-part-forms/) - Break up those long, complex forms into multiple pages.
+* [Save User Progress](http://wpninjas.com/downloads/save-user-progress/) - Let your users save their progress and return later to finish filling out the form.
+* [Conditional Logic](http://wpninjas.com/downloads/conditional-logic/) - Create "smart" forms that show or hide fields based upon user input. Even add a value to a dropdown list when a user selects a specific value from another list.
+* [Front-End Posting](http://wpninjas.com/downloads/front-end-posting/) - Use Ninja Forms to create posts from the front-end. These can be added to any post type, including custom post types, and users can select categories and tags.
+* [Layout & Styles](http://wpninjas.com/downloads/layout-styles/) - Use Ninja Forms to create amzing form layouts and styles right from your WordPress admin.
 
 We have several other extensions in the works.
 
@@ -52,26 +53,43 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.0 =
+= 2.0.4 =
 
-Version 2.0 is a complete rebuild. If you are a Pro user you should have receieved some additional license keys and links to extension downloads to enhance Ninja Forms. HTML output may have been altered slightly as well so you public form may not look as you intend with this new version without some minor changes. If you need help with anything like that please let us know at wpninjas.com and we will try and assist you very quickly.
+A couple new features, several changes and a bug fix. Check the changelog for specifics.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.0.4 =
+
+Features:
+* Added a label field to the plugin settings page that will allow users to set the message displayed above the form when there is a required field error.
+* Setting a text or textarea’s label position to ‘inside’ will now cause the label to be auto-removed when the input receives focus. If a user leaves the field blank, the label will return.
+
+Changes:
+* Increased the max file size for form imports.
+* Added a filter: ninja_forms_field_wrap_class. This filter is sent a string that contains the wrap class for each field along with its field id.
+* The CSS class of the list field wrapping div has been modified slightly. It has been changed from .list to .list-dropdown where dropdown is the list type.
+* Added a new shortcode for inserting the date into the success message and emails: [ninja_forms_sub_date format="m/d/Y"]. It follows the php.net date() string formats and defaults to m/d/Y.
+
+Bugs:
+* Fixed a bug that prevented Help Text from displayin properly when the label was set to the “inside” position.
+
 = 2.0.3 =
-* Features:
+
+Features:
 * Added a checkbox to allow the appending of field values to administrator emails.
 * Save form settings is now checked by default when creating a form.
 * Hide form after successful submission is now checked by default when creating a new form.
 * Changed the [label] system to [ninja_forms_field id=3] where 3 is the field ID that you want to insert.
 
-* Changes:
+Changes:
 *Changed the way that "settings saved" messages appear. When creating a save function on the admin-backend, you can now return the update message you wish users to see.
 
-* Bugs:
+Bugs:
 * Fixed a bug that caused design elements, especially text fields, from showing on multi-part forms.
 * Fixed a bug in the backend admin system that was causing problems with the Uploads Browser/Upload Settings tabs.
 * To prevent conflicts with other plugins, we removed the position declaration from the admin menu hook. This means that the Forms link will now float to the bottom of the admin menu.

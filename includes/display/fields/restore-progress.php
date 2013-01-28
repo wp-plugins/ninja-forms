@@ -31,7 +31,9 @@ function ninja_forms_filter_restore_progress( $data, $field_id ){
 		$clear_form = $ninja_forms_processing->get_form_setting( 'clear_complete' );
 		$process_complete = $ninja_forms_processing->get_form_setting( 'processing_complete' );
 		if( $process_complete != 1 OR ( $process_complete == 1 AND $clear_form != 1 ) ){
-			$data['default_value'] = $ninja_forms_processing->get_field_value( $field_id );
+			if( $ninja_forms_processing->get_field_value( $field_id ) !== false ){
+				$data['default_value'] = $ninja_forms_processing->get_field_value( $field_id );
+			}
 		}
 	}
 

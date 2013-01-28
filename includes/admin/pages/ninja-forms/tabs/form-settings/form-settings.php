@@ -259,6 +259,7 @@ function ninja_forms_admin_email($form_id, $data){
 		</p>
 	</label>
 	<div id="ninja_forms_mailto">
+		<input type="hidden" name="admin_mailto" value="">
 		<?php
 		if(is_array($admin_mailto) AND !empty($admin_mailto)){
 			$x = 0;

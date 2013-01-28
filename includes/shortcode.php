@@ -14,3 +14,16 @@ function ninja_forms_field_shortcode( $atts ){
 	$value = apply_filters( 'ninja_forms_field_shortcode', $value, $atts );
 	return $value;
 }
+
+add_shortcode( 'ninja_forms_sub_date', 'ninja_forms_sub_date_shortcode' );
+function ninja_forms_sub_date_shortcode( $atts ){
+	global $ninja_forms_processing;
+	if( isset( $atts['format'] ) ){
+		$date_format = $atts['format'];
+	}else{
+		$date_format = 'm/d/Y';
+	}
+	
+	$date = date( $date_format );
+	return $date;
+}

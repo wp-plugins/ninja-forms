@@ -26,7 +26,7 @@ function ninja_forms_register_imp_forms_metabox(){
 				'type' => 'file',
 				'label' => __('Select a file', 'ninja-forms'),
 				'desc' => '',
-				'max_file_size' => 30000,
+				'max_file_size' => 5000000,
 				'help_text' => '',
 			),
 			array(
@@ -128,7 +128,7 @@ function ninja_forms_save_impexp_forms($data){
 	}elseif($_REQUEST['submit'] == 'Import Form'){
 		if ($_FILES['userfile']['error'] == UPLOAD_ERR_OK AND is_uploaded_file($_FILES['userfile']['tmp_name'])){
 			$file = file_get_contents($_FILES['userfile']['tmp_name']); 
-			$form = unserialize($file);
+			$form = unserialize( $file );
 			$form_fields = $form['field'];
 			
 			unset($form['field']);
@@ -154,6 +154,7 @@ function ninja_forms_save_impexp_forms($data){
 			do_action( 'ninja_forms_after_import_form', $form );
 			$update_msg = __( 'Form Imported Successfully.', 'ninja-forms' );
 		}else{
+			echo $_FILES['userfile']['error'];
 			$update_msg = __( 'Please select a valid exported form file.', 'ninja-forms' );
 		}
 	}

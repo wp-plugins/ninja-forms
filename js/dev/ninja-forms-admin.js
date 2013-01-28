@@ -46,6 +46,7 @@ jQuery(document).ready(function($) {
 	$("#side-sortables").sortable({
 		placeholder: "ui-state-highlight",
 		helper: 'clone',
+		handle: '.hndl',
 		stop: function(e,ui) {
 			var order = $("#side-sortables").sortable("toArray");
 			var page = $("#_page").val();
@@ -55,6 +56,26 @@ jQuery(document).ready(function($) {
 			});
 		}, 
 	});
+
+	$(".add-new-h2").draggable({ 
+		connectToSortable: ".ninja-forms-field-list", 
+		revert: true,
+		start: function(e,ui){
+			$.data( document.body, 'test', e.target.id );
+		},
+		helper: function(){
+			var el = $( "li.ninja-forms-no-nest:last" ).clone();
+			return el;
+		}
+	});
+
+	/*
+	$(".ninja-forms-field-list").droppable({
+		drop: function( event, ui ) {
+      		alert( $("li.ninja-forms-no-nest:last" ).length );
+		}
+    });
+	*/
 
 	//Listen to the keydown and keyup of our New Form title. Then remove or add the class as appropriate to add/remove default text.
 	$("#title").keydown(function(){
@@ -94,6 +115,11 @@ jQuery(document).ready(function($) {
 			}
 		},
 		stop: function(e,ui) {
+			if( $(ui.item).prop("tagName") == "A" ){
+				//alert( $.data( document.body, 'test' ) );
+				var el = $( "li.ninja-forms-no-nest:last" ).clone();
+				$(ui.item).replaceWith(el);
+			}
 			var wp_editor_count = $(ui.item).find(".wp-editor-wrap").length;
 			if(wp_editor_count > 0){
 				$(ui.item).find(".wp-editor-wrap").each(function(){
@@ -269,7 +295,6 @@ jQuery(document).ready(function($) {
 		var id = this.id.replace("ninja_forms_field_", "");
 		id = id.replace("_datepicker", "");
 		if(this.checked == true){
-			alert('DATEPICKER');
 			//$("#ninja_forms_field_" + id + "_default_value").val("");
 			$("#ninja_forms_field_" + id + "_mask").val("");
 			$("#default_value_" + id).val("");

@@ -40,7 +40,7 @@ function ninja_forms_display_sidebars($data){
 				if((isset($opt['screen_options']['tab'][$current_tab]['sidebars'][$slug]['visible']) AND $opt['screen_options']['tab'][$current_tab]['sidebars'][$slug]['visible'] == 1) OR !isset($opt['screen_options']['tab'][$current_tab]['sidebars'][$slug]['visible'])){
 		?>
 		<div id="<?php echo $slug;?>" class="postbox">
-			<h3 >
+			<h3 class="hndl">
 				<span><?php _e($sidebar['name'], 'ninja-forms');?></span>
 			</h3>
 				<span class="item-controls">

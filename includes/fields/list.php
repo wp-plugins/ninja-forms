@@ -50,7 +50,7 @@ function ninja_forms_register_field_list(){
 				'add_value' => array(
 					'name' => 'Add Value',
 					'js_function' => 'add_value',
-					'output' => 'ninja_forms_add_value_test',
+					'output' => 'ninja_forms_field_list_add_value',
 				),
 				'remove_value' => array(
 					'name' => 'Remove Value',
@@ -66,9 +66,10 @@ function ninja_forms_register_field_list(){
 	);
 	
 	ninja_forms_register_field('_list', $args);
+	add_filter( 'ninja_forms_field_wrap_class', 'ninja_forms_field_filter_list_wrap_class', 10, 2 );
 }
 
-function ninja_forms_add_value_test( $field_id, $x, $conditional, $name, $id, $current = '', $field_data = '' ){
+function ninja_forms_field_list_add_value( $field_id, $x, $conditional, $name, $id, $current = '', $field_data = '' ){
 	if( isset( $current['value']['value'] ) ){
 		$current_value = $current['value']['value'];
 	}else{
@@ -525,34 +526,46 @@ function ninja_forms_field_list_option_output($field_id, $x, $option = '', $hidd
 
 function ninja_forms_field_list_type_dropdown( $selected = '' ){
 
-	if( $selected == '_list_dropdown' ){
+	if( $selected == '_list-dropdown' ){
 		$dropdown = 'selected="selected"';
 	}else{
 		$dropdown = '';
 	}
 
-	if( $selected == '_list_radio' ){
+	if( $selected == '_list-radio' ){
 		$radio = 'selected="selected"';
 	}else{
 		$radio = '';
 	}
 
-	if( $selected == '_list_checkbox' ){
+	if( $selected == '_list-checkbox' ){
 		$checkbox = 'selected="selected"';
 	}else{
 		$checkbox = '';
 	}
 
-	if( $selected == '_list_multi' ){
+	if( $selected == '_list-multi' ){
 		$multi = 'selected="selected"';
 	}else{
 		$multi = '';
 	}
 
 	$output = '<option value="list" disabled>List</option>
-	<option value="_list_dropdown" '.$dropdown.'>&nbsp;&nbsp;&nbsp;&nbsp;Dropdown</option>
-	<option value="_list_radio" '.$radio.'>&nbsp;&nbsp;&nbsp;&nbsp;Radio Buttons</option>
-	<option value="_list_checkbox" '.$checkbox.'>&nbsp;&nbsp;&nbsp;&nbsp;Checkboxes</option>
-	<option value="_list_multi" '.$multi.'>&nbsp;&nbsp;&nbsp;&nbsp;Multi-Select</option>';
+	<option value="_list-dropdown" '.$dropdown.'>&nbsp;&nbsp;&nbsp;&nbsp;Dropdown</option>
+	<option value="_list-radio" '.$radio.'>&nbsp;&nbsp;&nbsp;&nbsp;Radio Buttons</option>
+	<option value="_list-checkbox" '.$checkbox.'>&nbsp;&nbsp;&nbsp;&nbsp;Checkboxes</option>
+	<option value="_list-multi" '.$multi.'>&nbsp;&nbsp;&nbsp;&nbsp;Multi-Select</option>';
 	return $output;
+}
+
+function ninja_forms_field_filter_list_wrap_class( $field_wrap_class, $field_id ){
+	$field_row = ninja_forms_get_field_by_id( $field_id );
+	$field_type = $field_row['type'];
+	if( $field_type == '_list' ){
+		$field_data = $field_row['data'];
+		$list_type = $field_data['list_type'];
+		$field_wrap_class = str_replace( 'list-wrap', 'list-'.$list_type.'-wrap', $field_wrap_class );
+	}
+	
+	return $field_wrap_class;
 }

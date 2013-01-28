@@ -32,6 +32,35 @@ a.tooltip span
     -webkit-box-shadow: 5px 5px 8px #CCC;
     box-shadow: 5px 5px 8px #CCC;
 }
+#ui-datepicker-div {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+#ui-datepicker-div a {
+    text-decoration: none;
+    cursor: pointer;
+}
+#ui-datepicker-div .ui-datepicker-header,
+#ui-datepicker-div .ui-datepicker-calendar th,
+#ui-datepicker-div .ui-datepicker-calendar td {
+    padding: 5px;
+    text-align: center;
+}
+.ui-datepicker-prev {
+    float: left;
+}
+.ui-datepicker-next {
+    float: right;
+}
+.ninja-forms-no-display {
+    display: none;
+}
+.ninja-forms-form .wp-switch-editor {
+    height: auto;
+}
+.ninja-forms-form .mceIframeContainer {
+    background: #fff;
+}
 .ninja-forms-req-symbol {
     color: #ff0000;
 }

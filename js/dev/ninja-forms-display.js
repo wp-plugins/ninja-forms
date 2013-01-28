@@ -11,6 +11,20 @@ jQuery(document).ready(function(jQuery) {
 
 	/* * * Begin Mask JS * * */
 	
+	jQuery("div.label-inside input[type=text]").focus(function(){
+		var label = jQuery("#" + this.id + "_label_hidden").val();
+		if( this.value == label ){
+			this.value = '';
+		}
+	});
+
+	jQuery("div.label-inside input[type=text]").blur(function(){
+		var label = jQuery("#" + this.id + "_label_hidden").val();
+		if( this.value == '' ){
+			this.value = label;
+		}
+	});
+
 	jQuery(".ninja-forms-mask").each(function(){
 		var mask = this.title;
 		jQuery(this).mask(mask);

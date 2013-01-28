@@ -27,17 +27,24 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 		$state = '';
 	}
 
-	?>
-	<div id="postcustom" class="postbox ">
-		<span class="item-controls">
-			<a class="item-edit" id="edit_id" title="Edit Menu Item" href="#">Edit Menu Item</a>
-		</span>
-		<h3 class="hndle"><span><?php _e($title, 'ninja-forms');?></span></h3>
-		<div class="inside" style="<?php echo $state;?>">
-		<table class="form-table">
-			<tbody>
-	<?php
+	if( isset( $metabox['display_container'] ) ){
+		$display_container = $metabox['display_container'];
+	}else{
+		$display_container = true;
+	}
 
+	if( $display_container ){
+		?>
+		<div id="postcustom" class="postbox ">
+			<span class="item-controls">
+				<a class="item-edit" id="edit_id" title="Edit Menu Item" href="#">Edit Menu Item</a>
+			</span>
+			<h3 class="hndle"><span><?php _e($title, 'ninja-forms');?></span></h3>
+			<div class="inside" style="<?php echo $state;?>">
+			<table class="form-table">
+				<tbody>
+		<?php
+	}
 	if(is_array($settings) AND !empty($settings)){
 		foreach($settings as $s){
 			$value = '';
@@ -45,6 +52,11 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 				$name = $s['name'];
 			}else{
 				$name = '';
+			}
+			$name_array = '';
+			if( strpos( $name, '[') !== false ){
+				$name_array = str_replace( ']', '', $name );
+				$name_array = explode( '[', $name_array );
 			}
 			if(isset($s['type'])){
 				$type = $s['type'];
@@ -81,15 +93,37 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 			}else{
 				$default_value = '';
 			}
-			if(isset($current_settings[$name])){
-				if(is_array($current_settings[$name])){
-					$value = ninja_forms_stripslashes_deep($current_settings[$name]);
-				}else{
-					$value = stripslashes($current_settings[$name]);
+
+			if( is_array( $name_array ) ){
+				$tmp = '';
+				foreach( $name_array as $n ){
+					if( $tmp == '' ){
+						if( isset( $current_settings[$n] ) ){
+							$tmp = $current_settings[$n];
+						}
+					}else{
+						if( isset( $tmp[$n] ) ){
+							$tmp = $tmp[$n];
+						}
+					}
 				}
+				$value = $tmp;
 			}else{
+				if(isset($current_settings[$name])){
+					if(is_array($current_settings[$name])){
+						$value = ninja_forms_stripslashes_deep($current_settings[$name]);
+					}else{
+						$value = stripslashes($current_settings[$name]);
+					}
+				}else{
+					$value = '';
+				}
+			}
+
+			if( $value == '' ){
 				$value = $default_value;
 			}
+			
 			//$value = ninja_forms_esc_html_deep( $value );
 			if($s['type'] == 'text'){ 
 				$value = ninja_forms_esc_html_deep( $value );
@@ -285,15 +319,19 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 			}
 		}
 	}else if($display_function != ''){
-		$arguments['form_id'] = $form_id;
+		if( $form_id != '' ){
+			$arguments['form_id'] = $form_id;
+		}
+		$arguments['metabox'] = $metabox;
 		call_user_func_array($display_function, $arguments);
 	}
 
-	?>
-		</tbody>
-		</table>
+	if( $display_container ){
+		?>
+			</tbody>
+			</table>
+			</div>
 		</div>
-	</div>
-	<?php
-
+		<?php
+	}
 }

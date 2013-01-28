@@ -328,6 +328,10 @@ function ninja_forms_register_tab_metabox($args = array()){
 		$args['state'] = '';
 	}
 
+	if( !isset( $args['display_container'] ) ){
+		$args['display_container'] = true;
+	}
+
 	if( !isset( $args['save_function'] ) ){
 		$save_function = '';
 	}

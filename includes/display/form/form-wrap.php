@@ -1,7 +1,7 @@
 <?php
 /**
  * Outputs the HTML of the form wrap.
- * 
+ *
 **/
 add_action('init', 'ninja_forms_register_display_open_form_wrap');
 function ninja_forms_register_display_open_form_wrap(){
@@ -17,16 +17,10 @@ function ninja_forms_display_open_form_wrap($form_id){
 		}
 	}
 
-	$display = 1;
 
-	$display = apply_filters( 'ninja_forms_display_form_visibility', $display, $form_id );
-
-	if( $display != 1 ){
-		$display = "display:none;";
-	}
 
 	?>
-	<div id="ninja_forms_form_<?php echo $form_id;?>_wrap" style="<?php echo $display;?>" class="ninja-forms-form-wrap">
+	<div id="ninja_forms_form_<?php echo $form_id;?>_wrap" class="ninja-forms-form-wrap">
 	<?php
 }
 

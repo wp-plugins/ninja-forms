@@ -84,6 +84,7 @@ function ninja_forms_display_fields($form_id){
 					//Check to see if display_wrap has been disabled. If it hasn't, show the wrapping DIV.
 					if($display_wrap){
 						$field_wrap_class = ninja_forms_get_field_wrap_class($field_id);
+						$field_wrap_class = apply_filters( 'ninja_forms_field_wrap_class', $field_wrap_class, $field_id );
 						do_action( 'ninja_forms_display_before_opening_field_wrap', $field_id, $data );
 						?>
 						<div class="<?php echo $field_wrap_class;?>" style="<?php echo $display_style;?>" id="ninja_forms_field_<?php echo $field_id;?>_div_wrap">
@@ -108,7 +109,7 @@ function ninja_forms_display_fields($form_id){
 						$arguments['data'] = $data;
 						call_user_func_array($display_function, $arguments);
 						do_action( 'ninja_forms_display_after_field_function', $field_id, $data );
-						if( $label_pos == 'left'){
+						if( $label_pos == 'left' OR $label_pos == 'inside'){
 							do_action( 'ninja_forms_display_field_help', $field_id, $data );
 						}
 					}

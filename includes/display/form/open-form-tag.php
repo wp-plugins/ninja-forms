@@ -17,7 +17,18 @@ function ninja_forms_display_open_form_tag($form_id){
 	}else{
 		$url = '';
 	}
+
+	$display = 1;
+
+	$display = apply_filters( 'ninja_forms_display_form_visibility', $display, $form_id );
+
+	if( $display != 1 ){
+		$hide_class = " ninja-forms-no-display";
+	} else {
+		$hide_class = "";
+	}
+
 	?>
-	<form id="ninja_forms_form_<?php echo $form_id;?>" enctype="multipart/form-data" method="post" name="" action="<?php echo $url;?>" class="ninja-forms-form">
+	<form id="ninja_forms_form_<?php echo $form_id;?>" enctype="multipart/form-data" method="post" name="" action="<?php echo $url;?>" class="ninja-forms-form<?php echo $hide_class;?>">
 	<?php
 }

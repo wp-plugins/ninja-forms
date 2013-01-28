@@ -44,6 +44,12 @@ function ninja_forms_req_fields_process(){
 
 			$plugin_settings = get_option("ninja_forms_settings");
 			$req_field_error = $plugin_settings['req_field_error'];
+			if( isset( $plugin_settings['req_error_label'] ) ){
+				$req_error_label = $plugin_settings['req_error_label'];
+			}else{
+				$req_error_label = __( 'Please check required fields.', 'ninja-forms' );
+			}
+			
 
 			if($req == 1){
 				if($req_validation != ''){
@@ -52,15 +58,18 @@ function ninja_forms_req_fields_process(){
 					$req = call_user_func_array($req_validation, $arguments);
 					if(!$req){
 						$ninja_forms_processing->add_error('required-'.$field_id, $req_field_error, $field_id);
+						$ninja_forms_processing->add_error('required-general', $req_error_label, 'general');
 					}
 				}else{
 					if($label_pos == 'inside'){
 						if($user_value == $label){
 							$ninja_forms_processing->add_error('required-'.$field_id, $req_field_error, $field_id);
+							$ninja_forms_processing->add_error('required-general', $req_error_label, 'general');
 						}
 					}else{
 						if($user_value == ''){
 							$ninja_forms_processing->add_error('required-'.$field_id, $req_field_error, $field_id);
+							$ninja_forms_processing->add_error('required-general', $req_error_label, 'general');
 						}
 					}
 				}
