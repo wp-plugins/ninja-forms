@@ -64,7 +64,9 @@ If you have any feature requests, please feel free to visit [wpninjas.com](http:
 == Changelog ==
 
 = 2.0.6 =
+
 Bugs:
+
 * Fixed a JS bug that prevented some users from adding new form fields.
 
 = 2.0.5 =
