@@ -4,7 +4,7 @@ Donate link: http://wpninjas.com
 Tags: form, forms
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 2.0.5
+Stable tag: 2.0.6
 License: GPLv2 or later
 
 == Description ==
@@ -53,7 +53,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.0.5 =
+= 2.0.6 =
 
 A couple new features, several changes and a bug fix. Check the changelog for specifics.
 
@@ -62,6 +62,10 @@ A couple new features, several changes and a bug fix. Check the changelog for sp
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.0.6 =
+Bugs:
+* Fixed a JS bug that prevented some users from adding new form fields.
 
 = 2.0.5 =
 
