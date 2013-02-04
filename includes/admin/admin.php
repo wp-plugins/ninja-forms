@@ -9,9 +9,10 @@ function ninja_forms_add_menu(){
 	$subs = add_submenu_page("ninja-forms", "Submissions", "Submissions", "administrator", "ninja-forms-subs", "ninja_forms_admin");
 	$import = add_submenu_page("ninja-forms", "Import/Export", "Import / Export", "administrator", "ninja-forms-impexp", "ninja_forms_admin");
 	$settings = add_submenu_page("ninja-forms", "Ninja Form Settings", "Plugin Settings", "administrator", "ninja-forms-settings", "ninja_forms_admin");
+	$extend = add_submenu_page("ninja-forms", "Ninja Form Extensions", "Extend", "administrator", "ninja-forms-extend", "ninja_forms_admin");
 
 	add_action('admin_print_styles-' . $page, 'ninja_forms_admin_css');
-	add_action('admin_print_styles-' . $page, 'ninja_forms_admin_js');	
+	add_action('admin_print_styles-' . $page, 'ninja_forms_admin_js');
 
 	add_action('admin_print_styles-' . $new_form, 'ninja_forms_admin_css');
 	add_action('admin_print_styles-' . $new_form, 'ninja_forms_admin_js');
@@ -25,11 +26,15 @@ function ninja_forms_add_menu(){
 	add_action('admin_print_styles-' . $subs, 'ninja_forms_admin_js');
 	add_action('admin_print_styles-' . $subs, 'ninja_forms_admin_css');
 
+	add_action('admin_print_styles-' . $extend, 'ninja_forms_admin_js');
+	add_action('admin_print_styles-' . $extend, 'ninja_forms_admin_css');
+
 	add_action( 'load-' . $page, 'ninja_forms_load_screen_options_tab' );
 	add_action( 'load-' . $all_forms, 'ninja_forms_load_screen_options_tab' );
 	add_action( 'load-' . $settings, 'ninja_forms_load_screen_options_tab' );
 	add_action( 'load-' . $import, 'ninja_forms_load_screen_options_tab' );
 	add_action( 'load-' . $subs, 'ninja_forms_load_screen_options_tab' );
+	add_action( 'load-' . $extend, 'ninja_forms_load_screen_options_tab' );
 
 }
 
@@ -69,7 +74,7 @@ function ninja_forms_admin(){
 
 				if($ninja_forms_tabs[$current_page][$current_tab]['show_tab_links']){
 					?>
-					<h2 class="nav-tab-wrapper"> 
+					<h2 class="nav-tab-wrapper">
 						<?php
 						ninja_forms_display_tabs();
 						?>
@@ -88,7 +93,7 @@ function ninja_forms_admin(){
 				}
 
 				if(isset($ninja_forms_sidebars[$current_page][$current_tab]) AND is_array($ninja_forms_sidebars[$current_page][$current_tab])){
-					
+
 					?>
 					<div id="nav-menus-frame">
 						<?php ninja_forms_display_sidebars($data); ?>
@@ -98,7 +103,7 @@ function ninja_forms_admin(){
 
 				}
 				?>
-		
+
 			<div id="poststuff">
 				<div id="post-body">
 					<div id="post-body-content">
@@ -128,7 +133,7 @@ function ninja_forms_admin(){
 						}
 
 						?>
-						<?php 
+						<?php
 						if(isset($ninja_forms_tabs[$current_page][$current_tab]['show_save']) AND $ninja_forms_tabs[$current_page][$current_tab]['show_save'] === true){ ?>
 							<input class="button-primary menu-save ninja-forms-save-data" id="ninja_forms_save_data_top" type="submit" value="<?php _e('Save Form Settings', 'ninja-forms'); ?>" />
 						<?php
@@ -153,7 +158,7 @@ function ninja_forms_get_current_tab(){
 	if(isset($_REQUEST['page'])){
 		$current_page = $_REQUEST['page'];
 
-		
+
 		if(isset($_REQUEST['tab'])){
 			$current_tab = $_REQUEST['tab'];
 		}else{
@@ -221,7 +226,7 @@ function str_putcsv($array, $delimiter = ',', $enclosure = '"', $terminator = "\
 				# Make sure sprintf has a good datatype to work with
 				case "integer":  $_spFormat = '%i'; break;
 				case "double":   $_spFormat = '%0.2f'; break;
-				case "string":   $_spFormat = '%s'; $workArray[$i] = str_replace("$enclosure", "$enclosure$enclosure", $workArray[$i]); break; 
+				case "string":   $_spFormat = '%s'; $workArray[$i] = str_replace("$enclosure", "$enclosure$enclosure", $workArray[$i]); break;
 				# Unknown or invalid items for a csv - note: the datatype of array is already handled above, assuming the data is nested
 				case "object":
 				case "resource":

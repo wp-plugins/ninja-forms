@@ -10,17 +10,22 @@ function ninja_forms_register_field_textbox(){
 			array(
 				'type' => 'checkbox',
 				'name' => 'datepicker',
-				'label' => 'Datepicker',
+				'label' => __( 'Datepicker', 'ninja-forms' ),
 			),
 			array(
 				'type' => 'checkbox',
 				'name' => 'email',
-				'label' => 'Is this an email address?',
+				'label' => __( 'Is this an email address?', 'ninja-forms' ),
 			),
 			array(
 				'type' => 'checkbox',
 				'name' => 'send_email',
-				'label' => 'Send a copy of the form to this address?',
+				'label' => __( 'Send a copy of the form to this address?', 'ninja-forms' ),
+			),			
+			array(
+				'type' => 'checkbox',
+				'name' => 'from_email',
+				'label' => __( 'Use this as the "From" email address for Administrative recepients of this form?', 'ninja-forms' ),
 			),
 		),
 		'display_function' => 'ninja_forms_field_text_display',
@@ -38,6 +43,7 @@ function ninja_forms_register_field_textbox(){
 				'type' => 'text',
 			),
 		),
+		'pre_process' => 'ninja_forms_field_text_pre_process',
 	);
 
 	ninja_forms_register_field( '_text', $args );
@@ -212,4 +218,25 @@ function ninja_forms_field_text_display( $field_id, $data ){
 	<input id="ninja_forms_field_<?php echo $field_id;?>" title="<?php echo $mask;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="text" class="<?php echo $field_class;?> <?php echo $mask_class;?>" value="<?php echo $default_value;?>" />
 	<?php
 
+}
+
+function ninja_forms_field_text_pre_process( $field_id, $user_value ){
+	global $ninja_forms_processing;
+	$plugin_settings = get_option( 'ninja_forms_settings' );
+	if( isset( $plugin_settings['invalid_email'] ) ){
+		$invalid_email = $plugin_settings['invalid_email'];
+	}else{
+		$invalid_email = __( 'Please enter a valid email address.', 'ninja-forms' );
+	}
+	$field_row = $ninja_forms_processing->get_field_settings( $field_id );
+	$data = $field_row['data'];
+	if( isset( $data['email'] ) AND $data['email'] == 1 ){
+		if ( !filter_var($user_value, FILTER_VALIDATE_EMAIL) ) {
+    		$ninja_forms_processing->add_error( 'email-'.$field_id, $invalid_email, $field_id );
+		}
+	}
+	if( isset( $data['from_email'] ) AND $data['from_email'] == 1 ){
+		$user_value = $ninja_forms_processing->get_field_value( $field_id );
+		$ninja_forms_processing->update_form_setting( 'admin_email_from', $user_value );
+	}
 }

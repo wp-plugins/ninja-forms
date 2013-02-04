@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms
 Plugin URI: http://ninjaforms.com
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 2.0.4
+Version: 2.0.5
 Author: The WP Ninjas
 Author URI: http://wpninjas.net
 */
@@ -50,7 +50,7 @@ global $wpdb, $wp_version;
 
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/ninja-forms");
 define("NINJA_FORMS_URL", plugins_url()."/ninja-forms");
-define("NINJA_FORMS_VERSION", "2.0.4");
+define("NINJA_FORMS_VERSION", "2.0.5");
 define("NINJA_FORMS_TABLE_NAME", $wpdb->prefix . "ninja_forms");
 define("NINJA_FORMS_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fields");
 define("NINJA_FORMS_FAV_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fav_fields");
@@ -86,14 +86,6 @@ require_once(NINJA_FORMS_DIR."/includes/admin/register-screen-help.php");
 require_once(NINJA_FORMS_DIR."/includes/admin/export-subs.php");
 require_once(NINJA_FORMS_DIR."/includes/admin/output-tab-metabox.php");
 require_once(NINJA_FORMS_DIR."/includes/admin/form-preview.php");
-
-/*
-//Require EDD autoupdate file
-if( !class_exists( 'EDD_SL_Plugin_Updater' ) ) {
-	// load our custom updater if it doesn't already exist
-	require_once(NINJA_FORMS_DIR."/includes/EDD_SL_Plugin_Updater.php");
-}
-*/
 
 //Processing Functions
 require_once(NINJA_FORMS_DIR."/includes/display/processing/class-ninja-forms-processing.php");

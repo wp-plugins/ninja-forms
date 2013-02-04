@@ -3,33 +3,32 @@
 
 function ninja_forms_insert_field( $form_id, $args = array() ){
 	global $wpdb;
-	$type = $args['type'];
+	$insert_array = array();
 
+	$insert_array['type'] = $args['type'];
+	$insert_array['form_id'] = $form_id;
+	
 	if( isset( $args['data'] ) ){
-		$data = $args['data'];
+		$insert_array['data'] = $args['data'];
 	}else{
-		$data = '';
+		$insert_array['data'] = '';
 	}
 
 	if( isset( $args['order'] ) ){
-		$order = $args['order'];
+		$insert_array['order'] = $args['order'];
 	}else{
-		$order = 999;
+		$insert_array['order'] = 999;
 	}
 
 	if( isset( $args['fav_id'] ) ){
-		$fav_id = $args['fav_id'];
-	}else{
-		$fav_id = '';
-	}	
-
-	if( isset( $args['def_id'] ) ){
-		$def_id = $args['def_id'];
-	}else{
-		$def_id = '';
+		$insert_array['fav_id'] = $args['fav_id'];
 	}
 
-	$new_field = $wpdb->insert( NINJA_FORMS_FIELDS_TABLE_NAME, array( 'type' => $type, 'form_id' => $form_id, 'data' => $data, 'order' => $order, 'fav_id' => $fav_id, 'def_id' => $def_id ) );
+	if( isset( $args['def_id'] ) ){
+		$insert_array['def_id'] = $args['def_id'];
+	}
+
+	$new_field = $wpdb->insert( NINJA_FORMS_FIELDS_TABLE_NAME, $insert_array );
 	$new_id = $wpdb->insert_id;
 	return $new_id;
 }
@@ -100,6 +99,13 @@ function ninja_forms_get_form_ids_by_post_id( $post_id ){
 	}
 	
 	return $form_ids;
+}
+
+function ninja_forms_update_form( $args ){
+	global $wpdb;
+	$update_array = $args['update_array'];
+	$where = $args['where'];
+	$wpdb->update(NINJA_FORMS_TABLE_NAME, $update_array, $where);
 }
 
 // Begin Field Interaction Functions

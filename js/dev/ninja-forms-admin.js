@@ -40,6 +40,18 @@ jQuery(document).ready(function($) {
 		event.preventDefault();
 		//$(this).parent().next('div.inside').toggle();
 		$(this).nextElementInDom('.inside:first').toggle();
+		if($(this).hasClass("metabox-item-edit")){
+			var page = $("#_page").val();
+			var tab = $("#_tab").val();
+			var slug = $(this).parent().parent().prop("id").replace("ninja_forms_metabox_", "");
+			if($(this).nextElementInDom('.inside:first').is(":visible")){
+				var state = '';
+			}else{
+				var state = 'display:none;'
+			}
+
+			$.post( ajaxurl, { page: page, tab: tab, slug: slug, state: state, action:"ninja_forms_save_metabox_state" } );
+		}
 	});
 
 	//Make the Sidebar Sortable.
@@ -56,8 +68,18 @@ jQuery(document).ready(function($) {
 			});
 		}, 
 	});
+	/*
+	//Make Metaboxes Sortable.
+	$("#ninja_forms_admin_metaboxes").sortable({
+		placeholder: "ui-state-highlight",
+		helper: 'clone',
+		handle: '.hndl',
+		stop: function(e,ui) {
+			alert('done');
+		}
+	});
 
-	$(".add-new-h2").draggable({ 
+		$(".add-new-h2").draggable({ 
 		connectToSortable: ".ninja-forms-field-list", 
 		revert: true,
 		start: function(e,ui){
@@ -69,7 +91,6 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	/*
 	$(".ninja-forms-field-list").droppable({
 		drop: function( event, ui ) {
       		alert( $("li.ninja-forms-no-nest:last" ).length );
@@ -115,11 +136,13 @@ jQuery(document).ready(function($) {
 			}
 		},
 		stop: function(e,ui) {
+			/*
 			if( $(ui.item).prop("tagName") == "A" ){
 				//alert( $.data( document.body, 'test' ) );
 				var el = $( "li.ninja-forms-no-nest:last" ).clone();
 				$(ui.item).replaceWith(el);
 			}
+			*/
 			var wp_editor_count = $(ui.item).find(".wp-editor-wrap").length;
 			if(wp_editor_count > 0){
 				$(ui.item).find(".wp-editor-wrap").each(function(){
@@ -152,6 +175,7 @@ jQuery(document).ready(function($) {
 		}
 
 		if((limit != '' && current_count < limit) || limit == '' || current_count == '' || current_count == 0){
+			
 			$.post( ajaxurl, { type: type, form_id: form_id, action:"ninja_forms_new_field"}, ninja_forms_new_field_response );
 
 		}else{
@@ -303,6 +327,7 @@ jQuery(document).ready(function($) {
 			$("#mask_label_" + id).hide();
 			$("#ninja_forms_field_" + id + "_email").prop("checked", false);
 			$("#ninja_forms_field_" + id + "_send_email").prop("checked", false);
+			$("#ninja_forms_field_" + id + "_from_email").prop("checked", false);
 		}
 	});	
 	
@@ -323,6 +348,7 @@ jQuery(document).ready(function($) {
 			$("#ninja_forms_field_" + id + "_datepicker").prop("checked", false);
 		}else{
 			$("#ninja_forms_field_" + id + "_send_email").prop("checked", false);
+			$("#ninja_forms_field_" + id + "_from_email").prop("checked", false);
 		}
 	});
 
@@ -330,6 +356,24 @@ jQuery(document).ready(function($) {
 	$(".ninja-forms-_text-send_email").live("change", function(){
 		var id = this.id.replace("ninja_forms_field_", "");
 		id = id.replace("_send_email", "");
+		if(this.checked == true){
+			$("#ninja_forms_field_" + id + "_email").prop("checked", true);
+			if( $("#ninja_forms_field_" + id + "_default_value").val() != '_user_email' ){
+				$("#ninja_forms_field_" + id + "_default_value").val("");
+				$("#default_value_" + id).val("");
+				$("#default_value_label_" + id).hide();				
+			}
+			$("#ninja_forms_field_" + id + "_mask").val("");
+			$("#mask_" + id).val("");
+			$("#mask_label_" + id).hide();
+			$("#ninja_forms_field_" + id + "_datepicker").prop("checked", false);
+		}
+	});
+
+	// From Email
+	$(".ninja-forms-_text-from_email").live("change", function(){
+		var id = this.id.replace("ninja_forms_field_", "");
+		id = id.replace("_from_email", "");
 		if(this.checked == true){
 			$("#ninja_forms_field_" + id + "_email").prop("checked", true);
 			if( $("#ninja_forms_field_" + id + "_default_value").val() != '_user_email' ){
@@ -655,7 +699,6 @@ jQuery(document).ready(function($) {
 }); //Document.read();
 
 function ninja_forms_new_field_response( response ){
-
 	jQuery("#ninja_forms_field_list").append(response.new_html).show('slow');
 	if(typeof response.edit_options != 'undefined'){
 		for(var i = 0; i < response.edit_options.length; i++){

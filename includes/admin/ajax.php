@@ -1,4 +1,18 @@
 <?php
+add_action( 'wp_ajax_ninja_forms_save_metabox_state', 'ninja_forms_save_metabox_state' );
+function ninja_forms_save_metabox_state(){
+	$plugin_settings = get_option( 'ninja_forms_settings' );
+	$page = $_REQUEST['page'];
+	$tab = $_REQUEST['tab'];
+	$slug = $_REQUEST['slug'];
+	$state = $_REQUEST['state'];
+	$plugin_settings['metabox_state'][$page][$tab][$slug] = $state;
+	update_option( 'ninja_forms_settings', $plugin_settings );
+	$plugin_settings = get_option( 'ninja_forms_settings' );
+	echo "SETTING: ".$plugin_settings['metabox_state'][$page][$tab][$slug];
+	die();
+}
+
 add_action('wp_ajax_ninja_forms_new_field', 'ninja_forms_new_field');
 function ninja_forms_new_field(){
 	global $wpdb, $ninja_forms_fields;
@@ -27,7 +41,7 @@ function ninja_forms_new_field(){
 			'type' => $type,
 			'data' => $data,
 		);
-
+						
 		$new_id = ninja_forms_insert_field( $form_id, $args );
 		$new_html = ninja_forms_return_echo('ninja_forms_edit_field', $new_id);
 		header("Content-type: application/json");

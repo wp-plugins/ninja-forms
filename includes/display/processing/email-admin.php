@@ -32,6 +32,11 @@ function ninja_forms_email_admin(){
 	
 
 	$email_from = htmlspecialchars_decode($email_from);
+
+	if( $ninja_forms_processing->get_form_setting( 'admin_email_from' ) ){
+		$email_from = $ninja_forms_processing->get_form_setting( 'admin_email_from' );
+	}
+
 	$email_from = htmlspecialchars_decode($email_from);
 
 	$headers = "\nMIME-Version: 1.0\n";

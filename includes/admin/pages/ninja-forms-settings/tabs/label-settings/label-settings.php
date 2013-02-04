@@ -1,5 +1,5 @@
 <?php
-add_action('init', 'ninja_forms_register_tab_label_settings');
+add_action( 'init', 'ninja_forms_register_tab_label_settings' );
 
 function ninja_forms_register_tab_label_settings(){
 	$args = array(
@@ -8,11 +8,11 @@ function ninja_forms_register_tab_label_settings(){
 		'display_function' => '', 
 		'save_function' => 'ninja_forms_save_label_settings',
 	); 
-	ninja_forms_register_tab('label_settings', $args);
+	ninja_forms_register_tab( 'label_settings', $args );
 	
 }
 
-add_action('init', 'ninja_forms_register_label_settings_metabox');
+add_action( 'init', 'ninja_forms_register_label_settings_metabox' );
 
 function ninja_forms_register_label_settings_metabox(){
 
@@ -25,30 +25,36 @@ function ninja_forms_register_label_settings_metabox(){
 			array(
 				'name' => 'req_div_label',
 				'type' => 'text',
-				'label' => __('Required Field Label', 'ninja-forms'),
+				'label' => __( 'Required Field Label', 'ninja-forms' ),
 				'desc' => '',
 				'help_text' => '',
 			),
 			array(
 				'name' => 'req_field_symbol',
 				'type' => 'text',
-				'label' => __('Required field symbol', 'ninja-forms'),
+				'label' => __( 'Required field symbol', 'ninja-forms' ),
 			),
 			array(
 				'name' => 'req_error_label',
 				'type' => 'text',
-				'label' => __('Error message given if all required fields are not completed', 'ninja-forms'),
+				'label' => __( 'Error message given if all required fields are not completed', 'ninja-forms' ),
 			),
 			array(
 				'name' => 'req_field_error',
 				'type' => 'text',
-				'label' => __('Required Field Error', 'ninja-forms'),
+				'label' => __( 'Required Field Error', 'ninja-forms' ),
 				'desc' => '',
 			),
 			array(
 			 	'name' => 'spam_error',
 				'type' => 'text',
-				'label' => __('Anti-spam error message', 'ninja-forms'),
+				'label' => __( 'Anti-spam error message', 'ninja-forms' ),
+				'desc' => '',
+			),
+			array(
+			 	'name' => 'invalid_email',
+				'type' => 'text',
+				'label' => __( 'Please enter a valid email address', 'ninja-forms' ),
 				'desc' => '',
 			),
 			/*

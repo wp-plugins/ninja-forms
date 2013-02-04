@@ -1,5 +1,6 @@
 <?php
 function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
+	$plugin_settings = get_option( 'ninja_forms_settings' );
 	if($form_id != ''){
 		$form_row = ninja_forms_get_form_by_id($form_id);
 		$current_settings = $form_row['data'];
@@ -7,6 +8,9 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 		$form_id = '';
 		$current_settings = get_option("ninja_forms_settings");
 	}
+
+	$page = $metabox['page'];
+	$tab = $metabox['tab'];
 
 	$title = $metabox['title'];
 	if(isset($metabox['settings'])){
@@ -27,6 +31,10 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 		$state = '';
 	}
 
+	if( isset( $plugin_settings['metabox_state'][$page][$tab][$slug] ) ){
+		$state = $plugin_settings['metabox_state'][$page][$tab][$slug];
+	}
+
 	if( isset( $metabox['display_container'] ) ){
 		$display_container = $metabox['display_container'];
 	}else{
@@ -35,9 +43,9 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 
 	if( $display_container ){
 		?>
-		<div id="postcustom" class="postbox ">
+		<div id="ninja_forms_metabox_<?php echo $slug;?>" class="postbox ">
 			<span class="item-controls">
-				<a class="item-edit" id="edit_id" title="Edit Menu Item" href="#">Edit Menu Item</a>
+				<a class="item-edit metabox-item-edit" id="edit_id" title="Edit Menu Item" href="#">Edit Menu Item</a>
 			</span>
 			<h3 class="hndle"><span><?php _e($title, 'ninja-forms');?></span></h3>
 			<div class="inside" style="<?php echo $state;?>">

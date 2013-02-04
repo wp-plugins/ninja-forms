@@ -4,7 +4,7 @@ Donate link: http://wpninjas.com
 Tags: form, forms
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 2.0.4
+Stable tag: 2.0.5
 License: GPLv2 or later
 
 == Description ==
@@ -53,7 +53,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.0.4 =
+= 2.0.5 =
 
 A couple new features, several changes and a bug fix. Check the changelog for specifics.
 
@@ -62,6 +62,20 @@ A couple new features, several changes and a bug fix. Check the changelog for sp
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.0.5 =
+
+Features:
+* Added the option to set an email address as the “From” address within the field settings.
+* Added basic email validation. This does NOT validate that the email address exists, but only that it is semantically correct.
+* Added a label in the plugin settings “Label” tab for an invalid email address.
+* Added Shortcode and Template Function output to the Form List. You can now copy and paste the shortcode from there.
+
+Changes:
+* Admin metaboxes will now remember whether or not they were closed or open.
+
+Bugs:
+* Fixed a bug that prevented some users from adding new fields.
 
 = 2.0.4 =
 
