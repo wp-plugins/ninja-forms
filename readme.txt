@@ -64,50 +64,61 @@ If you have any feature requests, please feel free to visit [wpninjas.com](http:
 == Changelog ==
 
 = 2.0.6 =
+
 Bugs:
+
 * Fixed a JS bug that prevented some users from adding new form fields.
 
 = 2.0.5 =
 
-Features:
+*Features:*
+
 * Added the option to set an email address as the “From” address within the field settings.
 * Added basic email validation. This does NOT validate that the email address exists, but only that it is semantically correct.
 * Added a label in the plugin settings “Label” tab for an invalid email address.
 * Added Shortcode and Template Function output to the Form List. You can now copy and paste the shortcode from there.
 
-Changes:
+*Changes:*
+
 * Admin metaboxes will now remember whether or not they were closed or open.
 
-Bugs:
+*Bugs:*
+
 * Fixed a bug that prevented some users from adding new fields.
 
 = 2.0.4 =
 
-Features:
+*Features:*
+
 * Added a label field to the plugin settings page that will allow users to set the message displayed above the form when there is a required field error.
 * Setting a text or textarea’s label position to ‘inside’ will now cause the label to be auto-removed when the input receives focus. If a user leaves the field blank, the label will return.
 
-Changes:
+*Changes:*
+
 * Increased the max file size for form imports.
 * Added a filter: ninja_forms_field_wrap_class. This filter is sent a string that contains the wrap class for each field along with its field id.
 * The CSS class of the list field wrapping div has been modified slightly. It has been changed from .list to .list-dropdown where dropdown is the list type.
 * Added a new shortcode for inserting the date into the success message and emails: [ninja_forms_sub_date format="m/d/Y"]. It follows the php.net date() string formats and defaults to m/d/Y.
 
-Bugs:
+*Bugs:*
+
 * Fixed a bug that prevented Help Text from displayin properly when the label was set to the “inside” position.
 
 = 2.0.3 =
 
-Features:
+*Features:*
+
 * Added a checkbox to allow the appending of field values to administrator emails.
 * Save form settings is now checked by default when creating a form.
 * Hide form after successful submission is now checked by default when creating a new form.
 * Changed the [label] system to [ninja_forms_field id=3] where 3 is the field ID that you want to insert.
 
-Changes:
+*Changes:*
+
 *Changed the way that "settings saved" messages appear. When creating a save function on the admin-backend, you can now return the update message you wish users to see.
 
-Bugs:
+*Bugs:*
+
 * Fixed a bug that caused design elements, especially text fields, from showing on multi-part forms.
 * Fixed a bug in the backend admin system that was causing problems with the Uploads Browser/Upload Settings tabs.
 * To prevent conflicts with other plugins, we removed the position declaration from the admin menu hook. This means that the Forms link will now float to the bottom of the admin menu.
@@ -126,7 +137,6 @@ Bugs:
 
 = 2.0.1 =
 * Lots of bug fixes.
-
 * Filter User and Admin email subject line for [bracketed] labels.
 * Add an action hook to User and Email sending.
 * Add an option to the "user email" section for attaching user submitted values.
