@@ -64,7 +64,7 @@ function ninja_forms_register_form_settings_basic_metabox(){
 		'tab' => 'form_settings',
 		'slug' => 'basic_settings',
 		'title' => __('Basic Settings', 'ninja-forms'),
-		'display_function' => 'ninja_forms_form_settings_basic_metabox',
+		//'display_function' => 'ninja_forms_form_settings_basic_metabox',
 		'settings' => array(
 			array(
 				'name' => 'save_subs',

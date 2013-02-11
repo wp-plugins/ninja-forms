@@ -4,7 +4,7 @@ Donate link: http://wpninjas.com
 Tags: form, forms
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 2.0.6
+Stable tag: 2.0.7
 License: GPLv2 or later
 
 == Description ==
@@ -53,7 +53,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.0.6 =
+= 2.0.7 =
 
 A couple new features, several changes and a bug fix. Check the changelog for specifics.
 
@@ -63,9 +63,24 @@ If you have any feature requests, please feel free to visit [wpninjas.com](http:
 
 == Changelog ==
 
+= 2.0.7 =
+
+*Features:*
+
+* Added a new field type of "Password." This field offers the ability to add a password input textbox to your forms, including both password and re-enter password boxes. Ninja Forms will ensure that the text entered into these boxes matches. Please note that using this field within your forms to do things like logins, registrations, etc. will require custom coding.
+
+*Bugs:*
+
+* Modified the way that Ninja Forms created admin metaboxes. Metabox options should now properly output in the order in which they are registered.
+* Added a new serializeToArray function to the admin.js to fix a bug some users encountered with popup boxes.
+
+*Changes:*
+
+* Removed unused files.
+
 = 2.0.6 =
 
-Bugs:
+*Bugs:*
 
 * Fixed a JS bug that prevented some users from adding new form fields.
 

@@ -37,9 +37,8 @@ function ninja_forms_req_fields_process(){
 			}else{
 				$label = '';
 			}
-						
+
 			$reg_type = $ninja_forms_fields[$field_type];
-			
 			$req_validation = $reg_type['req_validation'];
 
 			$plugin_settings = get_option("ninja_forms_settings");

@@ -121,6 +121,19 @@ jQuery(document).ready(function(jQuery) {
 	
 	/* * * End ajaxForm JS * * */
 	
+	jQuery('.pass1').val('').keyup( function(){
+		var pass1 = this.value;
+		var pass2 = this.id.replace( "pass1", "pass2" );
+		pass2 = jQuery( "#" + pass2 ).val();
+		check_pass_strength( pass1, pass2 );
+	});
+	jQuery('.pass2').val('').keyup( function(){
+		var pass2 = this.value;
+		var pass1 = this.id.replace( "pass2", "pass1" );
+		pass1 = jQuery( "#" + pass1 ).val();
+		check_pass_strength( pass1, pass2 );
+	});
+
 }); //End document.ready
 
 function ninja_forms_html_decode(value) {
@@ -157,4 +170,66 @@ function ninja_forms_get_form_id(element){
 		form_id = jQuery("#_form_id").val();
 	}
 	return form_id;
+}
+
+function check_pass_strength(pass1, pass2) {
+	
+	jQuery('#pass-strength-result').removeClass('short bad good strong');
+	if ( ! pass1 ) {
+		jQuery('#pass-strength-result').html( ninja_forms_password_strength.empty );
+		return;
+	}
+
+	strength = passwordStrength(pass1, pass2);
+
+	switch ( strength ) {
+		case 2:
+			jQuery('#pass-strength-result').addClass('bad').html( ninja_forms_password_strength['bad'] );
+			break;
+		case 3:
+			jQuery('#pass-strength-result').addClass('good').html( ninja_forms_password_strength['good'] );
+			break;
+		case 4:
+			jQuery('#pass-strength-result').addClass('strong').html( ninja_forms_password_strength['strong'] );
+			break;
+		case 5:
+			jQuery('#pass-strength-result').addClass('short').html( ninja_forms_password_strength['mismatch'] );
+			break;
+		default:
+			jQuery('#pass-strength-result').addClass('short').html( ninja_forms_password_strength['short'] );
+	}
+}
+
+function passwordStrength(password1, password2) {
+	var shortPass = 1, badPass = 2, goodPass = 3, strongPass = 4, mismatch = 5, symbolSize = 0, natLog, score;
+
+	// password 1 != password 2
+	if ( (password1 != password2) && password2.length > 0)
+		return mismatch
+
+	//password < 4
+	if ( password1.length < 4 )
+		return shortPass
+
+	//password1 == username
+
+	if ( password1.match(/[0-9]/) )
+		symbolSize +=10;
+	if ( password1.match(/[a-z]/) )
+		symbolSize +=26;
+	if ( password1.match(/[A-Z]/) )
+		symbolSize +=26;
+	if ( password1.match(/[^a-zA-Z0-9]/) )
+		symbolSize +=31;
+
+	natLog = Math.log( Math.pow(symbolSize, password1.length) );
+	score = natLog / Math.LN2;
+
+	if (score < 40 )
+		return badPass
+
+	if (score < 56 )
+		return goodPass
+
+    return strongPass;
 }

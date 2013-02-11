@@ -75,11 +75,6 @@ function ninja_forms_register_field_checkbox(){
 
 //Checkbox Display Function
 function ninja_forms_field_checkbox_display($field_id, $data){
-	if(isset($data['show_field'])){
-		$show_field = $data['show_field'];		
-	}else{
-		$show_field = true;
-	}
 
 	$field_class = ninja_forms_get_field_class($field_id);
 	$default_value = $data['default_value'];

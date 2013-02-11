@@ -45,9 +45,7 @@ function ninja_forms_display_js($form_id, $local_vars = ''){
 					$clear_complete = 0;
 				}
 
-
 				$password_mismatch = esc_html(stripslashes($plugin_settings['password_mismatch']));
-
 
 				wp_enqueue_script( 'ninja-forms-display',
 				NINJA_FORMS_URL .'/js/min/ninja-forms-display.min.js',
@@ -59,8 +57,16 @@ function ninja_forms_display_js($form_id, $local_vars = ''){
 				}
 
 				wp_localize_script( 'ninja-forms-display', 'ninja_forms_form_'.$form_id.'_settings', array('form_settings' => $ninja_forms_js_form_settings ) );
-
-
+				
+				wp_localize_script( 'ninja-forms-display', 'ninja_forms_password_strength', array(
+					'empty' => __('Strength indicator'),
+					'short' => __('Very weak'),
+					'bad' => __('Weak'),
+					/* translators: password strength */
+					'good' => _x('Medium', 'password strength'),
+					'strong' => __('Strong'),
+					'mismatch' => __('Mismatch')
+					) );
 				wp_enqueue_script( 'jquery-maskedinput',
 					NINJA_FORMS_URL .'/js/min/jquery.maskedinput.min.js',
 					array( 'jquery' ) );
