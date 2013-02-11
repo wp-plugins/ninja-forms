@@ -318,12 +318,23 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 					<input type="hidden" name="<?php echo $name;?>" value="<?php echo $value;?>">
 					<?php
 					break;
+				case 'submit':
+					?>
+					<tr>
+						<td colspan="2">
+							<input type="submit" name="<?php echo $name;?>" value="<?php echo $label;?>">
+						</td>
+					</tr>
+					<?php
+					break;
 				default:
-					$s_display_function = $s['display_function'];
-					if( $s_display_function != '' ){
-						$arguments['form_id'] = $form_id;
-						$arguments['data'] = $current_settings;
-						call_user_func_array( $s_display_function, $arguments );						
+					if( isset( $s['display_function'] ) ){
+						$s_display_function = $s['display_function'];
+						if( $s_display_function != '' ){
+							$arguments['form_id'] = $form_id;
+							$arguments['data'] = $current_settings;
+							call_user_func_array( $s_display_function, $arguments );						
+						}						
 					}
 					break;
 			}
