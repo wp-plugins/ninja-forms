@@ -225,6 +225,40 @@ function ninja_forms_register_sidebar_option($slug, $args){
 	}
 }
 
+function ninja_forms_register_sidebar_options( $args ){
+	global $ninja_forms_sidebars;
+
+	$page = $args['page'];
+	$tab = $args['tab'];
+	$sidebar = $args['sidebar'];
+
+	foreach( $args['settings'] as $setting ){
+
+		if( !isset( $setting['desc'] ) ){
+			$setting['desc'] = '';
+		}
+
+		if( !isset( $setting['help'] ) ){
+			$setting['help'] = '';
+		}
+
+		if( !isset( $setting['display_function'] ) ){
+			$setting['display_function'] = '';
+		}
+
+		if( !isset( $setting['name'] ) ){
+			$setting['name'] = '';
+		}
+
+		$slug = $setting['name'];
+
+		foreach($setting as $key => $val){
+			$ninja_forms_sidebars[$page][$tab][$sidebar]['settings'][$slug][$key] = $val;
+		}
+	}
+
+}
+
 function ninja_forms_field_edit($slug){
 	global $ninja_forms_fields;
 	$function_name = $ninja_forms_fields[$slug]['edit_function'];

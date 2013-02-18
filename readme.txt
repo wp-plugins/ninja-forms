@@ -4,7 +4,7 @@ Donate link: http://wpninjas.com
 Tags: form, forms
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 2.0.7
+Stable tag: 2.0.8
 License: GPLv2 or later
 
 == Description ==
@@ -53,7 +53,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.0.7 =
+= 2.0.8 =
 
 A couple new features, several changes and a bug fix. Check the changelog for specifics.
 
@@ -62,6 +62,17 @@ A couple new features, several changes and a bug fix. Check the changelog for sp
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.0.8 =
+
+*Bugs:*
+
+* Fixed a bug that was causing odd behaviour when two or more forms were on the same page.
+
+*Changes:*
+
+* Modified the way that Ninja Forms outputs admin metaboxes.
+* Modified the way that Ninja Forms outputs errors and success messages.
 
 = 2.0.7 =
 

@@ -36,7 +36,7 @@ function ninja_forms_field_hr_display($field_id, $data){
 
 	$field_class = ninja_forms_get_field_class($field_id);
 	?>
-	<hr class="<?php echo $field_class;?>" style="<?php echo $display_style;?>" id="ninja_forms_field_<?php echo $field_id;?>_div_wrap" />
+	<hr class="<?php echo $field_class;?>" style="<?php echo $display_style;?>" id="ninja_forms_field_<?php echo $field_id;?>_div_wrap" rel="<?php echo $field_id;?>" />
 	<?php
 
 }

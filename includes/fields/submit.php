@@ -48,7 +48,7 @@ function ninja_forms_field_submit_display($field_id, $data){
 	}
 
 	?>
-	<input type="submit" name="_ninja_forms_field_<?php echo $field_id;?>" class="<?php echo $field_class;?>" id="ninja_forms_field_<?php echo $field_id;?>" value="<?php echo $label;?>">
+	<input type="submit" name="_ninja_forms_field_<?php echo $field_id;?>" class="<?php echo $field_class;?>" id="ninja_forms_field_<?php echo $field_id;?>" value="<?php echo $label;?>" rel="<?php echo $field_id;?>" >
 	<?php
 
 }

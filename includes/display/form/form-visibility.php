@@ -17,7 +17,7 @@ function ninja_forms_display_form_visibility( $display, $form_id ){
 	}
 
 	//If the plugin setting 'hide complete' has been set and a success message exists, hide the form.
-	if( $hide_complete == 1 AND ( isset( $ninja_forms_processing ) AND $ninja_forms_processing->get_form_setting( 'processing_complete' ) == 1 ) ){
+	if( $hide_complete == 1 AND ( isset( $ninja_forms_processing ) AND $ninja_forms_processing->get_form_setting( 'processing_complete' ) == 1 ) AND $ninja_forms_processing->get_form_ID() == $form_id ){
 		$display = 0;
 	}
 

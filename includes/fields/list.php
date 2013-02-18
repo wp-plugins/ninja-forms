@@ -214,7 +214,7 @@ function ninja_forms_field_list_display($field_id, $data){
 	switch($list_type){
 		case 'dropdown':
 			?>
-			<select name="ninja_forms_field_<?php echo $field_id;?>" id="ninja_forms_field_<?php echo $field_id;?>" class="<?php echo $field_class;?>">
+			<select name="ninja_forms_field_<?php echo $field_id;?>" id="ninja_forms_field_<?php echo $field_id;?>" class="<?php echo $field_class;?>" rel="<?php echo $field_id;?>">
 				<?php
 				if($label_pos == 'inside'){
 					?>
@@ -302,7 +302,7 @@ function ninja_forms_field_list_display($field_id, $data){
 				?>
 				<li>
 					<label id="ninja_forms_field_<?php echo $field_id;?>_<?php echo $x;?>_label" class="ninja-forms-field-<?php echo $field_id;?>-options" stlye="<?php echo $display_style;?>">
-						<input id="ninja_forms_field_<?php echo $field_id;?>_<?php echo $x;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="radio" class="<?php echo $field_class;?>" value="<?php echo $value;?>" <?php echo $selected;?> />
+						<input id="ninja_forms_field_<?php echo $field_id;?>_<?php echo $x;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="radio" class="<?php echo $field_class;?>" value="<?php echo $value;?>" <?php echo $selected;?> rel="<?php echo $field_id;?>" />
 						<?php echo $label;?>
 					</label>
 				</li>
@@ -313,7 +313,7 @@ function ninja_forms_field_list_display($field_id, $data){
 				</ul>
 			</span>
 			<label id="ninja_forms_field_<?php echo $field_id;?>_template_label" style="display:none;">
-				<input id="ninja_forms_field_<?php echo $field_id;?>_" name="" type="radio" class="<?php echo $field_class;?>" value=""/>
+				<input id="ninja_forms_field_<?php echo $field_id;?>_" name="" type="radio" class="<?php echo $field_class;?>" value="" rel="<?php echo $field_id;?>" />
 			</label>
 			<?php
 			break;
@@ -321,6 +321,7 @@ function ninja_forms_field_list_display($field_id, $data){
 			$x = 0;
 			?>
 			<input type="hidden" name="ninja_forms_field_<?php echo $field_id;?>" value="">
+			<input type="hidden" id="ninja_forms_field_<?php echo $field_id;?>_type" value="list-checkbox">
 			<span id="ninja_forms_field_<?php echo $field_id;?>_options_span">
 				<ul>
 			<?php
@@ -361,7 +362,7 @@ function ninja_forms_field_list_display($field_id, $data){
 				?>
 				<li>
 					<label id="ninja_forms_field_<?php echo $field_id;?>_<?php echo $x;?>_label" class="ninja-forms-field-<?php echo $field_id;?>-options" style="<?php echo $display_style;?>">
-						<input id="ninja_forms_field_<?php echo $field_id;?>_<?php echo $x;?>" name="ninja_forms_field_<?php echo $field_id;?>[]" type="checkbox" class="<?php echo $field_class;?>" value="<?php echo $value;?>" <?php echo $checked;?>/>
+						<input id="ninja_forms_field_<?php echo $field_id;?>_<?php echo $x;?>" name="ninja_forms_field_<?php echo $field_id;?>[]" type="checkbox" class="<?php echo $field_class;?> ninja_forms_field_<?php echo $field_id;?>" value="<?php echo $value;?>" <?php echo $checked;?> rel="<?php echo $field_id;?>"/>
 						<?php echo $label;?>
 					</label>
 				</li>
@@ -372,13 +373,13 @@ function ninja_forms_field_list_display($field_id, $data){
 				</ul>
 			</span>
 			<label id="ninja_forms_field_<?php echo $field_id;?>_template_label" style="display:none;">
-				<input id="ninja_forms_field_<?php echo $field_id;?>_" name="" type="checkbox" class="<?php echo $field_class;?>" value=""/>
+				<input id="ninja_forms_field_<?php echo $field_id;?>_" name="" type="checkbox" class="<?php echo $field_class;?>" value="" rel="<?php echo $field_id;?>" />
 			</label>
 			<?php
 			break;
 		case 'multi':
 			?>
-			<select name="ninja_forms_field_<?php echo $field_id;?>[]" id="ninja_forms_field_<?php echo $field_id;?>" class="<?php echo $field_class;?>" multiple size="<?php echo $multi_size;?>">
+			<select name="ninja_forms_field_<?php echo $field_id;?>[]" id="ninja_forms_field_<?php echo $field_id;?>" class="<?php echo $field_class;?>" multiple size="<?php echo $multi_size;?>" rel="<?php echo $field_id;?>" >
 				<?php
 				if($label_pos == 'inside'){
 					?>
@@ -425,7 +426,7 @@ function ninja_forms_field_list_display($field_id, $data){
 				}
 				?>
 			</select>
-			<select id="ninja_forms_field_<?php echo $field_id;?>_clone" style="display:none;">
+			<select id="ninja_forms_field_<?php echo $field_id;?>_clone" style="display:none;" rel="<?php echo $field_id;?>" >
 				<?php
 				$x = 0;
 				foreach($options as $option){

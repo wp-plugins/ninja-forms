@@ -87,7 +87,7 @@ function ninja_forms_field_profile_pass_display( $field_id, $data ){
 	}
 
 	?>
-	<input id="pass1_<?php echo $field_id;?>" title="" name="ninja_forms_field_<?php echo $field_id;?>" type="password" class="<?php echo $field_class;?> pass1" value="<?php echo $default_value;?>" />
+	<input id="pass1_<?php echo $field_id;?>" title="" name="ninja_forms_field_<?php echo $field_id;?>" type="password" class="<?php echo $field_class;?> pass1" value="<?php echo $default_value;?>" rel="<?php echo $field_id;?>" />
 	<br />
 	<?php
 	if( $label_pos == 'left' OR $label_pos == 'above' ){

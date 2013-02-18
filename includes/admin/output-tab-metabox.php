@@ -93,6 +93,11 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 			}else{
 				$class = '';
 			}
+			if(isset($s['tr_class'])){
+				$tr_class = $s['tr_class'];
+			}else{
+				$tr_class = '';
+			}
 			if(isset($s['max_file_size'])){
 				$max_file_size = $s['max_file_size'];
 			}else{
@@ -138,7 +143,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 				case 'text':
 					$value = ninja_forms_esc_html_deep( $value );
 					?>
-					<tr>
+					<tr class="<?php echo $tr_class;?>">
 						<th>
 							<?php echo $label; ?>
 						</th>
@@ -159,7 +164,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 					break;
 				case 'select':
 					?>
-					<tr>
+					<tr class="<?php echo $tr_class;?>">
 						<th>
 							<?php echo $label; ?>
 						</th>
@@ -189,7 +194,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 					break;
 				case 'checkbox':
 					?>
-					<tr>
+					<tr class="<?php echo $tr_class;?>">
 						<th>
 							<label for="<?php echo $name;?>"><?php echo $label;?></label>
 						</th>
@@ -211,7 +216,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 					break;
 				case 'checkbox_list':
 					?>
-					<tr>
+					<tr class="<?php echo $tr_class;?>">
 						<th>
 							<label for="<?php echo $name;?>_select_all">- <?php _e( 'Select All', 'ninja-forms' );?></label>
 						</th>
@@ -240,7 +245,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 				case 'radio':
 					if( is_array( $s['options'] ) AND !empty( $s['options'] ) ){
 						$x = 0; ?>
-						<tr>
+						<tr class="<?php echo $tr_class;?>">
 							<th>
 								<?php echo $label;?>
 							</th>
@@ -269,7 +274,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 				case 'textarea':
 					$value = ninja_forms_esc_html_deep( $value );
 					?>
-					<tr>
+					<tr class="<?php echo $tr_class;?>">
 						<th>
 							<?php echo $label; ?>
 						</th>
@@ -281,7 +286,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 					break;
 				case 'rte':
 					?>
-					<tr>
+					<tr class="<?php echo $tr_class;?>">
 						<th>
 							<?php echo $label; ?>
 						</th>
@@ -293,7 +298,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 					break;
 				case 'file':
 					?>
-					<tr>
+					<tr class="<?php echo $tr_class;?>">
 						<td colspan="2">
 							<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size;?>" />
 							<input type="file" name="<?php echo $name;?>" id="<?php echo $id;?>" class="<?php echo $class;?>">
@@ -303,7 +308,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 					break;
 				case 'desc':
 					?>
-					<tr>
+					<tr class="<?php echo $tr_class;?>">
 						<th>
 							<?php echo $label; ?>
 						</th>
@@ -320,7 +325,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 					break;
 				case 'submit':
 					?>
-					<tr>
+					<tr class="<?php echo $tr_class;?>">
 						<td colspan="2">
 							<input type="submit" name="<?php echo $name;?>" value="<?php echo $label;?>">
 						</td>

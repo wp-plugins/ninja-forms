@@ -72,6 +72,6 @@ function ninja_forms_field_desc_display( $field_id, $data ){
 
 	$field_class = ninja_forms_get_field_class($field_id);
 	?>
-	<<?php echo $desc_el;?> class="<?php echo $field_class;?>" id="ninja_forms_field_<?php echo $field_id;?>_div_wrap" style="<?php echo $display_style;?>"><?php echo $default_value;?></<?php echo $desc_el;?>>
+	<<?php echo $desc_el;?> class="<?php echo $field_class;?>" id="ninja_forms_field_<?php echo $field_id;?>_div_wrap" style="<?php echo $display_style;?>" rel="<?php echo $field_id;?>"><?php echo $default_value;?></<?php echo $desc_el;?>>
 	<?php
 }

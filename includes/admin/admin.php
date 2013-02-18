@@ -135,6 +135,7 @@ function ninja_forms_admin(){
 						?>
 						<?php
 						if(isset($ninja_forms_tabs[$current_page][$current_tab]['show_save']) AND $ninja_forms_tabs[$current_page][$current_tab]['show_save'] === true){ ?>
+							<br />
 							<input class="button-primary menu-save ninja-forms-save-data" id="ninja_forms_save_data_top" type="submit" value="<?php _e('Save Form Settings', 'ninja-forms'); ?>" />
 						<?php
 						}

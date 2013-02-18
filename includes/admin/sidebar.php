@@ -59,8 +59,13 @@ function ninja_forms_display_sidebars($data){
 
 				if(isset($sidebar['settings']) AND !empty($sidebar['settings'])){
 					foreach($sidebar['settings'] as $option){
+						if( isset( $option['p_class'] ) ){
+							$p_class = $option['p_class'];
+						}else{
+							$p_class = '';
+						}
 						?>
-						<p class="field-controls">
+						<p class="field-controls <?php echo $p_class;?>">
 						<?php
 						if(isset($option['display_function']) AND !empty($option['display_function'])){
 							call_user_func_array($option['display_function'], $arguments);
@@ -68,11 +73,16 @@ function ninja_forms_display_sidebars($data){
 
 							$name = $option['name'];
 
-							if( isset( $data[$name] ) ){
-								$value = $data[$name];
+							if( isset( $option['default_value'] ) ){
+								$value = $option['default_value'];
 							}else{
 								$value = '';
 							}
+
+							if( isset( $data[$name] ) ){
+								$value = $data[$name];
+							}
+
 							if( isset( $option['class'] ) ){
 								$class = $option['class'];
 							}else{
@@ -164,6 +174,8 @@ function ninja_forms_display_sidebars($data){
 				}
 				?>
 			</div>
+			<br />
+
 		</div>		
 		<?php
 				}

@@ -60,35 +60,6 @@ function ninja_forms_field_hidden_edit($field_id, $data){
 		</label>
 	</p>
 	
-	
-	<?php 
-	$custom = '';	
-	// Field Mask
-	if(isset($data['mask'])){
-		$mask = $data['mask'];
-	}else{
-		$mask = '';
-	}
-	?>
-	<p class="description description-thin">
-		<label for="">
-			<?php _e( 'Input Mask' , 'ninja-forms'); ?><br />
-			<select id="mask_<?php echo $field_id;?>"  name="" class="widefat ninja-forms-hidden-mask">
-				<option value="" <?php if($mask == ''){ echo 'selected'; $custom = 'no';}?>><?php _e('None', 'ninja-forms'); ?></option>
-				<option value="(999) 999-9999" <?php if($mask == '(999) 999-9999'){ echo 'selected'; $custom = 'no';}?>><?php _e('Phone - (555) 555-5555', 'ninja-forms'); ?></option>
-				<option value="date" <?php if($mask == '99/99/9999'){ echo 'selected'; $custom = 'no';}?>><?php _e('Date - mm/dd/yyyy', 'ninja-forms'); ?></option>
-				<option value="currency" <?php if($mask == 'dollars'){ echo 'selected'; $custom = 'no';}?>><?php _e('Dollars - $10.99', 'ninja-forms'); ?></option>
-				<option value="custom" <?php if($custom != 'no'){ echo 'selected';}?>><?php _e('Custom', 'ninja-forms'); ?> -></option>
-			</select>
-		</label>
-	</p>
-	<p class="description description-thin">
-		<label for=""  id="mask_label_<?php echo $field_id;?>" style="<?php if($custom == 'no'){ echo 'display:none;';}?>">
-			<?php _e( 'Custom Mask Definition' , 'ninja-forms'); ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" name="" class="">Help</a><br />
-			<input type="hidden" id="ninja_forms_field_<?php echo $field_id;?>_mask" name="ninja_forms_field_<?php echo $field_id;?>[mask]" class="widefat code" value="<?php echo $mask; ?>" />
-		</label>
-	</p>
-	
 	<?php
 	// Email Input Box ?
 	if(isset($data['email'])){
@@ -158,7 +129,7 @@ function ninja_forms_field_hidden_display($field_id, $data){
 		$default_value = $_POST['ninja_forms_field_'.$field_id];
 	}
 	?>
-	<input id="ninja_forms_field_<?php echo $field_id;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="hidden" class="<?php echo $field_class;?>" value="<?php echo $default_value;?>" />
+	<input id="ninja_forms_field_<?php echo $field_id;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="hidden" class="<?php echo $field_class;?>" value="<?php echo $default_value;?>" rel="<?php echo $field_id;?>" />
 	<?php
 
 }

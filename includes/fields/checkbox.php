@@ -86,7 +86,7 @@ function ninja_forms_field_checkbox_display($field_id, $data){
 
 	?>
 	<input id="" name="ninja_forms_field_<?php echo $field_id;?>" type="hidden" value="" />
-	<input id="ninja_forms_field_<?php echo $field_id;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="checkbox" class="<?php echo $field_class;?>" value="1" <?php echo $checked;?> />
+	<input id="ninja_forms_field_<?php echo $field_id;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="checkbox" class="<?php echo $field_class;?>" value="1" <?php echo $checked;?> rel="<?php echo $field_id;?>"/>
 	<?php
 }
 
