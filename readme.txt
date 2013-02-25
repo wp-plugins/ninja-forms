@@ -4,7 +4,7 @@ Donate link: http://wpninjas.com
 Tags: form, forms
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 2.0.8
+Stable tag: 2.0.9
 License: GPLv2 or later
 
 == Description ==
@@ -53,15 +53,23 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.0.8 =
+= 2.0.9 =
 
-A couple new features, several changes and a bug fix. Check the changelog for specifics.
+Mostly bugfixes. Check the changelog for specifics.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.0.9 =
+
+*Bugs:*
+
+* Fixed a bug in the redirect script that was causing some users to crash instead of changing sites. Ninja Forms now sets a $_SESSION variable, $_SESSION['ninja_forms_values'], equal to an array that looks like: array( 'field_id' => 32, 'user_value' => 'whatever the user submitted' ) just before it redirects. The target page can access these variables for processing or display.
+
+* Fixed a bug with the ninja_forms_register_tab_metabox_options() function
 
 = 2.0.8 =
 

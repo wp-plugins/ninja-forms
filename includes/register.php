@@ -387,7 +387,7 @@ function ninja_forms_register_tab_metabox_options( $args = array() ){
 	if( isset( $ninja_forms_tabs_metaboxes[$page][$tab][$slug]['settings'] ) ){
 		$settings = $ninja_forms_tabs_metaboxes[$page][$tab][$slug]['settings'];
 	}else{
-		$settings = '';
+		$settings = array();
 	}
 
 	if( is_array( $new_settings ) AND !empty( $new_settings ) ){

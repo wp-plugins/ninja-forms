@@ -1,5 +1,4 @@
 <?php
-
 if( isset( $_POST['_ninja_forms_display_submit'] ) AND $_POST['_ninja_forms_display_submit'] == 1 ){
 	$form_row = ninja_forms_get_form_by_id( $_POST['_form_id'] );
 	if( isset( $form_row['data']['ajax'] ) ){
@@ -30,10 +29,16 @@ function ninja_forms_page_append_check(){
 		if(is_array($form_ids) AND !empty($form_ids)){
 			foreach($form_ids as $form_id){
 				$ninja_forms_append_page_form_id[] = $form_id;
-				add_filter('the_content', 'ninja_forms_append_to_page');
+				//remove_filter('the_content', 'wpautop');
+				add_filter( 'the_content', 'ninja_forms_append_to_page' );
 			}
 		}
 	}
+}
+
+function remove_bad_br_tags($content) {
+	$content = str_ireplace( '</label><br />', '</label>', $content );
+	return $content;
 }
 
 function ninja_forms_append_to_page($content){
@@ -47,6 +52,8 @@ function ninja_forms_append_to_page($content){
 		$form = ninja_forms_return_echo('ninja_forms_display_form', $ninja_forms_append_page_form_id);
 	}
 	$content .= $form;
+	add_filter( 'the_content', 'remove_bad_br_tags', 99 );
+	remove_filter( 'the_content', 'wpautop' );
 	return $content;
 }
 
@@ -60,6 +67,7 @@ function ninja_forms_append_to_page($content){
 function ninja_forms_display_form($form_id = ''){
 	//Define our global variables
 	global $post, $wpdb, $ninja_forms_fields, $ninja_forms_processing;
+
 	//Get the settings telling us whether or not we should clear/hide the completed form.
 	//Check to see if the form_id has been sent.
 	if($form_id == ''){

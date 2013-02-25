@@ -50,8 +50,8 @@ function ninja_forms_register_field_checkbox(){
 					'name' => 'Change Value',
 					'output' => 'select',
 					'options' => array(
-						'Checked' => '1',
-						'Unchecked' => '0',
+						'Checked' => 'checked',
+						'Unchecked' => 'unchecked',
 					),
 					'js_function' => 'change_value',
 
@@ -66,8 +66,8 @@ function ninja_forms_register_field_checkbox(){
 				),
 			),
 		),
-		'process' => 'ninja_forms_field_checkbox_pre_process',
-		'edit_sub_pre_process' => 'ninja_forms_field_checkbox_pre_process',
+		//'process' => 'ninja_forms_field_checkbox_pre_process',
+		//'edit_sub_pre_process' => 'ninja_forms_field_checkbox_pre_process',
 	);
 	
 	ninja_forms_register_field('_checkbox', $args);
@@ -84,10 +84,7 @@ function ninja_forms_field_checkbox_display($field_id, $data){
 		$checked = '';
 	}
 
-	?>
-	<input id="" name="ninja_forms_field_<?php echo $field_id;?>" type="hidden" value="" />
-	<input id="ninja_forms_field_<?php echo $field_id;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="checkbox" class="<?php echo $field_class;?>" value="1" <?php echo $checked;?> rel="<?php echo $field_id;?>"/>
-	<?php
+	?><input id="" name="ninja_forms_field_<?php echo $field_id;?>" type="hidden" value="unchecked" /><input id="ninja_forms_field_<?php echo $field_id;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="checkbox" class="<?php echo $field_class;?>" value="checked" <?php echo $checked;?> rel="<?php echo $field_id;?>"/><?php
 }
 
 //Checkbox Pre-Processing Function

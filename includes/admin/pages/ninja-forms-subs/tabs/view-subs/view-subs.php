@@ -132,7 +132,8 @@ function ninja_forms_tab_view_subs(){
 		}
 		
 
-			if($edit_sub_form != 1){ 
+			if($edit_sub_form != 1){
+
 			?>
 			<div id="" class="tablenav top">
 				<div class="alignleft actions">

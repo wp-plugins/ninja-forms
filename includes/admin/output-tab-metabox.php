@@ -102,6 +102,11 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 				$max_file_size = $s['max_file_size'];
 			}else{
 				$max_file_size = '';
+			}			
+			if(isset($s['select_all'])){
+				$select_all = $s['select_all'];
+			}else{
+				$select_all = false;
 			}
 			if(isset($s['default_value'])){
 				$default_value = $s['default_value'];
@@ -215,30 +220,65 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 					<?php
 					break;
 				case 'checkbox_list':
+					if( $value == '' ){
+						$value = array();
+					}
+
 					?>
 					<tr class="<?php echo $tr_class;?>">
 						<th>
-							<label for="<?php echo $name;?>_select_all">- <?php _e( 'Select All', 'ninja-forms' );?></label>
+							<?php echo $label;?>
 						</th>
-						<td>
-							<input type="checkbox" name="" value="" id="<?php echo $name;?>_select_all" class="ninja-forms-select-all" title="ninja-forms-<?php echo $name;?>">
-						</td>
+						<?php
+						if( $select_all ){
+							?>
+							<td>
+								<label for="<?php echo $name;?>_select_all">
+									<input type="checkbox" name="" value="" id="<?php echo $name;?>_select_all" class="ninja-forms-select-all" title="ninja-forms-<?php echo $name;?>">
+								- <?php _e( 'Select All', 'ninja-forms' );?>
+								</label>
+							</td>
+						<?php							
+						}else{
+							if( is_array( $s['options'] ) AND isset( $s['options'][0] ) ){
+								
+								$option_name = $s['options'][0]['name'];
+								$option_value = $s['options'][0]['value'];
+								
+								?>
+								<td>
+									<label for="<?php echo $option_name;?>">
+										<input type="checkbox" class="ninja-forms-<?php echo $name;?> <?php echo $class;?>" name="<?php echo $name;?>[]" value="<?php echo $option_value;?>" <?php checked( in_array( $option_value, $value ) );?> id="<?php echo $option_name;?>">
+										<?php echo $option_name;?>
+									</label>
+								</td>
+								<?php
+							}
+						}
+						?>
 					</tr>
 					<?php
 					if( is_array( $s['options'] ) AND !empty( $s['options'] ) ){
+						$x = 0;
 						foreach( $s['options'] as $option ){
-							$option_name = $option['name'];
-							$option_value = $option['value'];
-							?>
-							<tr>
-								<th>
-									<label for="<?php echo $option_name;?>"><?php echo $option_name;?></label>
-								</th>
-								<td>
-									<input type="checkbox" class="ninja-forms-<?php echo $name;?> <?php echo $class;?>" name="<?php echo $name;?>[]" value="<?php echo $option_value;?> " <?php checked($value, $option_value);?> id="<?php echo $option_name;?>">
-								</td>
-							</tr>
-							<?php
+							if( ( !$select_all AND $x > 0 ) OR $select_all ){
+								$option_name = $option['name'];
+								$option_value = $option['value'];
+								?>
+								<tr>
+									<th>
+										
+									</th>
+									<td>
+										<label for="<?php echo $option_name;?>">
+											<input type="checkbox" class="ninja-forms-<?php echo $name;?> <?php echo $class;?>" name="<?php echo $name;?>[]" value="<?php echo $option_value;?>" <?php checked( in_array( $option_value, $value ) );?> id="<?php echo $option_name;?>">
+											<?php echo $option_name;?>
+										</label>
+									</td>
+								</tr>
+								<?php
+							}
+							$x++;
 						}
 					}
 					break;
@@ -370,8 +410,8 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 
 	if( $display_container ){
 		?>
-			</tbody>
-			</table>
+					</tbody>
+				</table>
 			</div>
 		</div>
 		<?php

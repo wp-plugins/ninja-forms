@@ -18,7 +18,19 @@ function ninja_forms_register_filter_email_add_fields(){
 
 function ninja_forms_filter_email_add_fields( $message ){
 	global $ninja_forms_processing, $ninja_forms_fields;
-	$all_fields = $ninja_forms_processing->get_all_fields();
+	$form_id = $ninja_forms_processing->get_form_ID();
+	$all_fields = ninja_forms_get_fields_by_form_id( $form_id );
+	//$all_fields = $ninja_forms_processing->get_all_fields();
+	$tmp_array = array();
+	if( is_array( $all_fields ) ){
+		foreach( $all_fields as $field ){
+			if( $ninja_forms_processing->get_field_value( $field['id'] ) ){
+				$tmp_array[$field['id']] = $ninja_forms_processing->get_field_value( $field['id'] );
+			}
+		}		
+	}
+	$all_fields = $tmp_array;
+
 	$email_type = $ninja_forms_processing->get_form_setting( 'email_type' );
 	if(is_array($all_fields) AND !empty($all_fields)){
 		if($email_type == 'html'){

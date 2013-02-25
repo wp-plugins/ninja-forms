@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms
 Plugin URI: http://ninjaforms.com
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 2.0.8
+Version: 2.0.9
 Author: The WP Ninjas
 Author URI: http://wpninjas.net
 */
@@ -50,7 +50,7 @@ global $wpdb, $wp_version;
 
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/ninja-forms");
 define("NINJA_FORMS_URL", plugins_url()."/ninja-forms");
-define("NINJA_FORMS_VERSION", "2.0.8");
+define("NINJA_FORMS_VERSION", "2.0.9");
 define("NINJA_FORMS_TABLE_NAME", $wpdb->prefix . "ninja_forms");
 define("NINJA_FORMS_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fields");
 define("NINJA_FORMS_FAV_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fav_fields");
@@ -204,6 +204,8 @@ require_once(NINJA_FORMS_DIR."/includes/admin/pages/ninja-forms-impexp/tabs/impe
 /* View Submissions */
 require_once(NINJA_FORMS_DIR."/includes/admin/pages/ninja-forms-subs/tabs/view-subs/view-subs.php");
 require_once(NINJA_FORMS_DIR."/includes/admin/pages/ninja-forms-subs/tabs/view-subs/fields-pre-process.php");
+require_once(NINJA_FORMS_DIR."/includes/admin/pages/ninja-forms-subs/tabs/view-subs/fields-process.php");
+require_once(NINJA_FORMS_DIR."/includes/admin/pages/ninja-forms-subs/tabs/view-subs/fields-post-process.php");
 require_once(NINJA_FORMS_DIR."/includes/admin/pages/ninja-forms-subs/tabs/view-subs/sidebars/select-subs.php");
 
 /* * * ninja-forms-addons - Addons Manager Page

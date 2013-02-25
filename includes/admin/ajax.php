@@ -8,8 +8,8 @@ function ninja_forms_save_metabox_state(){
 	$state = $_REQUEST['state'];
 	$plugin_settings['metabox_state'][$page][$tab][$slug] = $state;
 	update_option( 'ninja_forms_settings', $plugin_settings );
-	$plugin_settings = get_option( 'ninja_forms_settings' );
-	echo "SETTING: ".$plugin_settings['metabox_state'][$page][$tab][$slug];
+	//$plugin_settings = get_option( 'ninja_forms_settings' );
+	//echo "SETTING: ".$plugin_settings['metabox_state'][$page][$tab][$slug];
 	die();
 }
 

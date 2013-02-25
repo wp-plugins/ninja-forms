@@ -166,7 +166,7 @@ function ninja_forms_toggle_login_register(form_type, form_id) {
 
 function ninja_forms_get_form_id(element){
 	var form_id = jQuery(element).closest('form').prop("id");
-	if(form_id == ''){
+	if(form_id == '' || form_id == 'ninja_forms_admin'){
 		form_id = jQuery("#_form_id").val();
 	}
 	return form_id;
