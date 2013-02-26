@@ -23,6 +23,8 @@ Ninja Forms is a full-featured form building solution for WordPress. It allows y
 
 = In addition to these features, extensions are available at our website: [Ninja Forms Extensions](http://wpninjas.com/downloads/category/ninja-forms/) =
 
+* For the month of February, get 20% off when you purchase 4 or more Ninja Forms extensions!
+
 * [File Uploads](http://wpninjas.com/downloads/file-uploads/) - Allow users to upload files and store those files within a searchable database.
 * [Multi-Part Forms](http://wpninjas.com/downloads/multi-part-forms/) - Break up those long, complex forms into multiple pages.
 * [Save User Progress](http://wpninjas.com/downloads/save-user-progress/) - Let your users save their progress and return later to finish filling out the form.
