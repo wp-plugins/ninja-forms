@@ -4,7 +4,7 @@ Donate link: http://wpninjas.com
 Tags: form, forms
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 2.0.9
+Stable tag: 2.1.0
 License: GPLv2 or later
 
 == Description ==
@@ -22,8 +22,6 @@ Ninja Forms is a full-featured form building solution for WordPress. It allows y
 * Extremely developer friendly.
 
 = In addition to these features, extensions are available at our website: [Ninja Forms Extensions](http://wpninjas.com/downloads/category/ninja-forms/) =
-
-* For the month of February, get 20% off when you purchase 4 or more Ninja Forms extensions!
 
 * [File Uploads](http://wpninjas.com/downloads/file-uploads/) - Allow users to upload files and store those files within a searchable database.
 * [Multi-Part Forms](http://wpninjas.com/downloads/multi-part-forms/) - Break up those long, complex forms into multiple pages.
@@ -57,13 +55,23 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 = 2.0.9 =
 
-Mostly bugfixes. Check the changelog for specifics.
+* A new feature and a change to submission saving. Check the changelog for specifics.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.1.0 =
+
+*Features:*
+
+* Added an option to the "textbox" field type so that the "From Name" of a form submission email can be set as well as the "From Email."
+	
+*Changes:*
+
+* $ninja_forms_processing->get_form_setting('sub_id') will now populate with the ID of the submission after it has been inserted into the database.
 
 = 2.0.9 =
 

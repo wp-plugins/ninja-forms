@@ -26,6 +26,11 @@ function ninja_forms_register_field_textbox(){
 				'type' => 'checkbox',
 				'name' => 'from_email',
 				'label' => __( 'Use this as the "From" email address for Administrative recepients of this form?', 'ninja-forms' ),
+			),			
+			array(
+				'type' => 'checkbox',
+				'name' => 'from_name',
+				'label' => __( 'Use this as the "From" email name for Administrative recepients of this form?', 'ninja-forms' ),
 			),
 		),
 		'display_function' => 'ninja_forms_field_text_display',
@@ -235,8 +240,20 @@ function ninja_forms_field_text_pre_process( $field_id, $user_value ){
     		$ninja_forms_processing->add_error( 'email-'.$field_id, $invalid_email, $field_id );
 		}
 	}
+
 	if( isset( $data['from_email'] ) AND $data['from_email'] == 1 ){
 		$user_value = $ninja_forms_processing->get_field_value( $field_id );
 		$ninja_forms_processing->update_form_setting( 'admin_email_from', $user_value );
+	}	
+
+	if( isset( $data['from_name'] ) AND $data['from_name'] == 1 ){
+		$user_value = $ninja_forms_processing->get_field_value( $field_id );
+		if( $ninja_forms_processing->get_form_setting( 'admin_email_name' ) ){
+			$admin_email_name = $ninja_forms_processing->get_form_setting( 'admin_email_name' );
+			$admin_email_name .= " ".$user_value;
+		}else{
+			$admin_email_name = $user_value;
+		}
+		$ninja_forms_processing->update_form_setting( 'admin_email_name', $admin_email_name );
 	}
 }

@@ -450,8 +450,9 @@ jQuery(document).ready(function($) {
 			$("#mask_label_" + id).hide();
 			$("#ninja_forms_field_" + id + "_datepicker").prop("checked", false);
 		}
-	});
-	
+	});		
+
+
 	/* List Field JS */
 
 	//Collapse List Options.
@@ -595,6 +596,18 @@ jQuery(document).ready(function($) {
 			}
 		});
 		
+	});
+
+	$(".ninja-forms-hidden-default-value").live("change", function(){
+		var field_id = $(this).attr("rel");
+		if( this.value == 'custom' ){
+			$("#ninja_forms_field_" + field_id + "_default_value").val("");
+			$("#default_value_label_" + field_id).show();
+			$("#ninja_forms_field_" + field_id + "_default_value").focus();
+		}else{
+			$("#ninja_forms_field_" + field_id + "_default_value").val(this.value);
+			$("#default_value_label_" + field_id).hide();
+		}
 	});
 	
 	/* * * End Field Specific JS * * */

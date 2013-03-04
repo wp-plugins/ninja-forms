@@ -35,7 +35,6 @@ function ninja_forms_add_menu(){
 	add_action( 'load-' . $import, 'ninja_forms_load_screen_options_tab' );
 	add_action( 'load-' . $subs, 'ninja_forms_load_screen_options_tab' );
 	add_action( 'load-' . $extend, 'ninja_forms_load_screen_options_tab' );
-
 }
 
 function ninja_forms_admin(){

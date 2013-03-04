@@ -44,7 +44,7 @@ function ninja_forms_field_hidden_edit($field_id, $data){
 	<p class="description description-thin">
 		<label for="">
 			<?php _e( 'Default Value' , 'ninja-forms'); ?><br />
-			<select id="default_value_<?php echo $field_id;?>" name="" class="widefat ninja-forms-hidden-default-value">
+			<select id="default_value_<?php echo $field_id;?>" name="" class="widefat ninja-forms-hidden-default-value" rel="<?php echo $field_id;?>">
 				<option value="" <?php if($default_value == 'none' OR $default_value == ''){ echo 'selected'; $custom = 'no';}?>><?php _e('None', 'ninja-forms'); ?></option>
 				<option value="user_firstname" <?php if($default_value == 'user_firstname'){ echo 'selected'; $custom = 'no';}?>><?php _e('User Firstname (If logged in)', 'ninja-forms'); ?></option>
 				<option value="user_lastname" <?php if($default_value == 'user_lastname'){ echo 'selected'; $custom = 'no';}?>><?php _e('User Lastname (If logged in)', 'ninja-forms'); ?></option>
@@ -55,8 +55,8 @@ function ninja_forms_field_hidden_edit($field_id, $data){
 	</p>
 	<p class="description description-thin">
 		<label for="" id="default_value_label_<?php echo $field_id;?>" style="<?php if($custom == 'no'){ echo 'display:none;';}?>">
-			<?php _e( 'Default Value' , 'ninja-forms'); ?><br />
-			<input type="hidden" class="widefat code" name="ninja_forms_field_<?php echo $field_id;?>[default_value]" id="ninja_forms_field_<?php echo $field_id;?>_default_value" value="<?php echo $default_value;?>" />
+			<?php _e( 'Custom Default Value' , 'ninja-forms'); ?><br />
+			<input type="text" class="widefat code" name="ninja_forms_field_<?php echo $field_id;?>[default_value]" id="ninja_forms_field_<?php echo $field_id;?>_default_value" value="<?php echo $default_value;?>" />
 		</label>
 	</p>
 	
