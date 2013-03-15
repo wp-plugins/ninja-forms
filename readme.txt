@@ -23,8 +23,11 @@ Ninja Forms is a full-featured form building solution for WordPress. It allows y
 
 = In addition to these features, extensions are available at our website: [Ninja Forms Extensions](http://wpninjas.com/downloads/category/ninja-forms/) =
 
-* For the month of February, get 20% off when you purchase 4 or more Ninja Forms extensions!
+* For the month of March, WP Ninjas is donating 10% of our total plugin sales to the March of Dimes.
+* If that's not enough, you can also get 20% off when you purchase 4 or more Ninja Forms extensions!
+* You can find more information about both of those at our [blog](http://wpninjas.com/buy-extensions-help-babies-save-money/).
 
+* [Front-End Editor](http://wpninjas.com/downloads/front-end-editor/) - Give your users the ability to create, edit, or delete posts, pages, or any custom post type and allow your users to edit their Ninja Forms submissions all from the front-end. Also included is front-end profile editing, custom registration forms, login and password resetting, all without needing to see the default, WordPress branded login page.
 * [File Uploads](http://wpninjas.com/downloads/file-uploads/) - Allow users to upload files and store those files within a searchable database.
 * [Multi-Part Forms](http://wpninjas.com/downloads/multi-part-forms/) - Break up those long, complex forms into multiple pages.
 * [Save User Progress](http://wpninjas.com/downloads/save-user-progress/) - Let your users save their progress and return later to finish filling out the form.
