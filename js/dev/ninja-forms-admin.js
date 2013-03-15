@@ -483,9 +483,8 @@ jQuery(document).ready(function($) {
 		}
 	});
 	
-	/*
-	Make List Options sortable
-	*/
+	//Make List Options sortable
+	
 	$(".ninja-forms-field-list-options").sortable({
 		helper: 'clone',
 		handle: '.ninja-forms-drag',
@@ -607,6 +606,16 @@ jQuery(document).ready(function($) {
 		}else{
 			$("#ninja_forms_field_" + field_id + "_default_value").val(this.value);
 			$("#default_value_label_" + field_id).hide();
+		}
+	});
+
+	/* Password Field JS */
+
+	$(".ninja-forms-_profile_pass-reg_password").live("change", function(){
+		if( this.checked ){
+			$(".reg-password").parent().parent().show();
+		}else{
+			$(".reg-password").parent().parent().hide();
 		}
 	});
 	

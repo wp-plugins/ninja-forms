@@ -246,8 +246,10 @@ function ninja_forms_field_list_display($field_id, $data){
 					if($list_show_value == 0){
 						$value = $label;
 					}
-					
+
 					if($selected_value == $value){
+						$selected = 'selected';
+					}else if( $selected_value == '' AND isset( $option['selected'] ) AND $option['selected'] == 1 ){
 						$selected = 'selected';
 					}else{
 						$selected = '';
@@ -295,6 +297,8 @@ function ninja_forms_field_list_display($field_id, $data){
 				
 				if($selected_value == $value){
 					$selected = 'checked';
+				}else if( $selected_value == '' AND isset( $option['selected'] ) AND $option['selected'] == 1 ){
+					$selected = 'checked';
 				}else{
 					$selected = '';
 				}
@@ -333,14 +337,20 @@ function ninja_forms_field_list_display($field_id, $data){
 					$value = $label;
 				}
 
+				if( isset( $option['selected'] ) AND $option['selected'] == 1 ){
+					$checked = 'checked';
+				}	
+
 				if( is_array( $selected_value ) AND in_array($value, $selected_value) ){
 					$checked = 'checked';
 				}else if($selected_value == $value){
 					$checked = 'checked';
+				}else if( $selected_value == '' AND isset( $option['selected'] ) AND $option['selected'] == 1 ){
+					$checked = 'checked';					
 				}else{
 					$checked = '';
 				}
-				
+					
 				?><li><label id="ninja_forms_field_<?php echo $field_id;?>_<?php echo $x;?>_label" class="ninja-forms-field-<?php echo $field_id;?>-options" style="<?php echo $display_style;?>"><input id="ninja_forms_field_<?php echo $field_id;?>_<?php echo $x;?>" name="ninja_forms_field_<?php echo $field_id;?>[]" type="checkbox" class="<?php echo $field_class;?> ninja_forms_field_<?php echo $field_id;?>" value="<?php echo $value;?>" <?php echo $checked;?> rel="<?php echo $field_id;?>"/><?php echo $label;?></label></li><?php
 				$x++;
 			}
@@ -383,6 +393,8 @@ function ninja_forms_field_list_display($field_id, $data){
 					}
 
 					if(is_array($selected_value) AND in_array($value, $selected_value)){
+						$selected = 'selected';
+					}else if( $selected_value == '' AND isset( $option['selected'] ) AND $option['selected'] == 1 ){
 						$selected = 'selected';
 					}else{
 						$selected = '';

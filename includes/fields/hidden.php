@@ -112,11 +112,7 @@ function ninja_forms_field_hidden_save(){
 }
 
 function ninja_forms_field_hidden_display($field_id, $data){
-	if(isset($data['show_field'])){
-		$show_field = $data['show_field'];		
-	}else{
-		$show_field = true;
-	}
+	global $current_user;
 
 	$field_class = ninja_forms_get_field_class($field_id);
 	if(isset($data['default_value'])){
@@ -124,10 +120,29 @@ function ninja_forms_field_hidden_display($field_id, $data){
 	}else{
 		$default_value = '';
 	}
+
+	get_currentuserinfo();
+	$user_ID = $current_user->ID;
+	$user_firstname = $current_user->user_firstname;
+    $user_lastname = $current_user->user_lastname;
+    $user_email = $current_user->user_email;
+
+	switch( $default_value ){
+		case 'user_firstname':
+			$default_value = $user_firstname;
+			break;
+		case 'user_lastname':
+			$default_value = $user_lastname;
+			break;
+		case 'user_email':
+			$default_value = $user_email;
+			break;
+	}
 	
 	if(isset($_POST['ninja_forms_field_'.$field_id])){
 		$default_value = $_POST['ninja_forms_field_'.$field_id];
 	}
+
 	?>
 	<input id="ninja_forms_field_<?php echo $field_id;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="hidden" class="<?php echo $field_class;?>" value="<?php echo $default_value;?>" rel="<?php echo $field_id;?>" />
 	<?php

@@ -216,6 +216,18 @@ class Ninja_Forms_Processing {
 		}else{
 			return $this->data['user_ID'];			
 		}
+	}		
+
+	/**
+	 * Set the User ID of the form currently being processed.
+	 *
+	 */
+	function set_user_ID( $user_id ) {
+		if ( empty($this->data) ){
+			return false;
+		}else{
+			return $this->data['user_ID'] = $user_id;			
+		}
 	}	
 
 	/**

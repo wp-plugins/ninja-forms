@@ -1,6 +1,6 @@
 <?php
 /**
- * Adds Foo_Widget widget.
+ * Adds Ninja Forms widget.
  */
 class Ninja_Forms_Widget extends WP_Widget {
 

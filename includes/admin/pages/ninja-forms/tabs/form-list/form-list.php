@@ -206,7 +206,6 @@ function ninja_forms_tab_form_list($form_id, $data){
 }
 
 function ninja_forms_save_form_list( $data ){
-	global $ninja_forms_admin_update_message;
 	if( isset( $data['bulk_action'] ) AND $data['bulk_action'] != '' ){
 		if( isset( $data['form_ids'] ) AND is_array( $data['form_ids'] ) AND !empty( $data['form_ids'] ) ){
 			foreach( $data['form_ids'] as $form_id ){
@@ -215,9 +214,9 @@ function ninja_forms_save_form_list( $data ){
 						ninja_forms_delete_form( $form_id );
 						$ninja_forms_admin_update_message = count( $data['form_ids'] ).' ';
 						if( count( $data['form_ids'] ) > 1 ){
-							$ninja_forms_admin_update_message .= __( 'Forms Deleted', 'ninja-forms' );
+							$update_message = __( 'Forms Deleted', 'ninja-forms' );
 						}else{
-							$ninja_forms_admin_update_message .= __( 'Form Deleted', 'ninja-forms' );
+							$update_message = __( 'Form Deleted', 'ninja-forms' );
 						}
 						break;
 					case 'export':
@@ -226,5 +225,6 @@ function ninja_forms_save_form_list( $data ){
 				}
 			}
 		}
+		return $update_message;
 	}
 }

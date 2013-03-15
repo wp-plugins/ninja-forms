@@ -41,8 +41,11 @@ function ninja_forms_get_form_by_id($form_id){
 	return $form_row;
 }
 
-function ninja_forms_get_all_forms(){
+function ninja_forms_get_all_forms( $debug = false ){
 	global $wpdb;
+	if( isset( $_REQUEST['debug'] ) AND $_REQUEST['debug'] == true ){
+		$debug = true;
+	}
 	$form_results = $wpdb->get_results("SELECT * FROM ".NINJA_FORMS_TABLE_NAME, ARRAY_A);
 	if(is_array($form_results) AND !empty($form_results)){
 		$x = 0;
@@ -51,11 +54,10 @@ function ninja_forms_get_all_forms(){
 			if( isset( $form_results[$x]['data'] ) ){
 				$form_results[$x]['data'] = unserialize($form_results[$x]['data']);
 				if( substr( $form_results[$x]['data']['form_title'], 0, 1 ) == '_' ){
-					if( ( isset( $_REQUEST['debug'] ) AND $_REQUEST['debug'] != true ) OR !isset($_REQUEST['debug'] ) ){
+					if( !$debug ){
 						unset( $form_results[$x] );
 					}
 				}
-				
 			}
 			$x++;
 		}
@@ -64,7 +66,7 @@ function ninja_forms_get_all_forms(){
 	return $form_results;
 }
 
-function ninja_forms_get_form_by_field_id($field_id){
+function ninja_forms_get_form_by_field_id( $field_id ){
 	global $wpdb;
 	$form_id = $wpdb->get_row($wpdb->prepare("SELECT form_id FROM ".NINJA_FORMS_FIELDS_TABLE_NAME." WHERE id = %d", $field_id), ARRAY_A);
 	$form_row = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".NINJA_FORMS_TABLE_NAME." WHERE id = %d", $form_id), ARRAY_A);
@@ -100,6 +102,16 @@ function ninja_forms_get_form_ids_by_post_id( $post_id ){
 	
 	return $form_ids;
 }
+
+function ninja_forms_get_form_by_sub_id( $sub_id ){
+	global $wpdb;
+	$sub_row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM ".NINJA_FORMS_SUBS_TABLE_NAME." WHERE id = %d", $sub_id ), ARRAY_A );
+	$form_id = $sub_row['form_id'];
+	$form_row = ninja_forms_get_form_by_id( $form_id );
+	return $form_row;
+}
+
+// The ninja_forms_delete_form( $form_id ) function is in includes/ajax.php
 
 function ninja_forms_update_form( $args ){
 	global $wpdb;

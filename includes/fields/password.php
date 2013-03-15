@@ -25,17 +25,27 @@ function ninja_forms_register_field_profile_pass(){
 		'pre_process' => 'ninja_forms_field_profile_pass_pre_process',
 		'edit_options' => array(
 			array(
+				'name' => 'reg_password',
+				'type' => 'checkbox',
+				'label' => __( 'Use this as a registration password field', 'ninja-forms' ),
+				'default' => 1,
+				'desc' => '<br>'.__( 'If this box is checked, both password and re-password textboxes will be output.', 'ninja-forms' ),
+				'width' => 'wide',
+			),
+			array(
 				'name' => 're_pass',
 				'type' => 'text',
 				'label' => __( 'Re-enter Password Label', 'ninja-forms' ),
-				'class' => 'widefat',
+				'class' => 'widefat reg-password',
 				'default' => __( 'Re-enter Password', 'ninja-forms' ),
+				'width' => 'wide',
 			),
 			array(
 				'name' => 'adv_pass',
 				'type' => 'checkbox',
 				'label' => __( 'Show Password Strength Indicator', 'ninja-forms' ),
 				'default' => 1,
+				'class' => 'reg-password',
 			),
 		),
 	);
@@ -86,33 +96,46 @@ function ninja_forms_field_profile_pass_display( $field_id, $data ){
 		$default_value_re = $re_pass;
 	}
 
-	?>
-	<input id="pass1_<?php echo $field_id;?>" title="" name="ninja_forms_field_<?php echo $field_id;?>" type="password" class="<?php echo $field_class;?> pass1" value="<?php echo $default_value;?>" rel="<?php echo $field_id;?>" />
-	<br />
-	<?php
-	if( $label_pos == 'left' OR $label_pos == 'above' ){
-		?>
-		<label><?php echo $re_pass;?>
-		<?php
+	if( isset( $data['reg_password'] ) ){
+		$reg_password = $data['reg_password'];
+	}else{
+		$reg_password = 1;
 	}
-	?>
-	<input id="pass2_<?php echo $field_id;?>" title="" name="_pass_<?php echo $field_id;?>" type="password" class="<?php echo $field_class;?> pass2" value="<?php echo $default_value_re;?>" />
-	<?php
-	if( $label_pos == 'right' OR $label_pos == 'below' ){
+
+	if( $reg_password == 1 ){
 		?>
-		<label><?php echo $re_pass;?>
-		<?php
-	}
-	if( $label_pos != 'inside' ){
-		?>
-		</label>
-		<?php
-	}
-	if( $adv_pass == 1 ){
-		?>
+		<input id="pass1_<?php echo $field_id;?>" title="" name="ninja_forms_field_<?php echo $field_id;?>" type="password" class="<?php echo $field_class;?> pass1" value="<?php echo $default_value;?>" rel="<?php echo $field_id;?>" />
 		<br />
-		<div id="pass-strength-result"><?php _e('Strength indicator'); ?></div>
-			<p class="description indicator-hint"><?php _e('Hint: The password should be at least seven characters long. To make it stronger, use upper and lower case letters, numbers and symbols like ! " ? $ % ^ &amp; ).'); ?></p>
+		<?php
+		if( $label_pos == 'left' OR $label_pos == 'above' ){
+			?>
+			<label><?php echo $re_pass;?>
+			<?php
+		}
+		?>
+		<input id="pass2_<?php echo $field_id;?>" title="" name="_pass_<?php echo $field_id;?>" type="password" class="<?php echo $field_class;?> pass2" value="<?php echo $default_value_re;?>" />
+		<?php
+		if( $label_pos == 'right' OR $label_pos == 'below' ){
+			?>
+			<label><?php echo $re_pass;?>
+			<?php
+		}
+		if( $label_pos != 'inside' ){
+			?>
+			</label>
+			<?php
+		}
+		if( $adv_pass == 1 ){
+			?>
+			<br />
+			<div id="pass-strength-result"><?php _e('Strength indicator'); ?></div>
+				<p class="description indicator-hint"><?php _e('Hint: The password should be at least seven characters long. To make it stronger, use upper and lower case letters, numbers and symbols like ! " ? $ % ^ &amp; ).'); ?></p>
+			<?php
+		}
+
+	}else{
+		?>
+		<input id="ninja_forms_field_<?php echo $field_id;?>" title="" name="ninja_forms_field_<?php echo $field_id;?>" type="password" class="<?php echo $field_class;?>" value="<?php echo $default_value;?>" rel="<?php echo $field_id;?>" />
 		<?php
 	}
 }
@@ -120,9 +143,13 @@ function ninja_forms_field_profile_pass_display( $field_id, $data ){
 function ninja_forms_field_profile_pass_pre_process( $field_id, $user_value ){
 	global $ninja_forms_processing;
 
-	if( $user_value != $ninja_forms_processing->get_extra_value( '_pass_'.$field_id ) ){
-		$ninja_forms_processing->add_error( 'mismatch-'.$field_id, __( 'Passwords do not match', 'ninja-forms' ), $field_id );
-	}else{
-		$ninja_forms_processing->update_extra_value( '_password', $user_value );
+	$field_row = $ninja_forms_processing->get_field_settings( $field_id );
+	$field_data = $field_row['data'];
+	if( isset( $field_data['reg_password'] ) AND $field_data['reg_password'] == 1 ){
+		if( $user_value != $ninja_forms_processing->get_extra_value( '_pass_'.$field_id ) ){
+			$ninja_forms_processing->add_error( 'mismatch-'.$field_id, __( 'Passwords do not match', 'ninja-forms' ), $field_id );
+		}else{
+			$ninja_forms_processing->update_extra_value( '_password', $user_value );
+		}
 	}
 }

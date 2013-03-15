@@ -45,10 +45,12 @@ function ninja_forms_save_sub(){
 	
 		if($sub_id != ''){
 			$args['sub_id'] = $sub_id;
-			ninja_forms_update_sub($args);	
+			ninja_forms_update_sub($args);
+			do_action( 'ninja_forms_update_sub', $sub_id );
 		}else{
 			$sub_id = ninja_forms_insert_sub( $args );
 			$ninja_forms_processing->update_form_setting( 'sub_id', $sub_id );
+			do_action( 'ninja_forms_insert_sub', $sub_id );
 		}
 	}
 }

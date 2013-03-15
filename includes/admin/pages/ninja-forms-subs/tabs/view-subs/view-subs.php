@@ -453,11 +453,18 @@ function ninja_forms_edit_sub_save_values(){
 	$user_id = $ninja_forms_processing->get_user_ID();
 
 	$sub_row = ninja_forms_get_sub_by_id( $sub_id );
-	$status = $sub_row['status'];
-
+	if( isset( $sub_row['status'] ) ){
+		$status = $sub_row['status'];
+	}else{
+		$status = '';
+	}
 	
-	$action = $sub_row['action'];
-
+	if( isset( $sub_row['action'] ) ){
+		$action = $sub_row['action'];
+	}else{
+		$action = '';
+	}
+	
 	$field_data = $ninja_forms_processing->get_all_fields();
 	$sub_data = array();
 
@@ -476,7 +483,7 @@ function ninja_forms_edit_sub_save_values(){
 		'sub_id' => $sub_id,
 	);
 
-	$args = apply_filters( 'ninja_forms_edit_sub_args', $args );
+	//$args = apply_filters( 'ninja_forms_edit_sub_args', $args );
 
 	ninja_forms_update_sub($args);
 }

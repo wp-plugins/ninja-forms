@@ -2,6 +2,8 @@
 function ninja_forms_activation(){
 	global $wpdb;
 	
+	wp_schedule_event( time(), 'daily', 'ninja_forms_daily_action' );
+	
 	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 	
 	$plugin_settings = get_option( 'ninja_forms_settings' );

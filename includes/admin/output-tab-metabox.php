@@ -225,6 +225,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 					}
 
 					?>
+					<input type="hidden" name="<?php echo $name;?>" value="">
 					<tr <?php if( $tr_class != '' ){ ?>class="<?php echo $tr_class;?>"<?php } ?>>
 						<th>
 							<?php echo $label;?>
@@ -233,7 +234,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 						if( $select_all ){
 							?>
 							<td>
-								<label for="<?php echo $name;?>_select_all">
+								<label>
 									<input type="checkbox" name="" value="" id="<?php echo $name;?>_select_all" class="ninja-forms-select-all" title="ninja-forms-<?php echo $name;?>">
 								- <?php _e( 'Select All', 'ninja-forms' );?>
 								</label>
@@ -247,7 +248,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 								
 								?>
 								<td>
-									<label for="<?php echo $option_name;?>">
+									<label>
 										<input type="checkbox" class="ninja-forms-<?php echo $name;?> <?php echo $class;?>" name="<?php echo $name;?>[]" value="<?php echo $option_value;?>" <?php checked( in_array( $option_value, $value ) );?> id="<?php echo $option_name;?>">
 										<?php echo $option_name;?>
 									</label>
@@ -270,7 +271,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 										
 									</th>
 									<td>
-										<label for="<?php echo $option_name;?>">
+										<label>
 											<input type="checkbox" class="ninja-forms-<?php echo $name;?> <?php echo $class;?>" name="<?php echo $name;?>[]" value="<?php echo $option_value;?>" <?php checked( in_array( $option_value, $value ) );?> id="<?php echo $option_name;?>">
 											<?php echo $option_name;?>
 										</label>
@@ -386,7 +387,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 
 			if( $desc != '' AND $s['type'] != 'desc' ){
 				?>
-				<tr>
+				<tr class="<?php echo $tr_class;?>">
 					<th>
 						
 					</th>

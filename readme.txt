@@ -4,7 +4,7 @@ Donate link: http://wpninjas.com
 Tags: form, forms
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 License: GPLv2 or later
 
 == Description ==
@@ -22,6 +22,8 @@ Ninja Forms is a full-featured form building solution for WordPress. It allows y
 * Extremely developer friendly.
 
 = In addition to these features, extensions are available at our website: [Ninja Forms Extensions](http://wpninjas.com/downloads/category/ninja-forms/) =
+
+* For the month of February, get 20% off when you purchase 4 or more Ninja Forms extensions!
 
 * [File Uploads](http://wpninjas.com/downloads/file-uploads/) - Allow users to upload files and store those files within a searchable database.
 * [Multi-Part Forms](http://wpninjas.com/downloads/multi-part-forms/) - Break up those long, complex forms into multiple pages.
@@ -53,7 +55,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.0.9 =
+= 2.1.1 =
 
 * A new feature and a change to submission saving. Check the changelog for specifics.
 
@@ -62,6 +64,17 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.1.1 =
+
+*Bugs:*
+
+* Hidden Fields should now always properly assign values if set to "Username," "Firstname," etc.
+
+*Changes:*
+
+* Changed the way that the password field works so that it can be used for both registration and normal password entry.
+* Added a scheduled action hook (ninja_forms_daily_action) that is executed on a daily basis.
 
 = 2.1.0 =
 
