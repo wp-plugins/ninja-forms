@@ -44,9 +44,6 @@ function ninja_forms_display_form_settings($form_id, $data){
 <?php
 }
 
-
-
-
 add_action('init', 'ninja_forms_register_form_settings_basic_metabox');
 function ninja_forms_register_form_settings_basic_metabox(){
 	$pages = get_pages();
@@ -75,7 +72,6 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				'help' => __('', 'ninja-forms'),
 				'default_value' => 1,
 			),			
-			/*
 			array(
 				'name' => 'ajax',
 				'type' => 'checkbox',
@@ -84,7 +80,6 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				'display_function' => '',
 				'help' => __('', 'ninja-forms'),
 			),
-			*/			
 			array(
 				'name' => 'landing_page',
 				'type' => 'select',

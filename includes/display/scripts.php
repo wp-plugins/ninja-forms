@@ -21,7 +21,21 @@ function ninja_forms_display_js($form_id, $local_vars = ''){
 				$ajax = 0;
 			}
 
-			$ninja_forms_js_form_settings[$form_id]['ajax'] = $ajax;
+			if( isset( $form_row['data']['hide_complete'] ) ){
+				$hide_complete = $form_row['data']['hide_complete'];
+			}else{
+				$hide_complete = 0;
+			}
+			
+			if( isset( $form_row['data']['clear_complete'] ) ){
+				$clear_complete = $form_row['data']['clear_complete'];
+			}else{
+				$clear_complete = 0;
+			}
+
+			$ninja_forms_js_form_settings['ajax'] = $ajax;
+			$ninja_forms_js_form_settings['hide_complete'] = $hide_complete;
+			$ninja_forms_js_form_settings['clear_complete'] = $clear_complete;
 
 			//if(count($ninja_forms_js_form_settings) == count($form_ids)){
 
@@ -34,19 +48,9 @@ function ninja_forms_display_js($form_id, $local_vars = ''){
 
 				$date_format = ninja_forms_date_to_datepicker($date_format);
 				$currency_symbol = $plugin_settings['currency_symbol'];
-				if( isset( $form_row['data']['hide_complete'] ) ){
-					$hide_complete = $form_row['data']['hide_complete'];
-				}else{
-					$hide_complete = 0;
-				}
-				if( isset( $form_row['data']['clear_complete'] ) ){
-					$clear_complete = $form_row['data']['clear_complete'];
-				}else{
-					$clear_complete = 0;
-				}
 
 				$password_mismatch = esc_html(stripslashes($plugin_settings['password_mismatch']));
-
+				$msg_format = $plugin_settings['msg_format'];
 				wp_enqueue_script( 'jquery-maskedinput',
 					NINJA_FORMS_URL .'/js/min/jquery.maskedinput.min.js',
 					array( 'jquery' ) );
@@ -64,11 +68,11 @@ function ninja_forms_display_js($form_id, $local_vars = ''){
 				array( 'jquery', 'jquery-ui-dialog', 'jquery-ui-datepicker', 'jquery-form' ) );
 
 				if( !isset( $ninja_forms_display_localize_js ) OR !$ninja_forms_display_localize_js ){
-					wp_localize_script( 'ninja-forms-display', 'ninja_forms_settings', array('password_mismatch' => $password_mismatch, 'clear_complete' => $clear_complete, 'hide_complete' => $hide_complete, 'plugin_url' => NINJA_FORMS_URL, 'date_format' => $date_format, 'currency_symbol' => $currency_symbol ) );
+					wp_localize_script( 'ninja-forms-display', 'ninja_forms_settings', array('ajax_msg_format' => $msg_format, 'password_mismatch' => $password_mismatch, 'plugin_url' => NINJA_FORMS_URL, 'date_format' => $date_format, 'currency_symbol' => $currency_symbol ) );
 					$ninja_forms_display_localize_js = true;
 				}
 
-				wp_localize_script( 'ninja-forms-display', 'ninja_forms_form_'.$form_id.'_settings', array('form_settings' => $ninja_forms_js_form_settings ) );
+				wp_localize_script( 'ninja-forms-display', 'ninja_forms_form_'.$form_id.'_settings', $ninja_forms_js_form_settings );
 				
 				wp_localize_script( 'ninja-forms-display', 'ninja_forms_password_strength', array(
 					'empty' => __('Strength indicator'),

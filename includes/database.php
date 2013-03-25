@@ -288,7 +288,7 @@ function ninja_forms_get_subs($args = array()){
 		unset($args['limit']);
 	}
 
-	$subs_results = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".NINJA_FORMS_SUBS_TABLE_NAME." WHERE ".$where.$limit, NINJA_FORMS_SUBS_TABLE_NAME), ARRAY_A);
+	$subs_results = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".NINJA_FORMS_SUBS_TABLE_NAME." WHERE ".$where." ORDER BY `date_updated` DESC ".$limit, NINJA_FORMS_SUBS_TABLE_NAME), ARRAY_A);
 	
 	if(is_array($subs_results) AND !empty($subs_results)){
 		$x = 0;

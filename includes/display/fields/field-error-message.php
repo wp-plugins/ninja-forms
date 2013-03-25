@@ -13,19 +13,21 @@ function ninja_forms_display_field_processing_error( $field_id ){
 	if( is_object( $ninja_forms_processing)){
 		//print_r( $ninja_forms_processing );
 		$field_errors = $ninja_forms_processing->get_errors_by_location($field_id);
+		$style = '';
 	}else{
 		$field_errors = '';
+		$style = 'display:none';
 	}
-	
+		
+	?>
+	<div id="ninja_forms_field_<?php echo $field_id;?>_error" style="<?php echo $style;?>" class="ninja-forms-field-error">
+	<?php
 	if(is_array($field_errors)){
-		?>
-		<div id="ninja_forms_field_<?php echo $field_id;?>_error">
-		<?php
 		foreach($field_errors as $error){
 			echo '<p>'.$error['msg'].'</p>';
 		}
-		?>
-		</div>
-		<?php		
 	}
+	?>
+	</div>
+	<?php		
 }

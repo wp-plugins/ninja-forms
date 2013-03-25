@@ -28,8 +28,13 @@ function ninja_forms_add_custom_box() {
 /* Prints the box content */
 function ninja_forms_inner_custom_box() {
 	global $wpdb;
-	$post_id = esc_html( $_REQUEST['post'] );
 
+	if( isset( $_REQUEST['post'] ) ){
+		$post_id = esc_html( $_REQUEST['post'] );
+	}else{
+		$post_id = '';
+	}
+	
 	// Use nonce for verification
 	wp_nonce_field( plugin_basename(__FILE__), 'ninja_forms_nonce' );
 

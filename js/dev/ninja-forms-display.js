@@ -1,5 +1,10 @@
 jQuery(document).ready(function(jQuery) {
-	
+	// Initiate our response function list variable.
+	window['ninja_forms_response_function_list'] = {};	
+
+	// Initiate our beforeSubmit function list variable.
+	window['ninja_forms_before_submit_function_list'] = {};
+
 	jQuery(".ninja-forms-form input").bind("keypress", function(e) {
 		if (e.keyCode == 13) {
 			var type = jQuery(this).attr("type");
@@ -52,73 +57,26 @@ jQuery(document).ready(function(jQuery) {
 
 
 	/* * * Begin ajaxForms JS * * */
-	/*
+	
 	jQuery(".ninja-forms-form").each(function(){
 		var form_id = this.id.replace("ninja_forms_form_", "");
-		var ajax = ninja_forms_settings.form_settings[form_id].ajax;
+		var settings = window['ninja_forms_form_' + form_id + '_settings'];
+		ajax = settings.ajax
 		if(ajax == 1){
 			var options = { 
 			beforeSubmit:  ninja_forms_before_submit, 
 			success:       ninja_forms_response,
 			};
 			jQuery(this).ajaxForm(options);
+
+			// Add our default response handler if "custom" hasn't been selected.
+			ninja_forms_register_response_function( form_id, 'ninja_forms_default_response' );
+
+			// Add our default beforeSubmit handler if "custom" hasn't been selected.
+			ninja_forms_register_before_submit_function( form_id, 'ninja_forms_default_before_submit' );
 		}
 	});
 
-	function ninja_forms_before_submit(formData, jqForm, options){
-		var form_id = formData[1].value;
-		jQuery("#ninja_forms_form_" + form_id + "_process_msg").show();		
-	}
-	
-	function ninja_forms_response(responseText, statusText, xhr, jQueryform){
-		alert(responseText);
-		var data = jQuery.parseJSON(responseText);
-		var form_id = data.form_id;
-		var hide_complete = ninja_forms_settings.hide_complete;
-		var clear_complete = ninja_forms_settings.clear_complete;
-		
-		jQuery("#ninja_forms_form_" + form_id + "_process_msg").hide();
-		
-		jQuery("#ninja_forms_form_" + form_id + " .ninja-forms-field").each(function(){
-			jQuery("#" + this.id + "_error").prop("innerHTML", "");
-			jQuery(this).parent().removeClass("ninja-forms-error");
-		});
-		
-		jQuery("#ninja_forms_form_" + form_id + "_response_msg").prop("innerHTML", "");
-		
-		if(typeof(data.error) !== 'undefined'){
-			for(i in data.error){
-				var error_msg = ninja_forms_html_decode(data.error[i].msg);
-				if(typeof(data.error[i].field_id) != 'undefined'){
-					jQuery("#ninja_forms_field_" + data.error[i].field_id).parent().addClass("ninja-forms-error");
-					jQuery("#ninja_forms_field_" + data.error[i].field_id + "_error").prop("innerHTML", error_msg);
-				}
-				if(typeof(data.error[i].element_id) != 'undefined'){
-				
-				}
-				if(typeof(data.error[i].response_msg) != 'undefined'){
-					//jQuery("#ninja_forms_form_" + form_id + "_response_msg").prop("innerHTML", error_msg);
-					jQuery("#ninja_forms_form_" + form_id + "_response_msg").append("<p>" + error_msg + "<p>");
-				}
-			}		
-		}
-		if(typeof(data.success) !== 'undefined'){
-			for(i in data.success){
-				var success_msg = ninja_forms_html_decode(data.success[i].msg);
-				jQuery("#ninja_forms_form_" + form_id + "_response_msg").append(success_msg);
-			}
-			
-			if(clear_complete == 1){
-				jQuery("#ninja_forms_form_" + form_id).resetForm();
-			}
-			
-			if(hide_complete == 1){
-				jQuery("#ninja_forms_form_" + form_id + "_wrap").hide();
-			}
-			
-		}
-	}
-	
 	/* * * End ajaxForm JS * * */
 	
 	jQuery('.pass1').val('').keyup( function(){
@@ -135,6 +93,120 @@ jQuery(document).ready(function(jQuery) {
 	});
 
 }); //End document.ready
+
+function ninja_forms_before_submit(formData, jqForm, options){
+	var form_id = formData[1].value;
+	var result = true;
+	for( var name in window['ninja_forms_before_submit_function_list'][form_id] ){
+		var function_name = window['ninja_forms_before_submit_function_list'][form_id][name];
+		if( result ){
+			result = window[function_name](formData, jqForm, options);
+		}
+	}
+}
+
+function ninja_forms_response(responseText, statusText, xhr, jQueryform){
+	//alert(responseText);
+	if( ninja_forms_settings.ajax_msg_format == 'inline' ){
+		var response = jQuery.parseJSON( responseText );
+		var form_id = response.form_id;
+		var result = true;
+		for( var name in window['ninja_forms_response_function_list'][form_id] ){
+			var function_name = window['ninja_forms_response_function_list'][form_id][name];
+			if( result ){
+				result = window[function_name](response);
+			}
+		}
+	}
+}
+
+function ninja_forms_default_before_submit(formData, jqForm, options){
+	var form_id = formData[1].value;
+
+	// Show the ajax spinner and processing message.
+	jQuery("#ninja_forms_form_" + form_id + "_process_msg").show();
+	jQuery("#ninja_forms_form_" + form_id + "_response_msg").prop("innerHTML", "");
+	jQuery("#ninja_forms_form_" + form_id + "_response_msg").removeClass("ninja-forms-error-msg");
+	jQuery("#ninja_forms_form_" + form_id + "_response_msg").removeClass("ninja-forms-success-msg");
+	jQuery(".ninja-forms-field-error").prop("innerHTML", "");
+	jQuery(".ninja-forms-error").removeClass("ninja-forms-error");
+	return true;
+}
+
+function ninja_forms_default_response(response){
+	var form_id = response.form_id;
+
+	jQuery("#ninja_forms_form_" + form_id + "_process_msg").hide();
+
+	ninja_forms_update_error_msgs(response)
+	ninja_forms_update_success_msg(response)
+	return true;
+}
+
+function ninja_forms_register_response_function(form_id, name){
+	if( typeof window['ninja_forms_response_function_list'][form_id] == 'undefined' ){
+		window['ninja_forms_response_function_list'][form_id] = {};
+	}
+	window['ninja_forms_response_function_list'][form_id][name] = name;
+}
+
+function ninja_forms_register_before_submit_function(form_id, name){
+	if( typeof window['ninja_forms_before_submit_function_list'][form_id] == 'undefined' ){
+		window['ninja_forms_before_submit_function_list'][form_id] = {};
+	}
+	window['ninja_forms_before_submit_function_list'][form_id][name] = name;
+}
+
+function ninja_forms_update_success_msg(response){
+	var innerHTML = '';
+	var form_id = response.form_id;
+	var success = response.success;
+	var form_settings = response.form_settings;
+	var hide_complete = form_settings.hide_complete;
+	var clear_complete = form_settings.clear_complete;
+
+	if(success != false){
+		for( var propName in success ){
+			innerHTML += '<p>' + success[propName] + '</p>';
+		}
+		if(innerHTML != ''){
+			jQuery("#ninja_forms_form_" + form_id + "_response_msg").removeClass("ninja-forms-error-msg")
+			jQuery("#ninja_forms_form_" + form_id + "_response_msg").addClass("ninja-forms-success-msg")
+			jQuery("#ninja_forms_form_" + form_id + "_response_msg").prop("innerHTML", innerHTML);				
+		}
+		if(hide_complete == 1 ){
+			jQuery("#ninja_forms_form_" + form_id ).hide();
+		}
+		if(clear_complete == 1 ){
+			jQuery("#ninja_forms_form_" + form_id ).resetForm();
+		}
+	}
+}
+
+function ninja_forms_update_error_msgs(response){
+	var innerHTML = '';
+	var form_id = response.form_id;
+	var errors = response.errors;
+	var form_id = response.form_id;
+	if(errors != false){
+		for( var propName in errors ){
+			if(errors[propName]['location'] == 'general' ){
+	    		innerHTML += '<p>' + errors[propName]['msg'] + '</p>';
+	    	}else{
+	    		var field_id = errors[propName]['location'];
+	    		jQuery("#ninja_forms_field_" + field_id + "_error").show();
+	    		jQuery("#ninja_forms_field_" + field_id + "_error").prop("innerHTML", errors[propName]['msg']);
+	    		jQuery("#ninja_forms_field_" + field_id + "_div_wrap").addClass("ninja-forms-error");
+
+	    	}
+		}
+		if(innerHTML != ''){
+			jQuery("#ninja_forms_form_" + form_id + "_response_msg").removeClass("ninja-forms-success-msg")
+			jQuery("#ninja_forms_form_" + form_id + "_response_msg").addClass("ninja-forms-error-msg")
+			jQuery("#ninja_forms_form_" + form_id + "_response_msg").prop("innerHTML", innerHTML);
+		}
+	}
+}
 
 function ninja_forms_html_decode(value) {
 	if (value) {
@@ -166,6 +238,7 @@ function ninja_forms_toggle_login_register(form_type, form_id) {
 
 function ninja_forms_get_form_id(element){
 	var form_id = jQuery(element).closest('form').prop("id");
+	form_id = form_id.replace("ninja_forms_form_", "");
 	if(form_id == '' || form_id == 'ninja_forms_admin'){
 		form_id = jQuery("#_form_id").val();
 	}

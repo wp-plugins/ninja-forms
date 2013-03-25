@@ -4,7 +4,7 @@ Donate link: http://wpninjas.com
 Tags: form, forms
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 License: GPLv2 or later
 
 == Description ==
@@ -20,6 +20,7 @@ Ninja Forms is a full-featured form building solution for WordPress. It allows y
 * Add a datepicker to text fields.
 * Email form results to any number of pre-determined email addresses, as well as specific messages to the user filling out the form.
 * Extremely developer friendly.
+* Submit your form by reloading the page or asynchronously with AJAX.
 
 = In addition to these features, extensions are available at our website: [Ninja Forms Extensions](http://wpninjas.com/downloads/category/ninja-forms/) =
 
@@ -58,15 +59,27 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.1.1 =
+= 2.1.2 =
 
-* A new feature and a change to submission saving. Check the changelog for specifics.
+* AJAX form submissions have been re-added. Check the changelog for specifics.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.1.2 =
+
+*Features:*
+
+* AJAX submissions have been re-added. Visit the "Basic Settings" metabox underneath the "Form Settings" tab to enable this feature.
+* In the near future, there will be more options and documentation related to this feature.
+
+*Changes:*
+
+* Submissions are now listed from most recent to oldest. A sortable table is in the works.
+* Changed the output of the ninja_forms_get_form_id() JS function to just an ID number.
 
 = 2.1.1 =
 

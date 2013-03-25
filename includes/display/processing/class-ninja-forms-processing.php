@@ -543,7 +543,7 @@ class Ninja_Forms_Processing {
 	 */
 	function get_all_success_msgs() {
 		if(empty($this->data['success']) OR !isset($this->data['success'])){
-			return array();
+			return false;
 		}else{
 			return $this->data['success'];			
 		}

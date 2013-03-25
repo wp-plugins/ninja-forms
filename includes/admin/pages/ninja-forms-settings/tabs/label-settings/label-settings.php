@@ -57,14 +57,12 @@ function ninja_forms_register_label_settings_metabox(){
 				'label' => __( 'Please enter a valid email address', 'ninja-forms' ),
 				'desc' => '',
 			),
-			/*
 			array(
 				'name' => 'process_label',
 				'type' => 'text',
 				'label' => __('Ajax submitting message', 'ninja-forms'),
 				'desc' => __('If your form is submitted via ajax, what message should appear to let users know it is being processed?', 'ninja-forms'),
 			),
-			*/
 		),
 	);
 	ninja_forms_register_tab_metabox($args);

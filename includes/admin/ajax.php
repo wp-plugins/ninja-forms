@@ -486,6 +486,7 @@ function ninja_forms_delete_sub($sub_id = ''){
 
 add_action('wp_ajax_ninja_forms_ajax_submit', 'ninja_forms_ajax_submit');
 function ninja_forms_ajax_submit(){
+	ninja_forms_setup_processing_class();
 	ninja_forms_pre_process();
 	die();
 }
