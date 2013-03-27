@@ -1,32 +1,35 @@
 === Ninja Forms ===
 Contributors: kstover, jameslaws
-Donate link: http://wpninjas.com
-Tags: form, forms
+Tags: forms, web forms, contact forms, custom form, form builder, form manager, form, input, contact form, custom forms, form creator, form creation
 Requires at least: 3.3
 Tested up to: 3.5
 Stable tag: 2.1.3
 License: GPLv2 or later
 
+Create custom forms with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
+
 == Description ==
-Ninja Forms is a full-featured form building solution for WordPress. It allows you to easily and quickly design complex forms through a drag and drop interface.
+Ninja Forms is a full-featured form creation framework for WordPress. It allows you to easily and quickly design complex forms through a drag and drop interface and absolutely no code. But for you developers it has a ton of hooks and filters so you can do absolutely anything with this powerful form building framework. Here are just a few of the things you will find in Ninja Forms:
 
-= Some of the cool features of Ninja Forms: =
-
-* Custom input masks allow you to restrict user input for things like phone numbers, currency, and dates.
-* Manage, Edit, and Export user submissions.
+* Custom input masks allow you to restrict user input in your forms for things like phone numbers, currency, and dates.
+* Manage, Edit, and Export form user submissions.
 * Save fields as favorites and re-use them in multiple forms.
 * Export and Import forms and favorite fields.
 * Set required fields.
 * Add a datepicker to text fields.
 * Email form results to any number of pre-determined email addresses, as well as specific messages to the user filling out the form.
+* Customize form emails with the WordPress editor.
+* Anti-Spam field.
 * Extremely developer friendly.
 * Submit your form by reloading the page or asynchronously with AJAX.
 
-= In addition to these features, extensions are available at our website: [Ninja Forms Extensions](http://wpninjas.com/downloads/category/ninja-forms/) =
+= During the month of March =
 
-* For the month of March, WP Ninjas is donating 10% of our total plugin sales to the March of Dimes.
+* WP Ninjas is donating 10% of our total plugin sales to the March of Dimes.
 * If that's not enough, you can also get 20% off when you purchase 4 or more Ninja Forms extensions!
 * You can find more information about both of those at our [blog](http://wpninjas.com/buy-extensions-help-babies-save-money/).
+
+= In addition to these features, extensions are available at our website: =
 
 * [Front-End Editor](http://wpninjas.com/downloads/front-end-editor/) - Give your users the ability to create, edit, or delete posts, pages, or any custom post type and allow your users to edit their Ninja Forms submissions all from the front-end. Also included is front-end profile editing, custom registration forms, login and password resetting, all without needing to see the default, WordPress branded login page.
 * [File Uploads](http://wpninjas.com/downloads/file-uploads/) - Allow users to upload files and store those files within a searchable database.
@@ -104,7 +107,7 @@ If you have any feature requests, please feel free to visit [wpninjas.com](http:
 *Features:*
 
 * Added an option to the "textbox" field type so that the "From Name" of a form submission email can be set as well as the "From Email."
-	
+
 *Changes:*
 
 * $ninja_forms_processing->get_form_setting('sub_id') will now populate with the ID of the submission after it has been inserted into the database.
