@@ -54,13 +54,21 @@ function ninja_forms_tab_addons(){
             'link' => 'http://wpninjas.com/downloads/front-end-posting/',
             'plugin' => 'ninja-forms-post-creation/post-creation.php',
             'docs' => '',
+        ),        
+        array (
+            'title' => 'Front-End Editor',
+            'image' => 'http://wpninjas.com/wp-content/uploads/edd/2013/03/front-end-editor.png',
+            'content' => 'The Front-End Editor Extension brings the power of your WordPress admin to your front-facing site. It is a one-stop solution for almost all your front-end editing needs. Users can now be allowed to create, edit, or delete posts, pages, or any custom post type without the need to see the WordPress admin. ',
+            'link' => 'http://wpninjas.com/downloads/front-end-editor/',
+            'plugin' => 'ninja-forms-front-end-editor/front-end-editor.php',
+            'docs' => '',
         ),
         array (
             'title' => 'Multi-Part Forms',
             'image' => 'http://wpninjas.com/wp-content/uploads/edd/2012/10/multi-part-forms-300x121.png',
             'content' => 'The Multi-Part Forms extension allows you to break long forms into sections, creating a natural flow for your visitors. You can add a breadcrumb trail through the various sections of the form and a progress bar so that your users …',
             'link' => 'http://wpninjas.com/downloads/multi-part-forms/',
-            'plugin' => 'ninja-forms-multi-part/multi-part.php',
+            'plugin' => 'ninja-forms-multi-part/mutli-part.php',
             'docs' => '',
         ),
         array (
@@ -85,13 +93,18 @@ function ninja_forms_tab_addons(){
                     echo '<p>Documentation coming soon.</a>.</p>';
                 }
             echo '</div>';
-            if( is_plugin_active( $item['plugin'] ) ) {
-                echo '<span class="button-secondary nf-button">Active</span>';
-            } elseif( is_plugin_inactive( $item['plugin'] ) ) {
-                echo '<span class="button-secondary nf-button">Installed</span>';
-            } else {
+            if( file_exists( WP_PLUGIN_DIR.'/'.$item['plugin'] ) ){
+              if( is_plugin_active( $item['plugin'] ) ) {
+                    echo '<span class="button-secondary nf-button">Active</span>';
+                } elseif( is_plugin_inactive( $item['plugin'] ) ) {
+                    echo '<span class="button-secondary nf-button">Installed</span>';
+                } else {
+                    echo '<a href="' . $item['link'] . '" title="' . $item['title'] . '" class="button-primary nf-button">Learn More</a>';
+                }
+            }else{
                 echo '<a href="' . $item['link'] . '" title="' . $item['title'] . '" class="button-primary nf-button">Learn More</a>';
             }
+  
         echo '</div>';
     }
 }

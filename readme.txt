@@ -4,7 +4,7 @@ Donate link: http://wpninjas.com
 Tags: form, forms
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 2.1.2
+Stable tag: 2.1.3
 License: GPLv2 or later
 
 == Description ==
@@ -59,15 +59,22 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.1.2 =
+= 2.1.3 =
 
-* AJAX form submissions have been re-added. Check the changelog for specifics.
+* Bug fix for issues some users were having using AJAX.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.1.3 =
+
+*Bugs:*
+
+* Fixed a bug that caused some users issues with using AJAX submissions.
+* Fixed a bug that caused extensions to show as "installed" even if they were not.
 
 = 2.1.2 =
 

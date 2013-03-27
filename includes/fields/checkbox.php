@@ -68,6 +68,7 @@ function ninja_forms_register_field_checkbox(){
 		),
 		//'process' => 'ninja_forms_field_checkbox_pre_process',
 		//'edit_sub_pre_process' => 'ninja_forms_field_checkbox_pre_process',
+		'req_validation' => 'ninja_forms_field_checkbox_validation',
 	);
 	
 	ninja_forms_register_field('_checkbox', $args);
@@ -103,4 +104,13 @@ function ninja_forms_field_checkbox_pre_process( $field_id, $user_value ){
 		$ninja_forms_processing->update_field_value( $field_id, $user_value );
 	}
 
+}
+
+//Checkbox Validation Function
+function ninja_forms_field_checkbox_validation( $field_id, $user_value ){
+	if( $user_value != 'unchecked' ){
+		return true;
+	}else{
+		return false;
+	}
 }
