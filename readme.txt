@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws
 Tags: forms, web forms, contact forms, custom form, form builder, form manager, form, input, contact form, custom forms, form creator, form creation
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 2.1.3
+Stable tag: 2.1.4
 License: GPLv2 or later
 
 Create custom forms with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -22,12 +22,6 @@ Ninja Forms is a full-featured form creation framework for WordPress. It allows 
 * Anti-Spam field.
 * Extremely developer friendly.
 * Submit your form by reloading the page or asynchronously with AJAX.
-
-= During the month of March =
-
-* WP Ninjas is donating 10% of our total plugin sales to the March of Dimes.
-* If that's not enough, you can also get 20% off when you purchase 4 or more Ninja Forms extensions!
-* You can find more information about both of those at our [blog](http://wpninjas.com/buy-extensions-help-babies-save-money/).
 
 = In addition to these features, extensions are available at our website: =
 
@@ -62,7 +56,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.1.3 =
+= 2.1.4 =
 
 * Bug fix for issues some users were having using AJAX.
 
@@ -71,6 +65,13 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.1.4 =
+
+*Bugs:*
+
+* Fixed a bug that prevented some installations from being able to use AJAX submissions.
+* Fixed a problem with appending a form to a page or using a shortcode that sometimes caused extra breaks 
 
 = 2.1.3 =
 

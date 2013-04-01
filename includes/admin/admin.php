@@ -3,13 +3,17 @@
 add_action( 'admin_menu', 'ninja_forms_add_menu' );
 function ninja_forms_add_menu(){
 	$plugins_url = plugins_url();
-	$page = add_menu_page("Ninja Forms" , "Forms", "administrator", "ninja-forms", "ninja_forms_admin", NINJA_FORMS_URL."/images/ninja-head-ico-small.png" );
-	$all_forms = add_submenu_page("ninja-forms", "Forms", "All Forms", "administrator", "ninja-forms", "ninja_forms_admin");
-	$new_form = add_submenu_page("ninja-forms", "Add New", "Add New", "administrator", "ninja-forms&tab=form_settings&form_id=new", "ninja_forms_admin");
-	$subs = add_submenu_page("ninja-forms", "Submissions", "Submissions", "administrator", "ninja-forms-subs", "ninja_forms_admin");
-	$import = add_submenu_page("ninja-forms", "Import/Export", "Import / Export", "administrator", "ninja-forms-impexp", "ninja_forms_admin");
-	$settings = add_submenu_page("ninja-forms", "Ninja Form Settings", "Plugin Settings", "administrator", "ninja-forms-settings", "ninja_forms_admin");
-	$extend = add_submenu_page("ninja-forms", "Ninja Form Extensions", "Extend", "administrator", "ninja-forms-extend", "ninja_forms_admin");
+
+	$capabilities = 'administrator';
+	$capabilities = apply_filters( 'ninja_forms_admin_menu_capabilities', $capabilities );
+
+	$page = add_menu_page("Ninja Forms" , "Forms", $capabilities, "ninja-forms", "ninja_forms_admin", NINJA_FORMS_URL."/images/ninja-head-ico-small.png" );
+	$all_forms = add_submenu_page("ninja-forms", "Forms", "All Forms", $capabilities, "ninja-forms", "ninja_forms_admin");
+	$new_form = add_submenu_page("ninja-forms", "Add New", "Add New", $capabilities, "ninja-forms&tab=form_settings&form_id=new", "ninja_forms_admin");
+	$subs = add_submenu_page("ninja-forms", "Submissions", "Submissions", $capabilities, "ninja-forms-subs", "ninja_forms_admin");
+	$import = add_submenu_page("ninja-forms", "Import/Export", "Import / Export", $capabilities, "ninja-forms-impexp", "ninja_forms_admin");
+	$settings = add_submenu_page("ninja-forms", "Ninja Form Settings", "Plugin Settings", $capabilities, "ninja-forms-settings", "ninja_forms_admin");
+	$extend = add_submenu_page("ninja-forms", "Ninja Form Extensions", "Extend", $capabilities, "ninja-forms-extend", "ninja_forms_admin");
 
 	add_action('admin_print_styles-' . $page, 'ninja_forms_admin_css');
 	add_action('admin_print_styles-' . $page, 'ninja_forms_admin_js');

@@ -69,6 +69,25 @@ a.tooltip span
     display: block;
 }
 
+.ninja-forms-form .list-radio-wrap.label-above ul label,
+.ninja-forms-form .list-radio-wrap.label-below ul label,
+.ninja-forms-form .list-checkbox-wrap.label-above ul label,
+.ninja-forms-form .list-checkbox-wrap.label-below ul label {
+    display: inline;
+}
+
+.list-radio-wrap ul,
+.list-checkbox-wrap ul  {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.list-radio-wrap ul li,
+.list-checkbox-wrap ul li {
+    margin: 0;
+    padding: 0;
+}
+
 #pass-strength-result {
     background-color: #eee;
     border-color: #ddd !important;

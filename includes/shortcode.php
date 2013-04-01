@@ -1,6 +1,6 @@
 <?php
 
-add_shortcode( 'ninja_forms_display_form', 'ninja_forms_shortcode' );
+
 function ninja_forms_shortcode( $atts ){
 	$form = ninja_forms_return_echo( 'ninja_forms_display_form', $atts['id'] );
 	return $form;
@@ -26,4 +26,19 @@ function ninja_forms_sub_date_shortcode( $atts ){
 	
 	$date = date( $date_format );
 	return $date;
+}
+
+add_filter('the_content', 'ninja_forms_pre_process_shortcode', 9999);
+
+function ninja_forms_pre_process_shortcode($content) {
+   global $shortcode_tags;
+   // Backup current registered shortcodes and clear them all out
+   $current_shortcodes = $shortcode_tags;
+   $shortcode_tags = array();
+   add_shortcode( 'ninja_forms_display_form', 'ninja_forms_shortcode' );
+   // Do the shortcode (only the one above is registered)
+   $content = do_shortcode($content);
+   // Put the original shortcodes back
+   $shortcode_tags = $current_shortcodes;
+   return $content;
 }

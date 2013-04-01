@@ -30,7 +30,7 @@ function ninja_forms_page_append_check(){
 			foreach($form_ids as $form_id){
 				$ninja_forms_append_page_form_id[] = $form_id;
 				//remove_filter('the_content', 'wpautop');
-				add_filter( 'the_content', 'ninja_forms_append_to_page' );
+				add_filter( 'the_content', 'ninja_forms_append_to_page', 9999 );
 			}
 		}
 	}
@@ -52,8 +52,8 @@ function ninja_forms_append_to_page($content){
 		$form = ninja_forms_return_echo('ninja_forms_display_form', $ninja_forms_append_page_form_id);
 	}
 	$content .= $form;
-	add_filter( 'the_content', 'remove_bad_br_tags', 99 );
-	remove_filter( 'the_content', 'wpautop' );
+	//add_filter( 'the_content', 'remove_bad_br_tags', 99 );
+	//remove_filter( 'the_content', 'wpautop' );
 	return $content;
 }
 
