@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws
 Tags: forms, web forms, contact forms, custom form, form builder, form manager, form, input, contact form, custom forms, form creator, form creation
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 2.1.4
+Stable tag: 2.1.5
 License: GPLv2 or later
 
 Create custom forms with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
