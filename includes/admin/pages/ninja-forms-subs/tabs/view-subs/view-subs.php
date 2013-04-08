@@ -225,7 +225,8 @@ function ninja_forms_tab_view_subs(){
 					}
 				}
 				
-				$field_results = array_values($field_results);
+				$field_results = array_values( $field_results );
+				$field_results = apply_filters( 'ninja_forms_view_subs_table_header', $field_results, $form_id );
 
 				?>
 				<thead>
@@ -332,7 +333,7 @@ function ninja_forms_tab_view_subs(){
 				<input type="hidden" name="_form_id" value="<?php echo $form_id;?>">
 				<?php
 
-				add_filter('ninja_forms_field', 'ninja_forms_edit_sub_default_value', 99, 2);
+				add_filter('ninja_forms_field', 'ninja_forms_edit_sub_default_value', 10, 2);
 				add_filter('ninja_forms_field', 'ninja_forms_edit_sub_hide_fields', 99, 2);
 				remove_action('ninja_forms_display_before_fields', 'ninja_forms_display_req_items');
 				remove_action('ninja_forms_display_open_form_tag', 'ninja_forms_display_open_form_tag');

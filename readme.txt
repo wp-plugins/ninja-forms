@@ -56,15 +56,23 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.1.4 =
+= 2.1.5 =
 
-* Bug fix for issues some users were having using AJAX.
+* Fixed a bug with adding administrator email addresses incorrectly.
+* Fixed a bug that caused success messages to show in the wrong form when adding multiple forms to a single page.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.1.5 =
+
+*Bugs:*
+
+* Fixed a bug with adding administrator email addresses incorrectly.
+* Fixed a bug that caused success messages to show in the wrong form when adding multiple forms to a single page.
 
 = 2.1.4 =
 

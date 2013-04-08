@@ -67,6 +67,18 @@ function ninja_forms_register_field_list(){
 	
 	ninja_forms_register_field('_list', $args);
 	add_filter( 'ninja_forms_field_wrap_class', 'ninja_forms_field_filter_list_wrap_class', 10, 2 );
+	add_action('ninja_forms_display_after_opening_field_wrap', 'ninja_forms_display_list_type', 10, 2);
+}
+
+function ninja_forms_display_list_type( $field_id, $data ){
+	$field_row = ninja_forms_get_field_by_id( $field_id );
+	$field_type = $field_row['type'];
+	if( $field_type == '_list' ){
+		$list_type = $data['list_type'];
+		?>
+		<input type="hidden" id="ninja_forms_field_<?php echo $field_id;?>_list_type" value="<?php echo $list_type;?>">
+		<?php
+	}
 }
 
 function ninja_forms_field_list_add_value( $field_id, $x, $conditional, $name, $id, $current = '', $field_data = '' ){
@@ -141,17 +153,17 @@ function ninja_forms_field_list_edit($field_id, $data){
 			Show option values </label>
 		</p>
 		<div id="ninja_forms_field_<?php echo $field_id;?>_list_options" class="ninja-forms-field-list-options description description-wide">	
-				<?php
-
-				if(isset($data['list']['options']) AND is_array($data['list']['options'])){
-					$x = 0;			
-					foreach($data['list']['options'] as $option){
-						ninja_forms_field_list_option_output($field_id, $x, $option, $hidden);
-						$x++;
-					}
+			<input type="hidden" name="ninja_forms_field_<?php echo $field_id;?>[list][options]" value="">
+			<?php
+			if( isset( $data['list']['options'] ) AND is_array( $data['list']['options'] ) AND $data['list']['options'] != '' ){
+				$x = 0;			
+				foreach($data['list']['options'] as $option){
+					ninja_forms_field_list_option_output($field_id, $x, $option, $hidden);
+					$x++;
 				}
-				?>
-			
+			}
+			?>
+		
 		</div>	
 	</span>
 	
@@ -181,7 +193,7 @@ function ninja_forms_field_list_display($field_id, $data){
 		$list_show_value = 0;
 	}
 	
-	if(isset($data['list']['options'])){
+	if( isset( $data['list']['options'] ) AND $data['list']['options'] != '' ){
 		$options = $data['list']['options'];
 	}else{
 		$options = array();
@@ -305,12 +317,12 @@ function ninja_forms_field_list_display($field_id, $data){
 				?><li><input id="ninja_forms_field_<?php echo $field_id;?>_<?php echo $x;?>" name="ninja_forms_field_<?php echo $field_id;?>" type="radio" class="<?php echo $field_class;?>" value="<?php echo $value;?>" <?php echo $selected;?> rel="<?php echo $field_id;?>" /><label id="ninja_forms_field_<?php echo $field_id;?>_<?php echo $x;?>_label" class="ninja-forms-field-<?php echo $field_id;?>-options" style="<?php echo $display_style;?>" for="ninja_forms_field_<?php echo $field_id;?>_<?php echo $x;?>"><?php echo $label;?></label></li><?php
 				$x++;
 			}
-			?></ul></span><label id="ninja_forms_field_<?php echo $field_id;?>_template_label" style="display:none;"><input id="ninja_forms_field_<?php echo $field_id;?>_" name="" type="radio" class="<?php echo $field_class;?>" value="" rel="<?php echo $field_id;?>" /></label>
+			?></ul></span><li style="display:none;" id="ninja_forms_field_<?php echo $field_id;?>_template"><label><input id="ninja_forms_field_<?php echo $field_id;?>_" name="" type="radio" class="<?php echo $field_class;?>" value="" rel="<?php echo $field_id;?>" /></label></li>
 			<?php
 			break;
 		case 'checkbox':
 			$x = 0;
-			?><input type="hidden" name="ninja_forms_field_<?php echo $field_id;?>" value=""><input type="hidden" id="ninja_forms_field_<?php echo $field_id;?>_type" value="list-checkbox"><span id="ninja_forms_field_<?php echo $field_id;?>_options_span"><ul><?php
+			?><input type="hidden" name="ninja_forms_field_<?php echo $field_id;?>" value=""><span id="ninja_forms_field_<?php echo $field_id;?>_options_span"><ul><?php
 			foreach($options as $option){
 			
 				if(isset($option['value'])){
@@ -354,7 +366,7 @@ function ninja_forms_field_list_display($field_id, $data){
 				?><li><label id="ninja_forms_field_<?php echo $field_id;?>_<?php echo $x;?>_label" class="ninja-forms-field-<?php echo $field_id;?>-options" style="<?php echo $display_style;?>"><input id="ninja_forms_field_<?php echo $field_id;?>_<?php echo $x;?>" name="ninja_forms_field_<?php echo $field_id;?>[]" type="checkbox" class="<?php echo $field_class;?> ninja_forms_field_<?php echo $field_id;?>" value="<?php echo $value;?>" <?php echo $checked;?> rel="<?php echo $field_id;?>"/><?php echo $label;?></label></li><?php
 				$x++;
 			}
-			?></ul></span><label id="ninja_forms_field_<?php echo $field_id;?>_template_label" style="display:none;"><input id="ninja_forms_field_<?php echo $field_id;?>_" name="" type="checkbox" class="<?php echo $field_class;?>" value="" rel="<?php echo $field_id;?>" /></label>
+			?></ul></span><li style="display:none;" id="ninja_forms_field_<?php echo $field_id;?>_template"><label><input id="ninja_forms_field_<?php echo $field_id;?>_" name="" type="checkbox" class="<?php echo $field_class;?>" value="" rel="<?php echo $field_id;?>" /></label></li>
 			<?php
 			break;
 		case 'multi':

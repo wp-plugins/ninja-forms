@@ -36,21 +36,25 @@ function ninja_forms_display_response_message( $form_id ){
 		$class = '';
 	}
 
-	echo '<div id="ninja_forms_form_' . $form_id . '_response_msg" style="' . $display . '" class="ninja-forms-response-msg '.$class.'">';
-	if( is_object( $ninja_forms_processing ) AND $ninja_forms_processing->get_form_ID() == $form_id ){
-		if( is_object( $ninja_forms_processing) AND $ninja_forms_processing->get_errors_by_location('general') ){
-			foreach($ninja_forms_processing->get_errors_by_location('general') as $error){
-				echo $error['msg'];
+	if( is_object( $ninja_forms_processing ) ){
+		if( $ninja_forms_processing->get_form_ID() == $form_id ){
+			echo '<div id="ninja_forms_form_' . $form_id . '_response_msg" style="' . $display . '" class="ninja-forms-response-msg '.$class.'">';
+			if( is_object( $ninja_forms_processing ) AND $ninja_forms_processing->get_form_ID() == $form_id ){
+				if( is_object( $ninja_forms_processing) AND $ninja_forms_processing->get_errors_by_location('general') ){
+					foreach($ninja_forms_processing->get_errors_by_location('general') as $error){
+						echo $error['msg'];
+					}
+				}
 			}
+			
+			if( is_object( $ninja_forms_processing ) AND $ninja_forms_processing->get_form_ID() == $form_id ){
+				if( is_object( $ninja_forms_processing) AND $ninja_forms_processing->get_all_success_msgs()){
+					foreach($ninja_forms_processing->get_all_success_msgs() as $success){
+						echo $success;
+					}
+				}
+			}
+			echo '</div>';
 		}
 	}
-	
-	if( is_object( $ninja_forms_processing ) AND $ninja_forms_processing->get_form_ID() == $form_id ){
-		if( is_object( $ninja_forms_processing) AND $ninja_forms_processing->get_all_success_msgs()){
-			foreach($ninja_forms_processing->get_all_success_msgs() as $success){
-				echo $success;
-			}
-		}
-	}
-	echo '</div>';
 }

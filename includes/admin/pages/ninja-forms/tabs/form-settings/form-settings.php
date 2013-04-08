@@ -254,14 +254,14 @@ function ninja_forms_admin_email($form_id, $data){
 		</p>
 	</label>
 	<div id="ninja_forms_mailto">
-		<input type="hidden" name="register_admin_mailto" value="">
+		<input type="hidden" name="admin_mailto" value="">
 		<?php
 		if(is_array($admin_mailto) AND !empty($admin_mailto)){
 			$x = 0;
 			foreach($admin_mailto as $v){
 				?>
 				<span id="ninja_forms_mailto_<?php echo $x;?>_span">
-					<a href="#" id="" class="ninja-forms-remove-mailto">X</a> <input type="text" name="register_admin_mailto[]" id="" value="<?php echo $v;?>" class="ninja-forms-mailto-address">
+					<a href="#" id="" class="ninja-forms-remove-mailto">X</a> <input type="text" name="admin_mailto[]" id="" value="<?php echo $v;?>" class="ninja-forms-mailto-address">
 				</span>
 				<?php
 				$x++;
@@ -281,6 +281,7 @@ function ninja_forms_save_form_settings($form_id, $data){
 	foreach( $data as $key => $val ){
 		$form_data[$key] = $val;
 	}
+
 	$data_array = array('data' => serialize($form_data));
 	if($form_id != 'new'){
 		$wpdb->update( NINJA_FORMS_TABLE_NAME, $data_array, array( 'id' => $form_id ));
