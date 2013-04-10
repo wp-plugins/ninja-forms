@@ -8,12 +8,20 @@ function ninja_forms_filter_msgs(){
 	global $ninja_forms_processing;
 
 	//Get the form settings for the form currently being processed.
-	$admin_subject = $ninja_forms_processing->get_form_setting('admin_subject');
-	$user_subject = $ninja_forms_processing->get_form_setting('user_subject');
-	$success_msg = $ninja_forms_processing->get_form_setting('success_msg');
-	$admin_email_msg = $ninja_forms_processing->get_form_setting('admin_email_msg');
-	$user_email_msg = $ninja_forms_processing->get_form_setting('user_email_msg');
-	$save_msg = $ninja_forms_processing->get_form_setting('save_msg');
+	$admin_subject = $ninja_forms_processing->get_form_setting( 'admin_subject' );
+	$user_subject = $ninja_forms_processing->get_form_setting( 'user_subject' );
+	$success_msg = $ninja_forms_processing->get_form_setting( 'success_msg' );
+	$admin_email_msg = $ninja_forms_processing->get_form_setting( 'admin_email_msg' );
+	$user_email_msg = $ninja_forms_processing->get_form_setting( 'user_email_msg' );
+	$save_msg = $ninja_forms_processing->get_form_setting( 'save_msg' );
+
+	//Apply the wpautop to our fields if the email type is set to HTML
+	//$success_msg = wpautop( $success_msg );
+	//$save_msg = wpautop( $save_msg );
+	if( $ninja_forms_processing->get_form_setting( 'email_type' ) == 'html' ){
+		$admin_email_msg = wpautop( $admin_email_msg );
+		$user_email_msg = wpautop( $user_email_msg );
+	}
 
 	//Apply shortcodes to each of our message fields.
 	$admin_subject = do_shortcode( $admin_subject );

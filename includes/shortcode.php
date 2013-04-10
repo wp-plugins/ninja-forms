@@ -1,6 +1,6 @@
 <?php
 
-
+add_shortcode( 'ninja_forms_display_form', 'ninja_forms_shortcode' );
 function ninja_forms_shortcode( $atts ){
 	$form = ninja_forms_return_echo( 'ninja_forms_display_form', $atts['id'] );
 	return $form;
@@ -12,6 +12,9 @@ function ninja_forms_field_shortcode( $atts ){
 	$field_id = $atts['id'];
 	$value = $ninja_forms_processing->get_field_value( $field_id );
 	$value = apply_filters( 'ninja_forms_field_shortcode', $value, $atts );
+	if( is_array( $value ) ){
+		$value = implode( ',', $value );
+	}
 	return $value;
 }
 
@@ -32,6 +35,8 @@ add_filter('the_content', 'ninja_forms_pre_process_shortcode', 9999);
 
 function ninja_forms_pre_process_shortcode($content) {
    global $shortcode_tags;
+   // Remove our previously registered shortcode.
+   remove_shortcode( 'ninja_forms_display_form' );
    // Backup current registered shortcodes and clear them all out
    $current_shortcodes = $shortcode_tags;
    $shortcode_tags = array();

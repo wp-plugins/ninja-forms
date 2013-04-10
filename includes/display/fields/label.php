@@ -5,6 +5,7 @@
 **/
 add_action('init', 'ninja_forms_register_display_field_label');
 function ninja_forms_register_display_field_label(){
+	add_filter( 'ninja_forms_field', 'ninja_forms_display_label_inside', 10, 2 );
 	add_action('ninja_forms_display_field_label', 'ninja_forms_display_field_label', 10, 2);
 }
 
@@ -57,4 +58,33 @@ function ninja_forms_display_field_label( $field_id, $data ){
 		</label>
 		<?php
 	}
+}
+
+function ninja_forms_display_label_inside( $data, $field_id ){
+	global $ninja_forms_processing;
+
+	if( is_object( $ninja_forms_processing ) ){
+		$field_row = $ninja_forms_processing->get_field_settings( $field_id );
+	}else{
+		$field_row = ninja_forms_get_field_by_id( $field_id );
+	}
+
+	$field_data = $field_row['data'];
+	if( isset( $field_data['label_pos'] ) ){
+		$label_pos = $field_data['label_pos'];
+	}else{
+		$label_pos = '';
+	}
+
+	if( isset( $field_data['label'] ) ){
+		$label = $field_data['label'];
+	}else{
+		$label = '';
+	}
+
+	if( $label_pos == 'inside' ){
+		$data['default_value'] = $label;
+	}
+
+	return $data;
 }
