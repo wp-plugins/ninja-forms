@@ -36,7 +36,7 @@ add_filter('the_content', 'ninja_forms_pre_process_shortcode', 9999);
 function ninja_forms_pre_process_shortcode($content) {
    global $shortcode_tags;
    // Remove our previously registered shortcode.
-   remove_shortcode( 'ninja_forms_display_form' );
+   //remove_shortcode( 'ninja_forms_display_form' );
    // Backup current registered shortcodes and clear them all out
    $current_shortcodes = $shortcode_tags;
    $shortcode_tags = array();
