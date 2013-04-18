@@ -236,7 +236,7 @@ function ninja_forms_add_fav(){
 
 	$field_data = $_REQUEST['field_data'];
 	$field_id = $_REQUEST['field_id'];
-	
+
 	$field_row = ninja_forms_get_field_by_id($field_id);
 	
 	$field_type = $field_row['type'];
@@ -245,6 +245,7 @@ function ninja_forms_add_fav(){
 	$data = array();
 	
 	foreach($field_data as $key => $val){
+		$key = stripslashes( $key );
 		$key = str_replace('"', '', $key);	
 		if(strpos($key, '[')){
 			$key = str_replace(']', '', $key);
@@ -270,6 +271,7 @@ function ninja_forms_add_fav(){
 	
 	$name = stripslashes($_REQUEST['fav_name']);
 	$data['label'] = $name;
+
 	$data = serialize($data);
 	$wpdb->insert(NINJA_FORMS_FAV_FIELDS_TABLE_NAME, array('row_type' => 1, 'type' => $field_type, 'order' => 0, 'data' => $data, 'name' => $name));
 	$fav_id = $wpdb->insert_id;

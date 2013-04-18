@@ -23,7 +23,7 @@ Ninja Forms is a full-featured form creation framework for WordPress. It allows 
 * Extremely developer friendly.
 * Submit your form by reloading the page or asynchronously with AJAX.
 
-== Demo Site ==
+= Demo Site =
 Please feel free to visit our [demo site](http://demo.wpninjas.com/ninja-forms/) where you can test the features of Ninja Forms and all of our extensions. http://demo.wpninjas.com/ninja-forms/
 
 = In addition to these features, extensions are available at our website: =
