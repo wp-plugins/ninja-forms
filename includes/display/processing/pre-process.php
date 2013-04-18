@@ -27,14 +27,16 @@ function ninja_forms_pre_process(){
 		ninja_forms_process();
 	}else{
 		if($ajax == 1){
-			$errors = ninja_forms_esc_html_deep( $ninja_forms_processing->get_all_errors() );
-			$success = ninja_forms_esc_html_deep( $ninja_forms_processing->get_all_success_msgs() );
-			$fields = ninja_forms_esc_html_deep( $ninja_forms_processing->get_all_fields() );
-			$form_settings = ninja_forms_esc_html_deep( $ninja_forms_processing->get_all_form_settings() );
-			$extras = ninja_forms_esc_html_deep( $ninja_forms_processing->get_all_extras() );
+			$errors = $ninja_forms_processing->get_all_errors();
+			$success = $ninja_forms_processing->get_all_success_msgs();
+			$fields = $ninja_forms_processing->get_all_fields();
+			$form_settings = $ninja_forms_processing->get_all_form_settings();
+			$extras = $ninja_forms_processing->get_all_extras();
 
-			//header('Content-Type', 'text/html');
-			echo json_encode( array( 'form_id' => $form_id, 'errors' => $errors, 'success' => $success, 'fields' => $fields, 'form_settings' => $form_settings, 'extras' => $extras ) );
+			$json = json_encode( array( 'form_id' => $form_id, 'errors' => $errors, 'success' => $success, 'fields' => $fields, 'form_settings' => $form_settings, 'extras' => $extras ), JSON_HEX_QUOT | JSON_HEX_TAG  );
+			
+			header('Content-Type', 'application/json');
+			echo $json;
 			die();
 		}else{
 			//echo 'pre-processing';

@@ -154,7 +154,7 @@ function ninja_forms_save_impexp_forms($data){
 			do_action( 'ninja_forms_after_import_form', $form );
 			$update_msg = __( 'Form Imported Successfully.', 'ninja-forms' );
 		}else{
-			echo $_FILES['userfile']['error'];
+			//echo $_FILES['userfile']['error'];
 			$update_msg = __( 'Please select a valid exported form file.', 'ninja-forms' );
 		}
 	}

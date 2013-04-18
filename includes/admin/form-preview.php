@@ -14,7 +14,7 @@ function ninja_forms_preview_form() {
 	//if( '' != $form_data['data'] ) {
 	if(isset($form_data['data']) AND !empty($form_data['data'])){ // In order to prevent notices and errors, it's best to use these two checks when you are evaluating arrays.
 		$ninja_forms_append_page_form_id = array($form_id);
-		add_filter('the_content', 'ninja_forms_append_to_page');
+		add_filter( 'the_content', 'ninja_forms_append_to_page', 9999 );
 	}
 }
 

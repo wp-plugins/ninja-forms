@@ -1,7 +1,7 @@
 <?php
 add_action('init', 'ninja_forms_register_email_admin');
 function ninja_forms_register_email_admin(){
-	add_action('ninja_forms_process', 'ninja_forms_email_admin', 999);	
+	add_action('ninja_forms_process', 'ninja_forms_email_admin', 999);
 }
 
 function ninja_forms_email_admin(){
@@ -60,6 +60,6 @@ function ninja_forms_email_admin(){
 	}
 
 	if(is_array($admin_mailto) AND !empty($admin_mailto)){
-		wp_mail($admin_mailto, $subject, $message, $headers, $attachments);
+		$sent = wp_mail($admin_mailto, $subject, $message, $headers, $attachments);
 	}
 }

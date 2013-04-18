@@ -16,8 +16,8 @@ function ninja_forms_filter_msgs(){
 	$save_msg = $ninja_forms_processing->get_form_setting( 'save_msg' );
 
 	//Apply the wpautop to our fields if the email type is set to HTML
-	//$success_msg = wpautop( $success_msg );
-	//$save_msg = wpautop( $save_msg );
+	$success_msg = wpautop( $success_msg );
+	$save_msg = wpautop( $save_msg );
 	if( $ninja_forms_processing->get_form_setting( 'email_type' ) == 'html' ){
 		$admin_email_msg = wpautop( $admin_email_msg );
 		$user_email_msg = wpautop( $user_email_msg );

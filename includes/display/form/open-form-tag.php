@@ -14,6 +14,7 @@ function ninja_forms_display_open_form_tag($form_id){
 	if($ajax == 1){
 		$url = admin_url( 'admin-ajax.php' );
 		$url = add_query_arg('action', 'ninja_forms_ajax_submit', $url);
+		//$url = add_query_arg('action', 'test', $url);
 	}else{
 		$url = '';
 	}
@@ -27,8 +28,8 @@ function ninja_forms_display_open_form_tag($form_id){
 	} else {
 		$hide_class = "";
 	}
-
 	?>
 	<form id="ninja_forms_form_<?php echo $form_id;?>" enctype="multipart/form-data" method="post" name="" action="<?php echo $url;?>" class="ninja-forms-form<?php echo $hide_class;?>">
+	
 	<?php
 }

@@ -487,9 +487,13 @@ function ninja_forms_delete_sub($sub_id = ''){
 add_action('wp_ajax_ninja_forms_ajax_submit', 'ninja_forms_ajax_submit');
 add_action('wp_ajax_nopriv_ninja_forms_ajax_submit', 'ninja_forms_ajax_submit');
 function ninja_forms_ajax_submit(){
-	ninja_forms_setup_processing_class();
-	ninja_forms_pre_process();
-	die();
+	global $ninja_forms_processing;
+	//add_action( 'init', 'test' );
+	//add_action( 'init', 'ninja_forms_setup_processing_class', 5 );
+	//add_action( 'init', 'ninja_forms_pre_process', 999 );
+	//ninja_forms_setup_processing_class();
+	//ninja_forms_pre_process();
+	//die();
 }
 
 function ninja_forms_array_merge_recursive() {

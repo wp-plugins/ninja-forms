@@ -1,7 +1,8 @@
 <?php
-add_action('init', 'ninja_forms_register_filter_email_add_fields');
+add_action('init', 'ninja_forms_register_filter_email_add_fields', 15 );
 function ninja_forms_register_filter_email_add_fields(){
 	global $ninja_forms_processing;
+
 	if( is_object( $ninja_forms_processing ) ){
 		if( $ninja_forms_processing->get_form_setting( 'user_email_fields' ) == 1 ){
 			add_filter( 'ninja_forms_user_email', 'ninja_forms_filter_email_add_fields' );
@@ -13,11 +14,11 @@ function ninja_forms_register_filter_email_add_fields(){
 			add_filter( 'ninja_forms_admin_email', 'ninja_forms_filter_email_add_fields' );
 		}
 	}
-	
 }
 
 function ninja_forms_filter_email_add_fields( $message ){
 	global $ninja_forms_processing, $ninja_forms_fields;
+
 	$form_id = $ninja_forms_processing->get_form_ID();
 	$all_fields = ninja_forms_get_fields_by_form_id( $form_id );
 	//$all_fields = $ninja_forms_processing->get_all_fields();

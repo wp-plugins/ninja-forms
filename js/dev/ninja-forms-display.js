@@ -66,6 +66,8 @@ jQuery(document).ready(function(jQuery) {
 			var options = { 
 			beforeSubmit:  ninja_forms_before_submit, 
 			success:       ninja_forms_response,
+			//url: 		   'http://demo.wpninjas.com/ninja-forms/wp-admin/admin-ajax.php'
+			dataType: 'json'
 			};
 			jQuery(this).ajaxForm(options);
 
@@ -108,7 +110,8 @@ function ninja_forms_before_submit(formData, jqForm, options){
 function ninja_forms_response(responseText, statusText, xhr, jQueryform){
 	//alert(responseText);
 	if( ninja_forms_settings.ajax_msg_format == 'inline' ){
-		var response = jQuery.parseJSON( responseText );
+		//var response = jQuery.parseJSON( responseText );
+		var response = responseText;
 		var form_id = response.form_id;
 		var result = true;
 		for( var name in window['ninja_forms_response_function_list'][form_id] ){
@@ -122,7 +125,7 @@ function ninja_forms_response(responseText, statusText, xhr, jQueryform){
 
 function ninja_forms_default_before_submit(formData, jqForm, options){
 	var form_id = formData[1].value;
-
+	
 	// Show the ajax spinner and processing message.
 	jQuery("#ninja_forms_form_" + form_id + "_process_msg").show();
 	jQuery("#ninja_forms_form_" + form_id + "_response_msg").prop("innerHTML", "");
@@ -161,6 +164,7 @@ function ninja_forms_update_success_msg(response){
 	var innerHTML = '';
 	var form_id = response.form_id;
 	var success = response.success;
+	//alert(success);
 	var form_settings = response.form_settings;
 	var hide_complete = form_settings.hide_complete;
 	var clear_complete = form_settings.clear_complete;

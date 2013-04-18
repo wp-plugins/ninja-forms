@@ -374,6 +374,27 @@ function ninja_forms_update_sub($args){
 	$wpdb->update(NINJA_FORMS_SUBS_TABLE_NAME, $update_array, array('id' => $sub_id));
 }
 
+function ninja_forms_addslashes_deep( $value ){
+    $value = is_array($value) ?
+        array_map('ninja_forms_addslashes_deep', $value) :
+        addslashes($value);
+    return $value;
+}
+
+function ninja_forms_str_replace_deep( $search, $replace, $value ){
+    $value = is_array($value) ?
+        array_map('ninja_forms_str_replace_deep', array( $search, $replace, $value ) ) :
+        str_replace( $search, $replace, $value );
+    return $value;
+}
+
+function ninja_forms_html_entity_decode_deep( $value ){
+    $value = is_array($value) ?
+        array_map('ninja_forms_html_entity_decode_deep', $value) :
+        html_entity_decode( $value );
+    return $value;
+}
+
 function ninja_forms_stripslashes_deep( $value ){
     $value = is_array($value) ?
         array_map('ninja_forms_stripslashes_deep', $value) :
@@ -390,7 +411,7 @@ function ninja_forms_esc_html_deep( $value ){
 
 function ninja_forms_strip_tags_deep($value ){
  	$value = is_array($value) ?
-        array_map('stripslashes_deep', $value) :
+        array_map('ninja_forms_strip_tags_deep', $value) :
         strip_tags($value);
     return $value;
 }
