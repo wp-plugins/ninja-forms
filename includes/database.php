@@ -416,6 +416,25 @@ function ninja_forms_strip_tags_deep($value ){
     return $value;
 }
 
+function ninja_forms_json_response(){
+	global $ninja_forms_processing;
+
+	$errors = $ninja_forms_processing->get_all_errors();
+	$success = $ninja_forms_processing->get_all_success_msgs();
+	$fields = $ninja_forms_processing->get_all_fields();
+	$form_settings = $ninja_forms_processing->get_all_form_settings();
+	$extras = $ninja_forms_processing->get_all_extras();
+
+	if( phpversion() >= 5.3 ){
+		$json = json_encode( array( 'form_id' => $form_id, 'errors' => $errors, 'success' => $success, 'fields' => $fields, 'form_settings' => $form_settings, 'extras' => $extras ), JSON_HEX_QUOT | JSON_HEX_TAG  );
+	}else{
+		$json = json_encode( array( 'form_id' => $form_id, 'errors' => $errors, 'success' => $success, 'fields' => $fields, 'form_settings' => $form_settings, 'extras' => $extras ) );
+	}
+
+		
+	return $json;
+}
+
 function ninja_forms_field_type_dropdown( $args = '' ){
 	global $ninja_forms_fields, $ninja_forms_field_type_groups;
 	if( isset( $args['echo'] ) ){
