@@ -74,9 +74,17 @@ function ninja_forms_tab_addons(){
         array (
             'title' => 'Conditional Logic',
             'image' => 'http://wpninjas.com/wp-content/uploads/edd/2012/10/conditional-logic-300x121.png',
-            'content' => 'TThis extension for Ninja Forms allows you to create “smart” forms. Fields within these forms can dynamically change based upon user input; show or hide fields based on a selected item, set field values based upon a list selection, or …',
+            'content' => 'This extension for Ninja Forms allows you to create “smart” forms. Fields within these forms can dynamically change based upon user input; show or hide fields based on a selected item, set field values based upon a list selection, or …',
             'link' => 'http://wpninjas.com/downloads/conditional-logic/',
             'plugin' => 'ninja-forms-conditionals/conditionals.php',
+            'docs' => '',
+        ),        
+        array (
+            'title' => 'MailChimp',
+            'image' => 'http://wpninjas.com/wp-content/uploads/edd/2013/04/mailchimp-for-ninja-forms-300x121.png',
+            'content' => 'The MailChimp extension allows you to quickly create newsletter signup forms for your MailChimp account using the power and flexibility that Ninja Forms provides. …',
+            'link' => 'http://wpninjas.com/downloads/mail-chimp/',
+            'plugin' => 'ninja-forms-mailchimp/ninja-forms-mailchimp.php',
             'docs' => '',
         ),
     );

@@ -67,7 +67,7 @@ function ninja_forms_append_to_page($content){
  * 
 **/
 
-function ninja_forms_display_form($form_id = ''){
+function ninja_forms_display_form( $form_id = '' ){
 	//Define our global variables
 	global $post, $wpdb, $ninja_forms_fields, $ninja_forms_processing;
 
@@ -88,7 +88,22 @@ function ninja_forms_display_form($form_id = ''){
 		}else{
 			$ajax = 0;
 		}
+		if( isset( $form_row['data']['logged_in'] ) ){
+			$logged_in = $form_row['data']['logged_in'];
+		}else{
+			$logged_in = 0;
+		}
+
+		$display = true;
+
+		if( $logged_in == 1 ){
+			if( !is_user_logged_in() ){
+				$display = false;
+			}
+		}
 		
+		$display = apply_filters( 'ninja_forms_display_show_form', $display, $form_id );
+
 		if($ajax == 1){
 			$url = admin_url( 'admin-ajax.php' );
 			$url = add_query_arg('action', 'ninja_forms_ajax_submit', $url);
@@ -96,30 +111,32 @@ function ninja_forms_display_form($form_id = ''){
 			$url = '';
 		}
 
-		do_action( 'ninja_forms_before_form_display', $form_id );
-		
-		do_action('ninja_forms_display_before_form_wrap', $form_id);
-		do_action('ninja_forms_display_open_form_wrap', $form_id);
+		if( $display ){
+			do_action( 'ninja_forms_before_form_display', $form_id );
+			
+			do_action('ninja_forms_display_before_form_wrap', $form_id);
+			do_action('ninja_forms_display_open_form_wrap', $form_id);
 
-		do_action('ninja_forms_display_before_form_title', $form_id);
-		do_action('ninja_forms_display_form_title', $form_id);
-		do_action('ninja_forms_display_after_form_title', $form_id);
-				
-		do_action('ninja_forms_display_before_form', $form_id);
-		do_action('ninja_forms_display_open_form_tag', $form_id);
-		do_action('ninja_forms_display_after_open_form_tag', $form_id);
+			do_action('ninja_forms_display_before_form_title', $form_id);
+			do_action('ninja_forms_display_form_title', $form_id);
+			do_action('ninja_forms_display_after_form_title', $form_id);
+					
+			do_action('ninja_forms_display_before_form', $form_id);
+			do_action('ninja_forms_display_open_form_tag', $form_id);
+			do_action('ninja_forms_display_after_open_form_tag', $form_id);
 
-		do_action('ninja_forms_display_before_fields', $form_id);
-		do_action('ninja_forms_display_fields', $form_id);
-		do_action('ninja_forms_display_after_fields', $form_id);
+			do_action('ninja_forms_display_before_fields', $form_id);
+			do_action('ninja_forms_display_fields', $form_id);
+			do_action('ninja_forms_display_after_fields', $form_id);
 
-		do_action('ninja_forms_display_close_form_tag', $form_id);
-		do_action('ninja_forms_display_after_form', $form_id);		
+			do_action('ninja_forms_display_close_form_tag', $form_id);
+			do_action('ninja_forms_display_after_form', $form_id);		
 
-		do_action('ninja_forms_display_close_form_wrap', $form_id);
-		do_action('ninja_forms_display_after_form_wrap', $form_id);
+			do_action('ninja_forms_display_close_form_wrap', $form_id);
+			do_action('ninja_forms_display_after_form_wrap', $form_id);
 
-		do_action( 'ninja_forms_display_js', $form_id );
-		do_action( 'ninja_forms_display_css', $form_id );
+			do_action( 'ninja_forms_display_js', $form_id );
+			do_action( 'ninja_forms_display_css', $form_id );
+		}
 	}
 }

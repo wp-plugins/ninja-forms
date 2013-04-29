@@ -11,7 +11,7 @@ function ninja_forms_process(){
 	}else{
 		if($ajax == 1){
 			$json = ninja_forms_json_response();
-			header('Content-Type', 'application/json');			
+			//header('Content-Type', 'application/json');			
 			echo $json;
 			die();
 		}else{

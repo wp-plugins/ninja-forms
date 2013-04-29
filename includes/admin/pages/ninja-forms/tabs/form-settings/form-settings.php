@@ -79,6 +79,14 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				'label' => __('Submit via ajax?', 'ninja-forms'),
 				'display_function' => '',
 				'help' => __('', 'ninja-forms'),
+			),			
+			array(
+				'name' => 'logged_in',
+				'type' => 'checkbox',
+				'desc' => '',
+				'label' => __( 'Require Logged-in?', 'ninja-forms' ),
+				'display_function' => '',
+				'help' => __('', 'ninja-forms'),
 			),
 			array(
 				'name' => 'landing_page',

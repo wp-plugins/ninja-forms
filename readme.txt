@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws
 Tags: forms, web forms, contact forms, custom form, form builder, form manager, form, input, contact form, custom forms, form creator, form creation
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 2.1.9
+Stable tag: 2.2.0
 License: GPLv2 or later
 
 Create custom forms with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -36,6 +36,7 @@ Please feel free to visit our [demo site](http://demo.wpninjas.com/ninja-forms/)
 * [Conditional Logic](http://wpninjas.com/downloads/conditional-logic/) - Create "smart" forms that show or hide fields based upon user input. Even add a value to a dropdown list when a user selects a specific value from another list.
 * [Front-End Posting](http://wpninjas.com/downloads/front-end-posting/) - Use Ninja Forms to create posts from the front-end. These can be added to any post type, including custom post types, and users can select categories and tags.
 * [Layout & Styles](http://wpninjas.com/downloads/layout-styles/) - Use Ninja Forms to create amzing form layouts and styles right from your WordPress admin.
+* [MailChimp](http://wpninjas.com/downloads/mail-chimp/) - The MailChimp extension allows you to quickly create newsletter signup forms for your MailChimp account using the power and flexibility that Ninja Forms provides.
 
 We have several other extensions in the works.
 
@@ -60,16 +61,33 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.1.9 =
+= 2.2.0 =
+
+*Features:*
+    
+* Added a new form setting to prevent non-logged-in users from viewing or submitting the form.
+* Added a new filter named: ninja_forms_display_show_form. It is passed $display, a bool() true or false, along with the form_id. It expects a bool() true or false return. If false, the form will not be output to the screen. This is different than the behavior of the ninja_forms_display_form_visibility filter.
+
+*Bugs:*
 
 * Fixed a bug that could cause the success message to not show up properly when using AJAX.
-* Please note that if you are using a version of PHP lower than 5.3, you may experience some problems using AJAX Submissions. These can be minimized by using simple success/error messages without any quotes or special characters.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.2.0 =
+
+*Features:*
+    
+* Added a new form setting to prevent non-logged-in users from viewing or submitting the form.
+* Added a new filter named: ninja_forms_display_show_form. It is passed $display, a bool() true or false, along with the form_id. It expects a bool() true or false return. If false, the form will not be output to the screen. This is different than the behavior of the ninja_forms_display_form_visibility filter.
+
+*Bugs:*
+
+* Fixed a bug that could cause the success message to not show up properly when using AJAX.
 
 = 2.1.9 =
 

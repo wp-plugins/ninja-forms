@@ -19,7 +19,7 @@ function ninja_forms_post_process(){
 			$json = ninja_forms_json_response();
 			
 			if($ajax == 1){
-				header('Content-Type', 'application/json');
+				//header('Content-Type', 'application/json');
 				echo $json;
 				die();
 			}else{
@@ -31,7 +31,7 @@ function ninja_forms_post_process(){
 			}
 		}else{
 			if($ajax == 1){
-				header('Content-Type', 'application/json');
+				//header('Content-Type', 'application/json');
 				echo $json;
 				die();
 			}else{
@@ -41,7 +41,7 @@ function ninja_forms_post_process(){
 		}
 	}else{
 		if($ajax == 1){
-			header('Content-Type', 'application/json');
+			//header('Content-Type', 'application/json');
 			echo $json;
 			die();
 		}else{

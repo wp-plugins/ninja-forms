@@ -29,6 +29,16 @@ function ninja_forms_register_field_textbox(){
 			),			
 			array(
 				'type' => 'checkbox',
+				'name' => 'first_name',
+				'label' => __( 'Is this a first name?', 'ninja-forms' ),
+			),			
+			array(
+				'type' => 'checkbox',
+				'name' => 'last_name',
+				'label' => __( 'Is this a last name?', 'ninja-forms' ),
+			),
+			array(
+				'type' => 'checkbox',
 				'name' => 'from_name',
 				'label' => __( 'Use this as the "From" email name for Administrative recepients of this form?', 'ninja-forms' ),
 			),

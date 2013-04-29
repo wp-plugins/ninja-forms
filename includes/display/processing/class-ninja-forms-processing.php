@@ -146,7 +146,7 @@ class Ninja_Forms_Processing {
 							}
 
 							$val = ninja_forms_stripslashes_deep( $val );
-							$val = ninja_forms_esc_html_deep( $val );
+							//$val = ninja_forms_esc_html_deep( $val );
 							
 							$this->data['fields'][$field_ID] = $val;
 							$field_row = ninja_forms_get_field_by_id( $field_ID );

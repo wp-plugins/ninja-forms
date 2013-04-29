@@ -24,10 +24,10 @@ function ninja_forms_display_form_title( $form_id ){
 		$form_title = '';
 	}
 	
-	$form_title = apply_filters('ninja_forms_form_title', $form_title);
+	$form_title = '<h2 class="">'.$form_title.'</h2>';
+
+	$form_title = apply_filters( 'ninja_forms_form_title', $form_title, $form_id );
 	if($show_title == 1){
-		?>
-		<h2 class=""><?php echo $form_title;?></h2>
-		<?php
+		echo $form_title;
 	}
 }
