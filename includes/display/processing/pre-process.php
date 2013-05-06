@@ -9,8 +9,6 @@ function ninja_forms_setup_processing_class(){
 	$ninja_forms_processing->setup_submitted_vars();
 }
 
-
-
 function ninja_forms_pre_process(){
 	global $ninja_forms_processing;
 	

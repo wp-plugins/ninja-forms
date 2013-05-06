@@ -332,7 +332,10 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 							<?php echo $label; ?>
 						</th>
 						<td>
-							<?php wp_editor($value, $name); ?>
+							<?php 
+							$args = apply_filters( 'ninja_forms_admin_metabox_rte', array() );
+							wp_editor( $value, $name, $args ); 
+							?>
 						</td>
 					</tr>
 					<?php

@@ -137,6 +137,8 @@ function ninja_forms_display_form( $form_id = '' ){
 
 			do_action( 'ninja_forms_display_js', $form_id );
 			do_action( 'ninja_forms_display_css', $form_id );
+		}else{
+			do_action( 'ninja_forms_display_user_not_logged_in', $form_id );
 		}
 	}
 }

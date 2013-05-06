@@ -91,7 +91,8 @@ function ninja_forms_edit_field_el_output($field_id, $type, $label = '', $name =
 		<?php
 		break;
 		case 'rte':
-			wp_editor( $value, $name );
+			$args = apply_filters( 'ninja_forms_edit_field_rte', array() );
+			wp_editor( $value, $name, $args );
 		break;
 	}
 		if($type != 'rte'){

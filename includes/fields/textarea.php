@@ -56,7 +56,8 @@ function ninja_forms_field_textarea_display($field_id, $data){
 	$field_class = ninja_forms_get_field_class( $field_id );
 
 	if($textarea_rte == 1){
-		wp_editor( $default_value, 'ninja_forms_field_'.$field_id );
+		$args = apply_filters( 'ninja_forms_textarea_rte', array() );
+		wp_editor( $default_value, 'ninja_forms_field_'.$field_id, $args );
 	}else{
 		?>
 		<textarea name="ninja_forms_field_<?php echo $field_id;?>" id="ninja_forms_field_<?php echo $field_id;?>" class="<?php echo $field_class;?>" rel="<?php echo $field_id;?>"><?php echo $default_value;?></textarea>
