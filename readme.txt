@@ -1,12 +1,12 @@
 === Ninja Forms ===
 Contributors: kstover, jameslaws
-Tags: forms, web forms, contact forms, custom form, form builder, form manager, form, input, contact form, custom forms, form creator, form creation
+Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.3
 Tested up to: 3.5
 Stable tag: 2.2.1
 License: GPLv2 or later
 
-Create custom forms with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
+Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
 
 == Description ==
 Ninja Forms is a full-featured form creation framework for WordPress. It allows you to easily and quickly design complex forms through a drag and drop interface and absolutely no code. But for you developers it has a ton of hooks and filters so you can do absolutely anything with this powerful form building framework. Here are just a few of the things you will find in Ninja Forms:
@@ -64,7 +64,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 = 2.2.1 =
 
 *Changes:*
-        
+
 * Added a new action hook that runs if a form is set to "Require Logged-In", but the user is not logged in. It is named: ninja_forms_display_user_not_logged_in.
 * Added new filters for the arguments sent to the wp_editor() function when a rich text editor is rendered. They are:	ninja_forms_textarea_rte (Front-End Textarea), ninja_forms_admin_metabox_rte (Ninja Forms admin settings areas), ninja_forms_edit_field_rte (Field settings).
 
@@ -77,14 +77,14 @@ If you have any feature requests, please feel free to visit [wpninjas.com](http:
 = 2.2.1 =
 
 *Changes:*
-        
+
 * Added a new action hook that runs if a form is set to "Require Logged-In", but the user is not logged in. It is named: ninja_forms_display_user_not_logged_in.
 * Added new filters for the arguments sent to the wp_editor() function when a rich text editor is rendered. They are:	ninja_forms_textarea_rte (Front-End Textarea), ninja_forms_admin_metabox_rte (Ninja Forms admin settings areas), ninja_forms_edit_field_rte (Field settings).
 
 = 2.2.0 =
 
 *Features:*
-    
+
 * Added a new form setting to prevent non-logged-in users from viewing or submitting the form.
 * Added a new filter named: ninja_forms_display_show_form. It is passed $display, a bool() true or false, along with the form_id. It expects a bool() true or false return. If false, the form will not be output to the screen. This is different than the behavior of the ninja_forms_display_form_visibility filter.
 
@@ -132,7 +132,7 @@ If you have any feature requests, please feel free to visit [wpninjas.com](http:
 *Bugs:*
 
 * Fixed a bug that prevented some installations from being able to use AJAX submissions.
-* Fixed a problem with appending a form to a page or using a shortcode that sometimes caused extra breaks 
+* Fixed a problem with appending a form to a page or using a shortcode that sometimes caused extra breaks
 
 = 2.1.3 =
 
