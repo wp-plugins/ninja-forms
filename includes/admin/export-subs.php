@@ -10,7 +10,7 @@ function ninja_forms_subs_bulk_export(){
 	}
 }
 
-function ninja_forms_export_subs_to_csv($sub_ids = ''){
+function ninja_forms_export_subs_to_csv( $sub_ids = '', $return = false ){
 	global $ninja_forms_fields;
 	$plugin_settings = get_option("ninja_forms_settings");
 	if(isset($plugin_settings['date_format'])){
@@ -89,13 +89,18 @@ function ninja_forms_export_subs_to_csv($sub_ids = ''){
 	$today = date($date_format);
 	$filename = 'ninja_forms_subs_'.$today.'.csv';
 
-	header("Content-type: application/csv");
-	header("Content-Disposition: attachment; filename=".$filename);
-	header("Pragma: no-cache");
-	header("Expires: 0");
-	echo str_putcsv($array);
+	if( $return ){
+		return str_putcsv($array);
+	}else{
+		header("Content-type: application/csv");
+		header("Content-Disposition: attachment; filename=".$filename);
+		header("Pragma: no-cache");
+		header("Expires: 0");
+		echo str_putcsv($array);
 
-	die();
+		die();		
+	}
+
 
 }
 

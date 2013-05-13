@@ -170,7 +170,7 @@ function ninja_forms_field_list_edit($field_id, $data){
 	<?php
 }
 
-function ninja_forms_field_list_display($field_id, $data){
+function ninja_forms_field_list_display( $field_id, $data ){
 	global $wpdb, $ninja_forms_fields;
 
 	if(isset($data['show_field'])){
@@ -217,7 +217,7 @@ function ninja_forms_field_list_display($field_id, $data){
 		$multi_size = 5;
 	}
 	
-	if(isset($data['default_value'])){
+	if( isset( $data['default_value'] ) AND !is_array( $data['default_value'] ) ){
 		$selected_value = $data['default_value'];
 	}else{
 		$selected_value = '';		
@@ -564,3 +564,30 @@ function ninja_forms_field_filter_list_wrap_class( $field_wrap_class, $field_id 
 	
 	return $field_wrap_class;
 }
+
+// Add a filter to change the $data['default_value'] to the "selected" list elements, if any exist.
+function ninja_forms_field_filter_list_data( $data, $field_id ){
+	$tmp_array = array();
+	// Get the field row using our field ID.
+	$field_row = ninja_forms_get_field_by_id( $field_id );
+	// Get our field type.
+	$field_type = $field_row['type'];
+	// Check to see if we are working with a list. If so, filter the default_value
+	if( $field_type == '_list' ){
+		if( isset( $data['list']['options'] ) ){
+			foreach( $data['list']['options'] as $option ){
+				if( isset( $option['selected'] ) ){
+					if( isset( $data['list_show_value'] ) AND $data['list_show_value'] == 1 ){
+						$tmp_array[] = $option['value'];
+					}else{
+						$tmp_array[] = $option['label'];
+					}
+				}
+			}
+		}
+		$data['default_value'] = $tmp_array;
+	}
+	return $data;
+}
+
+add_filter( 'ninja_forms_field', 'ninja_forms_field_filter_list_data', 10, 2 );

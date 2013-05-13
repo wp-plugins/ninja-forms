@@ -71,7 +71,7 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				'display_function' => '',
 				'help' => __('', 'ninja-forms'),
 				'default_value' => 1,
-			),			
+			),				
 			array(
 				'name' => 'ajax',
 				'type' => 'checkbox',
@@ -235,7 +235,16 @@ function ninja_forms_register_form_settings_admin_email_metabox(){
 				'type' => 'checkbox',
 				'label' => __( 'Include a list of fields?', 'ninja-forms' ),
 				'default_value' => 1,
-			),	
+			),
+			array(
+				'name' => 'admin_attach_csv',
+				'type' => 'checkbox',
+				'desc' => '',
+				'label' => __('Attach CSV of submission?', 'ninja-forms'),
+				'display_function' => '',
+				'help' => __('', 'ninja-forms'),
+				'default_value' => 0,
+			),		
 		),
 	);
 	ninja_forms_register_tab_metabox($args);

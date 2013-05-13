@@ -1,7 +1,7 @@
 <?php
 add_action('init', 'ninja_forms_register_email_admin');
 function ninja_forms_register_email_admin(){
-	add_action('ninja_forms_process', 'ninja_forms_email_admin', 999);
+	add_action('ninja_forms_post_process', 'ninja_forms_email_admin', 999);
 }
 
 function ninja_forms_email_admin(){

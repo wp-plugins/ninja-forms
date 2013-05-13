@@ -343,6 +343,9 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 				case 'file':
 					?>
 					<tr <?php if( $tr_class != '' ){ ?>class="<?php echo $tr_class;?>"<?php } ?>>
+						<th>
+							<?php echo $label; ?>
+						</th>
 						<td colspan="2">
 							<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $max_file_size;?>" />
 							<input type="file" name="<?php echo $name;?>" id="<?php echo $id;?>" class="<?php echo $class;?>">
