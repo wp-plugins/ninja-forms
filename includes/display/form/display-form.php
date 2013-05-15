@@ -1,4 +1,5 @@
 <?php
+
 if( isset( $_POST['_ninja_forms_display_submit'] ) AND $_POST['_ninja_forms_display_submit'] == 1 ){
 	$form_row = ninja_forms_get_form_by_id( $_POST['_form_id'] );
 	if( isset( $form_row['data']['ajax'] ) ){

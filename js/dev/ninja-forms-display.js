@@ -30,28 +30,36 @@ jQuery(document).ready(function(jQuery) {
 		}
 	});
 
-	jQuery(".ninja-forms-mask").each(function(){
-		var mask = this.title;
-		jQuery(this).mask(mask);
-	});
+	if( jQuery.fn.mask ){
+		jQuery(".ninja-forms-mask").each(function(){
+			var mask = this.title;
+			jQuery(this).mask(mask);
+		});
 
-	jQuery(".ninja-forms-date").mask('99/99/9999');
+		jQuery(".ninja-forms-date").mask('99/99/9999');		
+	}
 
-	jQuery(".ninja-forms-datepicker").datepicker({
-		dateFormat: ninja_forms_settings.date_format,
-	});	
+	if( jQuery.fn.datepicker ){
+		jQuery(".ninja-forms-datepicker").datepicker({
+			dateFormat: ninja_forms_settings.date_format,
+		});
+	}
+
+	if( jQuery.fn.autoNumeric ){
+		jQuery(".ninja-forms-currency").autoNumeric({aSign: ninja_forms_settings.currency_symbol});	
+	}
 		
-	jQuery(".ninja-forms-currency").autoNumeric({aSign: ninja_forms_settings.currency_symbol});
-	
 	/* * * End Mask JS * * */
 	
 	/* * * Begin Help Hover JS * * */
 
-	jQuery(".ninja-forms-help-text").qtip({
-		style: {
-			classes: 'qtip-shadow qtip-dark'
-		}
-	});
+	if( jQuery.fn.qtip ){
+		jQuery(".ninja-forms-help-text").qtip({
+			style: {
+				classes: 'qtip-shadow qtip-dark'
+			}
+		});		
+	}
 
 	/* * * End Help Hover JS * * */
 

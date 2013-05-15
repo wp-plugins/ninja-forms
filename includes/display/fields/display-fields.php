@@ -255,5 +255,7 @@ function ninja_forms_get_field_class($field_id){
 		$field_class .= " ".$listen_class;
 	}
 
+	$field_class = apply_filters( 'ninja_forms_display_field_class', $field_class, $field_id );
+
 	return $field_class;
 }

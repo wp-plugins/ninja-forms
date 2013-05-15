@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 2.2.2
+Stable tag: 2.2.3
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -67,22 +67,34 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.2.2 =
-
-*Features:*
-
-* Added an option to email a CSV file of the user's submission to the administrator email addresses.
+= 2.2.3 =
 
 *Changes:*
 
-* Submission emailing has been moved to the ninja_forms_post_process hook from the ninja_forms_process hook.
-* The function used to export submissions now accepts a second parameter $return. Setting this to true will cause the function to return the CSV string rather than output the file for download.
+* Ninja Forms should now properly enqueue scripts for masking, datepicker, and other jQuery elements only if they are in your form.
+* Added a new filter for the classess output for a field: ninja_forms_display_field_class.
+
+*Bugs:*
+
+* Fixed a bug that was causing list fields to work improperly with the Conditionals Extension.
+
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.2.3 =
+
+*Changes:*
+
+* Ninja Forms should now properly enqueue scripts for masking, datepicker, and other jQuery elements only if they are in your form.
+* Added a new filter for the classess output for a field: ninja_forms_display_field_class.
+
+*Bugs:*
+
+* Fixed a bug that was causing list fields to work improperly with the Conditionals Extension.
 
 = 2.2.2 =
 
