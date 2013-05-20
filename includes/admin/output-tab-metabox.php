@@ -112,6 +112,11 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 				$default_value = $s['default_value'];
 			}else{
 				$default_value = '';
+			}			
+			if(isset($s['size'])){
+				$size = $s['size'];
+			}else{
+				$size = '';
 			}
 
 			if( is_array( $name_array ) ){
@@ -180,6 +185,40 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 									foreach( $s['options'] as $option ){
 										?>
 										<option value="<?php echo $option['value'];?>" <?php selected($value, $option['value']); ?>><?php echo $option['name'];?></option>
+										<?php
+									}
+								} ?>
+							</select>
+							<?php if( $help_text != ''){ ?>
+								<a href="#" class="tooltip">
+								    <img id="" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="">
+								    <span>
+								        <img class="callout" src="<?php echo NINJA_FORMS_URL;?>/images/callout.gif" />
+								        <?php echo $help_text;?>
+								    </span>
+								</a>
+							<?php } ?>
+						</td>
+					</tr>
+					<?php
+					break;
+				case 'multi_select':
+					if( $value == '' ){
+						$value = array();
+					}
+					?>
+					<tr <?php if( $tr_class != '' ){ ?>class="<?php echo $tr_class;?>"<?php } ?>>
+						<th>
+							<?php echo $label; ?>
+						</th>
+						<td>
+							<input type="hidden" name="<?php echo $name;?>" value="">
+							<select name="<?php echo $name;?>[]" class="<?php echo $class;?>" multiple="multiple" size="<?php echo $size;?>">
+								<?php
+								if( is_array( $s['options']) AND !empty( $s['options'] ) ){
+									foreach( $s['options'] as $option ){
+										?>
+										<option value="<?php echo $option['value'];?>" <?php selected( in_array( $option['value'], $value ) ); ?>><?php echo $option['name'];?></option>
 										<?php
 									}
 								} ?>

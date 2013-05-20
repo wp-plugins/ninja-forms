@@ -1,4 +1,5 @@
 <?php
+
 // Begin Form Interaction Functions
 
 function ninja_forms_insert_field( $form_id, $args = array() ){
@@ -111,7 +112,7 @@ function ninja_forms_get_form_by_sub_id( $sub_id ){
 	return $form_row;
 }
 
-// The ninja_forms_delete_form( $form_id ) function is in includes/ajax.php
+// The ninja_forms_delete_form( $form_id ) function is in includes/admin/ajax.php
 
 function ninja_forms_update_form( $args ){
 	global $wpdb;
@@ -341,7 +342,9 @@ function ninja_forms_get_subs($args = array()){
 function ninja_forms_get_sub_by_id($sub_id){
 	global $wpdb;
 	$sub_row = $wpdb->get_row($wpdb->prepare("SELECT * FROM ".NINJA_FORMS_SUBS_TABLE_NAME." WHERE id = %d", $sub_id), ARRAY_A);
-	$sub_row['data'] = unserialize($sub_row['data']);
+	if( $sub_row ){
+		$sub_row['data'] = unserialize($sub_row['data']);
+	}
 	return $sub_row;
 }
 
@@ -374,6 +377,8 @@ function ninja_forms_update_sub($args){
 	$wpdb->update(NINJA_FORMS_SUBS_TABLE_NAME, $update_array, array('id' => $sub_id));
 }
 
+// The ninja_forms_delete_sub( $sub_id ) function is in includes/admin/ajax.php
+
 function ninja_forms_addslashes_deep( $value ){
     $value = is_array($value) ?
         array_map('ninja_forms_addslashes_deep', $value) :
@@ -381,17 +386,36 @@ function ninja_forms_addslashes_deep( $value ){
     return $value;
 }
 
-function ninja_forms_str_replace_deep( $search, $replace, $value ){
-    $value = is_array($value) ?
-        array_map('ninja_forms_str_replace_deep', array( $search, $replace, $value ) ) :
-        str_replace( $search, $replace, $value );
-    return $value;
-}
+function utf8_encode_recursive( $input ){
+    if ( is_array( $input ) )    {
+        return array_map( __FUNCTION__, $input );
+    }else{
+        return utf8_encode( $input );
+    }
+}  
+
+function ninja_forms_str_replace_deep($search, $replace, $subject){ 
+    if( is_array( $subject ) ){ 
+        foreach( $subject as &$oneSubject ) 
+            $oneSubject = ninja_forms_str_replace_deep($search, $replace, $oneSubject); 
+        unset($oneSubject); 
+        return $subject; 
+    } else { 
+        return str_replace($search, $replace, $subject); 
+    } 
+} 
 
 function ninja_forms_html_entity_decode_deep( $value ){
     $value = is_array($value) ?
         array_map('ninja_forms_html_entity_decode_deep', $value) :
         html_entity_decode( $value );
+    return $value;
+}
+
+function ninja_forms_htmlspecialchars_deep( $value ){
+    $value = is_array($value) ?
+        array_map('ninja_forms_htmlspecialchars_deep', $value) :
+        htmlspecialchars( $value );
     return $value;
 }
 
@@ -423,14 +447,50 @@ function ninja_forms_json_response(){
 
 	$errors = $ninja_forms_processing->get_all_errors();
 	$success = $ninja_forms_processing->get_all_success_msgs();
-	$fields = ninja_forms_html_entity_decode_deep( $ninja_forms_processing->get_all_fields() );
-	$form_settings = ninja_forms_html_entity_decode_deep( $ninja_forms_processing->get_all_form_settings() );
-	$extras = ninja_forms_html_entity_decode_deep( $ninja_forms_processing->get_all_extras() );
+	$fields = $ninja_forms_processing->get_all_fields();
+	$form_settings = $ninja_forms_processing->get_all_form_settings();
+	$extras = $ninja_forms_processing->get_all_extras();
 
 	if( version_compare( phpversion(), '5.3', '>=' ) ){
 		$json = json_encode( array( 'form_id' => $form_id, 'errors' => $errors, 'success' => $success, 'fields' => $fields, 'form_settings' => $form_settings, 'extras' => $extras ), JSON_HEX_QUOT | JSON_HEX_TAG  );
 	}else{
+
+		$errors = ninja_forms_html_entity_decode_deep( $errors );
+		$success = ninja_forms_html_entity_decode_deep( $success );
+		$fields = ninja_forms_html_entity_decode_deep( $fields );
+		$form_settings = ninja_forms_html_entity_decode_deep( $form_settings );
+		$extras = ninja_forms_html_entity_decode_deep( $extras );
+
+		$errors = ninja_forms_str_replace_deep( '"', "\u0022", $errors );
+		$errors = ninja_forms_str_replace_deep( "'", "\u0027", $errors );
+		$errors = ninja_forms_str_replace_deep( '<', "\u003C", $errors );
+		$errors = ninja_forms_str_replace_deep( '>', "\u003E", $errors );
+
+		$success = ninja_forms_str_replace_deep( '"', "\u0022", $success );
+		$success = ninja_forms_str_replace_deep( "'", "\u0027", $success );
+		$success = ninja_forms_str_replace_deep( '<', "\u003C", $success );
+		$success = ninja_forms_str_replace_deep( '>', "\u003E", $success );
+
+		$fields = ninja_forms_str_replace_deep( '"', "\u0022", $fields );
+		$fields = ninja_forms_str_replace_deep( "'", "\u0027", $fields );
+		$fields = ninja_forms_str_replace_deep( '<', "\u003C", $fields );
+		$fields = ninja_forms_str_replace_deep( '>', "\u003E", $fields );		
+
+		$form_settings = ninja_forms_str_replace_deep( '"', "\u0022", $form_settings );
+		$form_settings = ninja_forms_str_replace_deep( "'", "\u0027", $form_settings );
+		$form_settings = ninja_forms_str_replace_deep( '<', "\u003C", $form_settings );
+		$form_settings = ninja_forms_str_replace_deep( '>', "\u003E", $form_settings );
+
+		$extras = ninja_forms_str_replace_deep( '"', "\u0022", $extras );
+		$extras = ninja_forms_str_replace_deep( "'", "\u0027", $extras );
+		$extras = ninja_forms_str_replace_deep( '<', "\u003C", $extras );
+		$extras = ninja_forms_str_replace_deep( '>', "\u003E", $extras );
+	
 		$json = json_encode( array( 'form_id' => $form_id, 'errors' => $errors, 'success' => $success, 'fields' => $fields, 'form_settings' => $form_settings, 'extras' => $extras ) );
+		$json = str_replace( "\\\u0022", "\\u0022", $json );
+		$json = str_replace( "\\\u0027", "\\u0027", $json );
+		$json = str_replace( "\\\u003C", "\\u003C", $json );
+		$json = str_replace( "\\\u003E", "\\u003E", $json );
 	}
 
 	return $json;
