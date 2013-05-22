@@ -451,9 +451,12 @@ function ninja_forms_json_response(){
 	$form_settings = $ninja_forms_processing->get_all_form_settings();
 	$extras = $ninja_forms_processing->get_all_extras();
 
+
+
 	if( version_compare( phpversion(), '5.3', '>=' ) ){
 		$json = json_encode( array( 'form_id' => $form_id, 'errors' => $errors, 'success' => $success, 'fields' => $fields, 'form_settings' => $form_settings, 'extras' => $extras ), JSON_HEX_QUOT | JSON_HEX_TAG  );
 	}else{
+
 
 		$errors = ninja_forms_html_entity_decode_deep( $errors );
 		$success = ninja_forms_html_entity_decode_deep( $success );
@@ -461,6 +464,12 @@ function ninja_forms_json_response(){
 		$form_settings = ninja_forms_html_entity_decode_deep( $form_settings );
 		$extras = ninja_forms_html_entity_decode_deep( $extras );
 
+		$errors = utf8_encode_recursive( $errors );
+		$success = utf8_encode_recursive( $success );
+		$fields = utf8_encode_recursive( $fields );
+		$form_settings = utf8_encode_recursive( $form_settings );
+		$extras = utf8_encode_recursive( $extras );
+		
 		$errors = ninja_forms_str_replace_deep( '"', "\u0022", $errors );
 		$errors = ninja_forms_str_replace_deep( "'", "\u0027", $errors );
 		$errors = ninja_forms_str_replace_deep( '<', "\u003C", $errors );

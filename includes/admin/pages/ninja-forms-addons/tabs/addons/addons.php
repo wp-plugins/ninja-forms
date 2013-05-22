@@ -86,6 +86,14 @@ function ninja_forms_tab_addons(){
             'link' => 'http://wpninjas.com/downloads/mail-chimp/',
             'plugin' => 'ninja-forms-mailchimp/ninja-forms-mailchimp.php',
             'docs' => '',
+        ),        
+        array (
+            'title' => 'Campaign Monitor',
+            'image' => 'http://wpninjas.com/wp-content/uploads/edd/2013/05/campaign-monitor-header-300x121.png',
+            'content' => 'The Campaign Monitor extension allows you to quickly create newsletter signup forms for your Campaign Monitor account using the power and flexibility that Ninja Forms provides. …',
+            'link' => 'http://wpninjas.com/downloads/mail-chimp/',
+            'plugin' => 'ninja-forms-campaign-monitor/ninja-forms-campaign-monitor.php',
+            'docs' => '',
         ),
     );
 

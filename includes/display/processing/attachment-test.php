@@ -16,6 +16,9 @@ function ninja_forms_attachment_test( $sub_id ){
 		$dir = $path['dirname'];
 		$basename = $path['basename'];
 		$new_name = apply_filters( 'ninja_forms_submission_csv_name', 'ninja-forms-submission' );
+		if( file_exists( $dir.'/'.$new_name.'.csv' ) ){
+			unlink( $dir.'/'.$new_name.'.csv' );
+		}
 		rename( $dir.'/'.$basename, $dir.'/'.$new_name.'.csv' );
 		$file1 = $dir.'/'.$new_name.'.csv';
 		array_push( $files, $file1 );

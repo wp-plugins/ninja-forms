@@ -574,7 +574,7 @@ function ninja_forms_field_filter_list_data( $data, $field_id ){
 	$field_type = $field_row['type'];
 	// Check to see if we are working with a list. If so, filter the default_value
 	if( $field_type == '_list' ){
-		if( isset( $data['list']['options'] ) ){
+		if( isset( $data['list']['options'] ) AND is_array( $data['list']['options'] ) AND !empty( $data['list']['options'] ) ){
 			foreach( $data['list']['options'] as $option ){
 				if( isset( $option['selected'] ) AND $option['selected'] == 1 ){
 					if( isset( $data['list_show_value'] ) AND $data['list_show_value'] == 1 ){

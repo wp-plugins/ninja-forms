@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.3
 Tested up to: 3.5
-Stable tag: 2.2.4
+Stable tag: 2.2.5
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -43,6 +43,7 @@ Please feel free to visit our [demo site](http://demo.wpninjas.com/ninja-forms/)
 * [Front-End Posting](http://wpninjas.com/downloads/front-end-posting/) - Use Ninja Forms to create posts from the front-end. These can be added to any post type, including custom post types, and users can select categories and tags.
 * [Layout & Styles](http://wpninjas.com/downloads/layout-styles/) - Use Ninja Forms to create amzing form layouts and styles right from your WordPress admin.
 * [MailChimp](http://wpninjas.com/downloads/mail-chimp/) - The MailChimp extension allows you to quickly create newsletter signup forms for your MailChimp account using the power and flexibility that Ninja Forms provides.
+* [Campaign Monitor](http://wpninjas.com/downloads/campaign-monitor/) - The Campaign Monitor extension allows you to quickly create newsletter signup forms for your Campaign Monitor account using the power and flexibility that Ninja Forms provides.
 
 We have several other extensions in the works.
 
@@ -67,22 +68,41 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.2.4 =
+= 2.2.5 =
 
 *Changes:*
 	
-* Added an admin metabox option type of "multi_select."
+*Changes:*
+
+* Added the new Campaign Monitor Extension to the extension list and the add-ons page.
 
 *Bugs:*
 
-* Fixed a bug that prevented AJAX submissions form working properly with PHP versions below 5.3.
-
+* Fixed a typo that redirecte the "More Plugin Information" link to a bad url.
+* Fixed another bug that prevented AJAX submissions form working properly with PHP versions below 5.3.
+* Fixed a bug that could cause CSV files to not be emailed to administrators.
+* Fixed an "undefined variable" notice with the list field type.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.2.5 =
+
+*Changes:*
+	
+*Changes:*
+
+* Added the new Campaign Monitor Extension to the extension list and the add-ons page.
+
+*Bugs:*
+
+* Fixed a typo that redirecte the "More Plugin Information" link to a bad url.
+* Fixed another bug that prevented AJAX submissions form working properly with PHP versions below 5.3.
+* Fixed a bug that could cause CSV files to not be emailed to administrators.
+* Fixed an "undefined variable" notice with the list field type.
 
 = 2.2.4 =
 
