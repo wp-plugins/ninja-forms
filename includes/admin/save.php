@@ -38,6 +38,7 @@ function ninja_forms_admin_save(){
 										$ninja_forms_admin_update_message .= ' ';
 									}
 									$ninja_forms_admin_update_message .= call_user_func_array($setting['save_function'], $arguments);
+									do_action( 'ninja_forms_save_admin_metabox_option', $setting, $form_id, $data_array );
 								}
 							}
 						}
@@ -56,6 +57,7 @@ function ninja_forms_admin_save(){
 								$ninja_forms_admin_update_message .= ' ';
 							}
 							$ninja_forms_admin_update_message .= call_user_func_array($save_function, $arguments);
+							do_action( 'ninja_forms_save_admin_metabox', $slug, $form_id, $data_array );
 						}
 					}
 					
@@ -79,6 +81,7 @@ function ninja_forms_admin_save(){
 								$ninja_forms_admin_update_message .= ' ';
 							}
 							$ninja_forms_admin_update_message .= call_user_func_array($save_function, $arguments);
+							do_action( 'ninja_forms_save_admin_sidebar', $slug, $form_id, $data_array );
 						}
 					}
 				}
@@ -94,6 +97,7 @@ function ninja_forms_admin_save(){
 			$arguments['data'] = $data_array;
 			if($save_function != ''){
 				$ninja_forms_admin_update_message = call_user_func_array($save_function, $arguments);
+				do_action( 'ninja_forms_save_admin_tab', $current_tab, $form_id, $data_array );
 			}
 		}
 	}
