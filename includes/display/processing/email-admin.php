@@ -29,7 +29,7 @@ function ninja_forms_email_admin(){
 	if(!$email_type){
 		$email_type = '';
 	}
-	
+
 	$email_from = htmlspecialchars_decode($email_from);
 	$email_from = htmlspecialchars_decode($email_from);
 
@@ -53,13 +53,15 @@ function ninja_forms_email_admin(){
 	$headers .= "From: $email_from \r\n";
 	$headers .= "Content-Type: text/".$email_type."; charset=utf-8\r\n";
 
-	if($ninja_forms_processing->get_form_setting('admin_attachments')){		
+	if($ninja_forms_processing->get_form_setting('admin_attachments')){
 		$attachments = $ninja_forms_processing->get_form_setting('admin_attachments');
 	}else{
 		$attachments = '';
 	}
 
 	if(is_array($admin_mailto) AND !empty($admin_mailto)){
-		$sent = wp_mail($admin_mailto, $subject, $message, $headers, $attachments);
+		foreach( $admin_mailto as $to ){
+			$sent = wp_mail($to, $subject, $message, $headers, $attachments);
+		}
 	}
 }
