@@ -3,13 +3,13 @@ Contributors: kstover, jameslaws
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 2.2.13
+Stable tag: 2.2.14
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
 
 == Description ==
-Ninja Forms is a full-featured form creation framework for WordPress. It allows you to easily and quickly design complex forms through a drag and drop interface and absolutely no code. But for you developers it has a ton of hooks and filters so you can do absolutely anything with this powerful form building framework.
+Ninja Forms is the ultimate FREE form creation solution for WordPress. Build WordPress Forms within minutes using Ninja Forms powerful forms creation page. It allows you to easily and quickly design complex forms through a drag and drop interface and absolutely no code. But for you developers it has a ton of hooks and filters so you can do absolutely anything with this powerful form building framework.
 
 The Ninja Forms framework is now on [GitHub](https://github.com/wpninjas/ninja-forms)! If you're a developer and want to help make Ninja Forms better, check out our [GitHub repo](https://github.com/wpninjas/ninja-forms). It's also a great resource for developers who are interested in creating premium extensions for our online store.
 
@@ -73,21 +73,31 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.2.13 =
+= 2.2.14 =
 
 * Changes:*
 
-* Added a filter to the individual user-submitted values that are emailed when "Include a list of fields?" is checked - ninja_forms_email_user_value.
-* Added a filter to the label of the default field list that is sent if the "Include a list of fields?" is checked - ninja_forms_email_field_label.
-* Added a filter to the table of defalut fields that is ssent if the "Include a list of fields?" is checked - ninja_forms_email_field_list.
-* Added the option to hide a setting using the admin metabox registration.
-* Cleaned up the Basic Settings metabox to make it more inuitive.
+* Added additional default styling rules to improve general form output includng inline list items when selecting left or right labels.
+
+*Bugs:*
+
+* Fixed the label and field output for the password field to make styling easier.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.2.14 =
+
+* Changes:*
+
+* Added additional default styling rules to improve general form output includng inline list items when selecting left or right labels.
+
+*Bugs:*
+
+* Fixed the label and field output for the password field to make styling easier.
 
 = 2.2.13 =
 
@@ -173,7 +183,7 @@ If you have any feature requests, please feel free to visit [wpninjas.com](http:
 = 2.2.4 =
 
 *Changes:*
-	
+
 * Added an admin metabox option type of "multi_select."
 
 *Bugs:*
