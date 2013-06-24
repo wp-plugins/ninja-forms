@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms
 Plugin URI: http://wpninjas.com/ninja-forms/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 2.2.16
+Version: 2.2.17
 Author: The WP Ninjas
 Author URI: http://wpninjas.net
 */
@@ -50,7 +50,7 @@ global $wpdb, $wp_version;
 
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/ninja-forms");
 define("NINJA_FORMS_URL", plugins_url()."/ninja-forms");
-define("NINJA_FORMS_VERSION", "2.2.16");
+define("NINJA_FORMS_VERSION", "2.2.17");
 define("NINJA_FORMS_TABLE_NAME", $wpdb->prefix . "ninja_forms");
 define("NINJA_FORMS_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fields");
 define("NINJA_FORMS_FAV_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fav_fields");
@@ -126,6 +126,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/form/form-title.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/process-message.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/field-error-message.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/form-wrap.php" );
+require_once( NINJA_FORMS_DIR . "/includes/display/form/fields-wrap.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/required-label.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/open-form-tag.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/close-form-tag.php" );
