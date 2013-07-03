@@ -25,6 +25,7 @@ function ninja_forms_register_field($slug, $args = array()){
  		'edit_sub_process' => '',
 		'group' => '',
 		'interact' => true,
+		'label_pos_options' => '',
  		'limit' => '',
  		'name' => $slug,
 		'nesting' => false,
@@ -78,6 +79,7 @@ function ninja_forms_register_tab( $slug, $args ){
 		'show_save' => true,
 		'show_tab_links' => true,
 		'show_this_tab_link' => true,
+		'tab_reload' => false,
 	);
 
 	// Parse incomming $args into an array and merge it with $defaults
