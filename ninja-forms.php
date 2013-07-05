@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms
 Plugin URI: http://wpninjas.com/ninja-forms/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 2.2.24
+Version: 2.2.25
 Author: The WP Ninjas
 Author URI: http://wpninjas.net
 */
@@ -50,7 +50,7 @@ global $wpdb, $wp_version;
 
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/ninja-forms");
 define("NINJA_FORMS_URL", plugins_url()."/ninja-forms");
-define("NINJA_FORMS_VERSION", "2.2.24");
+define("NINJA_FORMS_VERSION", "2.2.25");
 define("NINJA_FORMS_TABLE_NAME", $wpdb->prefix . "ninja_forms");
 define("NINJA_FORMS_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fields");
 define("NINJA_FORMS_FAV_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fav_fields");
@@ -247,6 +247,17 @@ function ninja_forms_load_lang() {
 	load_plugin_textdomain( 'ninja-forms', false, $lang_dir );
 }
 add_action('init', 'ninja_forms_load_lang');
+
+function ninja_forms_update_version_number(){
+	$plugin_settings = get_option( 'ninja_forms_settings' );
+	if ( NINJA_FORMS_VERSION != $plugin_settings['version'] ) {
+		$plugin_settings['version'] = NINJA_FORMS_VERSION;
+		update_option( 'ninja_forms_settings', $plugin_settings );
+	}
+}
+
+add_action( 'admin_init', 'ninja_forms_update_version_number' );
+
 /*
 $plugin_settings = get_option( 'ninja_forms_settings' );
 
