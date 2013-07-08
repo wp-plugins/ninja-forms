@@ -73,25 +73,25 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.2.25 =
-
-* If you are having issues with your Text fields displaying HTML code, please update to this version.
+= 2.2.26 =
 
 *Bugs:*
 
-* Fixed a widespread bug that caused the fields using Rich Text Editors to save encoded HTML rather than HTML.
-* Fixed a bug that prevented Multiselect and Checkbox list fields from re-populating properly when the page reloaded.
-
-*Changes:*
-
-* Added two new filters that are ran when a submission is exported to CSV. ninja_forms_export_sub_label and ninja_forms_export_sub_value.
-* Moved the location of the ninja_forms_email_user_value filter to be more effective.
+* Fixed a bug that prevented List Fields from working properly with Selected Defaults.
+* Other minor bugfixes.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.2.26 =
+
+*Bugs:*
+
+* Fixed a bug that prevented List Fields from working properly with Selected Defaults.
+* Other minor bugfixes.
 
 = 2.2.25 =
 
@@ -530,6 +530,11 @@ If you have any feature requests, please feel free to visit [wpninjas.com](http:
 * Removed the label "Error message shown when all fields are empty." This wasn't used anyway.
 * Added Shortcodes. They can be used like: [ninja_forms_display_form id=3].
 * Fixed a bug where saving plugin settings would break upon HTML entry.
+* Replaced isset( $ninja_forms_processing with is_object( $ninja_forms_processing.
+* Fixed several activation bugs.
+
+= 2.0 =
+* Version 2.0 is a major leap forward for Ninja Forms. It is much more stable and developer friendly than previous versions of the plugin.bug where saving plugin settings would break upon HTML entry.
 * Replaced isset( $ninja_forms_processing with is_object( $ninja_forms_processing.
 * Fixed several activation bugs.
 
