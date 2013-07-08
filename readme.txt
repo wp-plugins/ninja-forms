@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 2.2.25
+Stable tag: 2.2.26
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -530,11 +530,6 @@ If you have any feature requests, please feel free to visit [wpninjas.com](http:
 * Removed the label "Error message shown when all fields are empty." This wasn't used anyway.
 * Added Shortcodes. They can be used like: [ninja_forms_display_form id=3].
 * Fixed a bug where saving plugin settings would break upon HTML entry.
-* Replaced isset( $ninja_forms_processing with is_object( $ninja_forms_processing.
-* Fixed several activation bugs.
-
-= 2.0 =
-* Version 2.0 is a major leap forward for Ninja Forms. It is much more stable and developer friendly than previous versions of the plugin.bug where saving plugin settings would break upon HTML entry.
 * Replaced isset( $ninja_forms_processing with is_object( $ninja_forms_processing.
 * Fixed several activation bugs.
 
