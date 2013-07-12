@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 2.2.28
+Stable tag: 2.2.29
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -73,17 +73,35 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.2.28 =
+= 2.2.29 =
+
+*Changes:*
+
+* Added a filter to the edit field LI label on the Field Settings tab.
+* Added a field label to the layout text element. This label will not be displayed on the front-end, but will allow users to organize their forms better by naming these sections so that they are not all labelled "Text."
 
 *Bugs:*
 
-* Fixed a major bug that caused a php warning to appear when downloading CSV files and submitting forms.
+* Corrected several strings that weren't setup for translation.
+* Other minor bugfixes.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.2.29 =
+
+*Changes:*
+
+* Added a filter to the edit field LI label on the Field Settings tab.
+* Added a field label to the layout text element. This label will not be displayed on the front-end, but will allow users to organize their forms better by naming these sections so that they are not all labelled "Text."
+
+*Bugs:*
+
+* Corrected several strings that weren't setup for translation.
+* Other minor bugfixes.
 
 = 2.2.28 =
 
@@ -552,4 +570,4 @@ If you have any feature requests, please feel free to visit [wpninjas.com](http:
 * Fixed several activation bugs.
 
 = 2.0 =
-* Version 2.0 is a major leap forward for Ninja Forms. It is much more stable and developer friendly than previous versions of the plugin.veloper friendly than previous versions of the plugin.
+* Version 2.0 is a major leap forward for Ninja Forms. It is much more stable and developer friendly than previous versions of the plugin.
