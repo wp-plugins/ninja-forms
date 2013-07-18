@@ -87,7 +87,6 @@ jQuery.fn.nextElementInDom = function(selector, options) {
 };
 
 jQuery(document).ready(function($) {
-
 	/* * * General JS * * */
 	
 	$(".ninja-forms-admin-date").datepicker();
@@ -154,9 +153,12 @@ jQuery(document).ready(function($) {
 	});
 
 	//Disble the enter key so that it doesn't submit our form if pressed.
-	$("form").live("keydown", function( event ){
+	$("form input").live("keydown", function( event ){
 		if(event.keyCode == 13) {
-			return false;
+			var type = $(this).attr("type");
+			if( type != "textarea" ){
+				return false;
+			}
 		}
 	});
 	/*
@@ -286,8 +288,15 @@ jQuery(document).ready(function($) {
 		}
 
 		$("#ninja_forms_field_" + field_id + "_title").prop("innerHTML", label);
+		if ( label.length > 15 ) {
+			label = label.substring(0, 15);		
+			label += '...';
+		}		
 		$(".ninja-forms-field-conditional-cr-field option[value='" + field_id + "']").each(function(){
-			$(this).text(label);
+			$(this).text(field_id + ' - ' + label);
+		});
+		$(".ninja-forms-calc-select option[value='" + field_id +"']").each(function(){
+			$(this).text(field_id + ' - ' + label);
 		});
 	});
 
@@ -316,7 +325,7 @@ jQuery(document).ready(function($) {
 		}
 	});
 	
-	//Remove Field LI
+	//Remove Field
 	$(".ninja-forms-field-remove").live('click', function(event){
 		event.preventDefault();
 		var field_id = this.id.replace("ninja_forms_field_", "");
@@ -325,6 +334,7 @@ jQuery(document).ready(function($) {
 		if(answer){
 			$.post(ajaxurl, { field_id: field_id, action:"ninja_forms_remove_field"}, function(){
 				$("#ninja_forms_field_" + field_id).remove();
+				$(document).trigger('removeField', [ field_id ]);
 				$(".ninja-forms-field-conditional-cr-field").each(function(){
 					$(this).children('option').each(function(){
 						if(this.value == field_id){
@@ -349,7 +359,6 @@ jQuery(document).ready(function($) {
 			});
 		}
 	});
-
 
 	/* * * End General JS * * */
 	
@@ -526,6 +535,16 @@ jQuery(document).ready(function($) {
 		placeholder: "ui-state-highlight",
 	});
 	
+	// Listen to the Show list values checkboxes and show or hide those if necessary.
+	$(".ninja-forms-field-list-show-value").live("change", function(e){
+		var field_id = this.id.replace("ninja_forms_field_", "");
+		field_id = field_id.replace("_list_show_value", "");
+		if(this.checked){
+			$(".ninja-forms-field-" + field_id + "-list-option-value").show();
+		}else{
+			$(".ninja-forms-field-" + field_id + "-list-option-value").hide();
+		}
+	});
 
 	//Add New List Option
 	$(".ninja-forms-field-add-list-option").live("click", function(event){
@@ -583,6 +602,13 @@ jQuery(document).ready(function($) {
 	$(".ninja-forms-field-list-option-value").live("keydown", function(event){
 		if( event.keyCode == 13 ){
 			var add_id = this.id.replace("option_value", "add_option");
+			$("#" + add_id).click();
+			return false;
+		}
+	});	
+	$(".ninja-forms-field-list-option-calc").live("keydown", function(event){
+		if( event.keyCode == 13 ){
+			var add_id = this.id.replace("option_calc", "add_option");
 			$("#" + add_id).click();
 			return false;
 		}
@@ -687,7 +713,103 @@ jQuery(document).ready(function($) {
 			$(".reg-password").parent().parent().hide();
 		}
 	});
-	
+
+	/* Calculation Field JS */
+
+	$(".ninja-forms-field-add-calc").live("click", function(e){
+		e.preventDefault();
+		var field_id = $(this).attr("rel");
+		var spinner = $(this).next(".spinner");
+		$(spinner).show();
+		var x = $("#ninja_forms_field_" + field_id + "_calc").find(".ninja-forms-calc-row:last").attr("rel");
+		if ( isNaN( x ) ) {
+			x = 0;
+		} else {
+			x = parseInt(x);
+			x = x + 1;			
+		}
+
+		$.post(ajaxurl, { field_id: field_id, x: x, action:"ninja_forms_add_calc_row"}, function(response){
+			$("#ninja_forms_field_" + field_id + "_calc").append(response);
+			$(spinner).hide();
+		});
+	});
+
+	$(".ninja-forms-field-remove-calc").live("click", function(e){
+		e.preventDefault();
+		var field_id = $(this).attr("rel");
+		var x = $(this).attr("name");
+
+		$("#ninja_forms_field_" + field_id + "_calc_row_" + x).hide( function(){
+			$("#ninja_forms_field_" + field_id + "_calc_row_" + x).remove();
+		});
+	});
+
+	// Listen to the calculation field "name" element and update the calculation select lists with the new values.
+	$(".ninja-forms-calc-name").live("keyup", function(){
+		var field_id = $(this).prop("id");
+		field_id = field_id.replace("ninja_forms_field_", "");
+		field_id = field_id.replace("_calc_name", "");
+		var label = this.value;
+		label = ninja_forms_escape_html( label );
+		if ( $.trim( label ) == '' ){
+			label = 'calc_name';
+		}
+
+		// Set the LI label to this new text.
+		$(this).parent().parent().parent().prev().find('.ninja-forms-field-title').html(label);
+	});
+
+	// Register a function to be called whenever a new field is added to the form.
+	$(document).bind('addField', function(event, response){
+		// Add this new calc field to all of our calculation selects
+		$(".ninja-forms-calc-select").each(function(){
+			$(this).append('<option value="' + response.new_id + '">' + response.new_id + ' - ' + response.new_type + '</option>');
+		});
+	});
+
+	// Register a function to be called whenever a field is removed from the form.
+	$(document).bind('removeField', function(event, field_id){
+		$(".ninja-forms-calc-select option[value='" + field_id + "']").remove();
+	});
+
+	// Listen to the calculation display type select and show or hide the appropriate options.
+	$(".ninja-forms-calc-display").live("change", function(e){
+		var field_id = this.id.replace("ninja_forms_field_", "");
+		field_id = field_id.replace("_calc_display_type", "");
+		// Show the extra settings if the "none" option isn't selected.
+		if(this.value == 'html'){
+			$("#ninja_forms_field_" + field_id + "_clac_text_display").hide();
+			$("#ninja_forms_field_" + field_id + "_clac_html_display").show();
+			$("#ninja_forms_field_" + field_id + "_clac_extra_display").show();
+			$("#ninja_forms_field_" + field_id + "_label").val('');
+		}else if(this.value == 'text'){
+			$("#ninja_forms_field_" + field_id + "_clac_text_display").show();
+			$("#ninja_forms_field_" + field_id + "_clac_html_display").hide();
+			$("#ninja_forms_field_" + field_id + "_clac_extra_display").show();
+		}else{
+			$("#ninja_forms_field_" + field_id + "_clac_text_display").hide();
+			$("#ninja_forms_field_" + field_id + "_clac_html_display").hide();
+			$("#ninja_forms_field_" + field_id + "_clac_extra_display").hide();
+			$("#ninja_forms_field_" + field_id + "_label").val('');
+		}
+	});
+
+	// Listen to the calculation advanced equations checkbox and show the advanced calculations box if it is checked.
+	$(".ninja-forms-calc-method").live("change", function(e){
+		if(this.value == 'auto'){
+			// Hide both advanced options
+			$(this).parent().parent().parent().find(".ninja-forms-calculations").hide();
+			$(this).parent().parent().parent().find(".ninja-forms-eq").hide();
+		}else if(this.value == 'fields'){
+			$(this).parent().parent().parent().find(".ninja-forms-calculations").show();
+			$(this).parent().parent().parent().find(".ninja-forms-eq").hide();			
+		}else{
+			$(this).parent().parent().parent().find(".ninja-forms-calculations").hide();
+			$(this).parent().parent().parent().find(".ninja-forms-eq").show();	
+		}
+	});
+
 	/* * * End Field Specific JS * * */
 	
 	/* * * Favorite Fields JS * * */
@@ -871,6 +993,9 @@ function ninja_forms_new_field_response( response ){
 	jQuery("#ninja_forms_field_" + response.new_id + "_toggle").click();
 	
 	jQuery("#ninja_forms_field_" + response.new_id + "_label").focus();
+
+	// Fire our custom jQuery addField event.
+	jQuery(document).trigger('addField', [ response ]);
 
 }
 

@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms
 Plugin URI: http://wpninjas.com/ninja-forms/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 2.2.29
+Version: 2.2.30
 Author: The WP Ninjas
 Author URI: http://wpninjas.net
 */
@@ -50,7 +50,7 @@ global $wpdb, $wp_version;
 
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/".basename( dirname( __FILE__ ) ) );
 define("NINJA_FORMS_URL", plugins_url()."/".basename( dirname( __FILE__ ) ) );
-define("NINJA_FORMS_VERSION", "2.2.29");
+define("NINJA_FORMS_VERSION", "2.2.30");
 define("NINJA_FORMS_TABLE_NAME", $wpdb->prefix . "ninja_forms");
 define("NINJA_FORMS_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fields");
 define("NINJA_FORMS_FAV_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fav_fields");
@@ -71,6 +71,7 @@ require_once( NINJA_FORMS_DIR . "/includes/register.php" );
 require_once( NINJA_FORMS_DIR . "/includes/shortcode.php" );
 require_once( NINJA_FORMS_DIR . "/includes/widget.php" );
 require_once( NINJA_FORMS_DIR . "/includes/field-type-groups.php" );
+require_once( NINJA_FORMS_DIR . "/includes/eos.class.php" );
 
 require_once( NINJA_FORMS_DIR . "/includes/admin/scripts.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/scripts.php" );
@@ -115,7 +116,7 @@ require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/help.php" );
 require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/li.php" );
 require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/remove-button.php" );
 require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/save-button.php" );
-//require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/calc.php" );
+require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/calc.php" );
 
 //Display Form Functions
 require_once( NINJA_FORMS_DIR . "/includes/display/form/display-form.php" );
@@ -136,6 +137,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/form/form-visibility.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/restore-progress.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/inside-label-hidden.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/field-type.php" );
+require_once( NINJA_FORMS_DIR . "/includes/display/fields/calc-filter.php" );
 
 /* Require Pre-Registered Tabs and their sidebars */
 
@@ -159,6 +161,8 @@ require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-se
 require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/fav-fields.php" );
 require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/template-fields.php" );
 require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/layout-fields.php" );
+require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/user-info.php" );
+require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/payment-fields.php" );
 
 /* Form Preview */
 require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/form-preview/form-preview.php" );
@@ -233,7 +237,9 @@ require_once( NINJA_FORMS_DIR . "/includes/fields/desc.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/textarea.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/password.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/rating.php" );
-//require_once( NINJA_FORMS_DIR . "/includes/fields/calc.php" );
+require_once( NINJA_FORMS_DIR . "/includes/fields/calc.php" );
+require_once( NINJA_FORMS_DIR . "/includes/fields/country.php" );
+require_once( NINJA_FORMS_DIR . "/includes/fields/tax.php" );
 
 require_once( NINJA_FORMS_DIR . "/includes/admin/save.php" );
 
@@ -269,45 +275,6 @@ function ninja_forms_return_echo($function_name){
     call_user_func_array($function_name, $arguments);
 	$return = ob_get_clean();
 	return $return;
-}
-
-function ninja_forms_random_string($length = 10){
-	$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $random_string = '';
-    for ($i = 0; $i < $length; $i++) {
-        $random_string .= $characters[rand(0, strlen($characters) - 1)];
-    }
-    return $random_string;
-}
-
-function ninja_forms_remove_from_array($arr, $key, $val, $within = FALSE) {
-    foreach ($arr as $i => $array)
-            if ($within && stripos($array[$key], $val) !== FALSE && (gettype($val) === gettype($array[$key])))
-                unset($arr[$i]);
-            elseif ($array[$key] === $val)
-                unset($arr[$i]);
-
-    return array_values($arr);
-}
-			'edd_action'=> 'activate_license',
-			'license' 	=> $license,
-			'item_name' => urlencode( NINJA_FORMS_EDD_SL_ITEM_NAME ) // the name of our product in EDD
-		);
-
-		// Call the custom API.
-		$response = wp_remote_get( add_query_arg( $api_params, NINJA_FORMS_EDD_SL_STORE_URL ) );
-
-		// make sure the response came back okay
-		if ( is_wp_error( $response ) )
-			return false;
-
-		// decode the license data
-		$license_data = json_decode( wp_remote_retrieve_body( $response ) );
-
-		// $license_data->license will be either "active" or "inactive"
-
-		return $license_data->license;
-	}
 }
 
 function ninja_forms_random_string($length = 10){

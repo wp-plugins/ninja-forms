@@ -5,6 +5,7 @@ jQuery(document).ready(function(jQuery) {
 	// Initiate our beforeSubmit function list variable.
 	window['ninja_forms_before_submit_function_list'] = {};
 
+	// Prevent the enter key from submitting the form.
 	jQuery(".ninja-forms-form input").bind("keypress", function(e) {
 		if (e.keyCode == 13) {
 			var type = jQuery(this).attr("type");
@@ -89,6 +90,10 @@ jQuery(document).ready(function(jQuery) {
 
 	/* * * End ajaxForm JS * * */
 
+	/* 
+	 * Password Field JS
+	 */
+
 	jQuery('.pass1').val('').keyup( function(){
 		var pass1 = this.value;
 		var pass2 = this.id.replace( "pass1", "pass2" );
@@ -100,6 +105,319 @@ jQuery(document).ready(function(jQuery) {
 		var pass1 = this.id.replace( "pass2", "pass1" );
 		pass1 = jQuery( "#" + pass1 ).val();
 		check_pass_strength( pass1, pass2 );
+	});
+
+	/*
+	 * Calculation Field JS
+	 */
+
+	// Listen to the input elements with our calculation class for focus.
+	jQuery(".ninja-forms-field-calc-listen").live("focus", function(e){
+		jQuery(this).data( "oldValue", jQuery(this).val() );
+	});
+
+	// Listen to the input elements with our calculation class for focus.
+	jQuery(".ninja-forms-field-calc-listen").live("mousedown", function(e){
+		jQuery(this).data( "oldValue", jQuery(this).val() );
+	});	
+
+	// Listen to the input elements with our calculation class for focus.
+	jQuery(".ninja-forms-field-calc-listen").live("keydown", function(e){
+		if( this.type == 'select-multiple' ) {
+			jQuery(this).data( "oldValue", jQuery(this).val() );
+		}
+	});
+
+	jQuery(".ninja-forms-field-list-options-span-calc-listen").live("focus", function(e){
+		var field_id = jQuery(this).attr("rel");
+		jQuery(this).data("oldValue", jQuery("input[name='ninja_forms_field_" + field_id +"']:checked").val());
+	});
+
+	jQuery(".ninja-forms-field-list-options-span-calc-listen").live("mousedown", function(e){
+		var field_id = jQuery(this).attr("rel");
+		jQuery(this).data("oldValue", jQuery("input[name='ninja_forms_field_" + field_id +"']:checked").val());
+	});
+
+	// Listen to the input elements for our auto-calculation fields and change the total.
+	jQuery('.ninja-forms-field-calc-listen').live('change', function(event){
+		if ( this == event.target ) {
+			// Get our calc settings.
+			var form_id = ninja_forms_get_form_id( this );
+			var field_id = jQuery(this).attr("rel");
+			var calc_settings = window['ninja_forms_form_' + form_id + '_calc_settings'];
+			// Get our auto total field or fields.
+
+			for ( calc_id in calc_settings.calc_fields ) {
+				if ( calc_id != field_id ) {
+					var calc_method = calc_settings.calc_fields[calc_id]['method'];
+					var calc_places = calc_settings.calc_fields[calc_id]['places'];
+					// Find out which calc_method we're using.
+					// If we're using the 'fields' method, bail if the current field isn't in our field list.
+					if ( calc_method == 'fields' ) {
+						var change = false;
+						for (var i = calc_settings.calc_fields[calc_id]['fields'].length - 1; i >= 0; i--) {
+							if ( calc_settings.calc_fields[calc_id]['fields'][i]['field'] == field_id ) {
+								change = true;
+								break;
+							}
+						};
+
+					} else if ( calc_method == 'eq' ) { // If we're using the 'eq' method, make sure that our current field is in our equation
+						var change = false;
+						if ( typeof calc_settings.calc_fields[calc_id]['fields'] !== 'undefined' ) {
+							for (var i = calc_settings.calc_fields[calc_id]['fields'].length - 1; i >= 0; i--) {
+								if ( calc_settings.calc_fields[calc_id]['fields'][i] == field_id ) {
+									change = true;
+									break;
+								}
+							};					
+						}
+					}
+
+					if ( ( ( calc_method == 'fields' || calc_method == 'eq' ) && change ) || calc_method == 'auto' ) {
+						if ( calc_method == 'auto' || calc_method == 'fields' ) { // Method: auto or fields
+							// Loop through our calc fields and check to see if they are set to auto. If they are, perform the auto totalling actions.
+							var key = jQuery(this).val();
+							var new_value = '';
+							// Set our old_value to the previous one for this field.
+							old_value = jQuery(this).data('oldValue');
+							// Check to see if we are in a list field. If we are, we can grab the calc values.
+							if ( jQuery('#ninja_forms_field_' + field_id + '_type' ).val() == 'list' ) {
+								var key = jQuery(this).val();
+								// See if we have any old values. If we do, compare them to our current selectino for this field and see if we need to subtract anything.
+								if ( jQuery('#ninja_forms_field_' + field_id + '_list_type').val() == 'checkbox' ) {
+									if ( !this.checked ) {
+										old_value = key;
+										new_value = 0;
+									}
+								} else if ( jQuery('#ninja_forms_field_' + field_id + '_list_type').val() == 'radio' ) {
+									// If this is a checkbox or a radio list, then we have to check the span parent for the oldValue.
+									var span = jQuery(this).parent().parent().parent().parent();
+									old_value = jQuery(span).data('oldValue');
+								} else if ( jQuery(jQuery('#ninja_forms_field_' + field_id + '_list_type').val() == 'multi' ) ) {
+									// This is a multi-select list. The value is in an array, so we need to add all the values together.
+									if ( jQuery.isArray( key ) ) {
+										var tmp = 0;
+										for (var i = key.length - 1; i >= 0; i--) {
+											if ( typeof calc_settings.calc_value[field_id][key[i]] !== 'undefined' ) {
+												tmp += parseFloat( calc_settings.calc_value[field_id][key[i]] );
+											}
+										};
+										new_value = tmp;
+									}
+									
+									if ( jQuery.isArray( old_value ) ) {
+										var tmp = 0;
+										for (var i = old_value.length - 1; i >= 0; i--) {
+											if ( typeof calc_settings.calc_value[field_id][old_value[i]] !== 'undefined' ) {
+												tmp += parseFloat( calc_settings.calc_value[field_id][old_value[i]] );
+											}
+										};
+										old_value = tmp;
+									}
+								} else {
+									// This is a select list, so we can just grab the oldValue from this field.
+									var old_value = jQuery(this).data('oldValue');
+								}
+								// Check to see if we're in a checkbox field. If so, the key needs to be based on checked or unchecked, not value.
+							} else if ( jQuery('#ninja_forms_field_' + field_id + '_type').val() == 'checkbox' ) {
+								if ( this.checked ) {
+									// This field is checked, so set key to 'checked.'
+									var key = 'checked';
+									// Checkboxes only have two states, so if we are changing, the previous value must have been the opposite of this one.
+									var old_value = 'unchecked';
+								} else {
+									var key = 'unchecked';
+									var old_value = 'checked';
+								}
+								
+							}
+
+							if ( new_value === '' ) {
+								if ( typeof calc_settings.calc_value[field_id] !== 'undefined' && typeof calc_settings.calc_value[field_id][key] !== 'undefined' ) {
+									// Get our calc value for this field from our previously defined JS object.
+									var new_value = calc_settings.calc_value[field_id][key];
+								} else {
+									// This field doesn't exist in the calc value object. It's either a textbox or similar element.
+									if ( isNaN( this.value ) ) {
+										var new_value = 0;
+									} else {
+										var new_value = this.value;
+									}
+								}
+							}
+
+							// Check to see if our old_value exists in the calc_value JS object.
+							if ( typeof calc_settings.calc_value[field_id] !== 'undefined' && typeof calc_settings.calc_value[field_id][old_value] !== 'undefined' ) {
+								// Grab our calc value form the calc_value JS object.
+								old_value = calc_settings.calc_value[field_id][old_value];
+							} else {
+								// Our calc_value doesn't exist in the calc_value JS object.
+								// Check to see if our old_value is an array. This would be the case if the field is a multi-select.
+								if ( isNaN( old_value ) || old_value == '' ) {
+									// We aren't dealing with an old_value array and old_value isn't a number. Set it to 0.
+									old_value = 0;
+								}
+							}
+
+							// Find out what kind of element our total field is - either span or textbox.
+							// Set our current value.
+							if(jQuery("#ninja_forms_field_" + calc_id).attr("type") == 'text' ){
+								var current_value = jQuery("#ninja_forms_field_" + calc_id).val();
+							}else{
+								var current_value = jQuery("#ninja_forms_field_" + calc_id).html();
+							}
+
+							// Make sure that our current total is made up of numbers.
+							if ( !isNaN( current_value ) ) {
+								// Convert those string numbers into operable ones.
+								current_value = parseFloat( current_value );
+							} else {
+								// Our current total isn't made up of numbers, so set the current total to 0.
+								current_value = 0;
+							}
+
+							// Find out what calculation method our calc field is using and set our math operations appropriately.
+							if ( calc_method == 'auto' ) { // Method: auto
+								// If we are using the 'auto' method, then the calc is an auto-total field. We're always adding.
+								var old_op = 'subtract';
+								var new_op = 'add';
+								if ( !jQuery(this).hasClass('ninja-forms-field-calc-auto') ) {
+									old_value = '';
+									new_value = '';
+								}
+							} else if( calc_method == 'fields' ) { // Method: fields
+								// If we are using the 'fields' method, then figure out what the operators should be from the JS object.
+								for (var i = calc_settings.calc_fields[calc_id]['fields'].length - 1; i >= 0; i--) {
+									if ( calc_settings.calc_fields[calc_id]['fields'][i]['field'] == field_id ) {
+										var old_op = ninja_forms_find_opposite_op( calc_settings.calc_fields[calc_id]['fields'][i]['op'] );
+										var new_op = calc_settings.calc_fields[calc_id]['fields'][i]['op'];
+									}
+								};
+
+							}
+
+							// If our old value exists and isn't empty or 0, then carry out the old_op on it.
+							if ( old_value && !isNaN( old_value ) && old_value != 0 && old_value != '' ) {
+								old_value = parseFloat( old_value );
+								tmp = new ninja_forms_var_operator(old_op);
+								current_value = tmp.evaluate( current_value, old_value );
+							}
+
+							// If our new value exists and isn't empty or 0, then carry out the new_op on it.
+							if ( new_value && !isNaN( new_value ) && new_value != 0 && new_value != '' ) {
+								new_value = parseFloat( new_value );
+								tmp = new ninja_forms_var_operator(new_op);
+								var calc_value = tmp.evaluate( current_value, new_value );
+							} else {
+								// We don't have any calculations to do, so set calc_value to our current_value.
+								var calc_value = current_value;
+							}
+						} else if ( calc_method == 'eq' ) { // Method: eq.
+							var tmp_eq = calc_settings.calc_fields[calc_id]['eq'];
+
+							// Loop through our fields getting their values and replacing their placeholders in the equation.
+							for (var i = calc_settings.calc_fields[calc_id]['fields'].length - 1; i >= 0; i--) {
+
+								// Make sure that the changed field is in the formula and that we should change the current value.
+								var f_id = calc_settings.calc_fields[calc_id]['fields'][i];
+								var key = jQuery("#ninja_forms_field_" + f_id).val();
+								var f_value = '';
+								if ( jQuery('#ninja_forms_field_' + f_id + '_type' ).val() == 'list' ) {
+									if ( jQuery('#ninja_forms_field_' + f_id + '_list_type').val() == 'radio' ) {
+										key = jQuery('.ninja-forms-field-' + f_id + '-options :checked').val();
+									} else if ( jQuery('#ninja_forms_field_' + f_id + '_list_type').val() == 'multi' ) {
+										// If we're working with a multi-select list, we need to add all of these values together before we continue our calculation.
+										if ( jQuery.isArray( key ) ) {
+											var tmp = 0;
+											for (var x = key.length - 1; x >= 0; x--) {
+												if ( typeof calc_settings.calc_value[f_id][key[x]] !== 'undefined' ) {
+													tmp += parseFloat( calc_settings.calc_value[f_id][key[x]] );
+												}
+											};
+											f_value = tmp;
+										}
+									} else if ( jQuery('#ninja_forms_field_' + f_id + '_list_type').val() == 'checkbox' ) {
+										var tmp = 0;
+										jQuery('.ninja-forms-field-' + f_id + '-options :checked').each(function(){
+											if ( typeof calc_settings.calc_value[f_id][this.value] !== 'undefined' ) {
+												tmp += parseFloat( calc_settings.calc_value[f_id][this.value] );
+											}
+										});
+										f_value = tmp;
+									}
+								} else if ( jQuery('#ninja_forms_field_' + f_id + '_type').val() == 'checkbox' ) {
+										if ( jQuery('#ninja_forms_field_' + f_id).attr('checked') ) {
+											// This field is checked, so set key to 'checked.'
+											var key = 'checked';
+										} else {
+											var key = 'unchecked';
+										}
+								}
+								
+								if ( f_value == '' ) {
+									if ( typeof calc_settings.calc_value[f_id] !== 'undefined' && typeof calc_settings.calc_value[f_id][key] !== 'undefined' ) {
+										f_value = calc_settings.calc_value[f_id][key]
+									} else {
+										f_value = key;
+									}							
+								}
+
+								// Check for a percentage sign in our f_value. If we find one, then convert it to a decimal.
+								if ( f_value.indexOf("%") >= 0 ) {
+									f_value = f_value.replace( "%", "" );
+									if ( !isNaN( f_value ) ) {
+										f_value = parseFloat( f_value ) / 100;
+									}
+								}
+
+								if ( isNaN( f_value ) || f_value == '' || !f_value || typeof f_value === 'undefined' ) {
+									f_value = 0;
+								}
+
+								var find = 'field_' + f_id;
+								var re = new RegExp(find, 'g');
+								tmp_eq = tmp_eq.replace(re, f_value);
+							}
+							var calc_value = eval(tmp_eq);
+						}
+
+						// Find out what kind of element our total field is - either span or textbox.
+						// Set our current value.
+						if(jQuery("#ninja_forms_field_" + calc_id).attr("type") == 'text' ){
+							var current_value = jQuery("#ninja_forms_field_" + calc_id).val();
+						}else{
+							var current_value = jQuery("#ninja_forms_field_" + calc_id).html();
+						}
+
+						// Make sure that our current total is made up of numbers.
+						if ( !isNaN( current_value ) ) {
+							// Convert those string numbers into operable ones.
+							current_value = parseFloat( current_value );
+						} else {
+							// Our current total isn't made up of numbers, so set the current total to 0.
+							current_value = 0;
+						}
+
+						if ( current_value !== calc_value ) {
+							calc_value = calc_value.toFixed(calc_places);
+							// Set the value of our calculation field.
+							jQuery("#ninja_forms_field_" + calc_id).data("oldValue", current_value);
+							if(jQuery("#ninja_forms_field_" + calc_id).attr("type") == 'text' ){
+								jQuery("#ninja_forms_field_" + calc_id).val(calc_value);
+							}else{
+								jQuery("#ninja_forms_field_" + calc_id).html(calc_value);
+							}
+							
+							//if( typeof calc_settings.calc_fields[field_id] === 'undefined' ) {
+								jQuery("#ninja_forms_field_" + calc_id).trigger('change');
+							//}
+						}
+					}
+				}
+			}
+		}
+		
 	});
 
 }); //End document.ready
@@ -317,4 +635,35 @@ function passwordStrength(password1, password2) {
 		return goodPass
 
     return strongPass;
+}
+
+function ninja_forms_find_opposite_op(op) {
+	switch(op){
+		case "add":
+            return "subtract";
+        case "subtract":
+            return "add";
+        case "multiply":
+            return "divide";
+        case "divide":
+            return "multiply";
+	}
+
+}
+
+function ninja_forms_var_operator(op) {
+    this.operation = op;
+
+    this.evaluate = function evaluate(param1, param2) {
+    	switch(this.operation) {
+            case "add":
+                return param1 + param2;
+            case "subtract":
+                return param1 - param2;
+            case "multiply":
+                return param1 * param2;
+            case "divide":
+                return param1 / param2;
+        }
+    }
 }
