@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.3
 Tested up to: 3.5.1
-Stable tag: 2.2.30
+Stable tag: 2.2.31
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,32 +76,31 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.2.30 =
+= 2.2.31 =
 
 *Features:*
 
-* Added the new Calculation field. This field allows you to perform simple to complex mathematic operations, as well as collect payment data from the user.
-* Added the new Sub Total field. This calculation field allows you to collect payment data from the user.
-* Added the new Total field. This calculation field allows you to collect payment data from the user.
-* Added the new Tax field. This calculation field allows you to collect payment data from the user.
-* Added a new sidebar to the field settings tab to hold the new Payment Fields.
-* Added several new fields for capturing a user's personal information: First Name, Last Name, Address, City, State, Country, Postal Code, Email Address, Phone.
-* Added a new sidebar to the field settings tab to hold the new Personal Information fields.
+* Add Danish translation files for Ninja Forms.
 
 *Changes:*
 
-* Removed the Defined Fields sidebar from the Field Settings tab.
-* Submit and Anti-Spam fields have been moved into the Template Fields sidebar.
-
-*Bugs:*
-
-* Fixed a bug that prevented Text Layout Elements from showing properly on Multi-Part Forms.
+* Sidebars and individual field settings should now remember their state (open or closed) upon page reload.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.2.31 =
+
+*Features:*
+
+* Add Danish translation files for Ninja Forms.
+
+*Changes:*
+
+* Sidebars and individual field settings should now remember their state (open or closed) upon page reload.
 
 = 2.2.30 =
 
@@ -594,6 +593,16 @@ If you have any feature requests, please feel free to visit [wpninjas.com](http:
 * Filter User and Admin email subject line for [bracketed] labels.
 * Add an action hook to User and Email sending.
 * Add an option to the "user email" section for attaching user submitted values.
+* "Settings saved" now appears properly when saving plugin settings.
+* Fixed a bug with including display js and css for core and extensions.
+* Removed the label "Error message shown when all fields are empty." This wasn't used anyway.
+* Added Shortcodes. They can be used like: [ninja_forms_display_form id=3].
+* Fixed a bug where saving plugin settings would break upon HTML entry.
+* Replaced isset( $ninja_forms_processing with is_object( $ninja_forms_processing.
+* Fixed several activation bugs.
+
+= 2.0 =
+* Version 2.0 is a major leap forward for Ninja Forms. It is much more stable and developer friendly than previous versions of the plugin.il" section for attaching user submitted values.
 * "Settings saved" now appears properly when saving plugin settings.
 * Fixed a bug with including display js and css for core and extensions.
 * Removed the label "Error message shown when all fields are empty." This wasn't used anyway.
