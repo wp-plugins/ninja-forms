@@ -76,21 +76,31 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.2.31 =
-
-*Features:*
-
-* Add Danish translation files for Ninja Forms.
+= 2.2.32 =
 
 *Changes:*
 
-* Sidebars and individual field settings should now remember their state (open or closed) upon page reload.
+* Added translation ability to many, many previously untranslatable strings. 
+* Added an improved German translation file.
+* Improved the way that Ninja Forms handles translations so that translation files may be placed in the WP_LANG_DIR/ninja-forms/ directory rather than the main plugin directory. This will make them safe from plugin updates.
+* Thank you very much to David Decker for these changes!
+* Moved the Forms Setting metabox registration from 'init' to 'admin_init' so that it is only called on the admin-side.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.2.32 =
+
+*Changes:*
+
+* Added translation ability to many, many previously untranslatable strings. 
+* Added an improved German translation file.
+* Improved the way that Ninja Forms handles translations so that translation files may be placed in the WP_LANG_DIR/ninja-forms/ directory rather than the main plugin directory. This will make them safe from plugin updates.
+* Thank you very much to David Decker for these changes!
+* Moved the Forms Setting metabox registration from 'init' to 'admin_init' so that it is only called on the admin-side.
 
 = 2.2.31 =
 
@@ -593,16 +603,6 @@ If you have any feature requests, please feel free to visit [wpninjas.com](http:
 * Filter User and Admin email subject line for [bracketed] labels.
 * Add an action hook to User and Email sending.
 * Add an option to the "user email" section for attaching user submitted values.
-* "Settings saved" now appears properly when saving plugin settings.
-* Fixed a bug with including display js and css for core and extensions.
-* Removed the label "Error message shown when all fields are empty." This wasn't used anyway.
-* Added Shortcodes. They can be used like: [ninja_forms_display_form id=3].
-* Fixed a bug where saving plugin settings would break upon HTML entry.
-* Replaced isset( $ninja_forms_processing with is_object( $ninja_forms_processing.
-* Fixed several activation bugs.
-
-= 2.0 =
-* Version 2.0 is a major leap forward for Ninja Forms. It is much more stable and developer friendly than previous versions of the plugin.il" section for attaching user submitted values.
 * "Settings saved" now appears properly when saving plugin settings.
 * Fixed a bug with including display js and css for core and extensions.
 * Removed the label "Error message shown when all fields are empty." This wasn't used anyway.

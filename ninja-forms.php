@@ -3,9 +3,11 @@
 Plugin Name: Ninja Forms
 Plugin URI: http://wpninjas.com/ninja-forms/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 2.2.31
+Version: 2.2.32
 Author: The WP Ninjas
 Author URI: http://wpninjas.com
+Text Domain: ninja-forms
+Domain Path: /lang/
 */
 
 /*
@@ -50,19 +52,11 @@ global $wpdb, $wp_version;
 
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/".basename( dirname( __FILE__ ) ) );
 define("NINJA_FORMS_URL", plugins_url()."/".basename( dirname( __FILE__ ) ) );
-define("NINJA_FORMS_VERSION", "2.2.31");
+define("NINJA_FORMS_VERSION", "2.2.32");
 define("NINJA_FORMS_TABLE_NAME", $wpdb->prefix . "ninja_forms");
 define("NINJA_FORMS_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fields");
 define("NINJA_FORMS_FAV_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fav_fields");
 define("NINJA_FORMS_SUBS_TABLE_NAME", $wpdb->prefix . "ninja_forms_subs");
-
-/*
-// this is the URL our updater / license checker pings. This should be the URL of the site with EDD installed
-define( 'NINJA_FORMS_EDD_SL_STORE_URL', 'http://wpninjas.com' ); // IMPORTANT: change the name of this constant to something unique to prevent conflicts with other plugins using this system
-
-// the name of your product. This is the title of your product in EDD and should match the download title in EDD exactly
-define( 'NINJA_FORMS_EDD_SL_ITEM_NAME', 'Ninja Forms Alpha' ); // IMPORTANT: change the name of this constant to something unique to prevent conflicts with other plugins using this system
-*/
 
 /* Require Core Files */
 require_once( NINJA_FORMS_DIR . "/includes/database.php" );
@@ -250,9 +244,27 @@ $_SESSION['NINJA_FORMS_DIR'] = NINJA_FORMS_DIR;
 $_SESSION['NINJA_FORMS_URL'] = NINJA_FORMS_URL;
 
 function ninja_forms_load_lang() {
-	$plugin_dir = basename(dirname(__FILE__));
-	$lang_dir = $plugin_dir.'/lang/';
-	load_plugin_textdomain( 'ninja-forms', false, $lang_dir );
+
+	/** Set our unique textdomain string */
+	$textdomain = 'ninja-forms';
+
+	/** The 'plugin_locale' filter is also used by default in load_plugin_textdomain() */
+	$locale = apply_filters( 'plugin_locale', get_locale(), $textdomain );
+
+	/** Set filter for WordPress languages directory */
+	$wp_lang_dir = apply_filters(
+		'ninja_forms_wp_lang_dir',
+		WP_LANG_DIR . '/ninja-forms/' . $textdomain . '-' . $locale . '.mo'
+	);
+
+	/** Translations: First, look in WordPress' "languages" folder = custom & update-secure! */
+	load_textdomain( $textdomain, $wp_lang_dir );
+
+	/** Translations: Secondly, look in plugin's "lang" folder = default */
+	$plugin_dir = basename( dirname( __FILE__ ) );
+	$lang_dir = apply_filters( 'ninja_forms_lang_dir', $plugin_dir . '/lang/' );
+	load_plugin_textdomain( $textdomain, FALSE, $lang_dir );
+
 }
 add_action('plugins_loaded', 'ninja_forms_load_lang');
 
