@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.4
 Tested up to: 3.6
-Stable tag: 2.2.35
+Stable tag: 2.2.36
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,17 +76,23 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.2.35 =
+= 2.2.36 =
 
-*Changes:*
+*Bugs:*
 
-* Preparing for the release of WordPress 3.6, changed the instances of .live() in Ninja Forms Javascript to .on().
+* Email validation should now work properly.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.2.36 =
+
+*Bugs:*
+
+* Email validation should now work properly.
 
 = 2.2.35 =
 
@@ -630,4 +636,4 @@ If you have any feature requests, please feel free to visit [wpninjas.com](http:
 * Fixed several activation bugs.
 
 = 2.0 =
-* Version 2.0 is a major leap forward for Ninja Forms. It is much more stable and developer friendly than previous versions of the plugin.
+* Version 2.0 is a major leap forward for Ninja Forms. It is much more stable and developer friendly than previous versions of the plugin.lugin.
