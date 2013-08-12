@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.4
 Tested up to: 3.6
-Stable tag: 2.2.38
+Stable tag: 2.2.39
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,19 +76,29 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.2.38 =
+= 2.2.39 =
 
 *Bugs:*
 
-* Fixed a bug that prevented Calculation fields from working properly with the Conditional Logic extension.
-* The invalid Email message label should now properly populate upon plugin activation.
-* Fixed a bug that caused the CSV files attached to admin emails to only contain the date.
+* CSV files should now populate correctly in Admin emails.
+* Fixed a bug that could prevent files from being properly attached when using the File Uploads extension.
+* Fixed a bug that caused the date picker "next" and "prevous" months to hide when used on the same page as a rich text editor.
+* Calculation fields should now always show the correct amount in admin emails and CSV files.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.2.39 =
+
+*Bugs:*
+
+* CSV files should now populate correctly in Admin emails.
+* Fixed a bug that could prevent files from being properly attached when using the File Uploads extension.
+* Fixed a bug that caused the date picker "next" and "prevous" months to hide when used on the same page as a rich text editor.
+* Calculation fields should now always show the correct amount in admin emails and CSV files.
 
 = 2.2.38 =
 
@@ -655,11 +665,6 @@ If you have any feature requests, please feel free to visit [wpninjas.com](http:
 * Removed the label "Error message shown when all fields are empty." This wasn't used anyway.
 * Added Shortcodes. They can be used like: [ninja_forms_display_form id=3].
 * Fixed a bug where saving plugin settings would break upon HTML entry.
-* Replaced isset( $ninja_forms_processing with is_object( $ninja_forms_processing.
-* Fixed several activation bugs.
-
-= 2.0 =
-* Version 2.0 is a major leap forward for Ninja Forms. It is much more stable and developer friendly than previous versions of the plugin.saving plugin settings would break upon HTML entry.
 * Replaced isset( $ninja_forms_processing with is_object( $ninja_forms_processing.
 * Fixed several activation bugs.
 

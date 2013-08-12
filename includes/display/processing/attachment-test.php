@@ -1,10 +1,11 @@
 <?php
 add_action( 'ninja_forms_insert_sub', 'ninja_forms_attachment_test' );
+add_action( 'ninja_forms_update_sub', 'ninja_forms_attachment_test' );
 
 function ninja_forms_attachment_test( $sub_id ){
 	global $ninja_forms_processing;
 
-	if( $ninja_forms_processing->get_form_setting( 'admin_attach_csv' ) == 1 ){
+	if( $ninja_forms_processing->get_form_setting( 'admin_attach_csv' ) == 1 AND $ninja_forms_processing->get_action() == 'submit' ){
 		$files = $ninja_forms_processing->get_form_setting( 'admin_attachments' );
 		$sub_ids = array($sub_id);
 		$csv = ninja_forms_export_subs_to_csv( $sub_ids, true );

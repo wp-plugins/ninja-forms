@@ -20,7 +20,7 @@ function ninja_forms_register_field_calc(){
 		'edit_custom_class' => false,
 		'edit_help' => false,
 		//'process_field' => false,
-		'pre_process' => 'ninja_forms_field_calc_pre_process',
+		//'pre_process' => 'ninja_forms_field_calc_pre_process',
 		'edit_options' => array(
 			array(
 				'type' => 'hidden',
@@ -442,114 +442,132 @@ function ninja_forms_output_field_calc_row( $field_id, $c = array(), $x = 0 ){
  * @returns void
  */
 
-function ninja_forms_field_calc_pre_process( $field_id, $user_value ){
+function ninja_forms_field_calc_pre_process(){
 	global $ninja_forms_processing;
 	
-	$field_row = ninja_forms_get_field_by_id( $field_id );
-	$field_data = $field_row['data'];
-	if ( isset ( $field_data['default_value'] ) ){
-		$default_value = $field_data['default_value'];
-	} else {
-		$default_value = 0;
-	}
-
-	$result = $default_value;
-
-	// Figure out which method we are using to calculate this field.
-	if ( isset ( $field_data['calc_method'] ) ) {
-		$calc_method = $field_data['calc_method'];
-	} else {
-		$calc_method = 'auto';
-	}
-
-	// Get our advanced field op settings if they exist.
-	if ( isset ( $field_data['calc'] ) ) {
-		$calc_fields = $field_data['calc'];
-	} else {
-		$calc_fields = array();
-	}
-
-	// Get our calculation equation if it exists.
-	if ( isset ( $field_data['calc_eq'] ) ) {
-		$calc_eq = $field_data['calc_eq'];
-	} else {
-		$calc_eq = array();
-	}
-
+	$form_id = $ninja_forms_processing->get_form_ID();
 	$all_fields = $ninja_forms_processing->get_all_fields();
-
-	// Figure out if there is a sub_total and a tax field. If there are, and this is a total field set to calc_method auto, we're using an equation, not auto.
-	$tax = false;
-	$sub_total = false;
-	foreach ( $all_fields as $f_id => $user_value ) {
-		$field = $ninja_forms_processing->get_field_settings( $f_id );
-		$data = apply_filters( 'ninja_forms_field', $field['data'], $field['id'] );
-		if ( $field['type'] == '_tax' ) {
-			// There is a tax field; save its field_id.
-			$tax = $field['id'];
-		} else if ( isset ( $data['payment_sub_total'] ) AND $data['payment_sub_total'] == 1 ) {
-			// There is a sub_total field; save its field_id.
-			$sub_total = $field['id'];
-		}
-	}
-
-	// If the tax and sub_total have been found, and this is a total field set to auto, change the calc_method and calc_eq.
-	if ( $tax AND $sub_total AND isset ( $field_data['payment_total'] ) AND $field_data['payment_total'] == 1 AND $calc_method == 'auto' ) {
-		$calc_method = 'eq';
-		$calc_eq = 'field_'.$sub_total.' + ( field_'.$sub_total.' * field_'.$tax.' )';
-
-		$field_settings = $ninja_forms_processing->get_field_settings( $field_id );
-		$field_settings['data']['calc_method'] = $calc_method;
-		$field_settings['data']['calc_eq'] = $calc_eq;
-		$ninja_forms_processing->update_field_settings( $field_id, $field_settings );
-	}
-
-	// Loop through our fields and see which ones should be used for calculations.
-	foreach ( $all_fields as $f_id => $user_value ) {
-		$field = $ninja_forms_processing->get_field_settings( $f_id );
-		$field_value = $ninja_forms_processing->get_field_value( $f_id );
-		$data = $field['data'];
-		if ( $f_id == $tax ) {
-			$tax = ninja_forms_field_calc_value( $field['id'], $field_value, 'auto' );;
-		}
-		switch ( $calc_method ) {
-			case 'auto': // We are automatically totalling the fields that have a calc_auto_include set to 1.
-				if ( isset ( $data['calc_auto_include'] ) AND $data['calc_auto_include'] == 1 ) {
-					$calc_value = ninja_forms_field_calc_value( $field['id'], $field_value, $calc_method );
-					if ( $calc_value !== false ) {
-						$result = ninja_forms_calc_evaluate( 'add', $result, $calc_value );						
-					}
+	if ( is_array ( $all_fields ) ) {
+		foreach ( $all_fields as $f_id => $user_value ) {
+			$field_id = $f_id;
+			$field_row = ninja_forms_get_field_by_id( $field_id );
+			$field_type = $field_row['type'];
+			if ( $field_type == '_calc' ) {
+				$field_data = $field_row['data'];
+				if ( isset ( $field_data['default_value'] ) ){
+					$default_value = $field_data['default_value'];
+				} else {
+					$default_value = 0;
 				}
-				break;
-			case 'fields': // We are performing a specific set of operations on a set of fields.
-				if ( is_array ( $calc_fields ) ) {
-					foreach ( $calc_fields as $c ) {
-						if ( $c['field'] == $field['id'] ) {
-							$calc_value = ninja_forms_field_calc_value( $field['id'], $field_value, $calc_method );
-							if ( $calc_value !== false ) {
-								$result = ninja_forms_calc_evaluate( $c['op'], $result, $calc_value );
-							}
+
+				$result = $default_value;
+
+				// Figure out which method we are using to calculate this field.
+				if ( isset ( $field_data['calc_method'] ) ) {
+					$calc_method = $field_data['calc_method'];
+				} else {
+					$calc_method = 'auto';
+				}
+
+				// Get our advanced field op settings if they exist.
+				if ( isset ( $field_data['calc'] ) ) {
+					$calc_fields = $field_data['calc'];
+				} else {
+					$calc_fields = array();
+				}
+
+				// Get our calculation equation if it exists.
+				if ( isset ( $field_data['calc_eq'] ) ) {
+					$calc_eq = $field_data['calc_eq'];
+				} else {
+					$calc_eq = array();
+				}
+
+				$all_fields = $ninja_forms_processing->get_all_fields();
+
+				// Figure out if there is a sub_total and a tax field. If there are, and this is a total field set to calc_method auto, we're using an equation, not auto.
+				$tax = false;
+				$sub_total = false;
+				if ( is_array ( $all_fields ) ) {
+					foreach ( $all_fields as $f_id => $user_value ) {
+						$field = $ninja_forms_processing->get_field_settings( $f_id );
+						$data = apply_filters( 'ninja_forms_field', $field['data'], $field['id'] );
+						if ( $field['type'] == '_tax' ) {
+							// There is a tax field; save its field_id.
+							$tax = $field['id'];
+						} else if ( isset ( $data['payment_sub_total'] ) AND $data['payment_sub_total'] == 1 ) {
+							// There is a sub_total field; save its field_id.
+							$sub_total = $field['id'];
+						}
+					}		
+				}
+
+
+				// If the tax and sub_total have been found, and this is a total field set to auto, change the calc_method and calc_eq.
+				if ( $tax AND $sub_total AND isset ( $field_data['payment_total'] ) AND $field_data['payment_total'] == 1 AND $calc_method == 'auto' ) {
+					$calc_method = 'eq';
+					$calc_eq = 'field_'.$sub_total.' + ( field_'.$sub_total.' * field_'.$tax.' )';
+
+					$field_settings = $ninja_forms_processing->get_field_settings( $field_id );
+					$field_settings['data']['calc_method'] = $calc_method;
+					$field_settings['data']['calc_eq'] = $calc_eq;
+					$ninja_forms_processing->update_field_settings( $field_id, $field_settings );
+				}
+
+				// Loop through our fields and see which ones should be used for calculations.
+				if ( is_array ( $all_fields ) ) {
+					foreach ( $all_fields as $f_id => $user_value ) {
+						$field = $ninja_forms_processing->get_field_settings( $f_id );
+						$field_value = $ninja_forms_processing->get_field_value( $f_id );
+						$data = $field['data'];
+						if ( $f_id == $tax ) {
+							$tax = ninja_forms_field_calc_value( $field['id'], $field_value, 'auto' );;
+						}
+						switch ( $calc_method ) {
+							case 'auto': // We are automatically totalling the fields that have a calc_auto_include set to 1.
+								if ( isset ( $data['calc_auto_include'] ) AND $data['calc_auto_include'] == 1 ) {
+									$calc_value = ninja_forms_field_calc_value( $field['id'], $field_value, $calc_method );
+									if ( $calc_value !== false ) {
+										$result = ninja_forms_calc_evaluate( 'add', $result, $calc_value );						
+									}
+								}
+								break;
+							case 'fields': // We are performing a specific set of operations on a set of fields.
+								if ( is_array ( $calc_fields ) ) {
+									foreach ( $calc_fields as $c ) {
+										if ( $c['field'] == $field['id'] ) {
+											$calc_value = ninja_forms_field_calc_value( $field['id'], $field_value, $calc_method );
+											if ( $calc_value !== false ) {
+												$result = ninja_forms_calc_evaluate( $c['op'], $result, $calc_value );
+											}
+										}
+									}
+								}
+								break;
+							case 'eq':
+								$calc_value = ninja_forms_field_calc_value( $field['id'], $field_value, $calc_method );
+								if ( $calc_value !== false ) {
+									$calc_eq = preg_replace('/\bfield_'.$field['id'].'\b/', $calc_value, $calc_eq );
+								}
+								break;
 						}
 					}
 				}
-				break;
-			case 'eq':
-				$calc_value = ninja_forms_field_calc_value( $field['id'], $field_value, $calc_method );
-				if ( $calc_value !== false ) {
-					$calc_eq = preg_replace('/\bfield_'.$field['id'].'\b/', $calc_value, $calc_eq );
+				
+
+				if ( $calc_method == 'eq' ) {
+					$eq = new eqEOS();
+					$result = $eq->solveIF($calc_eq);
 				}
-				break;
+				if ( isset ( $field_data['calc_places'] ) ) {
+					$places = $field_data['calc_places'];
+					$result = number_format( round( $result, $places ), $places );
+				}
+
+				$ninja_forms_processing->update_field_value( $field_id, $result );
+			}
 		}
 	}
-
-	if ( $calc_method == 'eq' ) {
-		$eq = new eqEOS();
-		$result = $eq->solveIF($calc_eq);
-	}
-	if ( isset ( $field_data['calc_places'] ) ) {
-		$places = $field_data['calc_places'];
-		$result = number_format( round( $result, $places ), $places );
-	}
-
-	$ninja_forms_processing->update_field_value( $field_id, $result );
 }
+
+add_action( 'ninja_forms_pre_process', 'ninja_forms_field_calc_pre_process', 999 );

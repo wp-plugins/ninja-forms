@@ -46,6 +46,10 @@ a.tooltip span
     padding: 5px;
     text-align: center;
 }
+
+#ui-datepicker-div .ui-icon {
+    text-indent: 0px;
+}
 .ui-datepicker-prev {
     float: left;
 }
