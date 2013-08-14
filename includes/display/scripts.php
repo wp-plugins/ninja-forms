@@ -54,9 +54,10 @@ function ninja_forms_display_js($form_id, $local_vars = ''){
 						} else {
 							$key = $option['label'];
 						}
-						if ( isset ( $option['calc'] ) AND !empty ( $option['calc'] ) ) {
-							$calc_value[$field_id][$key] = $option['calc'];
+						if ( !isset ( $option['calc'] ) OR ( isset ( $option['calc'] ) AND empty ( $option['calc'] ) ) ) {
+							$option['calc'] = 0;
 						}
+						$calc_value[$field_id][$key] = $option['calc'];
 					}
 				}
 			}

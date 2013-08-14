@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.4
 Tested up to: 3.6
-Stable tag: 2.2.39
+Stable tag: 2.2.40
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,14 +76,13 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.2.39 =
+= 2.2.40 =
 
 *Bugs:*
 
-* CSV files should now populate correctly in Admin emails.
-* Fixed a bug that could prevent files from being properly attached when using the File Uploads extension.
-* Fixed a bug that caused the date picker "next" and "prevous" months to hide when used on the same page as a rich text editor.
-* Calculation fields should now always show the correct amount in admin emails and CSV files.
+* Fixed a bug with list fields and calculations that caused the item label to be used rather than the calc value.
+* Importing forms with calculation fields should now work properly.
+* Fixed a few PHP notices. Thanks @mpeshev!
 
 == Requested Features ==
 
@@ -91,14 +90,13 @@ If you have any feature requests, please feel free to visit [wpninjas.com](http:
 
 == Changelog ==
 
-= 2.2.39 =
+= 2.2.40 =
 
 *Bugs:*
 
-* CSV files should now populate correctly in Admin emails.
-* Fixed a bug that could prevent files from being properly attached when using the File Uploads extension.
-* Fixed a bug that caused the date picker "next" and "prevous" months to hide when used on the same page as a rich text editor.
-* Calculation fields should now always show the correct amount in admin emails and CSV files.
+* Fixed a bug with list fields and calculations that caused the item label to be used rather than the calc value.
+* Importing forms with calculation fields should now work properly.
+* Fixed a few PHP notices. Thanks @mpeshev!
 
 = 2.2.38 =
 

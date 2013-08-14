@@ -117,7 +117,7 @@ function ninja_forms_export_form( $form_id ){
 function ninja_forms_save_impexp_forms($data){
 	global $wpdb, $ninja_forms_admin_update_message;
 	$plugin_settings = get_option("ninja_forms_settings");
-	$form_id = $_REQUEST['form_id'];
+	$form_id = isset( $_REQUEST['form_id'] ) ? $_REQUEST['form_id'] : '';
 	$update_msg = '';
 	if( $_REQUEST['submit'] == __('Export Form', 'ninja-forms') OR ( isset( $_REQUEST['export_form'] ) AND $_REQUEST['export_form'] == 1 ) ){
 		if($form_id != ''){
@@ -129,7 +129,7 @@ function ninja_forms_save_impexp_forms($data){
 		if ($_FILES['userfile']['error'] == UPLOAD_ERR_OK AND is_uploaded_file($_FILES['userfile']['tmp_name'])){
 			$file = file_get_contents($_FILES['userfile']['tmp_name']);
 			$form = unserialize( trim( $file ) );
-			$form_fields = $form['field'];
+			$form_fields = isset( $form['field'] ) ? $form['field'] : null;
 
 			unset($form['field']);
 			$form = apply_filters( 'ninja_forms_before_import_form', $form );
@@ -188,4 +188,45 @@ function ninja_forms_import_form( $data ){
 	$form['field'] = $form_fields;
 	do_action( 'ninja_forms_after_import_form', $form );
 	return $form['id'];
+}
+
+/*
+ *
+ * Function that fixes calculation fields and their references to newly created fields.
+ *
+ * @since 2.2.40
+ * @returns void
+ */
+
+add_action( 'ninja_forms_after_import_form', 'ninja_forms_calc_after_import_form' );
+
+function ninja_forms_calc_after_import_form( $form ){
+	global $wpdb;
+
+	if( is_array( $form['field'] ) AND !empty( $form['field'] ) ){
+		$field_rows = ninja_forms_get_fields_by_form_id( $form['id'] );
+		if( is_array( $field_rows ) AND !empty( $field_rows ) ){
+			for ($y=0; $y < count( $field_rows ); $y++) {
+				if ( isset ( $field_rows[$y]['data']['calc'] ) AND is_array( $field_rows[$y]['data']['calc'] ) ) {
+					for ( $i=0; $i < count( $field_rows[$y]['data']['calc']); $i++ ) {
+						foreach( $form['field'] as $inserted_field ){
+							if ( isset ( $field_rows[$y]['data']['calc'][$i]['field'] ) AND $inserted_field['old_id'] == $field_rows[$y]['data']['calc'][$i]['field'] ) {
+								$field_rows[$y]['data']['calc'][$i]['field'] = $inserted_field['id'];
+							}
+						}
+					}
+				}
+				$field_rows[$y]['data'] = serialize( $field_rows[$y]['data'] );
+				$args = array(
+					'update_array' => array(
+						'data' => $field_rows[$y]['data'],
+						),
+					'where' => array(
+						'id' => $field_rows[$y]['id'],
+						),
+				);
+				ninja_forms_update_field($args);
+			}
+		}
+	}
 }

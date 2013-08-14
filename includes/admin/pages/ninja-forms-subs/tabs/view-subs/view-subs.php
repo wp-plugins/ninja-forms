@@ -495,7 +495,7 @@ function ninja_forms_edit_sub_save_values(){
 	ninja_forms_update_sub($args);
 }
 
-function ninja_forms_save_view_subs($form_id, $data){
+function ninja_forms_save_view_subs( $form_id, $data = array() ){
 	global $ninja_forms_admin_update_message;
 	$plugin_settings = get_option("ninja_forms_settings");
 	if( isset( $_POST['submit'] ) AND $_REQUEST['page'] == 'ninja-forms-subs' ){
