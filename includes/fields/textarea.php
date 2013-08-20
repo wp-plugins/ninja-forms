@@ -15,7 +15,12 @@ function ninja_forms_register_field_textarea(){
 			array(
 				'type' => 'checkbox',
 				'name' => 'textarea_rte',
-				'label' => __('Show Rich Text Editor?', 'ninja-forms'),
+				'label' => __('Show Rich Text Editor', 'ninja-forms'),
+			),
+			array(
+				'type' => 'checkbox',
+				'name' => 'textarea_media',
+				'label' => __( 'Show Media Upload Button', 'ninja-forms'),
 			),
 			array(
 				'type' => 'checkbox',
@@ -56,6 +61,12 @@ function ninja_forms_field_textarea_display($field_id, $data){
 		$textarea_rte = $data['textarea_rte'];
 	}else{
 		$textarea_rte = 0;
+	}	
+
+	if( isset ( $data['textarea_media'] ) AND $data['textarea_media'] == 1 ){
+		$textarea_media = true;
+	}else{
+		$textarea_media = false;
 	}
 
 	if ( isset( $data['disable_rte_mobile'] ) AND 1 == $data['disable_rte_mobile'] AND wp_is_mobile() ) {
@@ -65,7 +76,8 @@ function ninja_forms_field_textarea_display($field_id, $data){
 	$field_class = ninja_forms_get_field_class( $field_id );
 
 	if($textarea_rte == 1){
-		$args = apply_filters( 'ninja_forms_textarea_rte', array() );
+		$settings = array( 'media_buttons' => $textarea_media );
+		$args = apply_filters( 'ninja_forms_textarea_rte', $settings );
 		wp_editor( $default_value, 'ninja_forms_field_'.$field_id, $args );
 	}else{
 		?>

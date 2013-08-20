@@ -53,7 +53,7 @@ function ninja_forms_field_calc_filter( $calc_data, $field_id ){
 				
 				$all_fields = ninja_forms_get_fields_by_form_id( $form_id );
 
-				remove_filter( 'ninja_forms_field', 'ninja_forms_field_calc_filter', 9, 2 );
+				remove_filter( 'ninja_forms_field', 'ninja_forms_field_calc_filter', 11, 2 );
 
 				// Figure out if there is a sub_total and a tax field. If there are, and this is a total field set to calc_method auto, we're using an equation, not auto.
 				$tax = false;
@@ -143,14 +143,14 @@ function ninja_forms_field_calc_filter( $calc_data, $field_id ){
 
 				$calc_data['default_value'] = $result;
 					
-				add_filter( 'ninja_forms_field', 'ninja_forms_field_calc_filter', 9, 2 );
+				add_filter( 'ninja_forms_field', 'ninja_forms_field_calc_filter', 11, 2 );
 			//}
 		}
 	}
 	return $calc_data;
 }
 
-add_filter( 'ninja_forms_field', 'ninja_forms_field_calc_filter', 9, 2 );
+add_filter( 'ninja_forms_field', 'ninja_forms_field_calc_filter', 11, 2 );
 
 /*
  *

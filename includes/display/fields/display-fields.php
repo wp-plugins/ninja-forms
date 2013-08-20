@@ -195,7 +195,7 @@ function ninja_forms_get_field_wrap_class($field_id){
 			break;
 		}
 	}
-	return $field_wrap_class;
+	return apply_filters( 'ninja_forms_display_field_wrap_class', $field_wrap_class, $field_id );
 }
 
 
@@ -317,8 +317,5 @@ function ninja_forms_get_field_class($field_id){
 		$field_class .= ' '.$calc_listen;
 	}
 
-
-	$field_class = apply_filters( 'ninja_forms_display_field_class', $field_class, $field_id );
-
-	return $field_class;
+	return apply_filters( 'ninja_forms_display_field_class', $field_class, $field_id );
 }
