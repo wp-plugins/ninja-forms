@@ -37,6 +37,10 @@ function ninja_forms_display_field_label( $field_id, $data ){
 		$display_label = true;
 	}
 
+	$label_class = '';
+
+	$label_class = apply_filters( 'ninja_forms_label_class', $label_class, $field_id );
+
 	if($display_label){
 		if($req == 1){
 			$req_span = "<span class='ninja-forms-req-symbol'>$req_symbol</span>";
@@ -44,7 +48,7 @@ function ninja_forms_display_field_label( $field_id, $data ){
 			$req_span = '';
 		}
 		?>
-		<label for="ninja_forms_field_<?php echo $field_id;?>" id="ninja_forms_field_<?php echo $field_id;?>_label"><?php echo $label;?> <?php echo $req_span;?>
+		<label for="ninja_forms_field_<?php echo $field_id;?>" id="ninja_forms_field_<?php echo $field_id;?>_label" class="<?php echo $label_class;?>"><?php echo $label;?> <?php echo $req_span;?>
 		<?php
 		if( $label_pos != 'left' ){
 			do_action( 'ninja_forms_display_field_help', $field_id, $data );

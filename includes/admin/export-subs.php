@@ -90,7 +90,8 @@ function ninja_forms_export_subs_to_csv( $sub_ids = '', $return = false ){
 
 	$array = array($label_array, $value_array);
 	$today = date($date_format);
-	$filename = 'ninja_forms_subs_'.$today.'.csv';
+	$filename = apply_filters( 'ninja_forms_export_subs_csv_file_name', 'ninja_forms_subs_' . $today );
+	$filename = $filename . ".csv";
 
 	if( $return ){
 		return str_putcsv($array);

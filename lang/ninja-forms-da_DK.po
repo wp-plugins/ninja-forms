@@ -1164,7 +1164,7 @@ msgstr "Datov&aelig;lger"
 
 #: ../includes/fields/textbox.php:26
 msgid ""
-"Use this as the \"From\" email address for Administrative recepients of this "
+"Use this as the \"From\" email address for Administrative recipients of this "
 "form?"
 msgstr ""
 "Brug denne som \"Fra\" e-mail adresse for administrative modtagere af denne "
@@ -1172,7 +1172,7 @@ msgstr ""
 
 #: ../includes/fields/textbox.php:39
 msgid ""
-"Use this as the \"From\" email name for Administrative recepients of this "
+"Use this as the \"From\" email name for Administrative recipients of this "
 "form?"
 msgstr ""
 "Brug denne som \"Fra\" e-mail navn for administrative modtagere af denne "

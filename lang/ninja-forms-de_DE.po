@@ -1171,7 +1171,7 @@ msgstr "Datumswähler"
 # @ ninja-forms
 #: includes/fields/textbox.php:26
 msgid ""
-"Use this as the \"From\" email address for Administrative recepients of this "
+"Use this as the \"From\" email address for Administrative recipients of this "
 "form?"
 msgstr ""
 "Benutze dies als die \"Von\"-E-Mail-Adresse für administrative Empfänger "
@@ -1180,7 +1180,7 @@ msgstr ""
 # @ ninja-forms
 #: includes/fields/textbox.php:39
 msgid ""
-"Use this as the \"From\" email name for Administrative recepients of this "
+"Use this as the \"From\" email name for Administrative recipients of this "
 "form?"
 msgstr ""
 "Benutze dies als die \"Von\"-E-Mail-Adresse für administrative Empfänger "

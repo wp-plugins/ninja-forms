@@ -78,40 +78,62 @@ function ninja_forms_register_exp_forms_metabox(){
 	ninja_forms_register_tab_metabox($args);
 }
 
-function ninja_forms_export_form( $form_id ){
-	if($form_id != ''){
-		$form_row = ninja_forms_get_form_by_id($form_id);
-		$field_results = ninja_forms_get_fields_by_form_id($form_id);
-		$data = $form_row['data'];
-		$form_title = $data['form_title'];
-		$form_row['id'] = NULL;
-		if(is_array($form_row) AND !empty($form_row)){
-			if(is_array($field_results) AND !empty($field_results)){
-				$x = 0;
-				foreach($field_results as $field){
-					$form_row['field'][$x] = $field;
-					$x++;
-				}
+/*
+ *
+ * Function that returns a serialized string containing the form for export.
+ *
+ * @since 2.2.42
+ * @returns $form_row string
+ */
+
+function ninja_forms_serialize_form( $form_id ){
+	if($form_id == '')
+		return;
+	$plugin_settings = get_option( 'ninja_forms_settings' );
+	$form_row = ninja_forms_get_form_by_id($form_id);
+	$field_results = ninja_forms_get_fields_by_form_id($form_id);
+	$form_row['id'] = NULL;
+	if(is_array($form_row) AND !empty($form_row)){
+		if(is_array($field_results) AND !empty($field_results)){
+			$x = 0;
+			foreach($field_results as $field){
+				$form_row['field'][$x] = $field;
+				$x++;
 			}
 		}
-		if(isset($plugin_settings['date_format'])){
-			$date_format = $plugin_settings['date_format'];
-		}else{
-			$date_format = 'm/d/Y';
-		}
-
-		//$today = date($date_format);
-		$current_time = current_time('timestamp');
-		$today = date($date_format, $current_time);
-		$form_row = serialize($form_row);
-
-		header("Content-type: application/csv");
-		header("Content-Disposition: attachment; filename=".$form_title."-".$today.".nff");
-		header("Pragma: no-cache");
-		header("Expires: 0");
-		echo $form_row;
-		die();
 	}
+
+	$form_row = serialize($form_row);
+
+	return $form_row;
+}
+
+
+function ninja_forms_export_form( $form_id ){
+	if($form_id == '')
+		return;
+	$plugin_settings = get_option( 'ninja_forms_settings' );
+	$form_row = ninja_forms_get_form_by_id($form_id);
+	$data = $form_row['data'];
+	$form_title = $data['form_title'];
+	$form_row = ninja_forms_serialize_form( $form_id );
+
+	if(isset($plugin_settings['date_format'])){
+		$date_format = $plugin_settings['date_format'];
+	}else{
+		$date_format = 'm/d/Y';
+	}
+
+	//$today = date($date_format);
+	$current_time = current_time('timestamp');
+	$today = date($date_format, $current_time);
+
+	header("Content-type: application/csv");
+	header("Content-Disposition: attachment; filename=".$form_title."-".$today.".nff");
+	header("Pragma: no-cache");
+	header("Expires: 0");
+	echo $form_row;
+	die();
 }
 
 function ninja_forms_save_impexp_forms($data){

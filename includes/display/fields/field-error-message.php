@@ -11,12 +11,17 @@ function ninja_forms_display_field_processing_error( $field_id ){
 	global $ninja_forms_processing;
 
 	if( is_object( $ninja_forms_processing)){
-		//print_r( $ninja_forms_processing );
+
 		$field_errors = $ninja_forms_processing->get_errors_by_location($field_id);
-		$style = '';
+		if ( $field_errors ) {
+			$style = '';
+		} else {
+			$style = 'display:none;';
+		}
+		
 	}else{
 		$field_errors = '';
-		$style = 'display:none';
+		$style = 'display:none;';
 	}
 
 	?>

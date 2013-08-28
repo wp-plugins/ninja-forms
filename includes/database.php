@@ -250,6 +250,13 @@ function ninja_forms_get_subs($args = array()){
 			$where .= '`status` = '.$args['status'];
 			unset($args['status']);
 		}
+		if(isset($args['action'])){
+			if($where != ''){
+				$where .= ' AND ';
+			}
+			$where .= '`action` = "'.$args['action'].'"';
+			unset($args['action']);
+		}
 		if(isset($args['begin_date']) AND $args['begin_date'] != ''){
 			$begin_date = $args['begin_date'];
 			$begin_date = strtotime($begin_date);

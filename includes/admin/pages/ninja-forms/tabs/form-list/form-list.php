@@ -10,7 +10,17 @@ function ninja_forms_register_form_export(){
 
 add_action( 'admin_init', 'ninja_forms_register_form_export' );
 
+function ninja_forms_register_form_duplicate(){
+	if ( isset ( $_REQUEST['duplicate_form'] ) AND $_REQUEST['duplicate_form'] == 1 ) {
+		$form_id = $_REQUEST['form_id'];
+		$form_row = ninja_forms_serialize_form( $form_id );
+		ninja_forms_import_form( $form_row );
+		$url = remove_query_arg( array( 'duplicate_form', 'form_id' ) );
+		wp_redirect( $url );
+	}
+}
 
+add_action( 'admin_init', 'ninja_forms_register_form_duplicate' );
 
 function ninja_forms_register_tab_form_list(){
 	$new_link = esc_url(add_query_arg(array('form_id' => 'new', 'tab' => 'form_settings')));
@@ -159,6 +169,7 @@ function ninja_forms_tab_form_list($form_id, $data){
 			$edit_link = esc_url( add_query_arg( array( 'tab' => 'form_settings', 'form_id' => $form_id ) ) );
 			$subs_link = admin_url( 'admin.php?page=ninja-forms-subs&form_id='.$form_id );
 			$export_link = esc_url( add_query_arg( array( 'export_form' => 1, 'form_id' => $form_id ) ) );
+			$duplicate_link = esc_url( add_query_arg( array( 'duplicate_form' => 1, 'form_id' => $form_id ) ) );
 			?>
 			<tr id="ninja_forms_form_<?php echo $form_id;?>_tr">
 				<th scope="row" class="check-column">
@@ -172,6 +183,7 @@ function ninja_forms_tab_form_list($form_id, $data){
 						<span class="edit"><a href="<?php echo $edit_link;?>"><?php _e( 'Edit', 'ninja-forms' ); ?></a> | </span>
 						<span class="trash"><a class="ninja-forms-delete-form" title="<?php _e( 'Delete this form', 'ninja-forms' ); ?>" href="#" id="ninja_forms_delete_form_<?php echo $form_id;?>"><?php _e( 'Delete', 'ninja-forms' ); ?></a> | </span>
 						<span class="export"><a href="<?php echo $export_link;?>" title="<?php _e( 'Export Form', 'ninja-forms' ); ?>"><?php _e( 'Export', 'ninja-forms' ); ?></a> | </span>
+						<span class="duplicate"><a href="<?php echo $duplicate_link;?>" title="<?php _e( 'Duplicate Form', 'ninja-forms' ); ?>"><?php _e( 'Duplicate', 'ninja-forms' ); ?></a> | </span>
 						<span class="bleep"><?php echo ninja_forms_preview_link( $form_id ); ?> | </span>
 						<span class="subs"><a href="<?php echo $subs_link;?>" class="" title="<?php _e( 'View Submissions', 'ninja-forms' ); ?>"><?php _e( 'View Submissions', 'ninja-forms' ); ?></a></span>
 					</div>

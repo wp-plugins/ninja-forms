@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms
 Plugin URI: http://wpninjas.com/ninja-forms/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 2.2.41
+Version: 2.2.42
 Author: The WP Ninjas
 Author URI: http://wpninjas.com
 Text Domain: ninja-forms
@@ -33,7 +33,7 @@ Ninja Forms also uses the following jQuery plugins. Their licenses can be found 
 	www.drewwilson.com
 	Copyright 2010 Drew Wilson
 
-	jQuery MaskedInput v.1.3
+	jQuery MaskedInput v.1.3.1
 	http://digitalbush.co
 	Copyright (c) 2007-2011 Josh Bush
 
@@ -41,7 +41,7 @@ Ninja Forms also uses the following jQuery plugins. Their licenses can be found 
 	http://tablesorter.com
 	Copyright (c) Christian Bach 2012
 
-	jQuery AutoNumeric Plugin v.1.7.4-B
+	jQuery AutoNumeric Plugin v.1.9.15
 	http://www.decorplanit.com/plugin/
 	By: Bob Knothe And okolov Yura aka funny_falcon
 
@@ -50,7 +50,7 @@ global $wpdb, $wp_version;
 
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/".basename( dirname( __FILE__ ) ) );
 define("NINJA_FORMS_URL", plugins_url()."/".basename( dirname( __FILE__ ) ) );
-define("NINJA_FORMS_VERSION", "2.2.41");
+define("NINJA_FORMS_VERSION", "2.2.42");
 define("NINJA_FORMS_TABLE_NAME", $wpdb->prefix . "ninja_forms");
 define("NINJA_FORMS_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fields");
 define("NINJA_FORMS_FAV_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fav_fields");

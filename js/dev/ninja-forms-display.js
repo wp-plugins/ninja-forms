@@ -277,17 +277,21 @@ jQuery(document).ready(function(jQuery) {
 								}
 								
 							}
-
+	
 							if ( new_value === '' ) {
 								if ( typeof calc_settings.calc_value[field_id] !== 'undefined' && typeof calc_settings.calc_value[field_id][key] !== 'undefined' ) {
 									// Get our calc value for this field from our previously defined JS object.
 									var new_value = calc_settings.calc_value[field_id][key];
 								} else {
 									// This field doesn't exist in the calc value object. It's either a textbox or similar element.
-									if ( isNaN( this.value ) ) {
-										var new_value = 0;
-									} else {
-										var new_value = this.value;
+									
+									if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' ) {
+										var new_value = this.value.replace( ninja_forms_settings.currency_symbol, "" );	
+										new_value = new_value.replace( /,/g, "" );	
+									}
+									
+									if ( isNaN( new_value ) ) {
+										new_value = 0;
 									}
 								}
 							}
@@ -299,6 +303,10 @@ jQuery(document).ready(function(jQuery) {
 							} else {
 								// Our calc_value doesn't exist in the calc_value JS object.
 								// Check to see if our old_value is an array. This would be the case if the field is a multi-select.
+								if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' ) {
+									old_value = old_value.replace( ninja_forms_settings.currency_symbol, "" );	
+									old_value = old_value.replace( /,/g, "" );	
+								}
 								if ( isNaN( old_value ) || old_value == '' ) {
 									// We aren't dealing with an old_value array and old_value isn't a number. Set it to 0.
 									old_value = 0;
@@ -314,6 +322,10 @@ jQuery(document).ready(function(jQuery) {
 							}
 
 							// Make sure that our current total is made up of numbers.
+							if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' ) {
+								current_value = current_value.replace( ninja_forms_settings.currency_symbol, "" );	
+								current_value = current_value.replace( /,/g, "" );	
+							}
 							if ( !isNaN( current_value ) ) {
 								// Convert those string numbers into operable ones.
 								current_value = parseFloat( current_value );
@@ -343,6 +355,7 @@ jQuery(document).ready(function(jQuery) {
 							}
 
 							// If our old value exists and isn't empty or 0, then carry out the old_op on it.
+
 							if ( old_value && !isNaN( old_value ) && old_value != 0 && old_value != '' && !jQuery(this).hasClass('ninja-forms-field-calc-no-old-op') ) {
 								old_value = parseFloat( old_value );
 								tmp = new ninja_forms_var_operator(old_op);
@@ -436,6 +449,9 @@ jQuery(document).ready(function(jQuery) {
 						}
 
 						// Make sure that our current total is made up of numbers.
+						if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' ) {
+							current_value = current_value.replace( ninja_forms_settings.currency_symbol, "" );	
+						}
 						if ( !isNaN( current_value ) ) {
 							// Convert those string numbers into operable ones.
 							current_value = parseFloat( current_value );

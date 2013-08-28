@@ -6,11 +6,13 @@ function ninja_forms_register_req_fields_process(){
 
 function ninja_forms_req_fields_process(){
 	global $ninja_forms_processing, $ninja_forms_fields;
-	$all_fields = $ninja_forms_processing->get_all_fields();
 
+	$all_fields = $ninja_forms_processing->get_all_fields();
+	
 	if( is_array( $all_fields ) AND !empty( $all_fields ) ){
 		foreach($all_fields as $field_id => $user_value){
 			$field_row = $ninja_forms_processing->get_field_settings( $field_id );
+
 			if ( !$field_row ) {
 				$field_row = ninja_forms_get_field_by_id( $field_id );
 			}
@@ -51,7 +53,7 @@ function ninja_forms_req_fields_process(){
 				$req_error_label = __( 'Please check required fields.', 'ninja-forms' );
 			}
 
-			if($req == 1){
+			if( $req == 1 AND $user_value !== false ){
 				if($req_validation != ''){
 					$arguments['field_id'] = $field_id;
 					$arguments['user_value'] = $user_value;

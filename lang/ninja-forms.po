@@ -844,11 +844,11 @@ msgid "Datepicker"
 msgstr ""
 
 #: includes/fields/textbox.php:26
-msgid "Use this as the \"From\" email address for Administrative recepients of this form?"
+msgid "Use this as the \"From\" email address for Administrative recipients of this form?"
 msgstr ""
 
 #: includes/fields/textbox.php:39
-msgid "Use this as the \"From\" email name for Administrative recepients of this form?"
+msgid "Use this as the \"From\" email name for Administrative recipients of this form?"
 msgstr ""
 
 #: includes/fields/textbox.php:159

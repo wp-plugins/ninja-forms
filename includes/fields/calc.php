@@ -519,10 +519,11 @@ function ninja_forms_field_calc_pre_process(){
 					foreach ( $all_fields as $f_id => $user_value ) {
 						$field = $ninja_forms_processing->get_field_settings( $f_id );
 						$field_value = $ninja_forms_processing->get_field_value( $f_id );
-						$data = $field['data'];
+						$field_data = $field['data'];
 						if ( $f_id == $tax ) {
 							$tax = ninja_forms_field_calc_value( $field['id'], $field_value, 'auto' );;
 						}
+						
 						switch ( $calc_method ) {
 							case 'auto': // We are automatically totalling the fields that have a calc_auto_include set to 1.
 								if ( isset ( $field_data['calc_auto_include'] ) AND $field_data['calc_auto_include'] == 1 ) {
@@ -607,8 +608,6 @@ function ninja_forms_field_calc_pre_process(){
 					$places = $field_data['calc_places'];
 					$result = number_format( round( $result, $places ), $places );
 				}
-				//echo "RESULT: ".$result;
-				//echo "<br>";
 				$ninja_forms_processing->update_field_value( $field_id, $result );		
 			}
 		}

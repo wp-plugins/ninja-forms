@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.4
 Tested up to: 3.6
-Stable tag: 2.2.41
+Stable tag: 2.2.42
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,26 +76,47 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.2.41 =
+= 2.2.42 =
 
 *Features:*
 
-* Added the option to disable the "add media" button on the Textarea field.
+* Added the option to duplicate a form from the "All Forms" list; simply select "duplicate" and a clone of your form will be added to the list.
 
 *Changes:*
 
-* Improved the back-end processing of Calculation fields.
-* Added a new filter for the field wrapper: ninja_forms_display_field_wrap_class.
+* Added the ability to search the submission database by 'action.'
+* Fixed several misspellings.
+* Added an extra check to required fields to make them more stable.
 
 *Bugs:*
 
-* Fixed a bug that prevented Calculation fields from displaying properly in emails.
+* Calculation fields should now work properly with currency masks.
+* Error messages should no longer appear on fields that shouldn't have errors.
+* Cleaned up the CSS.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
 
 == Changelog ==
+
+= 2.2.42 =
+
+*Features:*
+
+* Added the option to duplicate a form from the "All Forms" list; simply select "duplicate" and a clone of your form will be added to the list.
+
+*Changes:*
+
+* Added the ability to search the submission database by 'action.'
+* Fixed several misspellings.
+* Added an extra check to required fields to make them more stable.
+
+*Bugs:*
+
+* Calculation fields should now work properly with currency masks.
+* Error messages should no longer appear on fields that shouldn't have errors.
+* Cleaned up the CSS.
 
 = 2.2.41 =
 

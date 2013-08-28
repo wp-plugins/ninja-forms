@@ -80,7 +80,7 @@ margin: 0;
 	clear: none;
 	float: left;
 	width: 46%;
-	margin: 0 2% 3px 2%;
+	margin: 0 2% 3px 2% !important;
 	padding: 0;
 }
 
@@ -218,7 +218,7 @@ border-bottom-color: transparent;
 	padding: 10px;
 }
 
-#poststuff .inside {
+#poststuff .ninja-forms-field-list .inside {
 	margin: 0;
 }
 

@@ -17,8 +17,13 @@ function ninja_forms_display_open_fields_wrap( $form_id ){
 		$hide_class = " ninja-forms-no-display";
 	else
 		$hide_class = "";
+
+	$wrap_class = '';
+
+	$wrap_class = apply_filters( 'ninja_forms_fields_wrap_class', $wrap_class, $form_id );
+
 	?>
-	<div id="ninja_forms_form_<?php echo $form_id;?>_all_fields_wrap" class="ninja-forms-all-fields-wrap <?php echo $hide_class;?>">
+	<div id="ninja_forms_form_<?php echo $form_id;?>_all_fields_wrap" class="ninja-forms-all-fields-wrap<?php echo $wrap_class;?><?php echo $hide_class;?>">
 	<?php
 }
 
