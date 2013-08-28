@@ -44,6 +44,11 @@ function ninja_forms_register_field_calc(){
 				'default' => 2,
 			),
 		),
+		'conditional' => array(
+			'value' => array(
+				'type' => 'text',
+			),
+		),
 	);
 
 	ninja_forms_register_field( '_calc', $args );
