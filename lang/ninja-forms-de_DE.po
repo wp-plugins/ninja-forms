@@ -1529,8 +1529,8 @@ msgstr "Ninja Formulare"
 # @ ninja-forms
 #. translators: plugin header field 'PluginURI'
 #: ninja-forms.php:0
-msgid "http://wpninjas.com/ninja-forms/"
-msgstr "http://wpninjas.com/ninja-forms/"
+msgid "http://ninjaforms.com/ninja-forms/"
+msgstr "http://ninjaforms.com/ninja-forms/"
 
 # @ ninja-forms
 #. translators: plugin header field 'Description'
@@ -1550,8 +1550,8 @@ msgstr "Die WP-Ninjas"
 # @ ninja-forms
 #. translators: plugin header field 'AuthorURI'
 #: ninja-forms.php:0
-msgid "http://wpninjas.com"
-msgstr "http://wpninjas.com/"
+msgid "http://ninjaforms.com"
+msgstr "http://ninjaforms.com/"
 
 # @ ninja-forms
 #. translators: plugin header field 'Version'

@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.4
 Tested up to: 3.6
-Stable tag: 2.2.42
+Stable tag: 2.2.43
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -37,19 +37,19 @@ Please feel free to visit our [demo site](http://demo.wpninjas.com/ninja-forms/)
 
 = In addition to these features, extensions are available at our website: =
 
-* [Front-End Editor](http://wpninjas.com/downloads/front-end-editor/) - Give your users the ability to create, edit, or delete posts, pages, or any custom post type and allow your users to edit their Ninja Forms submissions all from the front-end. Also included is front-end profile editing, custom registration forms, login and password resetting, all without needing to see the default, WordPress branded login page.
-* [File Uploads](http://wpninjas.com/downloads/file-uploads/) - Allow users to upload files and store those files within a searchable database.
-* [Multi-Part Forms](http://wpninjas.com/downloads/multi-part-forms/) - Break up those long, complex forms into multiple pages.
-* [Save User Progress](http://wpninjas.com/downloads/save-user-progress/) - Let your users save their progress and return later to finish filling out the form.
-* [Conditional Logic](http://wpninjas.com/downloads/conditional-logic/) - Create "smart" forms that show or hide fields based upon user input. Even add a value to a dropdown list when a user selects a specific value from another list.
-* [Front-End Posting](http://wpninjas.com/downloads/front-end-posting/) - Use Ninja Forms to create posts from the front-end. These can be added to any post type, including custom post types, and users can select categories and tags.
-* [Layout & Styles](http://wpninjas.com/downloads/layout-styles/) - Use Ninja Forms to create amzing form layouts and styles right from your WordPress admin.
-* [MailChimp](http://wpninjas.com/downloads/mail-chimp/) - The MailChimp extension allows you to quickly create newsletter signup forms for your MailChimp account using the power and flexibility that Ninja Forms provides.
-* [Campaign Monitor](http://wpninjas.com/downloads/campaign-monitor/) - The Campaign Monitor extension allows you to quickly create newsletter signup forms for your Campaign Monitor account using the power and flexibility that Ninja Forms provides.
-* [User Analytics](http://wpninjas.com/downloads/user-analytics/) - The User Analytics extension will help website owners understand how hot a lead is based on extra data automatically collected about the user.
-* [Constant Contact](http://wpninjas.com/downloads/constant-contact/) - The Constant Contact extension allows you to quickly create newsletter signup forms for your Constant Contact account using the power and flexibility that Ninja Forms provides.
-* [Pushover](http://wpninjas.com/downloads/pushover/) - When email and SMS notifications just do not cut it, send yourself push notifications of form submissions with Pushover. Pushover makes it easy to send real-time notifications to your Android and iOS devices.
-* [Freshbooks](http://wpninjas.com/downloads/freshbooks/) - Automatically insert Ninja Forms data right into Freshbooks when your potential clients submit forms. Go from lead to invoice that much quicker by having the information already in your favorite invoicing application.
+* [Front-End Editor](http://ninjaforms.com/downloads/front-end-editor/) - Give your users the ability to create, edit, or delete posts, pages, or any custom post type and allow your users to edit their Ninja Forms submissions all from the front-end. Also included is front-end profile editing, custom registration forms, login and password resetting, all without needing to see the default, WordPress branded login page.
+* [File Uploads](http://ninjaforms.com/downloads/file-uploads/) - Allow users to upload files and store those files within a searchable database.
+* [Multi-Part Forms](http://ninjaforms.com/downloads/multi-part-forms/) - Break up those long, complex forms into multiple pages.
+* [Save User Progress](http://ninjaforms.com/downloads/save-user-progress/) - Let your users save their progress and return later to finish filling out the form.
+* [Conditional Logic](http://ninjaforms.com/downloads/conditional-logic/) - Create "smart" forms that show or hide fields based upon user input. Even add a value to a dropdown list when a user selects a specific value from another list.
+* [Front-End Posting](http://ninjaforms.com/downloads/front-end-posting/) - Use Ninja Forms to create posts from the front-end. These can be added to any post type, including custom post types, and users can select categories and tags.
+* [Layout & Styles](http://ninjaforms.com/downloads/layout-styles/) - Use Ninja Forms to create amzing form layouts and styles right from your WordPress admin.
+* [MailChimp](http://ninjaforms.com/downloads/mail-chimp/) - The MailChimp extension allows you to quickly create newsletter signup forms for your MailChimp account using the power and flexibility that Ninja Forms provides.
+* [Campaign Monitor](http://ninjaforms.com/downloads/campaign-monitor/) - The Campaign Monitor extension allows you to quickly create newsletter signup forms for your Campaign Monitor account using the power and flexibility that Ninja Forms provides.
+* [User Analytics](http://ninjaforms.com/downloads/user-analytics/) - The User Analytics extension will help website owners understand how hot a lead is based on extra data automatically collected about the user.
+* [Constant Contact](http://ninjaforms.com/downloads/constant-contact/) - The Constant Contact extension allows you to quickly create newsletter signup forms for your Constant Contact account using the power and flexibility that Ninja Forms provides.
+* [Pushover](http://ninjaforms.com/downloads/pushover/) - When email and SMS notifications just do not cut it, send yourself push notifications of form submissions with Pushover. Pushover makes it easy to send real-time notifications to your Android and iOS devices.
+* [Freshbooks](http://ninjaforms.com/downloads/freshbooks/) - Automatically insert Ninja Forms data right into Freshbooks when your potential clients submit forms. Go from lead to invoice that much quicker by having the information already in your favorite invoicing application.
 
 We have several other extensions in the works.
 
@@ -57,7 +57,7 @@ If you're a developer and would like to talk about creating some premium extensi
 
 == Screenshots ==
 
-To see up to date screenshots, visit the [Ninja Forms](http://wpninjas.com/ninja-forms/) page.
+To see up to date screenshots, visit [Ninja Forms.com](http://ninjaforms.com/).
 
 == Installation ==
 
@@ -72,33 +72,27 @@ Shortcodes have been re-implemented. They are used like so: [ninja_forms_display
 
 == Use ==
 
-For help and video tutorials, please visit our website: [Ninja Forms Documentation](http://wpninjas.com/ninja-forms/docs/)
+For help and video tutorials, please visit our website: [Ninja Forms Documentation](http://ninjaforms.com/documentation/intro/)
 
 == Upgrade Notice ==
 
-= 2.2.42 =
-
-*Features:*
-
-* Added the option to duplicate a form from the "All Forms" list; simply select "duplicate" and a clone of your form will be added to the list.
+= 2.2.43 =
 
 *Changes:*
 
-* Added the ability to search the submission database by 'action.'
-* Fixed several misspellings.
-* Added an extra check to required fields to make them more stable.
-
-*Bugs:*
-
-* Calculation fields should now work properly with currency masks.
-* Error messages should no longer appear on fields that shouldn't have errors.
-* Cleaned up the CSS.
+* Changed all references to wpninjas.com to the new ninjaforms.com.
 
 == Requested Features ==
 
-If you have any feature requests, please feel free to visit [wpninjas.com](http://wpninjas.com/downloads/category/ninja-forms/) and let us know about it.
+If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.2.43 =
+
+*Changes:*
+
+* Changed all references to wpninjas.com to the new ninjaforms.com.
 
 = 2.2.42 =
 

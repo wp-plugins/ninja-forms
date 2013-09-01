@@ -1100,7 +1100,7 @@ msgid "Ninja Forms"
 msgstr ""
 
 #: ninja-forms.php:0
-msgid "http://wpninjas.com/ninja-forms/"
+msgid "http://ninjaforms.com/ninja-forms/"
 msgstr ""
 
 #: ninja-forms.php:0
@@ -1112,7 +1112,7 @@ msgid "The WP Ninjas"
 msgstr ""
 
 #: ninja-forms.php:0
-msgid "http://wpninjas.com"
+msgid "http://ninjaforms.com"
 msgstr ""
 
 #: ninja-forms.php:0

@@ -109,7 +109,6 @@ jQuery(document).ready(function(jQuery) {
 			var options = {
 			beforeSubmit:  ninja_forms_before_submit,
 			success:       ninja_forms_response,
-			//url: 		   'http://demo.wpninjas.com/ninja-forms/wp-admin/admin-ajax.php'
 			dataType: 'json'
 			};
 			jQuery(this).ajaxForm(options);
