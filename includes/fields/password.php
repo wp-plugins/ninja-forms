@@ -1,7 +1,7 @@
 <?php
 function ninja_forms_register_field_profile_pass(){
 	$args = array(
-		'name' => 'Password',
+		'name' => __( 'Password', 'ninja-forms' ),
 		'display_function' => 'ninja_forms_field_profile_pass_display',
 		'group' => 'standard_fields',
 		'edit_label' => true,

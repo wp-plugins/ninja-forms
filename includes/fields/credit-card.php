@@ -11,7 +11,7 @@ function ninja_forms_register_field_credit_card(){
 	$reg_field = apply_filters( 'ninja_forms_enable_credit_card_field', false );
 
 	$args = array(
-		'name' => 'Credit Card',
+		'name' => __( 'Credit Card', 'ninja-forms' ),
 		'sidebar' => '',
 		'display_function' => 'ninja_forms_field_credit_card_display',
 		'group' => 'standard_fields',
@@ -81,7 +81,7 @@ function ninja_forms_field_credit_card_display( $field_id, $data ) {
 			<input type="text" <?php if ( $post_field ){ echo 'name="_credit_card_name"'; } ?> class="" value="<?php echo $name;?>">
 		</div>
 		<div class="ninja-forms-credit-card-expires"> <!-- [open_expires_wrap] -->
-			<label><?php _e( 'Expiration (MM/YYYY', 'ninja-forms' ); ?></label>
+			<label><?php _e( 'Expiration (MM/YYYY)', 'ninja-forms' ); ?></label>
 			<span><?php _e( 'The date your credit card expires, typically on the front of the card.', 'ninja-forms' ); ?></span>
 			<input type="text" <?php if ( $post_field ){ echo 'name="_credit_card_expires"'; } ?> class="ninja-forms-mask" title="99/9999" value="<?php echo $expires;?>">
 		</div> <!-- [close_expires_wrap] -->

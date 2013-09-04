@@ -915,7 +915,7 @@ jQuery(document).ready(function($) {
 			}
 		})
 	
-		var def_name = prompt("What would you like to name this Defined FIeld?", "");
+		var def_name = prompt("What would you like to name this Defined Field?", "");
 		if(def_name.length >= 1){
 			$.post(ajaxurl, { def_name: def_name, field_data: field_data, field_id: field_id, action:"ninja_forms_add_def"}, function(response){
 				$("#ninja_forms_sidebar_def_fields").append(response.link_html);

@@ -3,7 +3,7 @@
 
 function ninja_forms_register_field_organizer(){
 	$args = array(
-		'name' => 'Organizer',
+		'name' => __( 'Organizer', 'ninja-forms' ),
 		'sidebar' => 'template_fields',
 		'edit_function' => '',
 		'display_function' => '',

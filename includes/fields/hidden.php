@@ -1,7 +1,7 @@
 <?php
 function ninja_forms_register_field_hiddenbox(){
 	$args = array(
-		'name' => 'Hidden Field',
+		'name' => __( 'Hidden Field' , 'ninja-forms' ),
 		'sidebar' => 'template_fields',
 		'edit_function' => 'ninja_forms_field_hidden_edit',
 		'display_function' => 'ninja_forms_field_hidden_display',
@@ -20,9 +20,9 @@ function ninja_forms_register_field_hiddenbox(){
 			),
 			'action' => array(
 				'change_value' => array(
-					'name' => 'Change Value',
+					'name'        => __( 'Change Value', 'ninja-forms' ),
 					'js_function' => 'change_value',
-					'output' => 'text',
+					'output'      => 'text',
 				),
 			),
 		),

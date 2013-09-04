@@ -1,25 +1,25 @@
 <?php
 function ninja_forms_register_field_list(){
 	$args = array(
-		'name' => 'List',
+		'name'          => __( 'List', 'ninja-forms' ),
 		'edit_function' => 'ninja_forms_field_list_edit',
-		'edit_options' => array(
+		'edit_options'  => array(
 			array(
-				'type' => 'select',
-				'name' => 'list_type',
-				'label' => 'List Type',
-				'width' => 'wide',
-				'class' => 'widefat',
+				'type'    => 'select',
+				'name'    => 'list_type',
+				'label'   => __( 'List Type', 'ninja-forms' ),
+				'width'   => 'wide',
+				'class'   => 'widefat',
 				'options' => array(
-					array('name' => 'Dropdown', 'value' => 'dropdown'),
-					array('name' => 'Radio', 'value' => 'radio'),
-					array('name' => 'Checkboxes', 'value' => 'checkbox'),
-					array('name' => 'Multi-Select', 'value' => 'multi'),
+					array('name' => __( 'Dropdown', 'ninja-forms' ), 'value' => 'dropdown'),
+					array('name' => __( 'Radio', 'ninja-forms' ), 'value' => 'radio'),
+					array('name' => __( 'Checkboxes', 'ninja-forms' ), 'value' => 'checkbox'),
+					array('name' => __( 'Multi-Select', 'ninja-forms' ), 'value' => 'multi'),
 				),
 			),
 			array(
-				'type' => 'checkbox',
-				'name' => 'user_state',
+				'type'  => 'checkbox',
+				'name'  => 'user_state',
 				'label' => __( 'This is the user\'s state', 'ninja-forms' ),
 			),				
 			array(
@@ -40,29 +40,29 @@ function ninja_forms_register_field_list(){
 		'conditional' => array(
 			'action' => array(
 				'show' => array(
-					'name' => 'Show This',
+					'name'        => __( 'Show This', 'ninja-forms' ),
 					'js_function' => 'show',
-					'output' => 'hide',
+					'output'      => 'hide',
 				),
 				'hide' => array(
-					'name' => 'Hide This',
+					'name'        => __( 'Hide This', 'ninja-forms' ),
 					'js_function' => 'hide',
-					'output' => 'hide',
+					'output'      => 'hide',
 				),
 				'change_value' => array(
-					'name' => 'Selected Value',
+					'name'        => __( 'Selected Value', 'ninja-forms' ),
 					'js_function' => 'change_value',
-					'output' => 'list',
+					'output'      => 'list',
 				),
 				'add_value' => array(
-					'name' => 'Add Value',
+					'name'        => __( 'Add Value', 'ninja-forms' ),
 					'js_function' => 'add_value',
-					'output' => 'ninja_forms_field_list_add_value',
+					'output'      => 'ninja_forms_field_list_add_value',
 				),
 				'remove_value' => array(
-					'name' => 'Remove Value',
+					'name'        => __( 'Remove Value', 'ninja-forms' ),
 					'js_function' => 'remove_value',
-					'output' => 'list',
+					'output'      => 'list',
 				),
 			),
 			'value' => array(

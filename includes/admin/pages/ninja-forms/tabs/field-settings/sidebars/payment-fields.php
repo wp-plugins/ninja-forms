@@ -9,7 +9,7 @@
 
 function ninja_forms_register_sidebar_payment_fields(){
 	$args = array(
-		'name' => 'Payment Fields',
+		'name' => __( 'Payment Fields', 'ninja-forms' ),
 		'page' => 'ninja-forms',
 		'tab' => 'field_settings',
 		'display_function' => 'ninja_forms_sidebar_payment_fields'

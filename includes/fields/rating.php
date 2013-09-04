@@ -1,7 +1,7 @@
 <?php
 function ninja_forms_register_field_rating(){
 	$args = array(
-		'name' => 'Star Rating',
+		'name' => __( 'Star Rating', 'ninja-forms' ),
 		'sidebar' => 'template_fields',
 		'display_function' => 'ninja_forms_field_rating_display',
 		'group' => 'standard_fields',

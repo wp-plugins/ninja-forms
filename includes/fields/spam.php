@@ -1,7 +1,7 @@
 <?php
 function ninja_forms_register_field_spam(){
 	$args = array(
-		'name' => 'Anti-Spam',
+		'name' => __( 'Anti-Spam', 'ninja-forms' ),
 		'edit_function' => '',
 		'display_function' => 'ninja_forms_field_spam_display',
 		'group' => 'standard_fields',
@@ -26,14 +26,14 @@ function ninja_forms_register_field_spam(){
 			array(
 				'name' => 'label',
 				'type' => 'text',
-				'label' => __('Spam Question', 'ninja-forms'),
+				'label' => __( 'Spam Question', 'ninja-forms' ),
 				'width' => 'wide',
 				'class' => 'widefat',
 			),
 			array(
 				'name' => 'spam_answer',
 				'type' => 'text',
-				'label' => __('Spam Answer', 'ninja-forms'),
+				'label' => __( 'Spam Answer', 'ninja-forms' ),
 				'width' => 'wide',
 				'class' => 'widefat',
 			),
@@ -68,7 +68,7 @@ function ninja_forms_field_spam_edit($field_id, $data){
 	</p>
 	<p class="description description-wide">
 		<label for="">
-			<?php _e( 'Spam Answer' , 'ninja-forms'); ?><br />
+			<?php _e( 'Spam Answer', 'ninja-forms'); ?><br />
 			<input type="text" class="widefat" name="ninja_forms_field_<?php echo $field_id;?>[answer]" id="" value="<?php echo $answer;?>">
 		</label>
 	</p>

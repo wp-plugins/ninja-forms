@@ -1,23 +1,23 @@
 <?php
 function ninja_forms_register_field_desc(){
 	$args = array(
-		'name' => 'Text',
+		'name' => __( 'Text', 'ninja-forms' ),
 		'sidebar' => 'layout_fields',
 		'edit_function' => '',
 		'edit_options' => array(
 			array(
-				'type' => 'rte',
-				'name' => 'default_value',
-				'label' => __('Default Value', 'ninja-forms'),
+				'type'  => 'rte',
+				'name'  => 'default_value',
+				'label' => __( 'Default Value', 'ninja-forms' ),
 				'width' => 'wide',
 				'class' => 'widefat',
 			),
 			array(
-				'type' => 'select',
-				'name' => 'desc_el',
-				'label' => __('Text Element', 'ninja-forms'),
-				'width' => 'thin',
-				'class' => '',
+				'type'    => 'select',
+				'name'    => 'desc_el',
+				'label'   => __( 'Text Element', 'ninja-forms' ),
+				'width'   => 'thin',
+				'class'   => '',
 				'options' => array(
 					array('name' => 'div', 'value' => 'div'),
 					array('name' => 'h1', 'value' => 'h1'),

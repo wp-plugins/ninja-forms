@@ -1,7 +1,7 @@
 <?php
 function ninja_forms_register_field_textbox(){
 	$args = array(
-		'name' => 'Textbox',
+		'name' => __( 'Textbox', 'ninja-forms' ),
 		'sidebar' => 'template_fields',
 		'edit_function' => 'ninja_forms_field_text_edit',
 		'edit_options' => array(
@@ -171,7 +171,7 @@ function ninja_forms_field_text_edit( $field_id, $data ){
 	<div class="description description-thin">
 		<span class="field-option">
 		<label for=""  id="mask_label_<?php echo $field_id;?>" style="<?php if($custom == 'no'){ echo 'display:none;';}?>">
-			<?php _e( 'Custom Mask Definition' , 'ninja-forms'); ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" name="" class="ninja-forms-mask-help">Help</a><br />
+			<?php _e( 'Custom Mask Definition' , 'ninja-forms'); ?> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" name="" class="ninja-forms-mask-help"><?php _e( 'Help', 'ninja-forms' ); ?></a><br />
 			<input type="text" id="ninja_forms_field_<?php echo $field_id;?>_mask" name="ninja_forms_field_<?php echo $field_id;?>[mask]" class="widefat code" value="<?php echo $mask; ?>" />
 		</label>
 		</span>

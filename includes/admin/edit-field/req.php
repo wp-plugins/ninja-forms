@@ -19,8 +19,8 @@ function ninja_forms_field_required($field_id){
 			$req = '';
 		}
 		$options = array(
-			array('name' => 'No', 'value' => '0'),
-			array('name' => 'Yes', 'value' => '1'),
+			array('name' => __( 'No', 'ninja-forms' ), 'value' => '0'),
+			array('name' => __( 'Yes', 'ninja-forms' ), 'value' => '1'),
 		);
 		ninja_forms_edit_field_el_output($field_id, 'select', __( 'Required', 'ninja-forms' ), 'req', $req, 'thin', $options);
 	}

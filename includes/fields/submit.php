@@ -1,7 +1,7 @@
 <?php
 function ninja_forms_register_field_submit(){
 	$args = array(
-		'name' => 'Submit',
+		'name' => __( 'Submit', 'ninja-forms' ),
 		'display_function' => 'ninja_forms_field_submit_display',
 		'group' => 'standard_fields',
 		'edit_label' => true,

@@ -4,7 +4,7 @@ function ninja_forms_register_field_settings_help(){
 	$args = array(
 		'page' => 'ninja-forms',
 		'tab' => 'field_settings',
-		'title' => 'Input Mask',
+		'title' => __( 'Input Mask', 'ninja-forms' ),
 		'display_function' => 'ninja_forms_help_field_settings',
 	);
 	ninja_forms_register_help_screen_tab('mask_help', $args);

@@ -8,7 +8,7 @@
 
 function ninja_forms_register_field_calc(){
 	$args = array(
-		'name' => 'Calculation',
+		'name' => __( 'Calculation', 'ninja-forms' ),
 		'sidebar' => 'template_fields',
 		'edit_function' => 'ninja_forms_field_calc_edit',
 		'display_function' => 'ninja_forms_field_calc_display',
@@ -30,12 +30,12 @@ function ninja_forms_register_field_calc(){
 			array(
 				'type' => 'hidden',
 				'name' => 'payment_total',
-				//'label' => 'Total',
+				//'label' => __( 'Total', 'ninja-forms' ),
 			),
 			array(
 				'type' => 'hidden',
 				'name' => 'payment_sub_total',
-				//'label' => 'Sub Total',
+				//'label' => __( 'Sub Total', 'ninja-forms' ),
 			),
 			array(
 				'type' => 'text',

@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.4
 Tested up to: 3.6
-Stable tag: 2.2.43
+Stable tag: 2.2.44
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -69,24 +69,29 @@ This section describes how to install the plugin and get it working.
 
 Shortcodes have been re-implemented. They are used like so: [ninja_forms_display_form id=3] where 3 is the ID number of the form you want to display.
 
-
 == Use ==
 
 For help and video tutorials, please visit our website: [Ninja Forms Documentation](http://ninjaforms.com/documentation/intro/)
 
 == Upgrade Notice ==
 
-= 2.2.43 =
+= 2.2.44 =
 
 *Changes:*
 
-* Changed all references to wpninjas.com to the new ninjaforms.com.
+* Fixed many previously untranslated strings. Big thanks to daveshine for the hard work in making Ninja Forms translation friendly.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.2.44 =
+
+*Changes:*
+
+* Fixed many previously untranslated strings. Big thanks to daveshine for the hard work in making Ninja Forms translation friendly.
 
 = 2.2.43 =
 

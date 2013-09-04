@@ -8,7 +8,7 @@
 
 function ninja_forms_register_field_tax(){
 	$args = array(
-		'name' => 'Tax',
+		'name' => __( 'Tax', 'ninja-forms' ),
 		'sidebar' => '',
 		'display_function' => 'ninja_forms_field_tax_display',
 		'group' => 'standard_fields',

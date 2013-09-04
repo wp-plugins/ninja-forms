@@ -1,31 +1,31 @@
 <?php
 function ninja_forms_register_field_textarea(){
 	$args = array(
-		'name' => 'Textarea',
+		'name' => __( 'Textarea', 'ninja-forms' ),
 		'sidebar' => 'template_fields',
 		'edit_function' => '',
 		'edit_options' => array(
 			array(
 				'type' => 'textarea',
 				'name' => 'default_value',
-				'label' => __('Default Value', 'ninja-forms'),
+				'label' => __( 'Default Value', 'ninja-forms' ),
 				'width' => 'wide',
 				'class' => 'widefat',
 			),
 			array(
 				'type' => 'checkbox',
 				'name' => 'textarea_rte',
-				'label' => __('Show Rich Text Editor', 'ninja-forms'),
+				'label' => __( 'Show Rich Text Editor', 'ninja-forms' ),
 			),
 			array(
 				'type' => 'checkbox',
 				'name' => 'textarea_media',
-				'label' => __( 'Show Media Upload Button', 'ninja-forms'),
+				'label' => __( 'Show Media Upload Button', 'ninja-forms' ),
 			),
 			array(
 				'type' => 'checkbox',
 				'name' => 'disable_rte_mobile',
-				'label' => __('Disable Rich Text Editor on Mobile', 'ninja-forms'),
+				'label' => __( 'Disable Rich Text Editor on Mobile', 'ninja-forms' ),
 			),
 		),
 		'display_function' => 'ninja_forms_field_textarea_display',

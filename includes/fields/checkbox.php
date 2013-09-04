@@ -1,35 +1,35 @@
 <?php
 function ninja_forms_register_field_checkbox(){
 	$args = array(
-		'name' => 'Checkbox',
+		'name' => __( 'Checkbox', 'ninja-forms' ),
 		'edit_options' => array(
 			array(
-				'type' => 'select', //What type of input should this be?
+				'type'    => 'select', //What type of input should this be?
 				'options' => array(
 					array(
-						'name' => 'Unchecked',
+						'name'  => __( 'Unchecked', 'ninja-forms' ),
 						'value' => 'unchecked',
 					),
 					array(
-						'name' => 'Checked',
+						'name'  => __( 'Checked', 'ninja-forms' ),
 						'value' => 'checked',
 					),
 				),
 				'name' => 'default_value', //What should it be named. This should always be a programmatic name, not a label.
-				'label' => __('Default Value', 'ninja-forms'),
+				'label' => __( 'Default Value', 'ninja-forms' ),
 				'class' => 'widefat', //Additional classes to be added to the input element.
 			),
 		),
 		//'edit_function' => 'ninja_forms_field_checkbox_edit',
-		'display_function' => 'ninja_forms_field_checkbox_display',
-		'group' => 'standard_fields',
-		'edit_label' => true,
-		'edit_label_pos' => true,
+		'display_function'  => 'ninja_forms_field_checkbox_display',
+		'group'             => 'standard_fields',
+		'edit_label'        => true,
+		'edit_label_pos'    => true,
 		'label_pos_options' => array(
-			array('name' => 'Left of Element', 'value' => 'left'),
-			array('name' => 'Above Element', 'value' => 'above'),
-			array('name' => 'Below Element', 'value' => 'below'),
-			array('name' => 'Right of Element', 'value' => 'right'),
+			array('name' => __( 'Left of Element', 'ninja-forms' ), 'value' => 'left'),
+			array('name' => __( 'Above Element', 'ninja-forms' ), 'value' => 'above'),
+			array('name' => __( 'Below Element', 'ninja-forms' ), 'value' => 'below'),
+			array('name' => __( 'Right of Element', 'ninja-forms' ), 'value' => 'right'),
 		),
 		'edit_req' => true,
 		'edit_custom_class' => true,
@@ -40,17 +40,17 @@ function ninja_forms_register_field_checkbox(){
 		'conditional' => array(
 			'action' => array(
 				'show' => array(
-					'name' => 'Show This',
+					'name' => __( 'Show This', 'ninja-forms' ),
 					'js_function' => 'show',
 					'output' => 'show',
 				),
 				'hide' => array(
-					'name' => 'Hide This',
+					'name' => __( 'Hide This', 'ninja-forms' ),
 					'js_function' => 'hide',
 					'output' => 'hide',
 				),
 				'change_value' => array(
-					'name' => 'Change Value',
+					'name' => __( 'Change Value', 'ninja-forms' ),
 					'output' => 'select',
 					'options' => array(
 						'Checked' => 'checked',

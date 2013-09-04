@@ -1,7 +1,7 @@
 <?php
 function ninja_forms_register_field_hr(){
 	$args = array(
-		'name' => 'hr',
+		'name' => __( 'hr', 'ninja-forms' ),
 		'sidebar' => 'layout_fields',
 		'edit_function' => '',
 		'display_function' => 'ninja_forms_field_hr_display',
