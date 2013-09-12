@@ -37,6 +37,7 @@ Please feel free to visit our [demo site](http://demo.wpninjas.com/ninja-forms/)
 
 = In addition to these features, extensions are available at our website: =
 
+* [PayPal Express](http://ninjaforms.com/downloads/paypal-express/) - Accept payments using PayPal Express and Ninja Forms.
 * [Front-End Editor](http://ninjaforms.com/downloads/front-end-editor/) - Give your users the ability to create, edit, or delete posts, pages, or any custom post type and allow your users to edit their Ninja Forms submissions all from the front-end. Also included is front-end profile editing, custom registration forms, login and password resetting, all without needing to see the default, WordPress branded login page.
 * [File Uploads](http://ninjaforms.com/downloads/file-uploads/) - Allow users to upload files and store those files within a searchable database.
 * [Multi-Part Forms](http://ninjaforms.com/downloads/multi-part-forms/) - Break up those long, complex forms into multiple pages.
