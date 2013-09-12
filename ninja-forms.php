@@ -3,12 +3,11 @@
 Plugin Name: Ninja Forms
 Plugin URI: http://ninjaforms.com/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 2.2.44
+Version: 2.2.45
 Author: The WP Ninjas
 Author URI: http://ninjaforms.com
 Text Domain: ninja-forms
 Domain Path: /lang/
-Contributors: kstover, jameslaws, daveshine
 
 Copyright 2011 WP Ninjas/Kevin Stover.
 
@@ -51,7 +50,7 @@ global $wpdb, $wp_version;
 
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/".basename( dirname( __FILE__ ) ) );
 define("NINJA_FORMS_URL", plugins_url()."/".basename( dirname( __FILE__ ) ) );
-define("NINJA_FORMS_VERSION", "2.2.44");
+define("NINJA_FORMS_VERSION", "2.2.45");
 define("NINJA_FORMS_TABLE_NAME", $wpdb->prefix . "ninja_forms");
 define("NINJA_FORMS_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fields");
 define("NINJA_FORMS_FAV_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fav_fields");
@@ -98,6 +97,8 @@ require_once( NINJA_FORMS_DIR . "/includes/display/processing/fields-pre-process
 require_once( NINJA_FORMS_DIR . "/includes/display/processing/fields-process.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/processing/fields-post-process.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/processing/req-fields-pre-process.php" );
+require_once( NINJA_FORMS_DIR . "/includes/display/processing/term-name-filter.php" );
+require_once( NINJA_FORMS_DIR . "/includes/display/processing/update-terms.php" );
 
 //Edit Field Functions
 require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/edit-field.php" );
@@ -106,11 +107,14 @@ require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/hr.php" );
 require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/req.php" );
 require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/custom-class.php" );
 require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/help.php" );
+require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/desc.php" );
 require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/li.php" );
 require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/remove-button.php" );
 require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/save-button.php" );
 require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/calc.php" );
 require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/user-info-fields.php" );
+require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/list-terms.php" );
+require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/post-meta-values.php" );
 
 //Display Form Functions
 require_once( NINJA_FORMS_DIR . "/includes/display/form/display-form.php" );
@@ -118,6 +122,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/fields/display-fields.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/response-message.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/label.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/help.php" );
+require_once( NINJA_FORMS_DIR . "/includes/display/fields/desc.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/form-title.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/form/process-message.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/field-error-message.php" );
@@ -132,6 +137,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/fields/restore-progress.php" 
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/inside-label-hidden.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/field-type.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/calc-filter.php" );
+require_once( NINJA_FORMS_DIR . "/includes/display/fields/list-term-filter.php" );
 
 /* Require Pre-Registered Tabs and their sidebars */
 
@@ -157,6 +163,7 @@ require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-se
 require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/layout-fields.php" );
 require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/user-info.php" );
 require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/payment-fields.php" );
+require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/post-fields.php" );
 
 /* Form Preview */
 require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/form-preview/form-preview.php" );
@@ -235,14 +242,34 @@ require_once( NINJA_FORMS_DIR . "/includes/fields/calc.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/country.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/tax.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/credit-card.php" );
+require_once( NINJA_FORMS_DIR . "/includes/fields/post-title.php" );
+require_once( NINJA_FORMS_DIR . "/includes/fields/post-content.php" );
+require_once( NINJA_FORMS_DIR . "/includes/fields/post-tags.php" );
+require_once( NINJA_FORMS_DIR . "/includes/fields/post-terms.php" );
+require_once( NINJA_FORMS_DIR . "/includes/fields/post-excerpt.php" );
 
 require_once( NINJA_FORMS_DIR . "/includes/admin/save.php" );
 
 if(session_id() == '') {
 	session_start();
 }
+
 $_SESSION['NINJA_FORMS_DIR'] = NINJA_FORMS_DIR;
 $_SESSION['NINJA_FORMS_URL'] = NINJA_FORMS_URL;
+
+// Set $_SESSION variable used for storing items in transient variables
+function ninja_forms_set_transient_id(){
+	if ( !isset ( $_SESSION['ninja_forms_transient_id'] ) AND !is_admin() ) {
+		$t_id = ninja_forms_random_string();
+		// Make sure that our transient ID isn't currently in use.
+		while ( get_transient( $t_id ) !== false ) {
+			$_id = ninja_forms_random_string();
+		}
+		$_SESSION['ninja_forms_transient_id'] = $t_id;		
+	}
+}
+
+add_action( 'init', 'ninja_forms_set_transient_id', 1 );
 
 function ninja_forms_load_lang() {
 

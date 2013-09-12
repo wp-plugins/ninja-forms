@@ -1,7 +1,7 @@
 <?php
 add_action('init', 'ninja_forms_register_filter_msgs');
 function ninja_forms_register_filter_msgs(){
-	add_action( 'ninja_forms_pre_process', 'ninja_forms_filter_msgs', 1001 );
+	add_action( 'ninja_forms_post_process', 'ninja_forms_filter_msgs', 1001 );
 }
 
 function ninja_forms_filter_msgs(){

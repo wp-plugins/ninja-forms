@@ -80,7 +80,7 @@ function ninja_forms_tab_view_subs(){
 			'form_id' => $form_id,
 			'begin_date' => $begin_date,
 			'end_date' => $end_date,
-			'status' => 1,
+			//'status' => 1,
 			//'11' => '05/06/2012',
 		);
 		$sub_results = ninja_forms_get_subs( $args );
@@ -240,7 +240,9 @@ function ninja_forms_tab_view_subs(){
 					<tr>
 						<th class="check-column"><input type="checkbox" id="" class="ninja-forms-select-all" title="ninja-forms-subs-bulk-action"></th>
 						<th><?php _e('Date', 'ninja-forms');?></th>
-				<?php
+						<?php
+						do_action( 'ninja_forms_view_sub_table_header', $form_id );
+
 				$x = 0;
 				while($x <= $col_count){
 					if(isset($field_results[$x]['data']['label'])){
@@ -286,6 +288,7 @@ function ninja_forms_tab_view_subs(){
 						</div>
 					</td>
 				<?php
+					do_action( 'ninja_forms_view_sub_table_row', $form_id, $sub['id'] );
 					$x = 0;
 					while($x <= $col_count){
 						if(isset($field_results[$x]['id'])){
@@ -296,15 +299,17 @@ function ninja_forms_tab_view_subs(){
 						<?php
 							foreach($data as $d){
 								if($field_id == $d['field_id']){
-									$user_value = ninja_forms_stripslashes_deep($d['user_value']);
+									$user_value = $d['user_value'];
+									$user_value = ninja_forms_stripslashes_deep( $user_value );
 									$user_value = ninja_forms_strip_tags_deep($user_value);
 									$user_value = apply_filters('ninja_forms_view_sub_td', $user_value, $d['field_id'], $sub['id'] );
+									
 									if(is_array($user_value) AND !empty($user_value)){
 										$y = 1;
 										foreach($user_value as $val){
 											echo ninja_forms_stripslashes_deep($val);
 											if($y != count($user_value)){
-												echo ",";
+												echo ", ";
 											}
 											$y++;
 										}
@@ -389,6 +394,7 @@ function ninja_forms_tab_view_subs(){
 						<th class="check-column"><input type="checkbox" id="" class="ninja-forms-select-all" title="ninja-forms-subs-bulk-action"></th>
 						<th><?php _e( 'Date', 'ninja-forms' ); ?></th>
 				<?php
+						do_action( 'ninja_forms_view_sub_table_header', $form_id );
 				$x = 0;
 				while($x <= $col_count){
 					if(isset($field_results[$x]['data']['label'])){
@@ -428,6 +434,7 @@ if(isset($_POST['_ninja_forms_edit_sub']) AND $_POST['_ninja_forms_edit_sub'] ==
 
 function ninja_forms_edit_sub_pre_process(){
 	global $ninja_forms_processing;
+
 	do_action( 'ninja_forms_edit_sub_pre_process' );
 	if( !$ninja_forms_processing->get_all_errors() ){
 		ninja_forms_edit_sub_process();
@@ -490,7 +497,7 @@ function ninja_forms_edit_sub_save_values(){
 		'sub_id' => $sub_id,
 	);
 
-	//$args = apply_filters( 'ninja_forms_edit_sub_args', $args );
+	$args = apply_filters( 'ninja_forms_edit_sub_args', $args );
 
 	ninja_forms_update_sub($args);
 }
@@ -606,3 +613,20 @@ function ninja_forms_edit_sub_hide_fields($data, $field_id){
 	}
 	return $data;
 }
+
+function ninja_forms_view_subs_default_filter( $sub_results ) {
+	if( is_array( $sub_results ) AND !empty( $sub_results ) ){
+		$tmp_array = array();
+		for ($i=0; $i < count( $sub_results ); $i++) { 
+			if( $sub_results[$i]['status'] == 1 ){
+				$tmp_array[] = $sub_results[$i];
+			}
+		}
+		$sub_results = $tmp_array;
+	}
+
+	return $sub_results;
+}
+
+add_filter( 'ninja_forms_view_subs_results', 'ninja_forms_view_subs_default_filter' );
+add_filter( 'ninja_forms_download_all_subs_results', 'ninja_forms_view_subs_default_filter' );	

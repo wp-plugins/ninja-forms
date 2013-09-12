@@ -21,11 +21,11 @@ function ninja_forms_register_field_list(){
 				'type'  => 'checkbox',
 				'name'  => 'user_state',
 				'label' => __( 'This is the user\'s state', 'ninja-forms' ),
-			),				
+			),
 			array(
 				'type' => 'hidden',
 				'name' => 'user_info_field_group',
-			),	
+			),
 		),
 		'display_function' => 'ninja_forms_field_list_display',
 		'group' => 'standard_fields',
@@ -34,6 +34,7 @@ function ninja_forms_register_field_list(){
 		'edit_req' => true,
 		'edit_custom_class' => true,
 		'edit_help' => true,
+		'edit_desc' => true,
 		'edit_meta' => false,
 		'sidebar' => 'template_fields',
 		'edit_conditional' => true,
@@ -84,10 +85,10 @@ function ninja_forms_display_list_type( $field_id, $data ){
 	if( $field_type == '_list' ){
 		if ( isset( $data['list_type'] ) ){
 			$list_type = $data['list_type'];
-		} else{ 
+		} else{
 			$list_type = '';
 		}
-		
+
 		?>
 		<input type="hidden" id="ninja_forms_field_<?php echo $field_id;?>_list_type" value="<?php echo $list_type;?>">
 		<?php
@@ -222,10 +223,9 @@ function ninja_forms_field_list_display( $field_id, $data ){
 
 	if ( isset( $data['list_type'] ) ) {
 		$list_type = $data['list_type'];
-	} else { 
+	} else {
 		$list_type = '';
 	}
-
 
 	if(isset($data['list_show_value'])){
 		$list_show_value = $data['list_show_value'];
@@ -310,7 +310,7 @@ function ninja_forms_field_list_display( $field_id, $data ){
 					}else{
 						$selected = '';
 					}
-					
+
 					?>
 					<option value="<?php echo $value;?>" <?php echo $selected;?> style="<?php echo $display_style;?>"><?php echo $label;?></option>
 				<?php
@@ -556,7 +556,7 @@ function ninja_forms_field_list_option_output($field_id, $x, $option = '', $hidd
 				</td>
 				<td class="ninja-forms-list-option-value-td">
 					<span id="ninja_forms_field_<?php echo $field_id;?>_list_option_<?php echo $x;?>_value_span" name="" class="ninja-forms-field-<?php echo $field_id;?>-list-option-value" style="<?php echo $hidden;?>"><?php _e( 'Value', 'ninja-forms' );?>: <input type="text" name="ninja_forms_field_<?php echo $field_id;?>[list][options][<?php echo $x;?>][value]" id="ninja_forms_field_<?php echo $field_id;?>_list_option_value" class="ninja-forms-field-list-option-value" value="<?php echo $value;?>"></span>
-				</td>				
+				</td>
 				<td class="ninja-forms-list-option-calc-td">
 					<?php _e( 'Calc', 'ninja-forms' );?>: <input type="text" name="ninja_forms_field_<?php echo $field_id;?>[list][options][<?php echo $x;?>][calc]" id="ninja_forms_field_<?php echo $field_id;?>_list_option_calc" class="ninja-forms-field-list-option-calc" value="<?php echo $calc;?>">
 				</td>
@@ -583,7 +583,7 @@ function ninja_forms_field_filter_list_wrap_class( $field_wrap_class, $field_id 
 		}else{
 			$list_type = '';
 		}
-		
+
 		$field_wrap_class = str_replace( 'list-wrap', 'list-'.$list_type.'-wrap', $field_wrap_class );
 	}
 

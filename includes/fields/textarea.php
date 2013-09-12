@@ -36,6 +36,7 @@ function ninja_forms_register_field_textarea(){
 		'edit_req' => true,
 		'edit_custom_class' => true,
 		'edit_help' => true,
+		'edit_desc' => true,
 		'edit_meta' => false,
 		'edit_conditional' => true,
 		'conditional' => array(
@@ -61,7 +62,7 @@ function ninja_forms_field_textarea_display($field_id, $data){
 		$textarea_rte = $data['textarea_rte'];
 	}else{
 		$textarea_rte = 0;
-	}	
+	}
 
 	if( isset ( $data['textarea_media'] ) AND $data['textarea_media'] == 1 ){
 		$textarea_media = true;

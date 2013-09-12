@@ -51,7 +51,7 @@ function ninja_forms_display_fields($form_id){
 					$sub_id = '';
 				}
 
-				if($sub_id != '' AND $sub_edit_function != ''){
+				if ( $sub_id != '' AND $sub_edit_function != '' AND is_admin() ){
 					$display_function = $sub_edit_function;
 				}
 

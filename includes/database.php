@@ -382,6 +382,9 @@ function ninja_forms_update_sub($args){
 	$update_array = array();
 	$sub_id = $args['sub_id'];
 	unset( $args['sub_id'] );
+	if ( !is_serialized( $args['data'] ) ) {
+		$args['data'] = serialize( $args['data'] );
+	}
 	$update_array = $args;
 
 	$wpdb->update(NINJA_FORMS_SUBS_TABLE_NAME, $update_array, array('id' => $sub_id));
@@ -513,4 +516,54 @@ function ninja_forms_json_response(){
 	}
 
 	return $json;
+}
+
+/*
+ *
+ * Function that sets up our transient variable.
+ *
+ * @since 2.2.45
+ * @return void
+ */
+
+function ninja_forms_set_transient(){
+	global $ninja_forms_processing;
+
+	$form_id = $ninja_forms_processing->get_form_ID();
+	// Setup our transient variable.
+	$transient = array();
+	$transient['form_id'] = $form_id;
+	$transient['field_values'] = $ninja_forms_processing->get_all_fields();
+	$transient['form_settings'] = $ninja_forms_processing->get_all_form_settings();
+	$all_fields_settings = array();
+	if ( $ninja_forms_processing->get_all_fields() ) {
+		foreach ( $ninja_forms_processing->get_all_fields() as $field_id => $user_value ) {
+			$field_settings = $ninja_forms_processing->get_field_settings( $field_id );
+			$all_fields_settings[$field_id] = $field_settings; 
+		}		
+	}
+
+	$transient['field_settings'] = $all_fields_settings;
+
+	// Set errors and success messages as $_SESSION variables.
+	$success = $ninja_forms_processing->get_all_success_msgs();
+	$errors = $ninja_forms_processing->get_all_errors();
+
+	$transient['success_msgs'] = $success;
+	$transient['error_msgs'] = $errors;
+	$transient_id = $_SESSION['ninja_forms_transient_id'];
+	//delete_transient( 'ninja_forms_test' );
+	set_transient( $transient_id, $transient, DAY_IN_SECONDS );
+}
+
+/*
+ *
+ * Function that deletes our transient variable
+ *
+ * @since 2.2.45
+ * @return void
+ */
+
+function ninja_forms_delete_transient(){
+	delete_transient( $_SESSION['ninja_forms_transient_id'] );
 }

@@ -303,17 +303,16 @@ jQuery(document).ready(function(jQuery) {
 								// Our calc_value doesn't exist in the calc_value JS object.
 								// Check to see if our old_value is an array. This would be the case if the field is a multi-select.
 								
-								if ( isNaN( old_value ) ) {
-									if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' ) {
-										old_value = old_value.replace( ninja_forms_settings.currency_symbol, "" );	
-										old_value = old_value.replace( /,/g, "" );	
-									}
-									
-								}
-
-								if ( old_value == '' ) {
+								if ( old_value == '' || typeof old_value === 'undefined' ) {
 									// We aren't dealing with an old_value array and old_value isn't a number. Set it to 0.
 									old_value = 0;
+								} else { 
+									if ( isNaN( old_value ) ) {
+										if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' ) {
+											old_value = old_value.replace( ninja_forms_settings.currency_symbol, "" );	
+											old_value = old_value.replace( /,/g, "" );	
+										}
+									}
 								}
 							}
 

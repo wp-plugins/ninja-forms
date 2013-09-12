@@ -197,7 +197,7 @@ function ninja_forms_register_field_country(){
 		__( 'Sao Tome And Principe', 'ninja-forms' ) => 'ST',
 		__( 'Saudi Arabia', 'ninja-forms' ) => 'SA',
 		__( 'Senegal', 'ninja-forms' ) => 'SN',
-		__( 'Serbia', 'ninja-forms' ) => 'SR',		
+		__( 'Serbia', 'ninja-forms' ) => 'SR',
 		__( 'Seychelles', 'ninja-forms' ) => 'SC',
 		__( 'Sierra Leone', 'ninja-forms' ) => 'SL',
 		__( 'Singapore', 'ninja-forms' ) => 'SG',
@@ -251,7 +251,7 @@ function ninja_forms_register_field_country(){
 		__( 'Zambia', 'ninja-forms' ) => 'ZM',
 		__( 'Zimbabwe', 'ninja-forms' ) => 'ZW'
 	);
-	
+
 	$tmp_array = array();
 	foreach ( $countries as $country => $abbr ) {
 		$tmp_array[] = array( 'name' => $country, 'value' => $abbr );
@@ -261,6 +261,7 @@ function ninja_forms_register_field_country(){
 		'sidebar' => '',
 		'display_function' => 'ninja_forms_field_country_display',
 		'group' => 'standard_fields',
+		'edit_desc' => true,
 		'edit_conditional' => true,
 		'edit_options' => array(
 			array(
@@ -499,7 +500,7 @@ function ninja_forms_field_country_display( $field_id, $data ) {
 		__( 'Sao Tome And Principe', 'ninja-forms' ) => 'ST',
 		__( 'Saudi Arabia', 'ninja-forms' ) => 'SA',
 		__( 'Senegal', 'ninja-forms' ) => 'SN',
-		__( 'Serbia', 'ninja-forms' ) => 'SR',	
+		__( 'Serbia', 'ninja-forms' ) => 'SR',
 		__( 'Seychelles', 'ninja-forms' ) => 'SC',
 		__( 'Sierra Leone', 'ninja-forms' ) => 'SL',
 		__( 'Singapore', 'ninja-forms' ) => 'SG',
@@ -601,7 +602,7 @@ function ninja_forms_field_country_type_filter( $field_type, $field_id ) {
 	if ( $field['type'] == '_country' ) {
 		$field_type = 'list';
 	}
-	
+
 	return $field_type;
 }
 

@@ -34,6 +34,7 @@ function ninja_forms_register_field_checkbox(){
 		'edit_req' => true,
 		'edit_custom_class' => true,
 		'edit_help' => true,
+		'edit_desc' => true,
 		'edit_meta' => false,
 		'sidebar' => 'template_fields',
 		'edit_conditional' => true,

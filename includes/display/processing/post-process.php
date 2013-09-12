@@ -17,7 +17,7 @@ function ninja_forms_post_process(){
 			$ninja_forms_processing->add_success_msg( 'success_msg', $success );
 
 			$json = ninja_forms_json_response();
-
+			
 			if($ajax == 1){
 				//header('Content-Type', 'application/json');
 				echo $json;
@@ -25,7 +25,7 @@ function ninja_forms_post_process(){
 			}else{
 
 				if( $ninja_forms_processing->get_form_setting( 'landing_page' ) != '' ){
-					$_SESSION['ninja_forms_values'] = $ninja_forms_processing->get_all_fields();
+					ninja_forms_set_transient();
 					header( 'Location: '.$ninja_forms_processing->get_form_setting( 'landing_page' ) );
 					die();
 				}

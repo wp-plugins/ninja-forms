@@ -64,7 +64,7 @@ function ninja_forms_req_fields_process(){
 					}
 				}else{
 					if($label_pos == 'inside'){
-						if($user_value == $label){
+						if( $user_value == $label OR $user_value == '' ){
 							$ninja_forms_processing->add_error('required-'.$field_id, $req_field_error, $field_id);
 							$ninja_forms_processing->add_error('required-general', $req_error_label, 'general');
 						}

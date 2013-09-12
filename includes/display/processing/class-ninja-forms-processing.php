@@ -26,6 +26,8 @@
  *		update_field_value('field_ID', 'new_value') - Used to change the value submitted by the user. If the field does not exist, it will be created.
  *		remove_field_value('field_ID') - Used to delete values submitted by the user.
  *		get_field_settings('field_ID') - Used to get all of the back-end data related to the field (type, label, required, show_help, etc.).
+ *		get_field_setting( 'field_ID', 'setting_ID' ) - Used to retrieve a specific field setting.
+ *		update_field_setting( 'field_ID', 'setting_ID', 'value' ) - Used to temporarily update a piece of back-end data related to the field. This is NOT permanent and will only affect the current form processing.
  *		update_field_settings('field_ID', $data) - Used to temporarily update the back-end data related to the field. This is NOT permanent and will only affect the current form processing.
  *
  * Extra Fields Methods (These are fields that begin with an _ and aren't Ninja Forms Fields )
@@ -55,6 +57,7 @@
  *		get_success_msg('unique_ID') - Used to get a specific success message.
  *		add_success_msg('unique_ID', 'Success Message') - Used to add a success message.
  *		remove_success_msg('unique_ID') - Used to remove a success message.
+ *		remove_all_success_msgs() - Used to remove all currently set success messages.
  *
  * Calculation Methods:
  *		get_calc( name or id, return array ) - Used to get the value of the specified calculation field. Unless bool(false) is sent, returns an array including all of the fields that contributed to the value.
@@ -117,29 +120,14 @@ class Ninja_Forms_Processing {
 		$plugin_settings = get_option("ninja_forms_settings");
 		$req_field_error = $plugin_settings['req_field_error'];
 
-		if(empty($this->data)){
+		if ( empty ( $this->data ) )
 			return '';
-		}else{
+		
+		$this->data['action'] = 'submit';
+		$cache = get_transient( $_SESSION['ninja_forms_transient_id'] );
 
-			/*
-			//Loop through our field list and add any fields that have process_field set to false.
-			//Anything that saves/edits/uses $ninja_forms_processing to get field should check the process_field value before doing anything.
-			$all_fields = ninja_forms_get_fields_by_form_id( $form_ID );
-			if( is_array( $all_fields ) AND !empty( $all_fields ) ){
-				foreach( $all_fields as $field ){
-					$field_ID = $field['id'];
-					$field_type = $field['type'];
-					if( !$ninja_forms_fields[$field_type]['process_field'] ){
-						if( isset( $field['data']['default_value'] ) ){
-							$this->data['fields'][$field_ID] = $field['data']['default_value'];
-							$this->data['field_data'][$field_ID] = $field;
-						}
-					}
-				}
-			}
-			*/
-
-			//Loop through the $_POST'd field values and add them to our global variable.
+		// If we have fields in our $_POST object, then loop through the $_POST'd field values and add them to our global variable.
+		if ( isset ( $_POST['_ninja_forms_display_submit'] ) OR isset ( $_POST['_ninja_forms_edit_sub'] ) ) {
 			foreach($_POST as $key => $val){
 				if(substr($key, 0, 1) != '_'){
 					$process_field = strpos($key, 'ninja_forms_field_');
@@ -181,8 +169,6 @@ class Ninja_Forms_Processing {
 				$form_data['sub_id'] = '';
 			}
 
-			$this->data['action'] = 'submit';
-
 			//Loop through the form data and set the global $ninja_form_data variable.
 			if(is_array($form_data) AND !empty($form_data)){
 				foreach($form_data as $key => $val){
@@ -197,10 +183,47 @@ class Ninja_Forms_Processing {
 				}
 				$this->data['form']['admin_attachments'] = array();
 				$this->data['form']['user_attachments'] = array();
+				$this->data['form']['form_url'] = wp_guess_url();
 			}
 
+		} else if ( $cache !== false ) { // Check to see if we have $_SESSION values from a submission.
+			if ( is_array ( $cache['field_values'] ) ) {
+				// We do have a submission contained in our $_SESSION variable. We'll populate the field values with that data.
+				foreach ( $cache['field_values'] as $field_id => $val ) {
+					$field_row = ninja_forms_get_field_by_id($field_id);
+					if(is_array($field_row) AND !empty($field_row)){
+						if(isset($field_row['type'])){
+							$field_type = $field_row['type'];
+						}else{
+							$field_type = '';
+						}
+						if(isset($field_row['data']['req'])){
+							$req = $field_row['data']['req'];
+						}else{
+							$req = '';
+						}
+
+						$val = ninja_forms_stripslashes_deep( $val );
+						//$val = ninja_forms_esc_html_deep( $val );
+
+						$this->data['fields'][$field_id] = $val;
+						if ( isset ( $cache['field_settings'][$field_id] ) ) {
+							$field_row = $cache['field_settings'][$field_id];
+						} else {
+							$field_row = ninja_forms_get_field_by_id( $field_id );
+						}
+						
+						$this->data['field_data'][$field_id] = $field_row;
+					}
+				}
+			}
+			$this->data['form'] = $cache['form_settings'];
+			$this->data['success'] = $cache['success_msgs'];
+			$this->data['errors'] = $cache['error_msgs'];
+			
 		}
-	}
+
+	} // Submitted Vars function
 
 	/**
 	 * Submitted Values Methods:
@@ -331,6 +354,24 @@ class Ninja_Forms_Processing {
 	}
 
 	/**
+	 * Retrieve a specific piece of field setting data.
+	 *
+	 * @since 2.2.45
+	 * @return $value or bool(false)
+	 */
+	function get_field_setting( $field_id = '', $setting_id = '' ) {
+		if ( empty ( $this->data ) OR $field_id == '' OR $setting_id = '' )
+			return false;
+		if ( isset ( $this->data['field_data'][$field_id][$setting_id] ) ) {
+			return $this->data['field_data'][$field_id][$setting_id];
+		} else if ( isset ( $this->data['field_data'][$field_id]['data'][$setting_id] ) ) {
+			return $this->data['field_data'][$field_id]['data'][$setting_id];
+		} else {
+			return false;
+		}
+	}
+
+	/**
 	 * Update field data by field ID. This data includes all of the informatoin entered into the admin back-end. (Please note that the changes made with these methods only affect the current process and DO NOT permanently change these settings):
 	 *
 	 */
@@ -342,6 +383,25 @@ class Ninja_Forms_Processing {
 			return true;
 		}
 	}
+
+	/**
+	 *
+	 * Update a specific piece of field setting data by giving the field id and setting id.
+	 *
+	 * @since 2.2.45
+	 * @return void or bool(false)
+	 */
+	function update_field_setting( $field_id = '', $setting_id = '', $value = '' ) {
+		if( empty( $this->data ) OR $field_id == '' OR $setting_id == '' OR $value == '' )
+			return false;
+
+		if ( isset ( $this->data['field_data'][$field_id][$setting_id] ) ) {
+			$this->data['field_data'][$field_id][$setting_id] = $value;
+		} else {
+			$this->data['field_data'][$field_id]['data'][$setting_id] = $value;
+		}
+	}
+
 
 	/**
 	 * Extra Form Values Methods
@@ -592,6 +652,19 @@ class Ninja_Forms_Processing {
 			unset($this->data['success'][$success_ID]);
 			return true;
 		}
+	}	
+
+	/**
+	 * Remove all success messages
+	 *
+	 */
+	function remove_all_success_msgs() {
+		if(empty($this->data['success'])  OR !isset($this->data['success'])){
+			return false;
+		}else{
+			$this->data['success'] = array();
+			return true;
+		}
 	}
 
 	/**
@@ -772,9 +845,7 @@ class Ninja_Forms_Processing {
 				$field_settings = $this->get_field_settings( $field_id );
 				$field_value = $this->get_field_value( $field_id );
 				$data = $field_settings['data'];
-				if ( isset ( $data['calc_option'] ) AND $data['calc_option'] == 1 ) {
-					$tmp_array[$field_id] = $value;
-				}
+				$tmp_array[$field_id] = $value;
 			}
 			$fields = $tmp_array;
 			$total = array();
@@ -855,9 +926,7 @@ class Ninja_Forms_Processing {
 				$field_settings = $this->get_field_settings( $field_id );
 				$field_value = $this->get_field_value( $field_id );
 				$data = $field_settings['data'];
-				if ( isset ( $data['calc_option'] ) AND $data['calc_option'] == 1 ) {
-					$tmp_array[$field_id] = $value;
-				}
+				$tmp_array[$field_id] = $value;
 			}
 			$fields = $tmp_array;
 			

@@ -14,12 +14,46 @@ if( isset( $_POST['_ninja_forms_display_submit'] ) AND $_POST['_ninja_forms_disp
 		add_action( 'init', 'ninja_forms_setup_processing_class', 5 );
 		add_action( 'init', 'ninja_forms_pre_process', 999 );
 	}
+} 
+
+/*
+ *
+ * Function that checks to see if session variables have been set that indicate we are on a success page.
+ * If we are, intialize the global processing class for access to the form's settings and user values.
+ *
+ * @since 2.2.45
+ * @return void
+ */
+
+function ninja_forms_session_class_setup(){
+	if ( isset ( $_SESSION['ninja_forms_transient_id'] ) ) {
+		if ( get_transient( $_SESSION['ninja_forms_transient_id'] ) !== false ) {
+			add_action( 'init', 'ninja_forms_setup_processing_class', 5 );
+		}
+	}
 }
 
-add_action('wp_head', 'ninja_forms_page_append_check');
+add_action( 'init', 'ninja_forms_session_class_setup', 4 );
+
+/*
+ *
+ * Function that clears any transient values that have been stored in cache for this user.
+ *
+ * @since 2.2.45
+ * @return void
+ */
+
+function ninja_forms_clear_transient() {
+	//set_transient( 'ninja_forms_test', 'TEST', DAY_IN_SECONDS );
+	ninja_forms_delete_transient();
+}
+
+add_action( 'wp_head', 'ninja_forms_clear_transient' );
 
 function ninja_forms_page_append_check(){
 	global $post, $ninja_forms_append_page_form_id;
+
+
 
 	if(is_array($ninja_forms_append_page_form_id)){
 		unset($ninja_forms_append_page_form_id);
@@ -39,6 +73,8 @@ function ninja_forms_page_append_check(){
 		}
 	}
 }
+
+add_action('wp_head', 'ninja_forms_page_append_check');
 
 function remove_bad_br_tags($content) {
 	$content = str_ireplace( '</label><br />', '</label>', $content );

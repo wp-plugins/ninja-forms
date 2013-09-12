@@ -109,10 +109,21 @@ function ninja_forms_export_subs_to_csv( $sub_ids = '', $return = false ){
 }
 
 function implode_r ($glue, $pieces){
- $out = "";
- foreach ($pieces as $piece)
-  if (is_array ($piece)) $out .= implode_r ($glue, $piece); // recurse
-  else                  $out .= $glue.$piece;
-
- return $out;
- }
+	$out = '';
+	foreach ( $pieces as $piece ) {
+		if ( is_array ( $piece ) ) {
+			if ( $out == '' ) {
+				$out = implode_r ($glue, $piece);
+			} else {
+				$out .= implode_r ($glue, $piece); // recurse
+			}			
+		} else {
+			if ( $out == '' ) {
+				$out .= $piece;
+			} else {
+				$out .= $glue.$piece;
+			}
+		}
+	}
+	return $out;
+}
