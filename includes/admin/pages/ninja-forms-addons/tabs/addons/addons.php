@@ -30,6 +30,14 @@ function ninja_forms_tab_addons(){
             'link' => 'http://ninjaforms.com/downloads/layout-styles/',
             'plugin' => 'ninja-forms-style/ninja-forms-style.php',
             'docs' => 'http://ninjaforms.com/documentation/extensions/layout-styles/',
+        ),       
+        array (
+            'title' => __( 'PayPal Express', 'ninja-forms' ),
+            'image' => 'http://ninjaforms.com/wp-content/uploads/edd/2013/09/paypal-express-300x121.png',
+            'content' => __( 'Accept payments using PayPal Express and Ninja Forms', 'ninja-forms' ),
+            'link' => 'http://ninjaforms.com/downloads/paypal-express/',
+            'plugin' => 'ninja-forms-paypal-express/paypal-express.php',
+            'docs' => 'http://ninjaforms.com/documentation/extensions/paypal-express/',
         ),
         array (
             'title' => __( 'Save User Progress', 'ninja-forms' ),
