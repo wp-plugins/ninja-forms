@@ -117,6 +117,8 @@ function ninja_forms_export_form( $form_id ){
 	$data = $form_row['data'];
 	$form_title = $data['form_title'];
 	$form_row = ninja_forms_serialize_form( $form_id );
+	$form_title = preg_replace('/[^a-zA-Z0-9-]/', '', $form_title);
+	$form_title = str_replace (" ", "-", $form_title);
 
 	if(isset($plugin_settings['date_format'])){
 		$date_format = $plugin_settings['date_format'];

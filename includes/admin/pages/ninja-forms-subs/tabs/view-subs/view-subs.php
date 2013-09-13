@@ -349,6 +349,7 @@ function ninja_forms_tab_view_subs(){
 				remove_action('ninja_forms_display_before_fields', 'ninja_forms_display_req_items');
 				remove_action('ninja_forms_display_open_form_tag', 'ninja_forms_display_open_form_tag');
 				remove_action('ninja_forms_display_close_form_tag', 'ninja_forms_display_close_form_tag');
+				remove_action( 'ninja_forms_display_before_form', 'ninja_forms_display_response_message' );
 				remove_action('ninja_forms_display_after_open_form_tag', 'ninja_forms_display_hidden_fields');
 				ninja_forms_display_form($form_id);
 				?>
