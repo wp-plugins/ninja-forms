@@ -4,7 +4,7 @@
  * Function to hook into our field filter and add the selected terms if the field is set to populate_term.
  *
  */
-
+/*
 function ninja_forms_field_filter_populate_term( $data, $field_id ){
     global $post;
 
@@ -52,3 +52,4 @@ function ninja_forms_field_filter_populate_term( $data, $field_id ){
 }
 
 add_filter( 'ninja_forms_field', 'ninja_forms_field_filter_populate_term', 11, 2 );
+*/
