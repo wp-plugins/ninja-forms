@@ -6,6 +6,7 @@
  * @since 0.7
  * @returns void
  */
+/*
 function ninja_forms_edit_field_list_term( $field_id ){
     $add_field = apply_filters( 'ninja_forms_use_post_fields', false );
     if ( !$add_field )
@@ -54,3 +55,4 @@ function ninja_forms_edit_field_list_term( $field_id ){
 }
 
 add_action('ninja_forms_edit_field_after_registered', 'ninja_forms_edit_field_list_term', 9);
+*/

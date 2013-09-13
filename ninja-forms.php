@@ -242,12 +242,13 @@ require_once( NINJA_FORMS_DIR . "/includes/fields/calc.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/country.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/tax.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/credit-card.php" );
+/*
 require_once( NINJA_FORMS_DIR . "/includes/fields/post-title.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/post-content.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/post-tags.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/post-terms.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/post-excerpt.php" );
-
+*/
 require_once( NINJA_FORMS_DIR . "/includes/admin/save.php" );
 
 if(session_id() == '') {

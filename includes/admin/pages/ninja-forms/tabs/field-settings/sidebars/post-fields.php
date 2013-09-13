@@ -1,5 +1,5 @@
 <?php
-
+/*
 function ninja_forms_register_sidebar_post_fields(){
 	$add_field = apply_filters( 'ninja_forms_use_post_fields', false );
 	if ( !$add_field )
@@ -43,3 +43,4 @@ function ninja_forms_register_sidebar_post_fields(){
 }
 
 add_action( 'admin_init', 'ninja_forms_register_sidebar_post_fields' );
+*/
