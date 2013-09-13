@@ -4,7 +4,7 @@
  * Function to hook into the post creation/update that will change the term based upon the selected term(s)
  *
  */
-
+/*
 function ninja_forms_pre_process_populate_term( $form_id ){
     global $ninja_forms_processing;
 
@@ -30,3 +30,4 @@ function ninja_forms_pre_process_populate_term( $form_id ){
 }
 
 add_action( 'ninja_forms_pre_process', 'ninja_forms_pre_process_populate_term' );
+*/

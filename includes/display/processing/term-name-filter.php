@@ -6,7 +6,7 @@
  * @since 2.2.45
  * @returns void
  */
-
+/*
 function ninja_forms_filter_term_ids_for_name( $val, $field_id ){
 
 	$add_field = apply_filters( 'ninja_forms_use_post_fields', false );
@@ -60,7 +60,7 @@ add_filter( 'ninja_forms_export_sub_value', 'ninja_forms_filter_term_ids_for_nam
  * @since 2.2.45
  * @returns void
  */
-
+/*
 function ninja_forms_filter_term_ids_for_name_sub_td( $val, $field_id, $sub_id ){
 	
 	$add_field = apply_filters( 'ninja_forms_use_post_fields', false );
@@ -71,3 +71,4 @@ function ninja_forms_filter_term_ids_for_name_sub_td( $val, $field_id, $sub_id )
 }
 
 add_filter( 'ninja_forms_view_sub_td', 'ninja_forms_filter_term_ids_for_name_sub_td', 10, 3 );
+*/

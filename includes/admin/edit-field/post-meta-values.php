@@ -1,5 +1,5 @@
 <?php
-
+/*
 function ninja_forms_post_meta_value_box( $field_id ){
 	global $wpdb, $ninja_forms_fields;
 
@@ -93,3 +93,4 @@ function ninja_forms_post_meta_value_box( $field_id ){
 }
 
 add_action( 'ninja_forms_edit_field_after_registered', 'ninja_forms_post_meta_value_box' );
+*/
