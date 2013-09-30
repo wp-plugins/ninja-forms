@@ -155,20 +155,13 @@ jQuery(document).ready(function(jQuery) {
 	 * Calculation Field JS
 	 */
 
-	// Listen to the input elements with our calculation class for focus.
-	jQuery('body').on( 'focus', '.ninja-forms-field-calc-listen', function(e){
-		jQuery(this).data( "oldValue", jQuery(this).val() );
-	});
+	var selects = jQuery(".ninja-forms-field-calc-listen");
 
-	// Listen to the input elements with our calculation class for focus.
-	jQuery('body').on( 'mousedown', '.ninja-forms-field-calc-listen', function(e){
-		jQuery(this).data( "oldValue", jQuery(this).val() );
-	});	
-
-	// Listen to the input elements with our calculation class for focus.
-	jQuery('body').on( 'keydown', '.ninja-forms-field-calc-listen', function(e){
-		if( this.type == 'select-multiple' ) {
-			jQuery(this).data( "oldValue", jQuery(this).val() );
+	selects.each(function (i, element) {
+		var select = jQuery(element);
+		var previousValue = jQuery(this).val();
+		if ( this.type !== 'checkbox' ) {
+			jQuery(element).data("oldValue", previousValue);
 		}
 	});
 
@@ -184,7 +177,9 @@ jQuery(document).ready(function(jQuery) {
 
 	// Listen to the input elements for our auto-calculation fields and change the total.
 	jQuery('body').on( 'change', '.ninja-forms-field-calc-listen', function(event){
+		
 		if ( this == event.target ) {
+
 			// Get our calc settings.
 			var form_id = ninja_forms_get_form_id( this );
 			var field_id = jQuery(this).attr("rel");
@@ -225,10 +220,11 @@ jQuery(document).ready(function(jQuery) {
 							var new_value = '';
 							// Set our old_value to the previous one for this field.
 							old_value = jQuery(this).data('oldValue');
+								
 							// Check to see if we are in a list field. If we are, we can grab the calc values.
 							if ( jQuery('#ninja_forms_field_' + field_id + '_type' ).val() == 'list' ) {
 								var key = jQuery(this).val();
-								// See if we have any old values. If we do, compare them to our current selectino for this field and see if we need to subtract anything.
+								// See if we have any old values. If we do, compare them to our current selection for this field and see if we need to subtract anything.
 								if ( jQuery('#ninja_forms_field_' + field_id + '_list_type').val() == 'checkbox' ) {
 									if ( !this.checked ) {
 										old_value = key;
@@ -238,7 +234,7 @@ jQuery(document).ready(function(jQuery) {
 									// If this is a checkbox or a radio list, then we have to check the span parent for the oldValue.
 									var span = jQuery(this).parent().parent().parent().parent();
 									old_value = jQuery(span).data('oldValue');
-								} else if ( jQuery(jQuery('#ninja_forms_field_' + field_id + '_list_type').val() == 'multi' ) ) {
+								} else if ( jQuery('#ninja_forms_field_' + field_id + '_list_type').val() == 'multi' ) {
 									// This is a multi-select list. The value is in an array, so we need to add all the values together.
 									if ( jQuery.isArray( key ) ) {
 										var tmp = 0;
@@ -276,16 +272,24 @@ jQuery(document).ready(function(jQuery) {
 								}
 								
 							}
-	
+							if ( this.type !== 'checkbox' ) {
+								jQuery(this).data('oldValue', key);
+							}
+							
 							if ( new_value === '' ) {
 								if ( typeof calc_settings.calc_value[field_id] !== 'undefined' && typeof calc_settings.calc_value[field_id][key] !== 'undefined' ) {
 									// Get our calc value for this field from our previously defined JS object.
 									var new_value = calc_settings.calc_value[field_id][key];
 								} else {
 									// This field doesn't exist in the calc value object. It's either a textbox or similar element.
-									
+									if ( typeof this.type === 'undefined' ) {
+										var new_value = this.innerHTML;
+									} else {
+										var new_value = this.value;
+									}
+
 									if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' ) {
-										var new_value = this.value.replace( ninja_forms_settings.currency_symbol, "" );	
+										new_value = new_value.replace( ninja_forms_settings.currency_symbol, "" );	
 										new_value = new_value.replace( /,/g, "" );	
 									}
 									
@@ -358,7 +362,7 @@ jQuery(document).ready(function(jQuery) {
 							}
 
 							// If our old value exists and isn't empty or 0, then carry out the old_op on it.
-
+							
 							if ( old_value && !isNaN( old_value ) && old_value != 0 && old_value != '' && !jQuery(this).hasClass('ninja-forms-field-calc-no-old-op') ) {
 								old_value = parseFloat( old_value );
 								tmp = new ninja_forms_var_operator(old_op);
@@ -370,6 +374,7 @@ jQuery(document).ready(function(jQuery) {
 								new_value = parseFloat( new_value );
 								tmp = new ninja_forms_var_operator(new_op);
 								var calc_value = tmp.evaluate( current_value, new_value );
+								//console.log( current_value + ' ' + new_op + ' ' + new_value + ' = ' + calc_value );
 							} else {
 								// We don't have any calculations to do, so set calc_value to our current_value.
 								var calc_value = current_value;
@@ -434,6 +439,18 @@ jQuery(document).ready(function(jQuery) {
 									}									
 								}
 
+								// This field doesn't exist in the calc value object. It's either a textbox or similar element.
+								if ( typeof this.type === 'undefined' ) {
+									f_value = this.innerHTML;
+								} else {
+									f_value = this.value;
+								}
+
+								if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' ) {
+									f_value = f_value.replace( ninja_forms_settings.currency_symbol, "" );	
+									f_value = f_value.replace( /,/g, "" );	
+								}
+
 								if ( isNaN( f_value ) || f_value == '' || !f_value || typeof f_value === 'undefined' ) {
 									f_value = 0;
 								}
@@ -466,9 +483,9 @@ jQuery(document).ready(function(jQuery) {
 						}
 
 						if ( current_value !== calc_value ) {
+							jQuery(this).removeClass('ninja-forms-field-calc-no-old-op');
 							calc_value = calc_value.toFixed(calc_places);
-							// Set the value of our calculation field.
-							jQuery("#ninja_forms_field_" + calc_id).data("oldValue", current_value);
+							// Set the value of our calculation field.							
 							if(jQuery("#ninja_forms_field_" + calc_id).attr("type") == 'text' ){
 								jQuery("#ninja_forms_field_" + calc_id).val(calc_value);
 							}else{
@@ -498,7 +515,7 @@ function ninja_forms_before_submit(formData, jqForm, options){
 }
 
 function ninja_forms_response(responseText, statusText, xhr, jQueryform){
-	//alert(responseText);
+	//console.log(responseText);
 	if( ninja_forms_settings.ajax_msg_format == 'inline' ){
 		var result = jQuery(jQueryform).triggerHandler('submitResponse', [ responseText ]);
 		if ( result !== false ) {

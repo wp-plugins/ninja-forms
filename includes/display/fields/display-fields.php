@@ -74,6 +74,10 @@ function ninja_forms_display_fields($form_id){
 					$display_style = '';
 				}
 
+				if ( $display_style != '' ) {
+					$display_style = 'style="'.$display_style.'"';
+				}
+
 				if ( $display_function != '' AND $show_field ) {
 					if ( isset( $data['label_pos'] ) ) {
 							$label_pos = $data['label_pos'];
@@ -92,7 +96,7 @@ function ninja_forms_display_fields($form_id){
 						$field_wrap_class = apply_filters( 'ninja_forms_field_wrap_class', $field_wrap_class, $field_id );
 						do_action( 'ninja_forms_display_before_opening_field_wrap', $field_id, $data );
 						?>
-						<div class="<?php echo $field_wrap_class;?>" style="<?php echo $display_style;?>" id="ninja_forms_field_<?php echo $field_id;?>_div_wrap">
+						<div class="<?php echo $field_wrap_class;?>" <?php echo $display_style;?> id="ninja_forms_field_<?php echo $field_id;?>_div_wrap">
 						<?php
 						do_action( 'ninja_forms_display_after_opening_field_wrap', $field_id, $data );
 					}
