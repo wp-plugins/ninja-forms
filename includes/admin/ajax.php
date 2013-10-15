@@ -461,6 +461,57 @@ add_action( 'wp_ajax_ninja_forms_import_list_options', 'ninja_forms_import_list_
 
 /*
  *
+ * Function that outputs a list of terms so that the user can exclude terms from a list selector.
+ *
+ * @since 2.2.51
+ * @return void
+ */
+
+function ninja_forms_list_terms_checkboxes( $field_id = '', $tax_name = '' ){
+	if ( $field_id == '' AND isset ( $_POST['field_id'] ) ) {
+		$field_id = $_POST['field_id'];
+	}	
+
+	if ( $tax_name == '' AND isset ( $_POST['tax_name'] ) ) {
+		$tax_name = $_POST['tax_name'];
+	}
+
+	if ( $field_id != '' AND $tax_name != '' ) {
+		$field = ninja_forms_get_field_by_id( $field_id );
+		if ( isset ( $field['data']['exclude_terms'] ) ) {
+			$exclude_terms = $field['data']['exclude_terms'];
+		} else {
+			$exclude_terms = '';
+		}
+
+		$terms = get_terms( $tax_name, array( 'hide_empty' => false ) );
+		if ( is_array ( $terms ) AND !empty ( $terms ) ) {
+			?>
+			<h4><?php _e( 'Do not show these terms', 'ninja-forms' );?>:</h4>
+            <input type="hidden" name="ninja_forms_field_<?php echo $field_id;?>[exclude_terms]" value="">
+			<?php
+			foreach ( $terms as $term ) {
+				?>
+				<div>
+					<label>
+						<input type="checkbox" <?php checked( in_array ( $term->term_id, $exclude_terms ), true );?> name="ninja_forms_field_<?php echo $field_id;?>[exclude_terms][]" value="<?php echo $term->term_id;?>">
+						<?php echo $term->name;?>
+					</label>
+				</div>
+				<?php
+			}
+		}
+	}
+
+	if ( isset ( $_POST['from_ajax'] ) AND $_POST['from_ajax'] == 1 ) {
+		die();
+	}
+}
+
+add_action( 'wp_ajax_ninja_forms_list_terms_checkboxes', 'ninja_forms_list_terms_checkboxes' );
+
+/*
+ *
  * Function that outputs a calculation row
  *
  * @since 2.2.28

@@ -532,20 +532,22 @@ jQuery(document).ready(function(jQuery) {
 								if ( typeof f_value !== 'undefined' ) {
 									if ( f_value.indexOf("%") >= 0 ) {
 										f_value = f_value.replace( "%", "" );
+										
 										if ( !isNaN( f_value ) ) {
 											f_value = parseFloat( f_value ) / 100;
 										}
+
 									}									
 								}
+
+
 
 								// This field doesn't exist in the calc value object. It's either a textbox or similar element.
 								if ( typeof this.type === 'undefined' ) {
 									f_value = this.innerHTML;
-								} else {
-									f_value = this.value;
 								}
 
-								if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' ) {
+								if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' && isNaN( f_value ) ) {
 									f_value = f_value.replace( ninja_forms_settings.currency_symbol, "" );	
 									f_value = f_value.replace( /,/g, "" );	
 								}
