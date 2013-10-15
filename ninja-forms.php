@@ -84,9 +84,9 @@ require_once( NINJA_FORMS_DIR . "/includes/display/processing/fields-pre-process
 require_once( NINJA_FORMS_DIR . "/includes/display/processing/fields-process.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/processing/fields-post-process.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/processing/req-fields-pre-process.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/processing/term-name-filter.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/processing/update-terms.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/processing/attach-post-media.php" );
+//require_once( NINJA_FORMS_DIR . "/includes/display/processing/term-name-filter.php" );
+//require_once( NINJA_FORMS_DIR . "/includes/display/processing/update-terms.php" );
+//require_once( NINJA_FORMS_DIR . "/includes/display/processing/attach-post-media.php" );
 
 //Display Form Functions
 require_once( NINJA_FORMS_DIR . "/includes/display/form/display-form.php" );
@@ -109,7 +109,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/fields/restore-progress.php" 
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/inside-label-hidden.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/field-type.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/calc-filter.php" );
-require_once( NINJA_FORMS_DIR . "/includes/display/fields/list-term-filter.php" );
+//require_once( NINJA_FORMS_DIR . "/includes/display/fields/list-term-filter.php" );
 require_once( NINJA_FORMS_DIR . "/includes/display/fields/default-value-filter.php" );
 
 /* Require Pre-Registered Tabs and their sidebars */
@@ -152,7 +152,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/fields/default-value-filter.p
 	require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/save-button.php" );
 	require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/calc.php" );
 	require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/user-info-fields.php" );
-	require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/list-terms.php" );
+	//require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/list-terms.php" );
 	require_once( NINJA_FORMS_DIR . "/includes/admin/edit-field/post-meta-values.php" );
 
 	/* * * * ninja-forms - Main Form Editing Page
@@ -177,7 +177,7 @@ require_once( NINJA_FORMS_DIR . "/includes/display/fields/default-value-filter.p
 	require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/layout-fields.php" );
 	require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/user-info.php" );
 	require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/payment-fields.php" );
-	require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/post-fields.php" );
+	//require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/field-settings/sidebars/post-fields.php" );
 
 	/* Form Preview */
 	require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms/tabs/form-preview/form-preview.php" );
@@ -256,13 +256,13 @@ require_once( NINJA_FORMS_DIR . "/includes/fields/calc.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/country.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/tax.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/credit-card.php" );
-
+/*
 require_once( NINJA_FORMS_DIR . "/includes/fields/post-title.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/post-content.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/post-tags.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/post-terms.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/post-excerpt.php" );
-
+*/
 require_once( NINJA_FORMS_DIR . "/includes/admin/save.php" );
 
 if(session_id() == '') {
