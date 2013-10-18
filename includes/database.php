@@ -260,7 +260,7 @@ function ninja_forms_get_subs($args = array()){
 		if(isset($args['begin_date']) AND $args['begin_date'] != ''){
 			$begin_date = $args['begin_date'];
 			$begin_date = strtotime($begin_date);
-			$begin_date = date("Y-m-d g:i:s", $begin_date);
+			$begin_date = date("Y-m-d G:i:s", $begin_date);
 			unset($args['begin_date']);
 		}else{
 			unset($args['begin_date']);
@@ -269,7 +269,7 @@ function ninja_forms_get_subs($args = array()){
 		if(isset($args['end_date']) AND $args['end_date'] != ''){
 			$end_date = $args['end_date'];
 			$end_date = strtotime($end_date);
-			$end_date = date("Y-m-d g:i:s", $end_date);
+			$end_date = date("Y-m-d G:i:s", $end_date);
 			unset($args['end_date']);
 		}else{
 			unset($args['end_date']);

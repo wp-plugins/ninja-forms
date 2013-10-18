@@ -640,6 +640,18 @@ a.tooltip span
 	right: 10px;
 }
 
+.mp6 .nf-extend {
+	background: #fff;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	float: left;
+	margin: 0 20px 20px 0;
+	padding: 10px;
+	position: relative;
+	width: 300px;
+	height: 350px;
+}
+
 .forms_page_ninja-forms-style h2 .nav-tab {
 	font-size: 16px;
 }
