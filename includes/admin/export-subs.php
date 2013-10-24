@@ -5,7 +5,7 @@ if(isset($_REQUEST['ninja_forms_export_subs_to_csv']) AND $_REQUEST['ninja_forms
 
 function ninja_forms_subs_bulk_export(){
 	if(isset($_REQUEST['sub_id']) AND $_REQUEST['sub_id'] != ''){
-		$sub_ids = array($_REQUEST['sub_id']);
+		$sub_ids = array( esc_html( $_REQUEST['sub_id'] ) );
 		ninja_forms_export_subs_to_csv($sub_ids);
 	}
 }
@@ -23,7 +23,7 @@ function ninja_forms_export_subs_to_csv( $sub_ids = '', $return = false ){
 	if ( isset ( $ninja_forms_processing ) ) {
 		$form_id = $ninja_forms_processing->get_form_ID();
 	} else if ( isset($_REQUEST['form_id'] ) ){
-		$form_id = $_REQUEST['form_id'];
+		$form_id = absint( $_REQUEST['form_id'] );
 	}
 	//Get the fields attached to the Form ID
 	$field_results = ninja_forms_get_fields_by_form_id($form_id);

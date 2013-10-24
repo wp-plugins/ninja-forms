@@ -23,7 +23,7 @@ function ninja_forms_sidebar_sorter($array, $sequence){
 function ninja_forms_display_sidebars($data){
 	global $ninja_forms_sidebars;
 	$current_tab = ninja_forms_get_current_tab();
-	$current_page = $_REQUEST['page'];
+	$current_page = esc_html( $_REQUEST['page'] );
 	$opt = get_option('ninja_forms_settings');
 	if( isset( $opt['sidebars'][$current_page][$current_tab] ) ){
 		$order = $opt['sidebars'][$current_page][$current_tab];

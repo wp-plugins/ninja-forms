@@ -193,31 +193,6 @@ function ninja_forms_field_text_display( $field_id, $data ){
 		$default_value = '';
 	}
 
-	get_currentuserinfo();
-	$user_ID = $current_user->ID;
-	$user_firstname = $current_user->user_firstname;
-    $user_lastname = $current_user->user_lastname;
-    $user_display_name = $current_user->display_name;
-    $user_email = $current_user->user_email;
-
-	switch( $default_value ){
-		case '_user_id':
-			$default_value = $user_ID;
-			break;
-		case '_user_firstname':
-			$default_value = $user_firstname;
-			break;
-		case '_user_lastname':
-			$default_value = $user_lastname;
-			break;
-		case '_user_display_name':
-			$default_value = $user_display_name;
-			break;
-		case '_user_email':
-			$default_value = $user_email;
-			break;
-	}
-
 	if(isset($data['label_pos'])){
 		$label_pos = $data['label_pos'];
 	}else{

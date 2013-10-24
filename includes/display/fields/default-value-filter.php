@@ -38,16 +38,16 @@ function ninja_forms_default_value_filter( $data, $field_id ) {
 		case '_user_id':
 			$default_value = $user_ID;
 			break;
-		case 'user_firstname':
+		case '_user_firstname':
 			$default_value = $user_firstname;
 			break;
-		case 'user_lastname':
+		case '_user_lastname':
 			$default_value = $user_lastname;
 			break;
 		case '_user_display_name':
 			$default_value = $user_display_name;
 			break;
-		case 'user_email':
+		case '_user_email':
 			$default_value = $user_email;
 			break;
 		case 'post_id':
@@ -66,4 +66,4 @@ function ninja_forms_default_value_filter( $data, $field_id ) {
 	return $data;
 }
 
-add_filter( 'ninja_forms_field', 'ninja_forms_default_value_filter', 9, 2 );
+add_filter( 'ninja_forms_field', 'ninja_forms_default_value_filter', 7, 2 );

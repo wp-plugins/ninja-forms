@@ -10,7 +10,6 @@ function ninja_forms_register_tab_addons(){
         'show_save' => false,
     );
     ninja_forms_register_tab('extend', $args);
-
 }
 
 function ninja_forms_tab_addons(){
@@ -154,7 +153,7 @@ function ninja_forms_tab_addons(){
             'docs' => '',
         ),       
         array (
-            'title' => __( 'MailPoet (formerly Wysija', 'ninja-forms' ),
+            'title' => __( 'MailPoet (formerly Wysija)', 'ninja-forms' ),
             'image' => 'http://ninjaforms.com/wp-content/uploads/edd/2013/09/mailpoet-300x121.png',
             'content' => __( 'The MailPoet (formerly Wysija) extension allows you to quickly create newsletter signup forms for your MailPoet mailing lists using the power and flexibility that Ninja Forms provides.', 'ninja-forms' ),
             'link' => 'http://ninjaforms.com/downloads/mailpoet/',
@@ -172,7 +171,7 @@ function ninja_forms_tab_addons(){
     );
 
     foreach ($items as $item) {
-        echo '<div class="nf-extend">';
+        echo '<div class="nf-extend nf-box">';
             echo '<img src="' . $item['image'] . '" />';
             echo '<h2>' . $item['title'] . '</h2>';
             echo '<div>';
@@ -201,5 +200,4 @@ function ninja_forms_tab_addons(){
 
 function ninja_forms_save_addons($data){
     global $wpdb;
-
 }

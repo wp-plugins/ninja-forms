@@ -46,7 +46,7 @@ function ninja_forms_display_fields($form_id){
 				if( is_object( $ninja_forms_processing)){
 					$sub_id = $ninja_forms_processing->get_form_setting('sub_id');
 				}else if(isset($_REQUEST['sub_id'])){
-					$sub_id = $_REQUEST['sub_id'];
+					$sub_id = absint( $_REQUEST['sub_id'] );
 				}else{
 					$sub_id = '';
 				}

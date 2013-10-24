@@ -165,7 +165,7 @@ class Ninja_Forms_Processing {
 			$form_data = $form_row['data'];
 
 			if(isset($_REQUEST['_sub_id']) AND !empty($_REQUEST['_sub_id'])){
-				$form_data['sub_id'] = $_REQUEST['_sub_id'];
+				$form_data['sub_id'] = absint ( $_REQUEST['_sub_id'] );
 			}else{
 				$form_data['sub_id'] = '';
 			}

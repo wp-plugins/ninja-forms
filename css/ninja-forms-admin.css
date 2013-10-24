@@ -1,3 +1,19 @@
+/* ---------------------------------
+/  Generic styles & classes 
+----------------------------------*/
+.nf-box {
+	background: #f1f1f1;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	padding: 10px;
+}
+
+
+
+/* ---------------------------------
+/  Styles for specific admin pages 
+----------------------------------*/
+
 div.field-wrap.list-wrap {
 	display: block;
 }
@@ -618,13 +634,8 @@ a.tooltip span
 }
 
 .nf-extend {
-	background: #f1f1f1;
-	border: 1px solid #ccc;
-	border-radius: 4px;
 	float: left;
 	margin: 0 20px 20px 0;
-	padding: 10px;
-	position: relative;
 	width: 300px;
 	height: 315px;
 }
@@ -701,3 +712,50 @@ a.tooltip span
 .ninja-forms-calc-row input{
 	width: 50px;
 }
+
+
+/* ---------------------------------
+/  System Status Page 
+----------------------------------*/
+#debug-report {
+	display: none;
+}
+	#debug-report textarea {
+		height: 200px;
+		width: 300px;
+	}
+p.debug-report {
+	display: inline-block;
+	padding: .5em 0;
+}
+.nf-status-table {
+	background: #f1f1f1;
+	border-radius: 4px 4px 0 0;
+	width: 100%;
+}
+	.nf-status-table th {
+		border-color: #ccc;
+		border-style: solid;
+		border-width: 1px 1px 0 1px;
+		border-radius: 4px 4px 0 0;
+		font-size: 1.4em;
+		font-weight: normal;
+		padding: .5em 0;
+		width: 100%;
+	}
+		.nf-status-table thead:first-child th {
+			border-radius: 4px 4px 0 0;
+		}
+	.nf-status-table td {
+		border-color: #ccc;
+		border-style: solid;
+		border-width: 1px 1px 0px 1px;
+		padding: .5em;
+	}
+		.nf-status-table td:first-child {
+			border-left: 1px solid #ccc;
+			border-right-width: 0; 
+		}
+		.nf-status-table tbody:last-child td {
+			border-bottom-width: 1px;
+		}

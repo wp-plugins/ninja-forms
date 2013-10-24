@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms
 Plugin URI: http://ninjaforms.com/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 2.2.52
+Version: 2.2.53
 Author: The WP Ninjas
 Author URI: http://ninjaforms.com
 Text Domain: ninja-forms
@@ -51,7 +51,7 @@ global $wpdb, $wp_version;
 
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/".basename( dirname( __FILE__ ) ) );
 define("NINJA_FORMS_URL", plugins_url()."/".basename( dirname( __FILE__ ) ) );
-define("NINJA_FORMS_VERSION", "2.2.52");
+define("NINJA_FORMS_VERSION", "2.2.53");
 define("NINJA_FORMS_TABLE_NAME", $wpdb->prefix . "ninja_forms");
 define("NINJA_FORMS_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fields");
 define("NINJA_FORMS_FAV_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fav_fields");
@@ -237,6 +237,9 @@ require_once( NINJA_FORMS_DIR . "/includes/display/fields/default-value-filter.p
 
 	/* Manage Addons */
 	require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms-addons/tabs/addons/addons.php" );
+
+	/* System Status */
+	require_once( NINJA_FORMS_DIR . "/includes/classes/class-nf-system-status.php" );
 //}
 
 /* Require Pre-Registered Fields */
@@ -350,4 +353,22 @@ function ninja_forms_remove_from_array($arr, $key, $val, $within = FALSE) {
                 unset($arr[$i]);
 
     return array_values($arr);
+}
+
+function ninja_forms_letters_to_numbers( $size ) {
+	$l		= substr( $size, -1 );
+	$ret	= substr( $size, 0, -1 );
+	switch( strtoupper( $l ) ) {
+		case 'P':
+			$ret *= 1024;
+		case 'T':
+			$ret *= 1024;
+		case 'G':
+			$ret *= 1024;
+		case 'M':
+			$ret *= 1024;
+		case 'K':
+			$ret *= 1024;
+	}
+	return $ret;
 }

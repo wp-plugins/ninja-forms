@@ -4,12 +4,12 @@ function ninja_forms_admin_save(){
 	global $ninja_forms_tabs, $ninja_forms_sidebars, $ninja_forms_tabs_metaboxes, $ninja_forms_admin_update_message;
 	if(!empty($_POST) AND !empty($_POST['_ninja_forms_admin_submit']) AND $_POST['_ninja_forms_admin_submit'] != ''){
 		if(wp_verify_nonce($_POST['_ninja_forms_admin_submit'],'_ninja_forms_save') AND check_admin_referer('_ninja_forms_save','_ninja_forms_admin_submit')){
-			$current_page = $_REQUEST['page'];
+			$current_page = esc_html( $_REQUEST['page'] );
 			$current_tab = ninja_forms_get_current_tab();
 
 			$data_array = array();
 			if ( isset( $_REQUEST['form_id'] ) ) {
-				$form_id = $_REQUEST['form_id'];
+				$form_id = absint( $_REQUEST['form_id'] );
 			} else {
 				$form_id = '';
 			}
