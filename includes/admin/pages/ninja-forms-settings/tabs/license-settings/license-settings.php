@@ -32,7 +32,7 @@ function ninja_forms_register_license_settings_metabox(){
 	ninja_forms_register_tab_metabox($args);
 }
 
-function ninja_forms_save_license_settings($data){
+function ninja_forms_save_license_settings( $field_id, $data ){
 	$plugin_settings = get_option("ninja_forms_settings");
 
 	foreach($data as $key => $val){

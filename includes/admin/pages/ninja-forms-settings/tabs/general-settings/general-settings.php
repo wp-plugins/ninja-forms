@@ -52,7 +52,7 @@ function ninja_forms_register_general_settings_metabox(){
 
 }
 
-function ninja_forms_save_general_settings($data){
+function ninja_forms_save_general_settings( $field_id, $data ){
 	$plugin_settings = get_option( 'ninja_forms_settings' );
 
 	foreach($data as $key => $val){
