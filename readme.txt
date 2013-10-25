@@ -76,21 +76,31 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.2.53 =
+= 2.2.54 =
 
 *Bugs:*
 
-* Fixed some minor bugs related to default values for hidden and textbox fields.
+* Fixed a security-related bug that prevented new forms from being created.
 
 *Changes:*
 
-* Added a new resource that will allow users to quickly and easily add their pertinent system information when requesting support for Ninja Forms. The new option can be found underneath the Forms menu: System Status.
+* Added better input escaping to improve form security.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.2.54 =
+
+*Bugs:*
+
+* Fixed a security-related bug that prevented new forms from being created.
+
+*Changes:*
+
+* Added better input escaping to improve form security.
 
 = 2.2.53 =
 
