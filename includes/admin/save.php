@@ -8,8 +8,10 @@ function ninja_forms_admin_save(){
 			$current_tab = ninja_forms_get_current_tab();
 
 			$data_array = array();
-			if ( isset( $_REQUEST['form_id'] ) ) {
+			if ( isset( $_REQUEST['form_id'] ) and $_REQUEST['form_id'] != 'new' ) {
 				$form_id = absint( $_REQUEST['form_id'] );
+			} else if ( isset ( $_REQUEST['form_id'] ) and $_REQUEST['form_id'] == 'new' ) {
+				$form_id = 'new';
 			} else {
 				$form_id = '';
 			}
@@ -30,7 +32,7 @@ function ninja_forms_admin_save(){
 					if( isset( $opts['settings'] ) AND !empty( $opts['settings'] ) ){
 						foreach( $opts['settings'] as $setting ){
 							if( isset( $setting['save_function'] ) ){
-								if( isset( $form_id ) ){
+								if( isset( $form_id ) and $form_id != '' ){
 									$arguments['form_id'] = $form_id;
 								}
 								$arguments['data'] = $data_array;
@@ -49,7 +51,7 @@ function ninja_forms_admin_save(){
 						$save_function = $opts['save_function'];
 						$arguments = func_get_args();
 						array_shift($arguments); // We need to remove the first arg ($function_name)
-						if ( isset( $form_id ) ) {
+						if ( isset( $form_id ) and $form_id != '' ) {
 							$arguments['form_id'] = $form_id;
 						}
 						$arguments['data'] = $data_array;
@@ -73,7 +75,7 @@ function ninja_forms_admin_save(){
 						$save_function = $sidebar['save_function'];
 						$arguments = func_get_args();
 						array_shift($arguments); // We need to remove the first arg ($function_name)
-						if ( isset( $form_id ) ){
+						if ( isset( $form_id ) and $form_id != '' ){
 							$arguments['form_id'] = $form_id;
 						}
 						$arguments['data'] = $data_array;
@@ -93,7 +95,7 @@ function ninja_forms_admin_save(){
 			$tab_reload = $ninja_forms_tabs[$current_page][$current_tab]['tab_reload'];
 			$arguments = func_get_args();
 			array_shift($arguments); // We need to remove the first arg ($function_name)
-			if ( isset( $form_id ) ) {
+			if ( isset( $form_id ) and $form_id != '' ) {
 				$arguments['form_id'] = $form_id;
 			}
 			$arguments['data'] = $data_array;

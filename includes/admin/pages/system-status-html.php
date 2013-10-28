@@ -91,6 +91,14 @@
 				<td><?php _e( 'SUHOSIN Installed','ninja-forms' ); ?>:</td>
 				<td><?php echo extension_loaded( 'suhosin' ) ? __( 'Yes', 'ninja-forms' ) : __( 'No', 'ninja-forms' ); ?></td>
 			</tr>
+			<tr>
+				<td><?php _e( 'SMTP','ninja-forms' ); ?>:</td>
+				<td><?php echo ini_get('SMTP'); ?></td>
+			</tr>
+			<tr>
+				<td><?php _e( 'smtp_port','ninja-forms' ); ?>:</td>
+				<td><?php echo ini_get('smtp_port'); ?></td>
+			</tr>
 		<?php endif; ?>
 		<tr>
 			<td><?php _e( 'Default Timezone','ninja-forms' ); ?>:</td>

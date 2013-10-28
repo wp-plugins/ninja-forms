@@ -37,7 +37,12 @@ function ninja_forms_export_subs_to_csv( $sub_ids = '', $return = false ){
 		foreach($field_results as $field){
 			$field_type = $field['type'];
 			$field_id = $field['id'];
-			$process_field = $ninja_forms_fields[$field_type]['process_field'];
+			if ( isset ( $ninja_forms_fields[$field_type]['process_field'] ) ) {
+				$process_field = $ninja_forms_fields[$field_type]['process_field'];
+			} else {
+				$process_field = true;
+			}
+			
 			if(isset($field['data']['label'])){
 				$label = $field['data']['label'];
 			}else{
