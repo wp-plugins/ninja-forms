@@ -1,9 +1,9 @@
 === Ninja Forms ===
-Contributors: kstover, jameslaws, daveshine, mordauk, bftrick
+Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.4
 Tested up to: 3.6
-Stable tag: 2.2.55
+Stable tag: 2.2.56
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,21 +76,41 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.2.55 =
+= 2.2.56 =
 
 *Bugs:*
 
-* Fixed a security-related bug that prevented pluagin and form settings from saving properly.
+* Fixed a bug that prevented bulk actions from working on submissions.
+* Duplicating a form should now properly change ninja_forms_field references in the admin and user email subjects.
 
 *Changes:*
 
-* Add smtp option output to System Status to assist in approved email issue troubleshooting.
+* Added a honeypot field for catching spam bots. Thanks helgatheviking!
+* The date input mask should now reflect the settings for date format.
+* Added a "button" option type to the admin metabox output.
+* Changed the way that Ninja Forms attempts to get a form's URL to the wp_guess_url() function.
+* Added the option to give a field type a default label and default value when registering a field type.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.2.56 =
+
+*Bugs:*
+
+* Fixed a bug that prevented bulk actions from working on submissions.
+* Duplicating a form should now properly change ninja_forms_field references in the admin and user email subjects.
+
+*Changes:*
+
+* Added a honeypot field for catching spam bots. Thanks helgatheviking!
+* The date input mask should now reflect the settings for date format.
+* Added a "button" option type to the admin metabox output.
+* Changed the way that Ninja Forms attempts to get a form's URL to the wp_guess_url() function.
+* Added the option to give a field type a default label and default value when registering a field type.
 
 = 2.2.55 =
 

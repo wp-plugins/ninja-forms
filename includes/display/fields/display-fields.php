@@ -67,12 +67,12 @@ function ninja_forms_display_fields($form_id){
 				}else{
 					$show_field = true;
 				}
-				
+
 				if( isset( $data['display_style'] ) ){
 					$display_style = $data['display_style'];
 				}else{
 					$display_style = '';
-				}				
+				}
 
 				if( isset( $data['visible'] ) ){
 					$visible = $data['visible'];
@@ -290,7 +290,7 @@ function ninja_forms_get_field_class($field_id){
 					break;
 			}
 		}
-		
+
 	}
 
 	if ( isset ( $field_data['payment_sub_total'] ) AND $field_data['payment_sub_total'] == 1 ) {
@@ -298,7 +298,7 @@ function ninja_forms_get_field_class($field_id){
 			$calc_listen = 'ninja-forms-field-calc-listen';
 		}
 	}
-	
+
 	// Check to see if this is a tax field;
 	if ( $field_row['type'] == '_tax' ) {
 		if ( $calc_listen == '' ) {

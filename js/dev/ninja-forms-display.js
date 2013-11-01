@@ -37,7 +37,13 @@ jQuery(document).ready(function(jQuery) {
 			jQuery(this).mask(mask);
 		});
 
-		jQuery(".ninja-forms-date").mask('99/99/9999');
+		var date_format_mask = ninja_forms_settings.date_format;
+		date_format_mask = date_format_mask.replace( /m/g, 9 );
+		date_format_mask = date_format_mask.replace( /d/g, 9 );
+		date_format_mask = date_format_mask.replace( /y/g, 99 );
+		date_format_mask = date_format_mask.replace( /Y/g, 9999 );
+
+		jQuery(".ninja-forms-date").mask(date_format_mask);
 	}
 
 	if( jQuery.fn.datepicker ){

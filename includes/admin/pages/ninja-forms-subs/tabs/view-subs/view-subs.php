@@ -521,7 +521,7 @@ function ninja_forms_save_view_subs( $form_id, $data = array() ){
 				if( isset( $_POST['bulk_action'] ) ){
 					if( $_POST['bulk_action'] == 'delete' ){
 						if( isset( $_POST['ninja_forms_sub'] ) AND is_array( $_POST['ninja_forms_sub'] ) AND !empty( $_POST['ninja_forms_sub'] ) ){
-							$subs = esc_html ( $_POST['ninja_forms_sub'] );
+							$subs = ninja_forms_esc_html_deep( $_POST['ninja_forms_sub'] );
 							foreach( $subs as $sub_id ){
 								ninja_forms_delete_sub($sub_id);
 							}
@@ -536,7 +536,7 @@ function ninja_forms_save_view_subs( $form_id, $data = array() ){
 						}
 					}elseif( $_POST['bulk_action'] == 'export' ){
 						if( isset($_POST['ninja_forms_sub'] ) AND is_array( $_POST['ninja_forms_sub'] ) AND !empty( $_POST['ninja_forms_sub'] ) ){
-							$subs = esc_html ( $_POST['ninja_forms_sub'] );
+							$subs = ninja_forms_esc_html_deep( $_POST['ninja_forms_sub'] );
 							ninja_forms_export_subs_to_csv( $subs );	
 						}
 					}

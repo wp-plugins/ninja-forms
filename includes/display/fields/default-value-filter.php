@@ -9,11 +9,16 @@
  */
 
 function ninja_forms_default_value_filter( $data, $field_id ) {
-	global $current_user, $post;
+	global $current_user, $ninja_forms_fields, $post;
+
+	$field_row = ninja_forms_get_field_by_id( $field_id );
+	$field_type = $field_row['type'];
 
 	if(isset($data['default_value'])){
 		$default_value = $data['default_value'];
-	}else{
+	} else if ( isset ( $ninja_forms_fields[$field_type]['default_value'] ) ){ 
+		$default_value = $ninja_forms_fields[$field_type]['default_value'];
+	} else {
 		$default_value = '';
 	}
 

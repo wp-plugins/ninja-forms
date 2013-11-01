@@ -26,13 +26,25 @@ function ninja_forms_new_field(){
 		$type_name = '';
 	}
 
+	if( isset( $ninja_forms_fields[$type]['default_label'] ) ){
+		$default_label = $ninja_forms_fields[$type]['default_label'];
+	}else{
+		$default_label = '';
+	}
+
 	if( isset( $ninja_forms_fields[$type]['edit_options'] ) ){
 		$edit_options = $ninja_forms_fields[$type]['edit_options'];
 	}else{
 		$edit_options = '';
 	}
 
-	$data = serialize(array('label' => $type_name));
+	if ( $default_label != '' ) {
+		$label = $default_label;
+	} else {
+		$label = $type_name;
+	}
+
+	$data = serialize(array('label' => $label));
 
 	$order = 999;
 

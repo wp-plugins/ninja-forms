@@ -255,3 +255,11 @@ CREDIT CARD BLOCK
 .ninja-forms-form-wrap .ninja-forms-form .credit_card-wrap div span {
     font-size: 0.8em;
 }
+
+/* ---------------------------------
+HONEYPOT
+----------------------------------*/
+
+.ninja-forms-form-wrap .ninja-forms-form .honeypot-wrap {
+    display: none;
+}

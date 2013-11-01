@@ -269,6 +269,14 @@ function ninja_forms_calc_after_import_form( $form ){
 				$form['data']['success_msg'] = $success_msg;
 			}
 
+			if ( isset ( $form['data']['user_subject'] ) AND $form['data']['user_subject'] != '' ) {
+				$user_subject = $form['data']['user_subject'];
+				foreach( $form['field'] as $inserted_field ){
+					$user_subject = str_replace( '[ninja_forms_field id='.$inserted_field['old_id'].']', '[ninja_forms_field id='.$inserted_field['id'].']', $user_subject );
+				}
+				$form['data']['user_subject'] = $user_subject;
+			}			
+
 			if ( isset ( $form['data']['user_email_msg'] ) AND $form['data']['user_email_msg'] != '' ) {
 				$user_email_msg = $form['data']['user_email_msg'];
 				foreach( $form['field'] as $inserted_field ){
@@ -276,6 +284,14 @@ function ninja_forms_calc_after_import_form( $form ){
 				}
 				$form['data']['user_email_msg'] = $user_email_msg;
 			}
+
+			if ( isset ( $form['data']['admin_subject'] ) AND $form['data']['admin_subject'] != '' ) {
+				$admin_subject = $form['data']['admin_subject'];
+				foreach( $form['field'] as $inserted_field ){
+					$admin_subject = str_replace( '[ninja_forms_field id='.$inserted_field['old_id'].']', '[ninja_forms_field id='.$inserted_field['id'].']', $admin_subject );
+				}
+				$form['data']['admin_subject'] = $admin_subject;
+			}			
 
 			if ( isset ( $form['data']['admin_email_msg'] ) AND $form['data']['admin_email_msg'] != '' ) {
 				$admin_email_msg = $form['data']['admin_email_msg'];

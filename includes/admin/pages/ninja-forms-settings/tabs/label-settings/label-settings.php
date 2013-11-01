@@ -52,6 +52,12 @@ function ninja_forms_register_label_settings_metabox(){
 				'desc' => '',
 			),
 			array(
+			 	'name' => 'honeypot_error',
+				'type' => 'text',
+				'label' => __( 'Honeypot error message', 'ninja-forms' ),
+				'desc' => '',
+			),
+			array(
 			 	'name' => 'invalid_email',
 				'type' => 'text',
 				'label' => __( 'Please enter a valid email address', 'ninja-forms' ),

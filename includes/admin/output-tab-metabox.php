@@ -348,6 +348,12 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 					<input type="submit" name="<?php echo $name;?>" class="<?php echo $class; ?>" value="<?php echo $label;?>">
 					<?php
 					break;
+				case 'button':
+					?>
+					<input type="button" name="<?php echo $name;?>" class="<?php echo $class; ?>" value="<?php echo $label;?>">
+					<?php
+					break;
+
 				default:
 					if( isset( $s['display_function'] ) ){
 						$s_display_function = $s['display_function'];
