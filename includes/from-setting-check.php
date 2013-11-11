@@ -60,7 +60,7 @@ function ninja_forms_split_email_from( $email_from ) {
 		$tmp_array['email_from'] = $matches[1];
 	} else {
 		$tmp_array['email_from_name'] = '';
-		$tmp_array['email_from'] = '';
+		$tmp_array['email_from'] = $email_from;
 	}
 	return $tmp_array;
 }

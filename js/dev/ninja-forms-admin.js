@@ -89,7 +89,10 @@ jQuery.fn.nextElementInDom = function(selector, options) {
 jQuery(document).ready(function($) {
 	/* * * General JS * * */
 
-	$(".ninja-forms-admin-date").datepicker();
+
+	$(".ninja-forms-admin-date").datepicker({
+		dateFormat: ninja_forms_settings.date_format
+	});
 
 	//Select All Checkbox
 	$(".ninja-forms-select-all").click(function(){

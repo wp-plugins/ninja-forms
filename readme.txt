@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.4
 Tested up to: 3.6
-Stable tag: 2.3
+Stable tag: 2.3.1
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,24 +76,35 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.3 =
+= 2.3.1 =
 
 *Bugs:*
 
-* Fixed several minor bugs related to saving form fields.
+* Fixed a bug that prevented "From Email" and "From Name" from saving properly on the Form Settings page.
+* Star Ratings fields can now be set to required. The user will be forced to enter at least one star.
+* Removed some PHP notices that could appear when using the widget.
 
 *Changes:*
 
-* Added a new submit feature called "Timed Submit." This new submit button will force users to wait a certain number of seconds before they can submit your form. Thanks helgatheviking!
-* Improved the Form Settings UI by adding a much-requested "Email From Name" field setting. You can use this to more easily define the name that emails appear to be from.
-* Added an easier way for developers to troubleshoot JS errors.
-* The "Use this as the From Email for Administrators..." setting has been removed in favour of one labelled "Set this as the reply-to email" for the form. We think that this presents a clearer interface and is easier to understand.
+* The datepicker used in the Ninja Forms admin section should now respect the date settings on the Plugin Settings page.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.3.1 =
+
+*Bugs:*
+
+* Fixed a bug that prevented "From Email" and "From Name" from saving properly on the Form Settings page.
+* Star Ratings fields can now be set to required. The user will be forced to enter at least one star.
+* Removed some PHP notices that could appear when using the widget.
+
+*Changes:*
+
+* The datepicker used in the Ninja Forms admin section should now respect the date settings on the Plugin Settings page.
 
 = 2.3 =
 
