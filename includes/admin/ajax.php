@@ -194,7 +194,11 @@ function ninja_forms_add_fav(){
 	}
 
 	$name = stripslashes( esc_html( $_REQUEST['fav_name'] ) );
-	$data['label'] = $name;
+	if ( !isset ( $data['label'] ) or empty ( $data['label'] ) ) {
+		$data['label'] = $name;		
+	}
+
+	$data = ninja_forms_stripslashes_deep( $data );
 
 	$data = serialize($data);
 	$wpdb->insert(NINJA_FORMS_FAV_FIELDS_TABLE_NAME, array('row_type' => 1, 'type' => $field_type, 'order' => 0, 'data' => $data, 'name' => $name));

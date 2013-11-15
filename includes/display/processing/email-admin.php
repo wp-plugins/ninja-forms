@@ -43,6 +43,8 @@ function ninja_forms_email_admin() {
 
 	$email_from = $email_from_name.' <'.$email_from.'>';
 
+	$email_from = apply_filters( 'ninja_forms_admin_email_from', $email_from, $email_reply, $form_ID );
+
 	$headers = array();
 	$headers[] = 'From: ' . $email_from;
 	if( $email_reply ) {

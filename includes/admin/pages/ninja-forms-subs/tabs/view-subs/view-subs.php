@@ -206,7 +206,7 @@ function ninja_forms_tab_view_subs(){
 				$back_link = remove_query_arg( array( 'edit_sub_form' ) );
 			?>
 			<div id="" class="">
-				<a href="<?php echo $back_link;?>"><input type="button" class="button-primary" value="<?php _e( 'Back To Sub List', 'ninja-forms' ); ?>"></a>
+				<a href="<?php echo $back_link;?>"><input type="button" class="button-secondary" value="<?php _e( 'Back To Submissions', 'ninja-forms' ); ?>"></a>
 			</div>
 			<?php
 			} 
@@ -355,7 +355,7 @@ function ninja_forms_tab_view_subs(){
 				ninja_forms_display_form($form_id);
 				?>
 				<tr id="">
-					<td colspan="2"><input type="submit" name="submit" value="<?php _e( 'Save Sub', 'ninja-forms' ); ?>" class="button-secondary"></td>
+					<td colspan="2"><input type="submit" name="submit" value="<?php _e( 'Save Submission', 'ninja-forms' ); ?>" class="button-primary"></td>
 				</tr>
 			<?php
 		}else{

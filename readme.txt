@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.4
 Tested up to: 3.6
-Stable tag: 2.3.1
+Stable tag: 2.3.2
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,23 +76,37 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.3.1 =
+= 2.3.2 =
 
 *Bugs:*
 
-* Fixed a bug that prevented "From Email" and "From Name" from saving properly on the Form Settings page.
-* Star Ratings fields can now be set to required. The user will be forced to enter at least one star.
-* Removed some PHP notices that could appear when using the widget.
+* Fixed a bug that prevented forms from populated correctly after they had been submitted. i.e. after missing required fields.
 
 *Changes:*
 
-* The datepicker used in the Ninja Forms admin section should now respect the date settings on the Plugin Settings page.
+* Changed the way that Ninja Forms figures out what URL a form lives on.
+* The "From Address" used in admin emails can now be filtered using ninja_forms_admin_email_from.
+* The delimiter, new line marker, and byte order mark can now all be filtered. See includes/admin/export-subs.php for more information. (Thanks to Jörn Lund!)
+* Changed button colors on the submission editing page to be inline with WordPress standards.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.3.2 =
+
+*Bugs:*
+
+* Fixed a bug that prevented forms from populated correctly after they had been submitted. i.e. after missing required fields.
+
+*Changes:*
+
+* Changed the way that Ninja Forms figures out what URL a form lives on.
+* The "From Address" used in admin emails can now be filtered using ninja_forms_admin_email_from.
+* The delimiter, new line marker, and byte order mark can now all be filtered. See includes/admin/export-subs.php for more information. (Thanks to Jörn Lund!)
+* Changed button colors on the submission editing page to be inline with WordPress standards.
 
 = 2.3.1 =
 

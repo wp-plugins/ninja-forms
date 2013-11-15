@@ -99,14 +99,20 @@ function ninja_forms_export_subs_to_csv( $sub_ids = '', $return = false ){
 	$filename = $filename . ".csv";
 
 	if( $return ){
-		return str_putcsv($array);
+		return str_putcsv($array , 
+			apply_filters('ninja_forms_csv_delimiter',',') , 
+			apply_filters('ninja_forms_csv_enclosure','"') , 
+			apply_filters('ninja_forms_csv_terminator',"\n") );
 	}else{
 		header("Content-type: application/csv");
 		header("Content-Disposition: attachment; filename=".$filename);
 		header("Pragma: no-cache");
 		header("Expires: 0");
-		echo "\xEF\xBB\xBF"; // Byte Order Mark
-		echo str_putcsv($array);
+		echo apply_filters('ninja_forms_csv_bom',"\xEF\xBB\xBF") ; // Byte Order Mark
+		echo str_putcsv($array , 
+			apply_filters('ninja_forms_csv_delimiter',',') , 
+			apply_filters('ninja_forms_csv_enclosure','"') , 
+			apply_filters('ninja_forms_csv_terminator',"\n") );
 
 		die();
 	}
