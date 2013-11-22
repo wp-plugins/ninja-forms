@@ -64,6 +64,15 @@ function ninja_forms_default_value_filter( $data, $field_id ) {
 		case 'post_url':
 			$default_value = $post_url;
 			break;
+		case 'today':
+			$plugin_settings = get_option( 'ninja_forms_settings' );
+			if ( isset ( $plugin_settings['date_format'] ) ) {
+				$date_format = $plugin_settings['date_format'];
+			} else {
+				$date_format = 'm/d/Y';
+			}
+			$default_value = date( $date_format, strtotime( 'now' ) );
+			break;
 	}
 
 	$data['default_value'] = $default_value;

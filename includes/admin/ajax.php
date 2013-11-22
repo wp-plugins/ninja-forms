@@ -313,7 +313,7 @@ function ninja_forms_side_sortable(){
 	$plugin_settings = get_option( 'ninja_forms_settings' );
 	$page = esc_html( $_REQUEST['page'] );
 	$tab = esc_html( $_REQUEST['tab'] );
-	$order = esc_html( $_REQUEST['order'] );
+	$order = ninja_forms_esc_html_deep( $_REQUEST['order'] );
 
 	$plugin_settings['sidebars'][$page][$tab] = $order;
 	update_option( 'ninja_forms_settings', $plugin_settings );

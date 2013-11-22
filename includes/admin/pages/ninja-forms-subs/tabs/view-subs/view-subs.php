@@ -156,6 +156,8 @@ function ninja_forms_tab_view_subs(){
 					<option value="20" <?php selected($saved_limit, 20);?>>20</option>
 					<option value="50" <?php selected($saved_limit, 50);?>>50</option>
 					<option value="100" <?php selected($saved_limit, 100);?>>100</option>
+					<option value="300" <?php selected($saved_limit, 300);?>>300</option>
+					<option value="500" <?php selected($saved_limit, 500);?>>500</option>
 				</select>
 				<?php _e('Submissions Per Page', 'ninja-forms');?>
 				<input type="submit" name="submit" value="<?php _e( 'Go', 'ninja-forms' ); ?>" class="button-secondary">

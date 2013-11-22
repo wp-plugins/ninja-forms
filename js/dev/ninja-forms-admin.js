@@ -392,7 +392,7 @@ jQuery(document).ready(function($) {
 			$("#ninja_forms_field_" + id + "_default_value").val(this.value);
 		}
 
-		if(this.value != ''){
+		if(this.value != '' && this.value != 'today' ){
 			$("#ninja_forms_field_" + id + "_datepicker").prop('checked', false);
 			if(this.value != '_user_email'){
 				$("#ninja_forms_field_" + id + "_email").prop("checked", false);
@@ -435,7 +435,9 @@ jQuery(document).ready(function($) {
 		id = id.replace("_datepicker", "");
 		if(this.checked == true){
 			//$("#ninja_forms_field_" + id + "_default_value").val("");
-			$("#ninja_forms_field_" + id + "_mask").val("");
+			if ( $("#ninja_forms_field_" + id + "_mask").val() != 'today' ) {
+				$("#ninja_forms_field_" + id + "_mask").val("");
+			}
 			$("#default_value_" + id).val("");
 			$("#default_value_label_" + id).hide();
 			$("#mask_" + id).val("");

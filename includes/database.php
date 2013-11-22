@@ -386,6 +386,8 @@ function ninja_forms_update_sub($args){
 		$args['data'] = serialize( $args['data'] );
 	}
 	$update_array = $args;
+	$date_updated = $date_updated = date( 'Y-m-d H:i:s', strtotime ( 'now' ) );
+	$update_array['date_updated'] = $date_updated;
 
 	$wpdb->update(NINJA_FORMS_SUBS_TABLE_NAME, $update_array, array('id' => $sub_id));
 }

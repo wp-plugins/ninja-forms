@@ -287,6 +287,16 @@ function ninja_forms_activation(){
 			}
  		}
  	}
+
+ 	// check for an existing form
+ 	$starter_form_exists = ninja_forms_starter_form_exists();
+
+ 	if ( ! $starter_form_exists ) {
+ 		// if a starter form doesn't exist them create it
+ 		ninja_forms_add_starter_form();
+ 	}
+
+ 	
 }
 
 function ninja_forms_activation_old_forms_check(){
@@ -599,3 +609,35 @@ function ninja_forms_activation_old_forms_check(){
 	//}
 	return $forms;
 }
+
+
+/*
+ * Check to see if a form exists.
+ *
+ * @since 2.3.3
+ * @return bool
+ */
+function ninja_forms_starter_form_exists() {
+	$forms = ninja_forms_get_all_forms();
+	if( empty( $forms ) ) {
+		return false;
+	}
+	return true;
+}
+
+
+/*
+ * Add a starter form. Return the ID.
+ *
+ * @since 2.3.3
+ * @returns int
+ */
+function ninja_forms_add_starter_form() {
+	// load starter form
+	$file = file_get_contents( NINJA_FORMS_DIR . "/includes/forms/starter-form.nff" );
+	$file = apply_filters( 'ninja_forms_starter_form_contents', $file );
+
+	// create new form
+	ninja_forms_import_form( $file );
+}
+
