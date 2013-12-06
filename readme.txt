@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.4
 Tested up to: 3.6
-Stable tag: 2.3.4
+Stable tag: 2.3.5
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,29 +76,25 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.3.4 =
+= 2.3.5 =
 
 *Bugs:*
 
-* Fixed up the extend page. Added some extensions and cleaned up CSS.
-* Added url encoding to the form settings saved message so it was no longer without spaces.
-* Fixed the get_subs function so that it works properly with dates in formats different than m/d/Y.
-* Fixed a bug that caused response message fields to be output if multiple forms were on the same page.
-* Fixed a bug that caused hidden fields to not show up on the submission edit screen.
-
-*Changes:*
-
-* Adding styling to admin metabox textareas so that they have a minimum size.
-* Saving a post/page should no longer create an empty Ninja Forms custom post meta.
-* Changed the call to sys_get_temp_dir() to the WordPress get_temp_dir() when trying to create a CSV attachment.
-* Added a new filter ninja_forms_email_all_fields_array to give users a way to remove unwanted data from being sent in emails.
-* Users can now add Calc values to their List Options import CSV.
+* Fixed a bug that prevented calculations from working properly in Mulit-Part Forms.
+* Fixed a bug that could prevent success messages from showing properly in modal forms.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.3.5 =
+
+*Bugs:*
+
+* Fixed a bug that prevented calculations from working properly in Mulit-Part Forms.
+* Fixed a bug that could prevent success messages from showing properly in modal forms.
 
 = 2.3.4 =
 
