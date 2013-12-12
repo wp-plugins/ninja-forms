@@ -1,8 +1,8 @@
 === Ninja Forms ===
 Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
-Requires at least: 3.4
-Tested up to: 3.6
+Requires at least: 3.6
+Tested up to: 3.8
 Stable tag: 2.3.5
 License: GPLv2 or later
 
@@ -76,18 +76,43 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.3.5 =
+= 2.3.6 =
 
 *Bugs:*
 
-* Fixed a bug that prevented calculations from working properly in Mulit-Part Forms.
-* Fixed a bug that could prevent success messages from showing properly in modal forms.
+* Fixed a bug in calc filters that could cause infinite loops.
+* "Back to submissions" should now work in IE.
+
+*Changes:*
+
+* Add some CSS for 3.8 compatability.
+* Removed the "Save Subs" option. Now all submissions are saved by default. This can be changed by using a WordPress filter.
+* Moved the "Forms" admin menu up to the same section as posts and custom post types.
+* Changed some CSS selector weights ot make overriding a little easier.
+* Changed the mask definition to be stored in a data-attribute rather than the field title.
+* Changed the currency mask to use the WordPress defined thousands separator and decimal point.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.3.6 =
+
+*Bugs:*
+
+* Fixed a bug in calc filters that could cause infinite loops.
+* "Back to submissions" should now work in IE.
+
+*Changes:*
+
+* Add some CSS for 3.8 compatability.
+* Removed the "Save Subs" option. Now all submissions are saved by default. This can be changed by using a WordPress filter.
+* Moved the "Forms" admin menu up to the same section as posts and custom post types.
+* Changed some CSS selector weights ot make overriding a little easier.
+* Changed the mask definition to be stored in a data-attribute rather than the field title.
+* Changed the currency mask to use the WordPress defined thousands separator and decimal point.
 
 = 2.3.5 =
 

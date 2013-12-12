@@ -183,9 +183,9 @@ function ninja_forms_calc_field_loop( $field_id, $calc_eq = '', $result = '' ){
 
 	// Get our calculation equation if it exists.
 	if ( isset ( $calc_data['calc_eq'] ) ) {
-		//$calc_eq = $calc_data['calc_eq'];
+		$calc_eq = $calc_data['calc_eq'];
 	} else {
-		//$calc_eq = array();
+		$calc_eq = array();
 	}
 
 	$form_id = $field_row['form_id'];
@@ -239,7 +239,7 @@ function ninja_forms_calc_field_loop( $field_id, $calc_eq = '', $result = '' ){
 						} else {
 							$calc_value = ninja_forms_field_calc_value( $field['id'], $field_value, $calc_method );							
 						}
-						var_dump( $calc_value );
+
 						if ( $calc_value !== false ) {
 							$result = ninja_forms_calc_evaluate( 'add', $result, $calc_value );						
 						}

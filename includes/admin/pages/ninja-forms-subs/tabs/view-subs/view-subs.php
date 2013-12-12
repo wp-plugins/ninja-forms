@@ -218,7 +218,7 @@ function ninja_forms_tab_view_subs(){
 				$back_link = remove_query_arg( array( 'edit_sub_form' ) );
 			?>
 			<div id="" class="">
-				<a href="<?php echo $back_link;?>"><input type="button" class="button-secondary" value="<?php _e( 'Back To Submissions', 'ninja-forms' ); ?>"></a>
+				<a href="<?php echo $back_link;?>" class="button-secondary" <?php _e( 'Back To Submissions', 'ninja-forms' ); ?></a>
 			</div>
 			<?php
 			} 

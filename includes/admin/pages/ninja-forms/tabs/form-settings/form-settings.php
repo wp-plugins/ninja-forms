@@ -227,16 +227,6 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				'label' => __( 'Display Form Title', 'ninja-forms' ),
 			),
 			array(
-				'name' => 'save_subs',
-				'type' => 'checkbox',
-				'desc' => '',
-				'label' => __( 'Save form submissions?', 'ninja-forms' ),
-				'display_function' => '',
-				'help' => __( '', 'ninja-forms' ),
-				'default_value' => 1,
-			),
-
-			array(
 				'name' => 'logged_in',
 				'type' => 'checkbox',
 				'desc' => '',
