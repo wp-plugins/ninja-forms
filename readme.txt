@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.6
 Tested up to: 3.8
-Stable tag: 2.3.6
+Stable tag: 2.3.7
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,27 +76,25 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.3.6 =
+= 2.3.7 =
 
 *Bugs:*
 
-* Fixed a bug in calc filters that could cause infinite loops.
+* Input masks should now work without causing Javascript errors.
 * "Back to submissions" should now work in IE.
-
-*Changes:*
-
-* Add some CSS for 3.8 compatability.
-* Removed the "Save Subs" option. Now all submissions are saved by default. This can be changed by using a WordPress filter.
-* Moved the "Forms" admin menu up to the same section as posts and custom post types.
-* Changed some CSS selector weights ot make overriding a little easier.
-* Changed the mask definition to be stored in a data-attribute rather than the field title.
-* Changed the currency mask to use the WordPress defined thousands separator and decimal point.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.3.7 =
+
+*Bugs:*
+
+* Input masks should now work without causing Javascript errors.
+* "Back to submissions" should now work in IE.
 
 = 2.3.6 =
 
