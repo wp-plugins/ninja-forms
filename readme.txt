@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.6
 Tested up to: 3.8
-Stable tag: 2.3.8
+Stable tag: 2.4
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,25 +76,45 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.3.8 =
+= 2.4 =
+
+*Features:*
+
+* A new method for loading Ninja Forms for display has been created to decrease loading times. Users with extremely large forms (100+ fields) should see a marked improvement in loading speeds. If you use any Ninja Forms extensions, make sure that they are updated to the newest versions to take advantage of this new loading system. Developers can look for the $ninja_forms_loading class for more information about using this powerful new feature.
+* Added a new Number field that requires users to enter a number. (Work is currently being done to make this requirement work with non-HTML5 compliant browers.)
 
 *Bugs:*
 
-* Fixed a bug that caused the Ninja Forms option on post/page edit to not save properly.
+* Fixed a bug that prevented Custom default values from working with hidden fields.
+* Encoded HTML entities in the help hover so that double quotes don’t break anything.
 
 *Changes:*
 
-* Simplified some CSS for the star rating field.
-* Fixed some 3.8 styling on modal boxes.
-* Fixed a few typos.
-* Added a default success message to newly created forms.
-* Address fields should now how a specific class that can be targeted in JS.
+* Default label position is now above the element.
+* Added filter 'ninja_forms_export_sub_pre_value' when exporting subs to access user_value before it is processed (stripslashes and if array implode_r).
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.4 =
+
+*Features:*
+
+* A new method for loading Ninja Forms for display has been created to decrease loading times. Users with extremely large forms (100+ fields) should see a marked improvement in loading speeds. If you use any Ninja Forms extensions, make sure that they are updated to the newest versions to take advantage of this new loading system. Developers can look for the $ninja_forms_loading class for more information about using this powerful new feature.
+* Added a new Number field that requires users to enter a number. (Work is currently being done to make this requirement work with non-HTML5 compliant browers.)
+
+*Bugs:*
+
+* Fixed a bug that prevented Custom default values from working with hidden fields.
+* Encoded HTML entities in the help hover so that double quotes don’t break anything.
+
+*Changes:*
+
+* Default label position is now above the element.
+* Added filter 'ninja_forms_export_sub_pre_value' when exporting subs to access user_value before it is processed (stripslashes and if array implode_r).
 
 = 2.3.8 =
 

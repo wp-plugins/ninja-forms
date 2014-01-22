@@ -136,6 +136,7 @@ function ninja_forms_get_field_by_id($field_id){
 
 function ninja_forms_get_fields_by_form_id($form_id, $orderby = 'ORDER BY `order` ASC'){
 	global $wpdb;
+
 	$field_results = $wpdb->get_results($wpdb->prepare("SELECT * FROM ".NINJA_FORMS_FIELDS_TABLE_NAME." WHERE form_id = %d ".$orderby, $form_id), ARRAY_A);
 	if(is_array($field_results) AND !empty($field_results)){
 		$x = 0;
@@ -145,6 +146,7 @@ function ninja_forms_get_fields_by_form_id($form_id, $orderby = 'ORDER BY `order
 			$x++;
 		}
 	}
+
 	return $field_results;
 }
 

@@ -278,8 +278,6 @@ function ninja_forms_tab_view_subs(){
 			for ($i = $start; $i < $end; $i++) {
 				$sub = $sub_results[$i];
 				$data = apply_filters( 'ninja_forms_view_sub_data', $sub['data'], $sub['id'] );
-				$download_link = add_query_arg(array('ninja_forms_export_subs_to_csv' => 1, 'sub_id' => $sub['id'], 'form_id' => $form_id));
-				$edit_link = add_query_arg(array('edit_sub_form' => 1, 'sub_id' => $sub['id'], 'form_id' => $form_id));
 				?>
 				<tr id="ninja_forms_sub_<?php echo $sub['id'];?>_tr">
 					<th scope="row" class="check-column">
@@ -293,10 +291,18 @@ function ninja_forms_tab_view_subs(){
 							echo $date;
 						?>
 						<div class="row-actions">
-							<span class="edit"><a href="<?php echo $edit_link;?>" id="ninja_forms_sub_<?php echo $sub['id'];?>" class="ninja-forms-view-sub"><?php _e('Edit', 'ninja-forms' ); ?></a> | </span>
-							<span class="trash"><a href="#" id="ninja_forms_sub_<?php echo $sub['id'];?>" class="ninja-forms-delete-sub"><?php _e( 'Delete', 'ninja-forms' ); ?></a> | </span>
-							<span class="export"><a href="<?php echo $download_link;?>" id="ninja_forms_sub_<?php echo $sub['id'];?>" class="ninja-forms-export-sub"><?php _e( 'Export to CSV', 'ninja-forms' ); ?></a></span>
-
+							<?php
+							/**
+							 * ninja_forms_sub_table_row_actions hook
+							 * hook in here to allow extra row actions
+							 *
+							 * @hooked ninja_forms_sub_table_row_actions_edit - 10
+							 * @hooked ninja_forms_sub_table_row_actions_delete - 20
+							 * @hooked ninja_forms_sub_table_row_actions_export - 30
+							 */
+							$row_actions = apply_filters( 'ninja_forms_sub_table_row_actions', array(), $data, $sub['id'], $form_id );
+							echo implode(" | ", $row_actions);
+							?>
 						</div>
 					</td>
 				<?php
@@ -659,3 +665,71 @@ function ninja_forms_edit_sub_remove_ajax( $form ){
 	$form['data']['ajax'] = 0;
 	return $form;
 }
+
+
+/**
+ * Add an edit link in the submission table
+ */
+function ninja_forms_sub_table_row_actions_edit( $row_actions, $data, $sub_id, $form_id ) {
+	
+	// create the edit link
+	$edit_link = add_query_arg(array('edit_sub_form' => 1, 'sub_id' => $sub_id, 'form_id' => $form_id));
+
+	// turn on the output buffer
+	ob_start();
+	?>
+	<span class="edit"><a href="<?php echo $edit_link;?>" id="ninja_forms_sub_<?php echo $sub['id'];?>" class="ninja-forms-view-sub"><?php _e('Edit', 'ninja-forms' ); ?></a></span>
+	<?php
+	$action = ob_get_clean();
+
+	// return the new html with the rest of the $row_actions array
+	$row_actions['edit'] = $action;
+	return $row_actions;
+
+}
+add_filter( 'ninja_forms_sub_table_row_actions', 'ninja_forms_sub_table_row_actions_edit', 10, 4 );
+
+
+/**
+ * Add a delete link in the submission table
+ */
+function ninja_forms_sub_table_row_actions_delete( $row_actions, $data, $sub_id, $form_id ) {
+
+	// turn on the output buffer
+	ob_start();
+	?>
+	<span class="trash"><a href="#" id="ninja_forms_sub_<?php echo $sub_id;?>" class="ninja-forms-delete-sub"><?php _e( 'Delete', 'ninja-forms' ); ?></a></span>
+	<?php
+	$action = ob_get_clean();
+
+	// return the new html with the rest of the $row_actions array
+	$row_actions['delete'] = $action;
+	return $row_actions;
+
+}
+add_filter( 'ninja_forms_sub_table_row_actions', 'ninja_forms_sub_table_row_actions_delete', 20, 4 );
+
+
+/**
+ * Add an export link in the submission table
+ */
+function ninja_forms_sub_table_row_actions_export( $row_actions, $data, $sub_id, $form_id ) {
+
+	// create the csv download link
+	$csv_download_link = add_query_arg(array('ninja_forms_export_subs_to_csv' => 1, 'sub_id' => $sub_id, 'form_id' => $form_id));
+
+	// turn on the output buffer
+	ob_start();
+	?>
+	<span class="export"><a href="<?php echo $csv_download_link;?>" id="ninja_forms_sub_<?php echo $sub_id;?>" class="ninja-forms-export-sub"><?php _e( 'Export to CSV', 'ninja-forms' ); ?></a></span>
+	<?php
+	$action = ob_get_clean();
+
+	// return the new html with the rest of the $row_actions array
+	$row_actions['export'] = $action;
+	return $row_actions;
+
+}
+add_filter( 'ninja_forms_sub_table_row_actions', 'ninja_forms_sub_table_row_actions_export', 30, 4 );
+
+?>
