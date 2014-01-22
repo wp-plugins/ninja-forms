@@ -103,7 +103,7 @@ function ninja_forms_display_label_inside( $data, $field_id ){
 
 	if ( $field_type != '_list' ) {
 		if ( $label_pos == 'inside' ) {
-			$data['default_value'] = $label;
+			$ninja_forms_loading->update_field_value( $field_id, $label );
 		}
 	}
 

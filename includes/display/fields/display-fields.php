@@ -16,7 +16,11 @@ function ninja_forms_display_fields($form_id){
 
 	if ( is_array ( $field_results ) AND !empty ( $field_results ) ) {
 		foreach ( $field_results as $field ) {
-
+			if ( isset ( $ninja_forms_loading ) ) {
+				$field = $ninja_forms_loading->get_field_settings( $field['id'] );
+			} else if ( isset ( $ninja_forms_processing ) ) {
+				$field = $ninja_forms_processing->get_field_settings( $field['id'] );
+			}
 			if( isset( $ninja_forms_fields[$field['type']] ) ){
 				$type = $ninja_forms_fields[$field['type']];
 
