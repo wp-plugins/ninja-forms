@@ -970,6 +970,15 @@ class Ninja_Forms_Processing {
 		}
 		// Get our sub-total if it exists.
 		$sub_total = $this->get_calc_sub_total( false );
+		$locale_info = localeconv();
+		$decimal_point = $locale_info['decimal_point'];
+		if ( $decimal_point == '.' ) {
+			$sub_total = str_replace(',', '', $sub_total );
+		} else {
+			$sub_total = str_replace('.', '', $sub_total );
+		}
+
+		$sub_total = intval( $sub_total );
 
 		// Get our total if it exists.
 		$total = $this->get_calc_total( false, false );
