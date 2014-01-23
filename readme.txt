@@ -2,8 +2,8 @@
 Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.6
-Tested up to: 3.8
-Stable tag: 2.4.1
+Tested up to: 3.8.1
+Stable tag: 2.4.2
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,18 +76,43 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.4.1 =
+= 2.4.2 =
 
 *Bugs:*
 
-* Fixed a bug that prevented the Inside label position from working properly on form load.
-* Fixed an issue that could cause the conditional logic extension to function improperly on load.
+* Fixed a bug that caused memory issues when a form has a large number of submissions.
+* Fixed a bug with the label inside position that generated a “call to member function…” error.
+* Fixed a bug that prevented tax totals from working properly with numbers with thousands separators.
+* Fixed a bug that prevented list importing from working with newly created list fields.
+* Fixed a bug with list fields that prevented list options from being re-ordered immediately after being added to the form.
+
+*Changes:*
+
+* Required fields that use the “inside” label position will now show the required symbol inside the field with the label.
+* Changed the default value filter to respect fields that shouldn’t be processed.
+* Removed code from the field class function that was specific to Conditional Logic. This code should be housed in the extension rather than the core plugin.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.4.2 =
+
+*Bugs:*
+
+* Fixed a bug that caused memory issues when a form has a large number of submissions.
+* Fixed a bug with the label inside position that generated a “call to member function…” error.
+* Fixed a bug that prevented tax totals from working properly with numbers with thousands separators.
+* Fixed a bug that prevented list importing from working with newly created list fields.
+* Fixed a bug with list fields that prevented list options from being re-ordered immediately after being added to the form.
+
+*Changes:*
+
+* Required fields that use the “inside” label position will now show the required symbol inside the field with the label.
+* Changed the default value filter to respect fields that shouldn’t be processed.
+* Removed code from the field class function that was specific to Conditional Logic. This code should be housed in the extension rather than the core plugin.
 
 = 2.4.1 =
 

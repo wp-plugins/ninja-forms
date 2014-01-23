@@ -21,6 +21,7 @@ function ninja_forms_display_fields($form_id){
 			} else if ( isset ( $ninja_forms_processing ) ) {
 				$field = $ninja_forms_processing->get_field_settings( $field['id'] );
 			}
+
 			if( isset( $ninja_forms_fields[$field['type']] ) ){
 				$type = $ninja_forms_fields[$field['type']];
 
@@ -234,7 +235,7 @@ function ninja_forms_get_field_class($field_id){
 	$x = 0;
 	$custom_class = '';
 
-	if(isset($field_data['class']) AND !empty($field_data['class'])){
+	if ( isset( $field_data['class'] ) AND !empty ( $field_data['class'] ) ) {
 		$class_array = explode(",", $field_data['class']);
 		foreach($class_array as $class){
 			$custom_class .= $class;
@@ -251,30 +252,6 @@ function ninja_forms_get_field_class($field_id){
 	}
 
 	$form_id = $field_row['form_id'];
-	$watch_fields = array();
-	if ( isset ( $ninja_forms_loading ) ) {
-		$field_results = $ninja_forms_loading->get_all_fields();
-	} else {
-		$field_results = $ninja_forms_processing->get_all_fields();
-	}
-
-	foreach($field_results as $f_id => $user_value ){
-		if ( isset ( $ninja_forms_loading ) ) {
-			$field = $ninja_forms_loading->get_field_settings( $f_id );
-		} else {
-			$field = $ninja_forms_processing->get_field_settings( $f_id );
-		}
-		$data = $field['data'];
-		if(isset($data['conditional']) AND is_array($data['conditional'])){
-			foreach($data['conditional'] as $conditional){
-				if(isset($conditional['cr']) AND is_array($conditional['cr'])){
-					foreach($conditional['cr'] as $cr){
-						$watch_fields[$cr['field']] = 1;
-					}
-				}
-			}
-		}
-	}
 
 	// Check to see if we are dealing with a field that has the user_info_field_group set.
 	if ( isset ( $data['user_info_field_group_name'] ) and $data['user_info_field_group_name'] != '' ) {
@@ -309,21 +286,12 @@ function ninja_forms_get_field_class($field_id){
     	$address_class = 'address country';
     }
 
-	$listen_class = '';
-	if(isset($watch_fields[$field_id]) AND $watch_fields[$field_id] == 1){
-		$listen_class = "ninja-forms-field-conditional-listen";
-	}
-
 	if($req_class != ''){
 		$field_class .= " ".$req_class;
 	}
 
 	if($custom_class != ''){
 		$field_class .= " ".$custom_class;
-	}
-
-	if($listen_class != ''){
-		$field_class .= " ".$listen_class;
 	}
 
 	if ( $user_info_group_class != '' ) {

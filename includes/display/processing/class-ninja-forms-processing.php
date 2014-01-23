@@ -147,6 +147,7 @@ class Ninja_Forms_Processing {
 
 				$this->data['fields'][$field_id] = $val;
 				$field_row = ninja_forms_get_field_by_id( $field_id );
+				$field_row['data']['field_class'] = 'ninja-forms-field';
 				$this->data['field_data'][$field_id] = $field_row;
 			}
 
@@ -208,6 +209,8 @@ class Ninja_Forms_Processing {
 						} else {
 							$field_row = ninja_forms_get_field_by_id( $field_id );
 						}
+
+						$field_row['data']['field_class'] = 'ninja-forms-field';
 						
 						$this->data['field_data'][$field_id] = $field_row;
 					}
@@ -309,7 +312,9 @@ class Ninja_Forms_Processing {
 			$fields = array();
 			$submitted_fields = $this->data['submitted_fields'];
 			foreach ( $submitted_fields as $field_id ) {
-				$fields[$field_id] = $this->data['fields'][$field_id];
+				if ( isset ( $this->data['fields'][$field_id] ) ) {
+					$fields[$field_id] = $this->data['fields'][$field_id];
+				}
 			}
 			return $fields;
 		}
