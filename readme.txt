@@ -100,7 +100,7 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 * Fixed a bug that could cause Admin emails to appear to have attachments when they didn't.
 * Required fields can now have a value of 0.
 * Fixed a bug with list fields and calculations that could cause them not to pre-populate properly.
-* Fixed a bug that could cause incomplete submissions to show in the dashboard for those using the Save Progress extension or the Multi-Part Forms extension.
+* Fixed a bug that could cause incomplete submissions to show in the dashboard for those using the Save Progress extension or the Multi-Part Forms extension.  
 
 = 2.5.1 =
 
