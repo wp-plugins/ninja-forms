@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms
 Plugin URI: http://ninjaforms.com/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 2.5.2
+Version: 2.5.3
 Author: The WP Ninjas
 Author URI: http://ninjaforms.com
 Text Domain: ninja-forms
@@ -54,7 +54,7 @@ global $wpdb, $wp_version;
 
 define("NINJA_FORMS_DIR", WP_PLUGIN_DIR."/".basename( dirname( __FILE__ ) ) );
 define("NINJA_FORMS_URL", plugins_url()."/".basename( dirname( __FILE__ ) ) );
-define("NINJA_FORMS_VERSION", "2.5.2");
+define("NINJA_FORMS_VERSION", "2.5.3");
 define("NINJA_FORMS_TABLE_NAME", $wpdb->prefix . "ninja_forms");
 define("NINJA_FORMS_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fields");
 define("NINJA_FORMS_FAV_FIELDS_TABLE_NAME", $wpdb->prefix . "ninja_forms_fav_fields");
@@ -286,13 +286,6 @@ require_once( NINJA_FORMS_DIR . "/includes/fields/post-terms.php" );
 require_once( NINJA_FORMS_DIR . "/includes/fields/post-excerpt.php" );
 */
 require_once( NINJA_FORMS_DIR . "/includes/admin/save.php" );
-
-if(session_id() == '') {
-	session_start();
-}
-
-$_SESSION['NINJA_FORMS_DIR'] = NINJA_FORMS_DIR;
-$_SESSION['NINJA_FORMS_URL'] = NINJA_FORMS_URL;
 
 // Set $_SESSION variable used for storing items in transient variables
 function ninja_forms_set_transient_id(){

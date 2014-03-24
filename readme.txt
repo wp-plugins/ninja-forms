@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.6
 Tested up to: 3.8.1
-Stable tag: 2.5.2
+Stable tag: 2.5.3
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,21 +76,23 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.5.2 =
+= 2.5.3 =
 
 *Bugs:*
 
-* Fixed various bugs with the default label position. It should now always default to above.
-* Fixed a bug that could cause Admin emails to appear to have attachments when they didn't.
-* Required fields can now have a value of 0.
-* Fixed a bug with list fields and calculations that could cause them not to pre-populate properly.
-* Fixed a bug that could cause incomplete submissions to show in the dashboard for those using the Save Progress extension or the Multi-Part Forms extension.
+* Fixed a bug that could prevent AJAX submissions from working properly.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.5.3 =
+
+*Bugs:*
+
+* Fixed a bug that could prevent AJAX submissions from working properly.
 
 = 2.5.2 =
 

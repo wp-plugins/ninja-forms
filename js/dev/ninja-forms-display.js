@@ -129,7 +129,9 @@ jQuery(document).ready(function(jQuery) {
 		if(ajax == 1){
 			var options = {
             beforeSerialize: function($form, add_product_form_options) {
-            	tinyMCE.triggerSave();
+            	if ( typeof tinyMCE !== 'undefined' ) {
+            		tinyMCE.triggerSave();
+            	}
             },
 			beforeSubmit:  ninja_forms_before_submit,
 			success:       ninja_forms_response,
