@@ -98,8 +98,7 @@ class Ninja_Forms_Processing {
 			return false;
 		}else{
 			$this->data['form_ID'] = $form_ID;
-			$current_user = wp_get_current_user();
-			$user_ID = $current_user->ID;
+			$user_ID = get_current_user_id();
 			if(!$user_ID){
 				$user_ID = '';
 			}

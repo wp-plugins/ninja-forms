@@ -128,6 +128,9 @@ jQuery(document).ready(function(jQuery) {
 		ajax = settings.ajax
 		if(ajax == 1){
 			var options = {
+            beforeSerialize: function($form, add_product_form_options) {
+            	tinyMCE.triggerSave();
+            },
 			beforeSubmit:  ninja_forms_before_submit,
 			success:       ninja_forms_response,
 			dataType: 'json'

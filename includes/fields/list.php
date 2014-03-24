@@ -612,6 +612,11 @@ function ninja_forms_field_filter_list_data( $form_id ){
 	} else {
 		$all_fields = $ninja_forms_processing->get_all_fields();
 	}
+
+	// Make sure we have some fields before displaying them!
+	if ( ! $all_fields ) {
+		return;
+	}
 	
 	// Loop through all of our fields and see if we have any list fields.
 	
@@ -658,4 +663,4 @@ function ninja_forms_field_filter_list_data( $form_id ){
 	}
 }
 
-add_action( 'ninja_forms_display_init', 'ninja_forms_field_filter_list_data' );
+add_action( 'ninja_forms_display_pre_init', 'ninja_forms_field_filter_list_data' );

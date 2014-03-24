@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.6
 Tested up to: 3.8.1
-Stable tag: 2.5.1
+Stable tag: 2.5.2
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,41 +76,37 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.5.1 =
+= 2.5.2 =
 
 *Bugs:*
 
-* Fixed a major bug that removed the "Number" field.
-
-= 2.5 =
-
-*Features:*
-
-* Submission Limiting - Allows users to limit the number of submissions a form can receive.
-* Character Counts - Added a "Character Count" option to textboxes and textareas.
-
-*Bugs:*
-
-* Fixed a bug that prevented the pagination from working on view submission pages.
-* Fixed a bug with the default value filter.
-* Fixed a bug that prevented forms from showing when they were on the landing page of another form.
-* Fixed a bug that caused required fields to go unprocessed when extensions were deactivated.
-* Fixed a bug that caused list fields to pre-populate incorrectly in some instances.
-* Removed some console logs that could cause crashes in Internet Explorer.
-* Fixed a bug that caused forms to improperly clear when submitted.
-* Fixed a bug that prevented empty success messages from being saved.
-
-*Changes:*
-
-* Add some CSS to help prevent theme from breaking left and right labels when they add display:block to the label element.
-* All settings are now fetched via a proxy function.
-* Added a wrapper for the entire form display (and everything that goes with it).
+* Fixed various bugs with the default label position. It should now always default to above.
+* Fixed a bug that could cause Admin emails to appear to have attachments when they didn't.
+* Required fields can now have a value of 0.
+* Fixed a bug with list fields and calculations that could cause them not to pre-populate properly.
+* Fixed a bug that could cause incomplete submissions to show in the dashboard for those using the Save Progress extension or the Multi-Part Forms extension.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.5.2 =
+
+*Bugs:*
+
+* Fixed various bugs with the default label position. It should now always default to above.
+* Fixed a bug that could cause Admin emails to appear to have attachments when they didn't.
+* Required fields can now have a value of 0.
+* Fixed a bug with list fields and calculations that could cause them not to pre-populate properly.
+* Fixed a bug that could cause incomplete submissions to show in the dashboard for those using the Save Progress extension or the Multi-Part Forms extension.
+
+= 2.5.1 =
+
+*Bugs:*
+
+* Fixed a major bug that removed the "Number" field.
 
 = 2.5 =
 
