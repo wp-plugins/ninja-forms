@@ -283,6 +283,8 @@ function ninja_forms_field_list_display( $field_id, $data ){
 						$value = $option['label'];
 					}
 
+					$value = htmlspecialchars( $value, ENT_QUOTES );
+
 					if(isset($option['label'])){
 						$label = $option['label'];
 					}else{
@@ -301,7 +303,7 @@ function ninja_forms_field_list_display( $field_id, $data ){
 						$disabled = '';
 					}
 
-					$label = htmlspecialchars( $label );
+					$label = htmlspecialchars( $label, ENT_QUOTES );
 
 					$label = stripslashes( $label );
 
@@ -312,6 +314,7 @@ function ninja_forms_field_list_display( $field_id, $data ){
 					if($list_show_value == 0){
 						$value = $label;
 					}
+
 
 					if ( $selected_value == $value OR ( is_array( $selected_value ) AND in_array( $value, $selected_value ) ) ) {
 						$selected = 'selected';
@@ -344,6 +347,8 @@ function ninja_forms_field_list_display( $field_id, $data ){
 					$value = $option['label'];
 				}
 
+				$value = htmlspecialchars( $value, ENT_QUOTES );
+
 				if(isset($option['label'])){
 					$label = $option['label'];
 				}else{
@@ -355,6 +360,8 @@ function ninja_forms_field_list_display( $field_id, $data ){
 				}else{
 					$display_style = '';
 				}
+
+				$label = htmlspecialchars( $label, ENT_QUOTES );
 
 				$label = stripslashes($label);
 
@@ -386,6 +393,8 @@ function ninja_forms_field_list_display( $field_id, $data ){
 					$value = $option['label'];
 				}
 
+				$value = htmlspecialchars( $value, ENT_QUOTES );
+
 				if(isset($option['label'])){
 					$label = $option['label'];
 				}else{
@@ -398,7 +407,9 @@ function ninja_forms_field_list_display( $field_id, $data ){
 					$display_style = '';
 				}
 
-				$label = stripslashes($label);
+				$label = htmlspecialchars( $label, ENT_QUOTES );
+
+				$label = stripslashes( $label) ;
 
 				if($list_show_value == 0){
 					$value = $label;
@@ -441,6 +452,8 @@ function ninja_forms_field_list_display( $field_id, $data ){
 						$value = $option['label'];
 					}
 
+					$value = htmlspecialchars( $value, ENT_QUOTES );
+
 					if(isset($option['label'])){
 						$label = $option['label'];
 					}else{
@@ -452,6 +465,8 @@ function ninja_forms_field_list_display( $field_id, $data ){
 					}else{
 						$display_style = '';
 					}
+
+					$label = htmlspecialchars( $label, ENT_QUOTES );
 
 					$label = stripslashes($label);
 
@@ -486,6 +501,8 @@ function ninja_forms_field_list_display( $field_id, $data ){
 						$value = $option['label'];
 					}
 
+					$value = htmlspecialchars( $value, ENT_QUOTES );
+
 					if(isset($option['label'])){
 						$label = $option['label'];
 					}else{
@@ -498,7 +515,9 @@ function ninja_forms_field_list_display( $field_id, $data ){
 						$display_style = '';
 					}
 
-					$label = stripslashes($label);
+					$label = htmlspecialchars( $label, ENT_QUOTES );
+
+					$label = stripslashes( $label );
 
 					if($list_show_value == 0){
 						$value = $label;

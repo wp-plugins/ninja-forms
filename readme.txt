@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.6
 Tested up to: 3.8.1
-Stable tag: 2.5.3
+Stable tag: 2.6
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,17 +76,41 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.5.3 =
+= 2.6 =
+
+*Changes:*
+
+* The "Processing Message" above the form has been removed in favour of changing the text of the submit button and disabling it.
+* This change in processing notification will make it easier for users to see that a submission is being processed and prevent them from clicking the "submit" button again.
+* Updated the label of the "Processing" label to make it clearer.
+* Added a credit card field that can be enabled by extensions that need to use it.
 
 *Bugs:*
 
-* Fixed a bug that could prevent AJAX submissions from working properly.
+* Fixed a bug introduced in version 2.5.3 which prevented Sessions from starting properly on some server setups.
+* Fixed some PHP warnings/notices.
+* List items should now properly escape html when displayed.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.6 =
+
+*Changes:*
+
+* The "Processing Message" above the form has been removed in favour of changing the text of the submit button and disabling it.
+* This change in processing notification will make it easier for users to see that a submission is being processed and prevent them from clicking the "submit" button again.
+* Updated the label of the "Processing" label to make it clearer.
+* Added a credit card field that can be enabled by extensions that need to use it.
+
+*Bugs:*
+
+* Fixed a bug introduced in version 2.5.3 which prevented Sessions from starting properly on some server setups.
+* Fixed some PHP warnings/notices.
+* List items should now properly escape html when displayed.
 
 = 2.5.3 =
 

@@ -34,7 +34,7 @@ jQuery(document).ready(function(jQuery) {
 	if( jQuery.fn.mask ){
 		jQuery(".ninja-forms-mask").each(function(){
 			var mask = jQuery(this).data('mask');
-			mask = mask.toString();			
+			mask = mask.toString();
 			jQuery(this).mask(mask);
 		});
 
@@ -78,7 +78,7 @@ jQuery(document).ready(function(jQuery) {
 		var input_limit_type = jQuery(this).data( 'input-limit-type' );
 		var input_limit_msg = jQuery(this).data( 'input-limit-msg' );
 		jQuery(this).counter( {
-		    count: 'down', 
+		    count: 'down',
 		    goal: input_limit,
 		    type: input_limit_type,
 		    msg: input_limit_msg
@@ -686,6 +686,10 @@ jQuery(document).ready(function(jQuery) {
 }); //End document.ready
 
 function ninja_forms_before_submit(formData, jqForm, options){
+	var form_id = jQuery( jqForm ).prop( 'id' ).replace( 'ninja_forms_form_', '' );
+	jQuery( '#nf_submit_' + form_id ).hide();
+	jQuery( '#nf_processing_' + form_id ).show();
+
 	var result = jQuery(jqForm).triggerHandler('beforeSubmit', [ formData, jqForm, options ]);
 	if ( result !== false ) {
 		result = jQuery('body').triggerHandler('beforeSubmit', [ formData, jqForm, options ]);
@@ -698,6 +702,10 @@ function ninja_forms_before_submit(formData, jqForm, options){
 
 function ninja_forms_response(responseText, statusText, xhr, jQueryform){
 	//alert(responseText);
+	var form_id = responseText.form_id;
+	jQuery( '#nf_processing_' + form_id ).hide();
+	jQuery( '#nf_submit_' + form_id ).show();
+
 	if( ninja_forms_settings.ajax_msg_format == 'inline' ){
 		var result = jQuery(jQueryform).triggerHandler('submitResponse', [ responseText ]);
 		if ( result !== false ) {
@@ -728,7 +736,7 @@ function ninja_forms_default_before_submit(formData, jqForm, options){
 	var form_id = jQuery(jqForm).prop("id").replace("ninja_forms_form_", "" );
 
 	// Show the ajax spinner and processing message.
-	jQuery("#ninja_forms_form_" + form_id + "_process_msg").show();
+	//jQuery("#ninja_forms_form_" + form_id + "_process_msg").show();
 	jQuery("#ninja_forms_form_" + form_id + "_response_msg").prop("innerHTML", "");
 	jQuery("#ninja_forms_form_" + form_id + "_response_msg").removeClass("ninja-forms-error-msg");
 	jQuery("#ninja_forms_form_" + form_id + "_response_msg").removeClass("ninja-forms-success-msg");
@@ -740,7 +748,7 @@ function ninja_forms_default_before_submit(formData, jqForm, options){
 function ninja_forms_default_response(response){
 	var form_id = response.form_id;
 
-	jQuery("#ninja_forms_form_" + form_id + "_process_msg").hide();
+	//jQuery("#ninja_forms_form_" + form_id + "_process_msg").hide();
 
 	ninja_forms_update_error_msgs(response)
 	ninja_forms_update_success_msg(response)
