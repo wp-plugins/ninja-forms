@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.6
 Tested up to: 3.9
-Stable tag: 2.6.1
+Stable tag: 2.6.2
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,18 +76,11 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.6.1 =
+= 2.6.2 =
 
 *Changes:*
 
-* Modified the call to wp_editor on the Field Settings tab so that it is compatible with WordPress 3.9.
-* Added more security to prevent forms from being spammed.
-* Added additional items to the system status page.
-
-*Bugs:*
-
-* Fixed a php notice that could occur when using the inside label position.
-* Calc fields that use advanced equations should now function properly when referencing other advanced calculation fields.
+* Added some CSS to make forms more responsive and cross browser compatible.
 
 == Requested Features ==
 
@@ -95,7 +88,13 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 
 == Changelog ==
 
-= 2.6.1 =
+= 2.6.2 (04/22/2014) =
+
+*Changes:*
+
+* Added some CSS to make forms more responsive and cross browser compatible.
+
+= 2.6.1 (04/17/2014) =
 
 *Changes:*
 

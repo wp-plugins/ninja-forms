@@ -130,10 +130,17 @@ a.tooltip span
 .ninja-forms-form-wrap input,
 .ninja-forms-form-wrap select ,
 .ninja-forms-form-wrap textarea {
-    padding: 15px 12px;
     width: auto;
+    height: auto;
     vertical-align: inherit;
 }
+
+.ninja-forms-form-wrap input,
+.ninja-forms-form-wrap textarea {
+    padding: 5px;
+}
+
+
 .ninja-forms-form-wrap label {
     font-weight: bold;
 }
