@@ -135,12 +135,6 @@ a.tooltip span
     vertical-align: inherit;
 }
 
-.ninja-forms-form-wrap input,
-.ninja-forms-form-wrap textarea {
-    padding: 5px;
-}
-
-
 .ninja-forms-form-wrap label {
     font-weight: bold;
 }
