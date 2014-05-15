@@ -84,7 +84,7 @@ a.tooltip span
 
 .field-wrap,
 #ninja_forms_required_items {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 #pass-strength-result {
@@ -203,7 +203,7 @@ TEXT FIELDS & TEXTAREAS
 }
 
 .textarea-wrap textarea {
-    height: 100px;
+    height: 200px;
 }
 
 .profile_pass-wrap input {
