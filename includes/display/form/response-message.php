@@ -22,22 +22,22 @@ function ninja_forms_display_response_message( $form_id ){
 		$display = '';
 	}
 
-	echo '<div id="ninja_forms_form_' . $form_id . '_response_msg" style="' . $display . '" class="ninja-forms-response-msg '.$class.'">';
-	
-	if ( isset ( $ninja_forms_processing ) && $ninja_forms_processing->get_form_ID() == $form_id ) {
-		
-		if( is_object( $ninja_forms_processing ) ){
-			if( $ninja_forms_processing->get_errors_by_location('general') ){
-				$class = 'ninja-forms-error-msg';
-			}else if( $ninja_forms_processing->get_all_success_msgs() ){
-				$class = 'ninja-forms-success-msg';
-			}else{
-				$class = '';
-			}
+	if( is_object( $ninja_forms_processing ) ){
+		if( $ninja_forms_processing->get_errors_by_location('general') ){
+			$class = 'ninja-forms-error-msg';
+		}else if( $ninja_forms_processing->get_all_success_msgs() ){
+			$class = 'ninja-forms-success-msg';
 		}else{
 			$class = '';
 		}
-		
+	}else{
+		$class = '';
+	}
+
+	echo '<div id="ninja_forms_form_' . $form_id . '_response_msg" style="' . $display . '" class="ninja-forms-response-msg '.$class.'">';
+	
+	if ( isset ( $ninja_forms_processing ) && $ninja_forms_processing->get_form_ID() == $form_id ) {
+			
 		if( is_object( $ninja_forms_processing ) ){
 			if( $ninja_forms_processing->get_form_ID() == $form_id ){
 				if( $ninja_forms_processing->get_errors_by_location('general') ){
