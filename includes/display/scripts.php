@@ -16,7 +16,7 @@ function ninja_forms_display_js( $form_id, $local_vars = '' ) {
 	$qtip = 0;
 	$mask = 0;
 	$currency = 0;
-	$input_limit= 0;
+	$input_limit = 0;
 	$rating = 0;
 	$calc_value = array();
 	$calc_fields = array();
@@ -191,9 +191,9 @@ function ninja_forms_display_js( $form_id, $local_vars = '' ) {
 			array( 'jquery' ) );
 	}
 
-	if ( $input_limit != 1 ) {
+	if ( $input_limit != 0 ) {
 		wp_enqueue_script('jquery-char-input-limit',
-			NINJA_FORMS_URL .'/js/dev/word-and-character-counter.js',
+			NINJA_FORMS_URL .'/js/min/word-and-character-counter.min.js',
 			array( 'jquery' ) );
 	}
 

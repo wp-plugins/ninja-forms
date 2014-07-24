@@ -582,7 +582,7 @@ function ninja_forms_field_calc_pre_process(){
 						
 						switch ( $calc_method ) {
 							case 'auto': // We are automatically totalling the fields that have a calc_auto_include set to 1.
-								if ( isset ( $field_data['calc_auto_include'] ) AND $field_data['calc_auto_include'] == 1 ) {
+								if ( isset ( $field_data['calc_auto_include'] ) AND $field_data['calc_auto_include'] == 1 && $field_value ) {
 									
 									if ( $field['type'] == '_calc' ) {
 										$calc_value = ninja_forms_calc_field_loop( $field['id'], '', $result );

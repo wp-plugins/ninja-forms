@@ -614,7 +614,7 @@ jQuery(document).ready(function(jQuery) {
 									//console.log( 'undefined: ' + f_value );
 								}
 
-								if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' && isNaN( f_value ) ) {
+								if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' && isNaN( f_value ) && typeof f_value != 'undefined' ) {
 									f_value = f_value.replace( ninja_forms_settings.currency_symbol, "" );
 									f_value = f_value.replace( /,/g, "" );
 								}
@@ -779,6 +779,11 @@ function ninja_forms_update_success_msg(response){
 		}
 		if(clear_complete == 1 ){
 			jQuery("#ninja_forms_form_" + form_id ).clearForm();
+			// Replace any inside labels.
+			jQuery( 'div.label-inside input.ninja-forms-field, div.label-inside textarea.ninja-forms-field' ).each( function() {
+				var label = jQuery("#" + this.id + "_label_hidden").val();
+				this.value = label;
+			});
 			if( 'rating' in jQuery("input[type=radio].ninja-forms-star") ) {
 				jQuery("input[type=radio].ninja-forms-star").rating("drain");
 			}

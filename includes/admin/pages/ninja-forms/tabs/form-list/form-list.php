@@ -167,7 +167,7 @@ function ninja_forms_tab_form_list($form_id, $data){
 			$date_updated = strtotime( $date_updated );
 			$date_updated = date_i18n( __( 'F d, Y', 'ninja-forms' ), $date_updated );
 			$edit_link = esc_url( add_query_arg( array( 'tab' => 'form_settings', 'form_id' => $form_id ) ) );
-			$subs_link = admin_url( 'admin.php?page=ninja-forms-subs&form_id='.$form_id );
+			$subs_link = admin_url( 'edit.php?post_status=all&post_type=nf_sub&action=-1&m=0&form_id=' . $form_id . '&paged=1&mode=list&action2=-1' );
 			$export_link = esc_url( add_query_arg( array( 'export_form' => 1, 'form_id' => $form_id ) ) );
 			$duplicate_link = esc_url( add_query_arg( array( 'duplicate_form' => 1, 'form_id' => $form_id ) ) );
 			$shortcode = apply_filters ( "ninja_forms_form_list_shortcode", "[ninja_forms_display_form id=" .  $form_id . "]", $form_id );

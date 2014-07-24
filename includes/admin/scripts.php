@@ -10,13 +10,6 @@ function ninja_forms_admin_css(){
 
 }
 
-function ninja_forms_font_css() {
-	if ( is_admin() ) {
-		wp_enqueue_style( 'ninja-forms-fonts', NINJA_FORMS_URL .'/css/fonts.css');
-	}
-}
-add_action( 'admin_init', 'ninja_forms_font_css' );
-
 function ninja_forms_add_class($classes) {
 	// add 'class-name' to the $classes array
 	$classes .= ' nav-menus-php';

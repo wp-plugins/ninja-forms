@@ -1,9 +1,9 @@
 === Ninja Forms ===
 Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
-Requires at least: 3.6
-Tested up to: 3.9
-Stable tag: 2.6.5
+Requires at least: 3.7
+Tested up to: 3.9.1
+Stable tag: 2.7
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,17 +76,18 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.6.5 (06/10/2014) =
+= 2.7 (24 July 2014) =
 
 *Changes:*
 
-* Added a filter for setting which field types are shown the input limiter.
-* Changed the header( 'Location....') php function with wp_redirect().
+* Submissions are now stored in a new database, making them easier to search, edit, and display.
+* There are new methods for interacting with submissions, which can be found [here](http://ninjaforms.com/documentation/developer-api/submissions/).
+* We're very excited about this new direction for Ninja Forms submissions, and we hope you enjoy using the new submissions system.
+* See the plugin welcome screen for more details.
 
 *Bugs:*
 
-* Fixed a bug that could cause the required symbol to be added twice if the label position was set inside.
-* Wrapped the $post global in an if check to prevent errors on some WP pages.
+* Fixed several bugs.
 
 == Requested Features ==
 

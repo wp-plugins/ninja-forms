@@ -50,3 +50,21 @@ function ninja_forms_pre_process_shortcode($content) {
    return $content;
 }
 add_filter('the_content', 'ninja_forms_pre_process_shortcode', 9999);
+
+/**
+ * Shortcode for submission sequential ID
+ *
+ * @since 2.7
+ * @return string $content
+ */
+function nf_sub_seq_num_shortcode( $atts = array() ) {
+	global $ninja_forms_processing;
+	$sub_id = $ninja_forms_processing->get_form_setting( 'sub_id' );
+	if ( $sub_id == '' ) {
+		return '';
+	} else {
+		return Ninja_Forms()->sub( $sub_id )->get_seq_num();
+	}
+}
+
+add_shortcode( 'nf_sub_seq_num', 'nf_sub_seq_num_shortcode' );
