@@ -997,7 +997,7 @@ class NF_Subs_CPT {
 			<div id="major-publishing-actions">
 				<div id="delete-action">
 
-				<!-- <a class="submitdelete deletion" href="<?php echo get_delete_post_link( $post->ID ); ?>">Move to Trash</a></div> -->
+				<!-- <a class="submitdelete deletion" href="<?php echo get_delete_post_link( $post->ID ); ?>">Move to Trash</a>--></div> 
 
 				<div id="publishing-action">
 				<span class="spinner"></span>
