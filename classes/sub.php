@@ -15,7 +15,7 @@ class NF_Sub {
 	/**
 	 * @var $sub_id store our sub id
 	 */
-	var $sub_id;	
+	var $sub_id;
 
 	/**
 	 * @var $seq_num store our sequential number
@@ -59,14 +59,14 @@ class NF_Sub {
 
 	/**
 	 * Get things started
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void/
 	 */
 	public function __construct( $sub_id ) {
 		global $ninja_forms_fields;
-		
+
 		// Bail if the sub doesn't exist.
 		$sub = get_post( $sub_id );
 		if ( ! is_object( $sub ) )
@@ -78,9 +78,9 @@ class NF_Sub {
 		// Setup our form id var
 		$this->form_id = $this->get_meta( '_form_id' );
 		// Setup our action var
-		$this->action = $this->get_meta( '_action' );	
+		$this->action = $this->get_meta( '_action' );
 		// Setup our sequential id
-		$this->seq_num = $this->get_meta( '_seq_num' );		
+		$this->seq_num = $this->get_meta( '_seq_num' );
 		// Setup our user_id var
 		$this->user_id = $sub->post_author;
 		// Setup our date submitted var
@@ -111,7 +111,7 @@ class NF_Sub {
 					$process_field = false;
 				}
 				if ( $process_field ) {
-					$this->fields[ $field_id ] = $meta_value;					
+					$this->fields[ $field_id ] = $meta_value;
 				}
 
 			} else if ( $key != '_form_id' && $key != '_action' ) {
@@ -122,7 +122,7 @@ class NF_Sub {
 
 	/**
 	 * Update our form id
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return bool
@@ -138,7 +138,7 @@ class NF_Sub {
 
 	/**
 	 * Update our action
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return bool
@@ -150,11 +150,11 @@ class NF_Sub {
 		} else {
 			return false;
 		}
-	}	
+	}
 
 	/**
 	 * Update our sequential id
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return bool
@@ -170,7 +170,7 @@ class NF_Sub {
 
 	/**
 	 * Update our user id
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return bool
@@ -192,7 +192,7 @@ class NF_Sub {
 
 	/**
 	 * Update our date submitted
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return bool
@@ -215,7 +215,7 @@ class NF_Sub {
 
 	/**
 	 * Update our date modified
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return bool
@@ -238,7 +238,7 @@ class NF_Sub {
 
 	/**
 	 * Add a meta value to our submission.
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return bool
@@ -255,18 +255,18 @@ class NF_Sub {
 	/**
 	 * Update a meta value.
 	 * Wrapper for add_field().
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return bool
 	 */
 	public function update_meta( $meta_key, $value ) {
 		return $this->add_meta( $meta_key, $value );
-	}	
+	}
 
 	/**
 	 * Add a field value to our submission.
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return bool
@@ -283,7 +283,7 @@ class NF_Sub {
 
 	/**
 	 * Update a field value
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return bool
@@ -294,7 +294,7 @@ class NF_Sub {
 
 	/**
 	 * Get a meta value from our submission by meta key
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return array|bool
@@ -309,7 +309,7 @@ class NF_Sub {
 
 	/**
 	 * Get a field value from our submission by field id
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return array|bool
@@ -324,19 +324,19 @@ class NF_Sub {
 
 	/**
 	 * Get a submission from the database, returning all the field data.
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return array $sub
 	 */
 	public function get_all_fields() {
-		return $this->fields;		
+		return $this->fields;
 	}
 
 	/**
 	 * Get a submission sequential ID by the post ID.
 	 * This function puts together the prefix, sequential number, and postfix
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return string $seq_num
@@ -347,7 +347,7 @@ class NF_Sub {
 
 	/**
 	 * Export our current submission.
-	 * 
+	 *
 	 * @access public
 	 * @param array $sub_ids
 	 * @param bool @return
@@ -355,12 +355,12 @@ class NF_Sub {
 	 * @return void
 	 */
 	public function export( $return = false ){
-		Ninja_Forms()->subs()->export( array( $this->sub_id ) );
+		Ninja_Forms()->subs()->export( array( $this->sub_id ), $return );
 	}
 
 	/**
 	 * Delete this submission
-	 * 
+	 *
 	 * @access public
 	 * @since 2.7
 	 * @return void
