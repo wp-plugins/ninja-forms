@@ -104,7 +104,7 @@ function nf_v27_upgrade_subs_to_cpt() {
 	$old_sub_count = $convert_subs->count_old_subs();
 
 	if( empty( $total ) || $total <= 1 ) {
-		$total = round( ( $old_sub_count / 100 ), 0, PHP_ROUND_HALF_UP ) + 1;
+		$total = round( ( $old_sub_count / 100 ), 0 ) + 2;
 	}
 	
 	if ( $step <= $total ) {
