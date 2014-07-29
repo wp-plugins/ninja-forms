@@ -363,7 +363,7 @@ function ninja_forms_field_list_display( $field_id, $data ){
 					$display_style = '';
 				}
 
-				$label = htmlspecialchars( $label, ENT_QUOTES );
+				//$label = htmlspecialchars( $label, ENT_QUOTES );
 
 				$label = stripslashes($label);
 
@@ -409,7 +409,7 @@ function ninja_forms_field_list_display( $field_id, $data ){
 					$display_style = '';
 				}
 
-				$label = htmlspecialchars( $label, ENT_QUOTES );
+				//$label = htmlspecialchars( $label, ENT_QUOTES );
 
 				$label = stripslashes( $label) ;
 

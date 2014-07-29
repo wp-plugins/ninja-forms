@@ -355,7 +355,11 @@ class NF_Sub {
 	 * @return void
 	 */
 	public function export( $return = false ){
-		Ninja_Forms()->subs()->export( array( $this->sub_id ), $return );
+		if ( $return ) {
+			return Ninja_Forms()->subs()->export( $this->sub_id, $return );
+		} else {
+			Ninja_Forms()->subs()->export( $this->sub_id, $return );
+		}
 	}
 
 	/**

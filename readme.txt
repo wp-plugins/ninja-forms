@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.7
 Tested up to: 3.9.1
-Stable tag: 2.7.2
+Stable tag: 2.7.3
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,19 +76,35 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.7.2 (25 July 2014) =
+= 2.7.3 (29 July 2014) =
 
 *Bugs:*
 
-* Fixed an issue that could cause the submission values to appear as a widget on the submission edit screen.
+* Fixed a bug that caused the text elements to be output with encoded html tags rather than the tags themselves.
 
-* Fixed a bug that could cause a direct download if the "send CSV attachment" was checked.
+* Fixed a bug that caused empty CSV files to be emailed to the admin.
+
+*Changes:*
+
+* List item labels can now contain HTML.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.7.3 (29 July 2014) =
+
+*Bugs:*
+
+* Fixed a bug that caused the text elements to be output with encoded html tags rather than the tags themselves.
+
+* Fixed a bug that caused empty CSV files to be emailed to the admin.
+
+*Changes:*
+
+* List item labels can now contain HTML.
 
 = 2.7.2 (25 July 2014) =
 
