@@ -159,7 +159,7 @@ function ninja_forms_display_sidebars($data){
 							if(isset($option['help']) AND !empty($option['help'])){
 								?>
 								<a href="#" class="tooltip">
-								    <img id="" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="">
+								    <img id="" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>images/question-ico.gif" title="">
 								    <span>
 								        <img class="callout" src="<?php echo NINJA_FORMS_URL;?>/images/callout.gif" />
 								        <?php _e($option['help'], 'ninja-forms');?>

@@ -68,7 +68,11 @@ function ninja_forms_field_desc_display( $field_id, $data ){
 
 	$default_value = html_entity_decode( $default_value );
 
-	$default_value = wpautop( $default_value );
+	if($desc_el == "div"){
+		$default_value = wpautop( $default_value );		
+	}else{		
+		$default_value = nl2br( $default_value );
+	}
 
 	if( isset( $data['display_style'] ) ){
 		$display_style = $data['display_style'];

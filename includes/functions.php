@@ -50,11 +50,16 @@ function ninja_forms_subval_sort( $a, $subkey ) {
 	foreach($a as $k=>$v) {
 		$b[$k] = strtolower($v[$subkey]);
 	}
-	asort($b);
-	foreach($b as $key=>$val) {
-		$c[] = $a[$key];
+	if ( is_array ( $b ) ) {
+		asort($b);
+		foreach($b as $key=>$val) {
+			$c[] = $a[$key];
+		}
+		return $c;		
+	} else {
+		return $a;
 	}
-	return $c;
+
 }
 
 /**

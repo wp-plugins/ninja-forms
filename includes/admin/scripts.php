@@ -3,8 +3,8 @@
 function ninja_forms_admin_css(){
 	$plugin_settings = nf_get_settings();
 
-	wp_enqueue_style( 'jquery-smoothness', NINJA_FORMS_URL .'/css/smoothness/jquery-smoothness.css');
-	wp_enqueue_style( 'ninja-forms-admin', NINJA_FORMS_URL .'/css/ninja-forms-admin.css');
+	wp_enqueue_style( 'jquery-smoothness', NINJA_FORMS_URL .'css/smoothness/jquery-smoothness.css');
+	wp_enqueue_style( 'ninja-forms-admin', NINJA_FORMS_URL .'css/ninja-forms-admin.css');
 
 	add_filter('admin_body_class', 'ninja_forms_add_class');
 
@@ -38,7 +38,7 @@ function ninja_forms_admin_js(){
 	$date_format = ninja_forms_date_to_datepicker($date_format);
 
 	wp_enqueue_script('ninja-forms-admin',
-	NINJA_FORMS_URL . '/js/' . $src .'/ninja-forms-admin' . $suffix . '.js',
+	NINJA_FORMS_URL . 'js/' . $src .'/ninja-forms-admin' . $suffix . '.js',
 	array('jquery', 'jquery-ui-core', 'jquery-ui-sortable', 'jquery-ui-datepicker', 'jquery-ui-draggable', 'jquery-ui-droppable'));
 
 	wp_localize_script( 'ninja-forms-admin', 'ninja_forms_settings', array('date_format' => $date_format));

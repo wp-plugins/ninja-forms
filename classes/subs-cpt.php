@@ -267,7 +267,7 @@ class NF_Subs_CPT {
 		// Compatibility with old field registration system. Can be removed when the new one is in place.
 		if ( isset ( $_GET['form_id'] ) && $_GET['form_id'] != '' ) {
 			$form_id = $_GET['form_id'];
-			if ( is_object( Ninja_Forms()->form( $form_id ) ) && is_array ( Ninja_Forms()->form( $this->form_id )->fields ) ) {
+			if ( is_object( Ninja_Forms()->form( $form_id ) ) && is_array ( Ninja_Forms()->form( $form_id )->fields ) ) {
 				foreach ( Ninja_Forms()->form( $this->form_id )->fields as $field ) {
 					$field_id = $field['id'];
 					$field_type = $field['type'];
@@ -522,7 +522,7 @@ class NF_Subs_CPT {
 	public function table_filter( $query ) {
 		global $pagenow;
 
-		if( $pagenow == 'edit.php' && is_admin() && $query->query['post_type'] == 'nf_sub' && is_main_query() ) {
+		if( $pagenow == 'edit.php' && is_admin() && ( isset ( $query->query['post_type'] ) && $query->query['post_type'] == 'nf_sub' ) && is_main_query() ) {
 
 		    $qv = &$query->query_vars;
 
@@ -547,6 +547,11 @@ class NF_Subs_CPT {
 		    	$end_date = '';
 		    }
 
+		    if ( $begin_date > $end_date ) {
+			     $begin_date = '';
+			     $end_date = '';
+		    }
+		    
 		    if ( ! isset ( $qv['date_query'] ) ) {
 			    $qv['date_query'] = array(
 			    	'after' => $begin_date,

@@ -34,7 +34,7 @@ function ninja_forms_display_form_settings($form_id, $data){
 	<div id="titlediv">
 		<div id="titlewrap">
 			<label class="<?php echo $prompt_text;?>" id="title-prompt-text" for="title"><?php _e( 'Enter form title here', 'ninja-forms' ); ?></label>
-			<input type="text" name="form_title" size="30" value="<?php echo $form_title;?>" id="title" autocomplete="off">
+			<input type="text" name="form_title" size="30" value="<?php echo esc_attr($form_title); ?>" id="title" autocomplete="off">
 		</div>
 	</div>
 <?php
@@ -329,7 +329,7 @@ function ninja_forms_admin_email($form_id, $data){
 		<p>
 			<a href="#" id="ninja_forms_add_mailto_<?php echo $form_id;?>" name="" class="ninja-forms-add-mailto"><?php _e( 'Add New', 'ninja-forms' ); ?></a>
 			<a href="#" class="tooltip">
-			    <img id="" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>/images/question-ico.gif" title="">
+			    <img id="" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>images/question-ico.gif" title="">
 			    <span>
 			        <img class="callout" src="<?php echo NINJA_FORMS_URL;?>/images/callout.gif" />
 			        <?php _e( 'Please enter all the addresses this form should be sent to.', 'ninja-forms' );?>

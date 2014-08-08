@@ -489,7 +489,7 @@ jQuery(document).ready(function(jQuery) {
 							}
 
 							// Make sure that our current total is made up of numbers.
-							if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' ) {
+							if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' && typeof current_value != 'undefined' ) {
 								current_value = current_value.replace( ninja_forms_settings.currency_symbol, "" );
 								current_value = current_value.replace( /,/g, "" );
 							}
@@ -640,7 +640,7 @@ jQuery(document).ready(function(jQuery) {
 						}
 
 						// Make sure that our current total is made up of numbers.
-						if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' ) {
+						if ( typeof ninja_forms_settings.currency_symbol !== 'undefined' && typeof current_value != 'undefined' ) {
 							current_value = current_value.replace( ninja_forms_settings.currency_symbol, "" );
 						}
 						if ( !isNaN( current_value ) ) {
