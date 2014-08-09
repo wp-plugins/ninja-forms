@@ -34,7 +34,7 @@ function ninja_forms_display_response_message( $form_id ){
 		$class = '';
 	}
 
-	if ( $class != '' ) {
+	//if ( $class != '' ) {
 		echo '<div id="ninja_forms_form_' . $form_id . '_response_msg" style="' . $display . '" class="ninja-forms-response-msg '.$class.'">';
 			
 		if ( isset ( $ninja_forms_processing ) && $ninja_forms_processing->get_form_ID() == $form_id ) {
@@ -64,7 +64,7 @@ function ninja_forms_display_response_message( $form_id ){
 
 
 		echo '</div>';		
-	}
+	//}
 
 	
 }

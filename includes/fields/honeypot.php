@@ -20,7 +20,13 @@ function ninja_forms_register_field_honeypot(){
 		'edit_conditional' => false,
 		'display_label' => true,
 		'process_field' => false,
-		'pre_process' => 'ninja_forms_field_honeypot_pre_process'
+		'pre_process' => 'ninja_forms_field_honeypot_pre_process',
+		'edit_options' => array(
+			array(
+				'type' => 'hidden',
+				'name' => 'honeypot_save',
+			),
+		),
 	);
 
 	ninja_forms_register_field('_honeypot', $args);

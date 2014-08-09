@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.7
 Tested up to: 3.9.2
-Stable tag: 2.7.4
+Stable tag: 2.7.5
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,27 +76,23 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.7.4 (08 August 2014) =
+= 2.7.5 (09 August 2014) =
 
 *Bugs:*
 
-* Fixed HTML breaking issues with the Text field type when something other than div is selected
-
-* Fixed a bug that could cause forms to stop working on Windows (IIS) servers.
-
-* Forms without errors or success messages should no longer see the "response" message div.
-
-*Changes:*
-
-* Added Portuguese translation files.
-
-* Added Dutch translation files.
+* Fixed a bug with success messages not being displayed for AJAX submissions.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.7.5 (09 August 2014) =
+
+*Bugs:*
+
+* Fixed a bug with success messages not being displayed for AJAX submissions.
 
 = 2.7.4 (08 August 2014) =
 
