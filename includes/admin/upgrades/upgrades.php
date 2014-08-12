@@ -22,16 +22,21 @@ function nf_upgrades_screen() {
 	$action = isset( $_GET['nf-upgrade'] ) ? sanitize_text_field( $_GET['nf-upgrade'] ) : '';
 	$step   = isset( $_GET['step'] )        ? absint( $_GET['step'] )                     : 1;
 	$total  = isset( $_GET['total'] )       ? absint( $_GET['total'] )                    : false;
-	$custom = isset( $_GET['custom'] )      ? absint( $_GET['custom'] )                   : 0;
+	$custom = isset( $_GET['custom'] )      ? $_GET['custom']			                  : 0;
 	$form_id = isset( $_GET['form_id'] )      ? absint( $_GET['form_id'] )                : 0;
+
+	if ( is_string( $custom ) ) {
+		$custom = urlencode( $custom );
+	}
+
 	?> 
 	<div class="wrap">
-		<h2><?php _e( 'Ninja Forms - Upgrades', 'ninja-forms' ); ?></h2>
+		<h2><?php _e( 'Ninja Forms - Processing', 'ninja-forms' ); ?></h2>
 	
 		<?php if( ! empty( $action ) ) : ?>
 
 			<div id="nf-upgrade-status">
-				<p><?php _e( 'The upgrade process has started, please be patient. This could take several minutes. You will be automatically redirected when the upgrade is finished.', 'ninja-forms' ); ?></p>
+				<p><?php _e( 'The process has started, please be patient. This could take several minutes. You will be automatically redirected when the process is finished.', 'ninja-forms' ); ?></p>
 				<?php if( ! empty( $total ) ) : ?>
 					<p><strong><?php printf( __( 'Step %d of approximately %d running', 'ninja-forms' ), $step, $total + 1 ); ?></strong>
 					<span class="spinner" id="nf-upgrade-loader"/></span></p>
@@ -45,7 +50,7 @@ function nf_upgrades_screen() {
 
 			<div id="nf-upgrade-status">
 				<p>
-					<?php _e( 'The upgrade process has started, please be patient. This could take several minutes. You will be automatically redirected when the upgrade is finished.', 'edd' ); ?>
+					<?php _e( 'The process has started, please be patient. This could take several minutes. You will be automatically redirected when the process is finished.', 'edd' ); ?>
 					<span class="spinner" id="nf-upgrade-loader"/></span>
 				</p>
 			</div>

@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.7
 Tested up to: 3.9.2
-Stable tag: 2.7.5
+Stable tag: 2.7.6
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,17 +76,39 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.7.5 (09 August 2014) =
+= 2.7.6 (12 August 2014) =
 
 *Bugs:*
 
-* Fixed a bug with success messages not being displayed for AJAX submissions.
+* On the submissions table, the filter will now use the earliest date as the begin date.
+
+*Changes:*
+
+* Added the ability to download all submissions for a particular form.
+
+* Added a step processor that can be extended and used by developers.
+
+* Added new extensions to the add-ons page.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.7.6 (12 August 2014) =
+
+*Bugs:*
+
+* On the submissions table, the filter will now use the earliest date as the begin date.
+
+*Changes:*
+
+* Added the ability to download all submissions for a particular form.
+
+* Added a step processor that can be extended and used by developers.
+
+* Added new extensions to the add-ons page.
 
 = 2.7.5 (09 August 2014) =
 

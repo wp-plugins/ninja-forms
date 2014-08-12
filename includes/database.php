@@ -427,7 +427,7 @@ function nf_get_sub_count( $form_id, $post_status = 'publish' ) {
 		'meta_key' => '_form_id',
 	    'meta_value' => $form_id,
 	    'post_type' => 'nf_sub',
-	    'posts_per_page' => 999999,
+	    'posts_per_page' => -1,
 	    'post_status' => $post_status,
 	);
 	$posts = get_posts( $args );

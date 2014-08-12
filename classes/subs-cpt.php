@@ -16,6 +16,8 @@ class NF_Subs_CPT {
 
 	var $screen_options;
 
+	var $filename;
+
 	/**
 	 * Get things started
 	 * 
@@ -27,9 +29,6 @@ class NF_Subs_CPT {
 		
 		// Register our submission custom post type.
 		add_action( 'init', array( $this, 'register_cpt' ), 5 );
-
-		// Listen for the "download all" button.
-		add_action( 'load-edit.php', array( $this, 'export_listen' ) );
 
 		// Populate our field settings var
 		add_action( 'current_screen', array( $this, 'setup_fields' ) );
@@ -83,6 +82,9 @@ class NF_Subs_CPT {
 
 		// Load any custom screen options
 		add_filter( 'screen_settings', array( $this, 'output_screen_options' ), 10, 2 );
+				
+		// Listen for our exports button.
+		add_action( 'load-edit.php', array( $this, 'export_listen' ) );
 
 	}
 
@@ -178,6 +180,7 @@ class NF_Subs_CPT {
 		add_action( 'admin_print_styles', array( $this, 'load_css' ) );
 		// Remove the publish box from the submission editing page.
 		remove_meta_box( 'submitdiv', 'nf_sub', 'side' );
+
 	}
 
 	/**
@@ -536,20 +539,28 @@ class NF_Subs_CPT {
 		    $date_format = $plugin_settings['date_format'];
 
 		    if ( !empty ( $_GET['begin_date'] ) ) {
-		    	$begin_date = nf_get_begin_date( $_GET['begin_date'] );
+		    	$begin_date = nf_get_begin_date( $_GET['begin_date'] )->format("Y-m-d G:i:s");
 		    } else {
 		    	$begin_date = '';
 		    }
 
 			if ( !empty ( $_GET['end_date'] ) ) {
-		    	$end_date = nf_get_end_date( $_GET['end_date'] );
+		    	$end_date = nf_get_end_date( $_GET['end_date'] )->format("Y-m-d G:i:s");
 		    } else {
 		    	$end_date = '';
 		    }
 
 		    if ( $begin_date > $end_date ) {
-			     $begin_date = '';
-			     $end_date = '';
+		    	 $begin_date = new DateTime( $begin_date );
+		    	 $end_date = new DateTime( $end_date );
+			     $end_date_temp = $begin_date;
+			     $begin_date_temp = $end_date;
+			     $begin_date = $begin_date_temp;
+			     $end_date = $end_date_temp;
+			     $_GET['begin_date'] = $begin_date->format('m/d/Y');
+			     $_GET['end_date'] = $end_date->format('m/d/Y');
+			     $begin_date = $begin_date->format("Y-m-d G:i:s");
+			     $end_date = $end_date->format("Y-m-d G:i:s");
 		    }
 		    
 		    if ( ! isset ( $qv['date_query'] ) ) {
@@ -676,7 +687,10 @@ class NF_Subs_CPT {
 	 */
 	public function bulk_admin_footer() {
 		global $post_type;
- 
+ 		
+		if ( ! is_admin() )
+			return false;
+
 		if( $post_type == 'nf_sub' && isset ( $_REQUEST['post_status'] ) && $_REQUEST['post_status'] == 'all' ) {
 			?>
 			<script type="text/javascript">
@@ -693,6 +707,24 @@ class NF_Subs_CPT {
 						},5000);
 						<?php
 					}
+
+					if ( isset ( $_REQUEST['form_id'] ) && $_REQUEST['form_id'] != '' ) {
+						$redirect = urlencode( remove_query_arg( array( 'download_all', 'download_file' ) ) );
+						$url = admin_url( 'admin.php?page=nf-processing&action=download_all_subs&form_id=' . $_REQUEST['form_id'] . '&redirect=' . $redirect );
+						?>
+						var button = '<a href="<?php echo $url; ?>" class="button-secondary nf-download-all"><?php echo __( 'Download All Submissions', 'ninja-forms' ); ?></a>';
+						jQuery( '#doaction2' ).after( button );
+						<?php
+					}
+					
+					if ( isset ( $_REQUEST['download_all'] ) && $_REQUEST['download_all'] != '' ) {
+						$redirect = add_query_arg( array( 'download_file' => $_REQUEST['download_all'] ) );
+						$redirect = remove_query_arg( array( 'download_all' ), $redirect );
+						?>
+						document.location.href = "<?php echo $redirect; ?>";
+						<?php
+					}
+
 					?>
 				});
 			</script>
@@ -1124,13 +1156,19 @@ class NF_Subs_CPT {
 	}
 
 	/**
-	 * Download all submissions within a date range
+	 * Listen for exporting subs
 	 * 
 	 * @access public
-	 * @since 2.7
+	 * @since 2.7.3
 	 * @return void
 	 */
 	public function export_listen() {
+		// Bail if we aren't in the admin
+		if ( ! is_admin() )
+			return false;
+
+		if ( ! isset ( $_REQUEST['form_id'] ) || empty ( $_REQUEST['form_id'] ) )
+			return false;
 
 		if ( isset ( $_REQUEST['export_single'] ) && ! empty( $_REQUEST['export_single'] ) )
 			Ninja_Forms()->sub( $_REQUEST['export_single'] )->export();
@@ -1138,8 +1176,41 @@ class NF_Subs_CPT {
 		if ( isset ( $_REQUEST['action'] ) && $_REQUEST['action'] == 'export' )
 			Ninja_Forms()->subs()->export( $_REQUEST['post'] );
 
-		if ( isset ( $_REQUEST['submit'] ) && $_REQUEST['submit'] == __( 'Download All', 'ninja-forms' ) && isset ( $_REQUEST['form_id'] ) ) {
-			//$subs = Ninja_Forms()->form( 241 )->get_subs();
+		if ( isset ( $_REQUEST['download_file'] ) && ! empty( $_REQUEST['download_file'] ) ) {
+			// Open our download all file
+			$filename = $_REQUEST['download_file'];
+			
+			$upload_dir = wp_upload_dir();
+
+			$file_path = trailingslashit( $upload_dir['path'] ) . $filename . '.csv';
+
+			if ( file_exists( $file_path ) ) {
+				$myfile = file_get_contents ( $file_path );
+			} else {
+				$redirect = remove_query_arg( array( 'download_file', 'download_all' ) );
+				wp_redirect( $redirect );
+				die();
+			}
+			
+			unlink( $file_path );
+
+			$form_name = Ninja_Forms()->form( $_REQUEST['form_id'] )->get_setting( 'form_title' );
+			$form_name = sanitize_title( $form_name );
+
+			$today = date( 'Y-m-d', current_time( 'timestamp' ) );
+
+			$filename = apply_filters( 'nf_download_all_filename', $form_name . '-all-subs-' . $today );
+
+			header( 'Content-type: application/csv');
+			header( 'Content-Disposition: attachment; filename="'.$filename .'.csv"' );
+			header( 'Pragma: no-cache');
+			header( 'Expires: 0' );
+
+			echo $myfile;
+
+			die();
 		}
 	}
+
+	
 }

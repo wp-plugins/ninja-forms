@@ -25,7 +25,7 @@ function nf_get_actions() {
 		do_action( 'nf_' . $_GET['nf_action'], $_GET );
 	}
 }
-add_action( 'init', 'nf_get_actions' );
+add_action( 'init', 'nf_get_actions', 999 );
 
 /**
  * Hooks NF actions, when present in the $_POST superglobal. Every nf_action
@@ -40,4 +40,4 @@ function nf_post_actions() {
 		do_action( 'nf_' . $_POST['nf_action'], $_POST );
 	}
 }
-add_action( 'init', 'nf_post_actions' );
+add_action( 'init', 'nf_post_actions', 999 );

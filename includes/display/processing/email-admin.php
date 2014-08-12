@@ -67,4 +67,9 @@ function ninja_forms_email_admin() {
 			}
 		}
 	}
+
+	// Delete our admin CSV if one is present.
+	if ( file_exists( $ninja_forms_processing->get_extra_value( '_attachment_csv_path' ) ) ) {
+		unlink ( $ninja_forms_processing->get_extra_value( '_attachment_csv_path' ) );
+	}
 }

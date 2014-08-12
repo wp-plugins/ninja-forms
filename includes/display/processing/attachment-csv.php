@@ -10,8 +10,11 @@ function nf_csv_attachment( $sub_id ){
 		// create CSV content
 		$csv_content = Ninja_Forms()->sub( $sub_id )->export( true );
 		
+		$upload_dir = wp_upload_dir();
+		$path = trailingslashit( $upload_dir['path'] );
+
 		// create temporary file
-		$path = tempnam( get_temp_dir(), 'Sub' );
+		$path = tempnam( $path, 'Sub' );
 		$temp_file = fopen( $path, 'r+' );
 		
 		// write to temp file
@@ -39,5 +42,6 @@ function nf_csv_attachment( $sub_id ){
 		$files = $ninja_forms_processing->get_form_setting( 'admin_attachments' );
 		array_push( $files, $file1 );
 		$ninja_forms_processing->update_form_setting( 'admin_attachments', $files );
+		$ninja_forms_processing->update_extra_value( '_attachment_csv_path', $file1 );
 	}
 }

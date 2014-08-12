@@ -127,11 +127,11 @@ class NF_Subs {
 		}
 
 		if( isset( $args['begin_date'] ) AND $args['begin_date'] != '') {
-			$query_args['date_query']['after'] = nf_get_begin_date( $args['begin_date'] );
+			$query_args['date_query']['after'] = nf_get_begin_date( $args['begin_date'] )->format("Y-m-d G:i:s");
 		}
 
 		if( isset( $args['end_date'] ) AND $args['end_date'] != '' ) {
-			$query_args['date_query']['before'] = nf_get_end_date( $args['end_date'] );
+			$query_args['date_query']['before'] = nf_get_end_date( $args['end_date'] )->format("Y-m-d G:i:s");
 		}
 
 		$subs = new WP_Query( $query_args );;
@@ -173,10 +173,16 @@ class NF_Subs {
 		$label_array = array();
 		// Get our Form ID.
 		$form_id = Ninja_Forms()->sub( $sub_ids[0] )->form_id;
+
 		// Get our list of fields.
 		$fields = nf_get_fields_by_form_id( $form_id );
+
+		// Add our sequential number.
+		$label_array[0]['_seq_num'] = __( '#', 'ninja-forms' );
+
 		// Add our "Date" label.
-		$label_array[0][] = __( 'Date Submitted', 'ninja-forms' );
+		$label_array[0]['_date_submitted'] = __( 'Date Submitted', 'ninja-forms' );
+
 		foreach ( $fields as $field_id => $field ) {
 			// Get our field type
 			$field_type = $field['type'];
@@ -187,6 +193,7 @@ class NF_Subs {
 			} else {
 				$process_field = false;
 			}
+
 			// If this field's "process_field" is set to true, then add its label to the array.
 			if ( $process_field ) {
 				if ( isset ( $field['data']['admin_label'] ) && $field['data']['admin_label'] != '' ) {
@@ -208,10 +215,6 @@ class NF_Subs {
 		$x = 0;
 		// Loop through our submissions and create a new row for each one.
 		foreach ( $sub_ids as $sub_id ) {
-			// Get the date of our submission.
-			$date = strtotime( Ninja_Forms()->sub( $sub_id )->date_submitted );
-			// The first item is our date field.
-			$value_array[ $x ][] = date( $date_format, $date );
 			foreach ( $label_array[0] as $field_id => $label ) {
 				// Make sure we aren't working with our date field, which will always have a field id of 0.
 				if ( $field_id !== 0 ) {
@@ -219,6 +222,13 @@ class NF_Subs {
 					if ( is_numeric( $field_id ) ) {
 						// We're working with a field, grab the value.
 						$user_value = Ninja_Forms()->sub( $sub_id )->get_field( $field_id );
+					} else if ( '_date_submitted' == $field_id ) {
+						// Get the date of our submission.
+						$date = strtotime( Ninja_Forms()->sub( $sub_id )->date_submitted );
+						// The first item is our date field.
+						$user_value = date( $date_format, $date );
+					} else if ( '_seq_num' == $field_id ) {
+						$user_value = Ninja_Forms()->sub( $sub_id )->get_seq_num();
 					} else {
 						// We're working with a piece of meta, grabe the value.
 						$user_value = Ninja_Forms()->sub( $sub_id )->get_meta( $field_id );

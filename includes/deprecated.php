@@ -137,11 +137,11 @@ function ninja_forms_get_subs( $args = array() ) {
 		}
 
 		if( isset( $args['begin_date'] ) AND $args['begin_date'] != '') {
-			$query_args['date_query']['after'] = nf_get_begin_date( $args['begin_date'] );
+			$query_args['date_query']['after'] = nf_get_begin_date( $args['begin_date'] )->format("Y-m-d G:i:s");
 		}
 
 		if( isset( $args['end_date'] ) AND $args['end_date'] != '' ) {
-			$query_args['date_query']['before'] = nf_get_end_date( $args['end_date'] );
+			$query_args['date_query']['before'] = nf_get_end_date( $args['end_date'] )->format("Y-m-d G:i:s");
 		}
 
 		$query_args = array(

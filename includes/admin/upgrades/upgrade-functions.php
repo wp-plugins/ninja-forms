@@ -79,8 +79,13 @@ function nf_v27_upgrade_subs_to_cpt() {
 		return false;
 
 	// Bail if we don't have the appropriate permissions.
-	if ( ! current_user_can( 'install_plugins' ) )
-		return false;
+	if ( is_multisite() ) {
+		if ( ! is_super_admin() )
+			return false;
+	} else {
+		if ( ! current_user_can( 'install_plugins' ) )
+			return false;
+	}
 
 	ignore_user_abort( true );
 
