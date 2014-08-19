@@ -57,14 +57,26 @@ add_filter('the_content', 'ninja_forms_pre_process_shortcode', 9999);
  * @since 2.7
  * @return string $content
  */
-function nf_sub_seq_num_shortcode( $atts = array() ) {
+function nf_sub_seq_num_shortcode( $sub_id ) {
 	global $ninja_forms_processing;
-	$sub_id = $ninja_forms_processing->get_form_setting( 'sub_id' );
-	if ( $sub_id == '' ) {
-		return '';
-	} else {
-		return Ninja_Forms()->sub( $sub_id )->get_seq_num();
-	}
+	
+	$seq_num = Ninja_Forms()->sub( $sub_id )->get_seq_num();
+
+	//Get the form settings for the form currently being processed.
+	$admin_subject = $ninja_forms_processing->get_form_setting( 'admin_subject' );
+	$user_subject = $ninja_forms_processing->get_form_setting( 'user_subject' );
+	$success_msg = $ninja_forms_processing->get_form_setting( 'success_msg' );
+	$admin_email_msg = $ninja_forms_processing->get_form_setting( 'admin_email_msg' );
+	$user_email_msg = $ninja_forms_processing->get_form_setting( 'user_email_msg' );
+	$save_msg = $ninja_forms_processing->get_form_setting( 'save_msg' );
+
+	$ninja_forms_processing->update_form_setting( 'admin_subject', str_replace( '[nf_sub_seq_num]', $seq_num, $admin_subject ) );
+	$ninja_forms_processing->update_form_setting( 'user_subject', str_replace( '[nf_sub_seq_num]', $seq_num, $user_subject ) );
+	$ninja_forms_processing->update_form_setting( 'success_msg', str_replace( '[nf_sub_seq_num]', $seq_num, $success_msg ) );
+	$ninja_forms_processing->update_form_setting( 'admin_email_msg', str_replace( '[nf_sub_seq_num]', $seq_num, $admin_email_msg ) );
+	$ninja_forms_processing->update_form_setting( 'user_email_msg', str_replace( '[nf_sub_seq_num]', $seq_num, $user_email_msg ) );
+	$ninja_forms_processing->update_form_setting( 'save_msg', str_replace( '[nf_sub_seq_num]', $seq_num, $save_msg ) );
+	
 }
 
-add_shortcode( 'nf_sub_seq_num', 'nf_sub_seq_num_shortcode' );
+add_action( 'nf_save_sub', 'nf_sub_seq_num_shortcode' );

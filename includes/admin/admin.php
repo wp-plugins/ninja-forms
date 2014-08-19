@@ -1,8 +1,8 @@
 <?php
 
 function ninja_forms_add_menu(){
-	$page = add_menu_page("Ninja Forms" , __( 'Forms', 'ninja-forms' ), apply_filters( 'ninja_forms_admin_menu_capabilities', 'manage_options' ), "ninja-forms", "ninja_forms_admin", "dashicons-feedback", "35.1337" );
-	$all_forms = add_submenu_page("ninja-forms", __( 'Forms', 'ninja-forms' ), __( 'All Forms', 'ninja-forms' ), apply_filters( 'ninja_forms_admin_menu_capabilities', 'manage_options' ), "ninja-forms", "ninja_forms_admin");
+	$page = add_menu_page("Ninja Forms" , __( 'Forms', 'ninja-forms' ), apply_filters( 'ninja_forms_admin_parent_menu_capabilities', 'manage_options' ), "ninja-forms", "ninja_forms_admin", "dashicons-feedback", "35.1337" );
+	$all_forms = add_submenu_page("ninja-forms", __( 'Forms', 'ninja-forms' ), __( 'All Forms', 'ninja-forms' ), apply_filters( 'ninja_forms_admin_all_forms_capabilities', 'manage_options' ), "ninja-forms", "ninja_forms_admin");
 	$new_form = add_submenu_page("ninja-forms", __( 'Add New', 'ninja-forms' ), __( 'Add New', 'ninja-forms' ), apply_filters( 'ninja_forms_admin_add_new_capabilities', 'manage_options' ), "ninja-forms&tab=form_settings&form_id=new", "ninja_forms_admin");
 	
 	$upgrade = add_submenu_page( null, __( 'Ninja Forms Upgrades', 'ninja-forms' ), __( 'Upgrades', 'ninja-forms' ), 'install_plugins', 'nf-upgrades', 'nf_upgrades_screen' );

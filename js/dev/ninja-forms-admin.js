@@ -1031,16 +1031,14 @@ function ninja_forms_new_field_response( response ){
 			placeholder: "ui-state-highlight",
 		});
 	}
-	if(typeof response.edit_options != 'undefined'){
-		for(var i = 0; i < response.edit_options.length; i++){
-			if(response.edit_options[i].type == 'rte'){
-				var editor_id = 'ninja_forms_field_' + response.new_id + '[' + response.edit_options[i].name + ']';
-
-				tinyMCE.execCommand( 'mceRemoveControl', false, editor_id );
-				tinyMCE.execCommand( 'mceAddControl', true, editor_id );
-			}
-		}
+	if ( typeof nf_ajax_rte_editors !== 'undefined' ) {
+		for (var x = nf_ajax_rte_editors.length - 1; x >= 0; x--) {
+			var editor_id = nf_ajax_rte_editors[x];
+			tinyMCE.init( tinyMCEPreInit.mceInit[ editor_id ] );
+			try { quicktags( tinyMCEPreInit.qtInit[ editor_id ] ); } catch(e){}
+		};
 	}
+
 	jQuery(".ninja-forms-field-conditional-cr-field").each(function(){
 		jQuery(this).append('<option value="' + response.new_id + '">' + response.new_type + '</option>');
 	});

@@ -86,6 +86,9 @@ class NF_Subs_CPT {
 		// Listen for our exports button.
 		add_action( 'load-edit.php', array( $this, 'export_listen' ) );
 
+		// Filter our submission capabilities
+		add_filter( 'user_has_cap', array( $this, 'cap_filter' ), 10, 3 );
+
 	}
 
 	/**
@@ -122,20 +125,28 @@ class NF_Subs_CPT {
 			'show_ui' => true,
 			'_builtin' => false, // It's a custom post type, not built in!
 			'query_var' => true,
-			'capability_type' => 'post',
 			'has_archive' => false,
 			'show_in_menu' => false,
-			// 'capabilities' => array(
-		 //    	'create_posts' => false, // Removes support for the "Add New" function
-			// ),
 			'hierarchical' => false,
 			'menu_events' => null,
 			'rewrite' => array( 'slug' => 'nf_sub' ), // Permalinks format
-			//'taxonomies' => array( 'novel_genre', 'novel_series', 'novel_author', 'post_tag'),
 			'supports' => array( 'custom-fields' ),
+			'capability_type' => 'nf_sub',
+			'capabilities' => array(
+				'publish_posts' => 'nf_sub',
+				'edit_posts' => 'nf_sub',
+				'edit_others_posts' => 'nf_sub',
+				'delete_posts' => 'nf_sub',
+				'delete_others_posts' => 'nf_sub',
+				'read_private_posts' => 'nf_sub',
+				'edit_post' => 'nf_sub',
+				'delete_post' => 'nf_sub',
+				'read_post' => 'nf_sub',
+			),
 		);
 
-		register_post_type('nf_sub',$args);
+		register_post_type( 'nf_sub',$args );
+
 	}
 
 	/**
@@ -173,7 +184,7 @@ class NF_Subs_CPT {
 	 */
 	public function add_submenu() {
 		// Add our submissions submenu
-		$sub_page = add_submenu_page( 'ninja-forms', __( 'Submissions', 'ninja-forms' ), __( 'Submissions', 'ninja-forms' ), apply_filters( 'nf_admin_menu_subs_capabilities', 'manage_options' ), 'edit.php?post_type=nf_sub' ); 
+		$sub_page = add_submenu_page( 'ninja-forms', __( 'Submissions', 'ninja-forms' ), __( 'Submissions', 'ninja-forms' ), apply_filters( 'ninja_forms_admin_submissions_capabilities', 'manage_options' ), 'edit.php?post_type=nf_sub' ); 
 		// Enqueue our JS on the edit page.
 		//add_action( 'load-' . $sub_page, array( $this, 'load_js' ) );
 		add_action( 'admin_print_styles', array( $this, 'load_js' ) );
@@ -193,7 +204,7 @@ class NF_Subs_CPT {
 	public function load_js() {
 		global $pagenow, $typenow;
 		// Bail if we aren't on the edit.php page or we aren't editing our custom post type.
-		if ( ( $pagenow != 'edit.php' && $pagenow != 'post.php' ) && $typenow != 'nf_sub' )
+		if ( ( $pagenow != 'edit.php' && $pagenow != 'post.php' ) || $typenow != 'nf_sub' )
 			return false;
 
 		$form_id = isset ( $_REQUEST['form_id'] ) ? $_REQUEST['form_id'] : '';
@@ -228,11 +239,12 @@ class NF_Subs_CPT {
 	 * @return void
 	 */
 	public function load_css() {
-		global $pagenow;
-		// Bail if we aren't on the edit.php page or the post.php page.
-		if ( $pagenow != 'edit.php' && $pagenow != 'post.php' )
-			return false;
+		global $pagenow, $typenow;
 
+		// Bail if we aren't on the edit.php page or the post.php page.
+		if ( ( $pagenow != 'edit.php' && $pagenow != 'post.php' ) || $typenow != 'nf_sub' )
+			return false;
+		
 		wp_enqueue_style( 'nf-sub', NF_PLUGIN_URL .'assets/css/cpt.css' );
 		wp_enqueue_style( 'nf-jquery-ui-freshness', NF_PLUGIN_URL .'assets/css/jquery-ui-fresh.min.css' );
 	}
@@ -409,6 +421,9 @@ class NF_Subs_CPT {
 					else
 						$h_time = mysql2date( __( 'Y/m/d' ), $m_time );
 				}
+
+				$t_time = apply_filters( 'nf_sub_title_time', $t_time );
+				$h_time = apply_filters( 'nf_sub_human_time', $h_time );
 				
 				/** This filter is documented in wp-admin/includes/class-wp-posts-list-table.php */
 				echo '<abbr title="' . $t_time . '">' . $h_time . '</abbr>';
@@ -1211,6 +1226,23 @@ class NF_Subs_CPT {
 			die();
 		}
 	}
-
 	
+	/**
+	 * Filter user capabilities
+	 * 
+	 * @access public
+	 * @since 2.7.7
+	 * @return void
+	 */
+	public function cap_filter( $allcaps, $cap, $args ) {
+
+		$sub_cap = apply_filters( 'ninja_forms_admin_submissions_capabilities', 'manage_options' );
+
+		if ( ! empty( $allcaps[ $sub_cap ] ) ) {
+			$allcaps['nf_sub'] = true;
+		}
+
+		return $allcaps;
+	}
+
 }

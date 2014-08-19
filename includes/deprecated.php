@@ -376,3 +376,15 @@ function ninja_forms_get_csv_terminator() {
 function ninja_forms_save_sub() {
 	nf_save_sub();
 }
+
+function nf_change_all_forms_filter( $cap ) {
+	return apply_filters( 'ninja_forms_admin_menu_capabilities', $cap );
+}
+
+add_filter( 'ninja_forms_admin_all_forms_capabilities', 'nf_change_all_forms_filter' );
+
+function nf_change_admin_menu_filter( $cap ) {
+	return apply_filters( 'ninja_forms_admin_menu_capabilities', $cap );
+}
+
+add_filter( 'ninja_forms_admin_parent_menu_capabilities', 'nf_change_admin_menu_filter' );
