@@ -9,6 +9,7 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 	}
 
 	public function loading() {
+		global $wpdb;
 
 		/**
 	 	 * Add our table structure for version 2.8.
