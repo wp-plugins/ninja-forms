@@ -40,7 +40,7 @@ class NF_Welcome {
 		add_action( 'admin_init', array( $this, 'welcome'    ) );
 
 		$this->header_text = sprintf( __( 'Welcome to Ninja Forms %s', 'ninja-forms' ), $this->display_version );
-		$this->header_desc = sprintf( __( 'Thank you for updating to the latest version! Ninja Forms %s is primed to make your experience managing submissions an enjoyable one!', 'ninja-forms' ), $this->display_version );
+		$this->header_desc = sprintf( __( 'Thank you for updating to the latest version! Ninja Forms %s brings you unprecedented control over your notifications in a form creation plugin!', 'ninja-forms' ), $this->display_version );
 	}
 
 	/**
@@ -81,8 +81,8 @@ class NF_Welcome {
 
 		// Credits Page
 		add_dashboard_page(
-			__( 'The people that build Ninja Forms', 'ninja-forms' ),
-			__( 'The people that build Ninja Forms', 'ninja-forms' ),
+			__( 'The people who build Ninja Forms', 'ninja-forms' ),
+			__( 'The people who build Ninja Forms', 'ninja-forms' ),
 			$this->minimum_capability,
 			'nf-credits',
 			array( $this, 'credits_screen' )
@@ -182,22 +182,22 @@ class NF_Welcome {
 			<div class="changelog">
 
 				<div class="about-overview">
-					<iframe width="640" height="360" src="//www.youtube.com/embed/X810JLbAuzs" frameborder="0" allowfullscreen></iframe>
+					<iframe width="640" height="360" src="//www.youtube.com/embed/LeXxZn0aPlo" frameborder="0" allowfullscreen></iframe>
 				</div>
-				<h2 class="about-headline-callout"><?php _e( 'A better submission management experience', 'ninja-forms' );?></h2>
+				<h2 class="about-headline-callout"><?php _e( 'A more powerful and flexible notification system', 'ninja-forms' );?></h2>
 
 				<div class="feature-section col two-col">
 
 					<div class="col-1">
-						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-sub-table.png'; ?>">
-						<h4><?php _e( 'Improved submissions layout', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'Submissions are now displayed in a clean and organized table for easy viewing.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-noti-view.png'; ?>">
+						<h4><?php _e( 'Unlimited notifications', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'Create as many notifications (Email, Success Message, Redirect) as you like for each of your Ninja Forms.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
 					</div>
 
 					<div class="col-2 last-feature">
-						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-sub-edit-screen.png'; ?>">
-						<h4><?php _e( 'Easy submission editing', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'Editing submissions no longer gets bogged down with front-end functionality and styles. 2.7 provides a clean submission editing experience.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-noti-create.gif'; ?>">
+						<h4><?php _e( 'Easy notification creation', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'All relevant notification settings on one page. Easily fill these settings with submitted data.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
 					</div>
 
 				</div>
@@ -207,21 +207,21 @@ class NF_Welcome {
 				<div class="feature-section col three-col">
 
 					<div class="col-1">
-						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-seq-nums.png'; ?>">
-						<h4><?php _e( 'Sequential submission numbering', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'Keep track of all form submisisions with a unique sequntial number.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-noti-deactivate.png'; ?>">
+						<h4><?php _e( 'Activate or deactivate notifications', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'Easily activate or deactivate notifications, depending on your current needs.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
 					</div>
 
 					<div class="col-2">
-						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-columns.gif'; ?>">
-						<h4><?php _e( 'Show and hide table columns', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'Show and hide columns in your submisssions table. Settings saved on a per form and per user basis', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-noti-filter.png'; ?>">
+						<h4><?php _e( 'Filter notifications by type', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'Easily filter long lists of notifications by a specified type to find just the one you\'re looking for.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
 					</div>
 
 					<div class="col-3 last-feature">
-						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-sort.gif'; ?>">
-						<h4><?php _e( 'Sort submissions by field', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'Sort submissions by any field within your form.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<img src="<?php echo NF_PLUGIN_URL . 'assets/images/screenshots/ss-noti-duplicate.png'; ?>">
+						<h4><?php _e( 'Duplicate notifications', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'Duplicate notifications and change settings to quickly create similar notifications.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
 					</div>
 
 				</div>
@@ -231,13 +231,17 @@ class NF_Welcome {
 				<div class="feature-section col two-col">
 
 					<div class="col-1">
-						<h4><?php _e( 'Admin only labels', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'Each field can now be assigned an admin only label to be used in the submissions tables for clearer identification of the content involved.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<h4><?php _e( 'More to come', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'This update is just the beginning; the future will bring even more improvements to the notification system. We have plans to add "global" notifications that can be used across multiple forms. Also be on the look out for Ninja Forms extesions to make notifications even more powerful.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
 					</div>
 
 					<div class="col-2 last-feature">
-						<h4><?php _e( 'Search or filter by date', 'ninja-forms' );?></h4>
-						<p><?php printf( __( 'Search all your submissions by any field value, as well as filter by any date range to easily find the exact submission you are looking for.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<h4><?php _e( 'Notification documentation', 'ninja-forms' );?></h4>
+						<p><?php printf( __( 'To get you started, we\'ve already added documentation on the new notifications feature. If you still have questions you can always contact the Ninja Forms support team.', 'ninja-forms' ), admin_url( 'edit.php?post_type=download&page=nf-settings&tab=misc' ) ); ?></p>
+						<p>
+							<a href="<?php echo esc_url( 'http://ninjaforms.com/documentation/using-ninja-forms/creating-new-notification/' ); ?>"><?php _e( 'Notification Documentation', 'ninja-forms' ); ?></a> &middot;
+							<a href="<?php echo esc_url( 'http://ninjaforms.com/contact/' ); ?>"><?php _e( 'Get Support', 'ninja-forms' ); ?></a>
+						</p>
 					</div>
 
 				</div>

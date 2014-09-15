@@ -80,7 +80,7 @@ function ninja_forms_register_form_settings_basic_email_metabox(){
 	ninja_forms_register_tab_metabox($args);
 }
 
-add_action( 'admin_init', 'ninja_forms_register_form_settings_basic_email_metabox' );
+// add_action( 'admin_init', 'ninja_forms_register_form_settings_basic_email_metabox' );
 
 function ninja_forms_register_form_settings_admin_email_metabox(){
 	$args = apply_filters( 'ninja_forms_form_settings_admin_email', array(
@@ -128,7 +128,7 @@ function ninja_forms_register_form_settings_admin_email_metabox(){
 	ninja_forms_register_tab_metabox($args);
 }
 
-add_action( 'admin_init', 'ninja_forms_register_form_settings_admin_email_metabox' );
+// add_action( 'admin_init', 'ninja_forms_register_form_settings_admin_email_metabox' );
 
 function ninja_forms_register_form_settings_user_email_metabox(){
 	$args = apply_filters( 'ninja_forms_form_settings_user_email', array(
@@ -160,7 +160,7 @@ function ninja_forms_register_form_settings_user_email_metabox(){
 	ninja_forms_register_tab_metabox($args);
 }
 
-add_action( 'admin_init', 'ninja_forms_register_form_settings_user_email_metabox' );
+// add_action( 'admin_init', 'ninja_forms_register_form_settings_user_email_metabox' );
 
 function ninja_forms_register_form_settings_basic_metabox(){
 
@@ -252,17 +252,17 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				'help' => __( '', 'ninja-forms' ),
 				'tr_class' => 'landing-page-hide '.$ajax_style,
 			),
-			array(
-				'name' => 'landing_page',
-				'type' => 'select',
-				'desc' => '',
-				'label' => __( 'Success Page', 'ninja-forms' ),
-				'display_function' => '',
-				'help' => __( '', 'ninja-forms' ),
-				'options' => $pages_array,
-				'tr_class' => 'ajax-hide ' . $landing_page_style,
-				'class' => 'landing-page-select',
-			),
+			// array(
+			// 	'name' => 'landing_page',
+			// 	'type' => 'select',
+			// 	'desc' => '',
+			// 	'label' => __( 'Success Page', 'ninja-forms' ),
+			// 	'display_function' => '',
+			// 	'help' => __( '', 'ninja-forms' ),
+			// 	'options' => $pages_array,
+			// 	'tr_class' => 'ajax-hide ' . $landing_page_style,
+			// 	'class' => 'landing-page-select',
+			// ),
 			array(
 				'name' => 'clear_complete',
 				'type' => 'checkbox',
@@ -283,14 +283,14 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				'default_value' => 1,
 				'tr_class' => 'landing-page-hide ' . $hide_complete_style,
 			),
-			array(
-				'name' => 'success_msg',
-				'type' => 'rte',
-				'label' => __( 'Success Message', 'ninja-forms' ),
-				'desc' => __( 'If you want to include field data entered by the user, for instance a name, you can use the following shortcode: [ninja_forms_field id=23] where 23 is the ID of the field you want to insert. This will tell Ninja Forms to replace the bracketed text with whatever input the user placed in that field. You can find the field ID when you expand the field for editing.', 'ninja-forms' ),
-				//'default_value' => __( 'Thanks for submitting this form. We&#39;ll get back to you soon.', 'ninja-forms' ),
-				'tr_class' => 'landing-page-hide ' . $success_msg_style,
-			),
+			// array(
+			// 	'name' => 'success_msg',
+			// 	'type' => 'rte',
+			// 	'label' => __( 'Success Message', 'ninja-forms' ),
+			// 	'desc' => __( 'If you want to include field data entered by the user, for instance a name, you can use the following shortcode: [ninja_forms_field id=23] where 23 is the ID of the field you want to insert. This will tell Ninja Forms to replace the bracketed text with whatever input the user placed in that field. You can find the field ID when you expand the field for editing.', 'ninja-forms' ),
+			// 	//'default_value' => __( 'Thanks for submitting this form. We&#39;ll get back to you soon.', 'ninja-forms' ),
+			// 	'tr_class' => 'landing-page-hide ' . $success_msg_style,
+			// ),
 			array(
 				'name' => 'sub_limit_number',
 				'type' => 'number',

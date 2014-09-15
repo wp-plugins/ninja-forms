@@ -80,3 +80,39 @@ function nf_sub_seq_num_shortcode( $sub_id ) {
 }
 
 add_action( 'nf_save_sub', 'nf_sub_seq_num_shortcode' );
+
+/**
+ * Shortcode for ninja_forms_all_fields
+ *
+ * @since 2.8
+ * @return string $content
+ */
+function nf_all_fields_shortcode( $atts ) {
+	global $ninja_forms_fields, $ninja_forms_processing;
+
+	if ( ! isset ( $ninja_forms_processing ) )
+		return false;
+
+	// Generate our "all fields" table for use as a JS var.
+	$all_fields_table = '<table><tbody>';
+
+	foreach ( $ninja_forms_processing->get_all_fields() as $field_id => $user_value ) {
+		if ( ! $user_value )
+			continue;
+
+		$field = $ninja_forms_processing->get_field_settings( $field_id );
+		$type = $field['type'];
+		if ( ! isset ( $ninja_forms_fields[ $type ] ) || ! $ninja_forms_fields[ $type ]['process_field'] )
+			continue;
+
+		$value = apply_filters( 'nf_all_fields_field_value', ninja_forms_field_shortcode( array( 'id' => $field_id ) ), $field_id );
+		$label = strip_tags( apply_filters( 'nf_all_fields_field_label', $field['data']['label'], $field_id ) );
+		$all_fields_table .= '<tr id="ninja_forms_field_' . $field_id . '"><td>' . $label .':</td><td>' . $value . '</td></tr>'; 
+	}
+	
+	$all_fields_table .= '</tbody></table>';
+
+	return apply_filters( 'nf_all_fields_table', $all_fields_table, $ninja_forms_processing->get_form_ID() );
+}
+
+add_shortcode( 'ninja_forms_all_fields', 'nf_all_fields_shortcode' );

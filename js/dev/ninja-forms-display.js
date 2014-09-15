@@ -10,7 +10,7 @@ jQuery(document).ready(function(jQuery) {
 		if (e.keyCode == 13) {
 			var type = jQuery(this).attr("type");
 			if( type != "textarea" ){
-				return false;
+				// return false;
 			}
 		}
 	});
@@ -773,6 +773,8 @@ function ninja_forms_update_success_msg(response){
 			jQuery("#ninja_forms_form_" + form_id + "_response_msg").removeClass("ninja-forms-error-msg")
 			jQuery("#ninja_forms_form_" + form_id + "_response_msg").addClass("ninja-forms-success-msg")
 			jQuery("#ninja_forms_form_" + form_id + "_response_msg").prop("innerHTML", innerHTML);
+			jQuery("#ninja_forms_form_" + form_id + "_response_msg").show();
+
 		}
 		if(hide_complete == 1 ){
 			jQuery("#ninja_forms_form_" + form_id ).hide();

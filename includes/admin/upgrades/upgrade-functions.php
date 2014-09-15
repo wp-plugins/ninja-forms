@@ -19,6 +19,20 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * @return void
 */
 function nf_show_upgrade_notices() {
+
+	// Convert notifications
+	if ( isset ( $_GET['page'] ) && $_GET['page'] == 'nf-processing' )
+		return; // Don't show notices on the processing page.
+
+	$n_conversion_complete = get_option( 'nf_convert_notifications_complete', false );
+
+	if ( ! $n_conversion_complete ) {
+		printf(
+			'<div class="update-nag"><p>' . __( 'Ninja Forms needs to upgrade your form notifications, click <a href="%s">here</a> to start the upgrade.', 'ninja-forms' ) . '</p></div>',
+			admin_url( 'index.php?page=nf-processing&action=convert_notifications' )
+		);
+	}
+
 	if ( isset( $_GET['page'] ) && $_GET['page'] == 'nf-upgrades' )
 		return; // Don't show notices on the upgrades page
 
@@ -29,7 +43,7 @@ function nf_show_upgrade_notices() {
 			$step = 1;
 		}
 		printf(
-			'<div class="updated"><p>' . __( 'Ninja Forms needs to upgrade the submissions table, click <a href="%s">here</a> to start the upgrade.', 'ninja-forms' ) . '</p></div>',
+			'<div class="update-nag"><p>' . __( 'Ninja Forms needs to upgrade the submissions table, click <a href="%s">here</a> to start the upgrade.', 'ninja-forms' ) . '</p></div>',
 			admin_url( 'index.php?page=nf-upgrades&nf-upgrade=upgrade_subs_to_cpt&step=' . $step )
 		);
 	}
@@ -38,14 +52,14 @@ function nf_show_upgrade_notices() {
 
 	if ( $upgrade_notice != 'closed' ) {
 		printf(
-			'<div class="updated"><p>' . __( 'Thank you for updating to version 2.7 of Ninja Forms. Please update any Ninja Forms extensions from ', 'ninja-forms' ) . '<a href="http://ninjaforms.com/your-account/purchases/"</a>ninjaforms.com</a>. <a href="%s">Dismiss this notice</a></p></div>',
-			add_query_arg( array( 'nf_action' => 'dismiss_upgrade_notice' ) ) 
+			'<div class="update-nag"><p>' . __( 'Thank you for updating to version 2.7 of Ninja Forms. Please update any Ninja Forms extensions from ', 'ninja-forms' ) . '<a href="http://ninjaforms.com/your-account/purchases/"</a>ninjaforms.com</a>. <a href="%s">Dismiss this notice</a></p></div>',
+			add_query_arg( array( 'nf_action' => 'dismiss_upgrade_notice' ) )
 		);
 	}
 
 	if ( defined( 'NINJA_FORMS_UPLOADS_VERSION' ) && version_compare( NINJA_FORMS_UPLOADS_VERSION, '1.3.5' ) == -1 ) {
 		echo '<div class="error"><p>' . __( 'Your version of the Ninja Forms File Upload extension isn\'t compatible with version 2.7 of Ninja Forms. It needs to be at least version 1.3.5. Please update this extension at ', 'ninja-forms' ) . '<a href="http://ninjaforms.com/your-account/purchases/"</a>ninjaforms.com</a></p></div>';
-	}	
+	}
 
 	if ( defined( 'NINJA_FORMS_SAVE_PROGRESS_VERSION' ) && version_compare( NINJA_FORMS_SAVE_PROGRESS_VERSION, '1.1.3' ) == -1 ) {
 		echo '<div class="error"><p>' . __( 'Your version of the Ninja Forms Save Progress extension isn\'t compatible with version 2.7 of Ninja Forms. It needs to be at least version 1.1.3. Please update this extension at ', 'ninja-forms' ) . '<a href="http://ninjaforms.com/your-account/purchases/"</a>ninjaforms.com</a></p></div>';
@@ -111,7 +125,7 @@ function nf_v27_upgrade_subs_to_cpt() {
 	if( empty( $total ) || $total <= 1 ) {
 		$total = round( ( $old_sub_count / 100 ), 0 ) + 2;
 	}
-	
+
 	if ( $step <= $total ) {
 		if ( $step == 1 ) {
 			$begin = 0;
@@ -122,7 +136,7 @@ function nf_v27_upgrade_subs_to_cpt() {
 		$subs_results = $convert_subs->get_old_subs( $begin, 100 );
 
 		if ( is_array( $subs_results ) && ! empty( $subs_results ) ) {
-			
+
 			foreach ( $subs_results as $sub ) {
 				if ( $form_id != $sub['form_id'] ) {
 					$form_id = $sub['form_id'];
@@ -134,7 +148,7 @@ function nf_v27_upgrade_subs_to_cpt() {
 
 				if ( ! in_array( $sub['id'], $converted ) ) {
 					$convert_subs->convert( $sub, $number );
-									
+
 					$converted[] = $sub['id'];
 					update_option( 'nf_converted_subs', $converted );
 					$number++;

@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.7
 Tested up to: 4.0
-Stable tag: 2.7.7
+Stable tag: 2.8
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,27 +76,22 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.7.7 (19 August 2014) =
+= 2.8 (14 September 2014) =
 
-*Bugs:*
+*Features:*
 
-* Fixing a bug with editing submissions with specific field combinations.
-
-* Submission CSS should now only enqueue on the submission page.
-
-* Fixed a bug with the submissions permissions filter. It should now function properly.
-
-* Fixed a bug with some servers caused by calling the set_time_limit() function.
-
-* The [nf_sub_seq_num] shortcode should now always function properly.
-
-* Fixed an invalid argument error when viewing a the submissions table.
-
-* Rich Text Editors should now render properly when they are added to a form.
+* New, simpler system for creating custom notifications.
+* Send any number of emails per form submission.
+* Easily redirect the user to a page or display a custom success message.
 
 *Changes:*
 
-* Added a new filter to the admin menu capabilities. Deprecated older versions.
+* Changed the "Save Form Settings" button to "Save."
+
+*Bugs:*
+
+* Fixed PHP notices.
+* Fixed some possible security vulnerabilites within the admin.
 
 == Requested Features ==
 
@@ -104,22 +99,33 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 
 == Changelog ==
 
+= 2.8 (14 September 2014) =
+
+*Features:*
+
+* New, simpler system for creating custom notifications.
+* Send any number of emails per form submission.
+* Easily redirect the user to a page or display a custom success message.
+
+*Changes:*
+
+* Changed the "Save Form Settings" button to "Save."
+
+*Bugs:*
+
+* Fixed PHP notices.
+* Fixed some possible security vulnerabilites within the admin.
+
 = 2.7.7 (19 August 2014) =
 
 *Bugs:*
 
 * Fixing a bug with editing submissions with specific field combinations.
-
 * Submission CSS should now only enqueue on the submission page.
-
 * Fixed a bug with the submissions permissions filter. It should now function properly.
-
-* Fixed a bug with some servers caused by calling the set_time_limit() function.
-
+* Fixed a bug with some servers caused by calling the set_time_limit() function
 * The [nf_sub_seq_num] shortcode should now always function properly.
-
 * Fixed an invalid argument error when viewing a the submissions table.
-
 * Rich Text Editors should now render properly when they are added to a form.
 
 *Changes:*
@@ -135,9 +141,7 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 *Changes:*
 
 * Added the ability to download all submissions for a particular form.
-
 * Added a step processor that can be extended and used by developers.
-
 * Added new extensions to the add-ons page.
 
 = 2.7.5 (09 August 2014) =
@@ -151,15 +155,12 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 *Bugs:*
 
 * Fixed HTML breaking issues with the Text field type when something other than div is selected
-
 * Fixed a bug that could cause forms to stop working on Windows (IIS) servers.
-
 * Forms without errors or success messages should no longer see the "response" message div.
 
 *Changes:*
 
 * Added Portuguese translation files.
-
 * Added Dutch translation files.
 
 = 2.7.3 (29 July 2014) =
@@ -167,7 +168,6 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 *Bugs:*
 
 * Fixed a bug that caused the text elements to be output with encoded html tags rather than the tags themselves.
-
 * Fixed a bug that caused empty CSV files to be emailed to the admin.
 
 *Changes:*
@@ -179,7 +179,6 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 *Bugs:*
 
 * Fixed an issue that could cause the submission values to appear as a widget on the submission edit screen.
-
 * Fixed a bug that could cause a direct download if the "send CSV attachment" was checked.
 
 = 2.7.1 (25 July 2014) =

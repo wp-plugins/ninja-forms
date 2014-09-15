@@ -175,7 +175,7 @@ class NF_Subs {
 		$form_id = Ninja_Forms()->sub( $sub_ids[0] )->form_id;
 
 		// Get our list of fields.
-		$fields = nf_get_fields_by_form_id( $form_id );
+		$fields = Ninja_Forms()->form( $form_id )->fields;
 
 		// Add our sequential number.
 		$label_array[0]['_seq_num'] = __( '#', 'ninja-forms' );
@@ -240,7 +240,7 @@ class NF_Subs {
 						$user_value = implode( ',', $user_value );
 					}
 					// Run our final value through the appropriate filters and assign it to the array.
-					$value_array[ $x ][ $field_id ] = apply_filters( 'nf_subs_csv_field_value', $user_value, $field_id );					
+					$value_array[ $x ][ $field_id ] = htmlspecialchars_decode( apply_filters( 'nf_subs_csv_field_value', $user_value, $field_id ), ENT_QUOTES );					
 				}
 			}
 			$x++;

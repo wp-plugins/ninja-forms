@@ -54,11 +54,7 @@ function ninja_forms_activation( $network_wide ){
 
 		$plugin_settings = nf_get_settings();
 
-		if( isset( $plugin_settings['version'] ) ){
-			$current_version = $plugin_settings['version'];
-		}else{
-			$current_version = '';
-		}
+		$current_version = isset ( $plugin_settings['version'] ) ? $plugin_settings['version'] : '';
 
 		if ( $current_version != '' ) {
 			update_option( 'nf_version_upgraded_from', $current_version );
@@ -66,31 +62,19 @@ function ninja_forms_activation( $network_wide ){
 
 		$forms = '';
 
-		if( ( $current_version != '' ) AND version_compare( $current_version, '2.0' , '<' ) ){
-			if($wpdb->get_var("SHOW COLUMNS FROM ".NINJA_FORMS_TABLE_NAME." LIKE 'title'") == 'title') {
-				$forms = ninja_forms_activation_old_forms_check();
+		$opt = $plugin_settings;
 
-				if($wpdb->get_var("SHOW TABLES LIKE '".NINJA_FORMS_TABLE_NAME."'") == NINJA_FORMS_TABLE_NAME) {
-					$wpdb->query("DROP TABLE ".NINJA_FORMS_TABLE_NAME);
-				}
-
-				if($wpdb->get_var("SHOW TABLES LIKE '".NINJA_FORMS_FIELDS_TABLE_NAME."'") == NINJA_FORMS_FIELDS_TABLE_NAME) {
-					$wpdb->query("DROP TABLE ".NINJA_FORMS_FIELDS_TABLE_NAME);
-				}
-
-				if($wpdb->get_var("SHOW TABLES LIKE '".NINJA_FORMS_SUBS_TABLE_NAME."'") == NINJA_FORMS_SUBS_TABLE_NAME) {
-					$wpdb->query("DROP TABLE ".NINJA_FORMS_SUBS_TABLE_NAME);
-				}
-			}
+		if( ! empty( $current_version ) && version_compare( $current_version, '2.0' , '<' ) ){
+			nf_pre_20_activation( $current_version );
+			$opt = nf_pre_20_opts();
 		}
-
 
 		$sql = "CREATE TABLE IF NOT EXISTS ".NINJA_FORMS_TABLE_NAME." (
 		  `id` int(11) NOT NULL AUTO_INCREMENT,
 		  `data` longtext CHARACTER SET utf8 NOT NULL,
 		  `date_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 		  PRIMARY KEY (`id`)
-		) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;";
+		) DEFAULT CHARSET=utf8 ;";
 
 		dbDelta($sql);
 
@@ -102,7 +86,7 @@ function ninja_forms_activation( $network_wide ){
 		`data` longtext CHARACTER SET utf8 NOT NULL,
 		`name` varchar(255) CHARACTER SET utf8 NOT NULL,
 		PRIMARY KEY (`id`)
-		) ENGINE=InnoDB  DEFAULT CHARSET=utf8;";
+		) DEFAULT CHARSET=utf8;";
 
 		dbDelta($sql);
 
@@ -143,77 +127,46 @@ function ninja_forms_activation( $network_wide ){
 		  `fav_id` int(11) DEFAULT NULL,
 		  `def_id` int(11) DEFAULT NULL,
 		  PRIMARY KEY (`id`)
-		) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;";
+		) DEFAULT CHARSET=utf8 ;";
 
 		dbDelta($sql);
 
-		$sql = "CREATE TABLE IF NOT EXISTS ".NINJA_FORMS_SUBS_TABLE_NAME." (
-		  `id` int(11) NOT NULL AUTO_INCREMENT,
-		  `user_id` int(11) DEFAULT NULL,
-		  `form_id` int(11) NOT NULL,
-		  `status` int(11) NOT NULL,
-		  `action` varchar(255) NOT NULL,
-		  `data` longtext CHARACTER SET utf8 NOT NULL,
-		  `date_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	 	/**
+	 	 * Add our table structure for version 2.8.
+	 	 */
+
+	 	// Create our object meta table
+	 	$sql = "CREATE TABLE IF NOT EXISTS ". NF_OBJECT_META_TABLE_NAME . " (
+		  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+		  `object_id` bigint(20) NOT NULL,
+		  `meta_key` varchar(255) NOT NULL,
+		  `meta_value` longtext NOT NULL,
 		  PRIMARY KEY (`id`)
-		) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;";
+		) DEFAULT CHARSET=utf8;";
+	
+		dbDelta( $sql );
 
-		dbDelta($sql);
+		// Create our object table
+		$sql = "CREATE TABLE IF NOT EXISTS " . NF_OBJECTS_TABLE_NAME . " (
+		  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+		  `type` varchar(255) NOT NULL,
+		  PRIMARY KEY (`id`)
+		) DEFAULT CHARSET=utf8;";
+	
+		dbDelta( $sql );
 
-		if( version_compare( $current_version, '2.0' , '<' ) ){
-			if( isset( $plugin_settings['upload_dir'] ) ){
-				$base_upload_dir = $plugin_settings['upload_dir'];
-			}else{
-				$base_upload_dir = '';
-			}
-			if( isset( $plugin_settings['upload_size'] ) ){
-				$max_file_size = $plugin_settings['upload_size'];
-			}else{
-				$max_file_size = 2;
-			}
+		// Create our object relationships table
 
-			$opt = array(
-				'license_key' => '',
-				'license_status' => 'inactive',
-				'date_format' => 'm/d/Y',
-				'currency_symbol' => '$',
-				'clear_complete' => 1,
-				'hide_complete' => 1,
-				'req_div_label' => __('Fields marked with a * are required.', 'ninja-forms'),
-				'req_field_symbol' => '*',
-				'req_error_label' => __( 'Please ensure all required fields are completed.', 'ninja-forms' ),
-				'req_field_error' => __( 'This is a required field.', 'ninja-forms' ),
-				'spam_error' => __( 'Please answer the anti-spam question correctly.', 'ninja-forms' ),
-				'honeypot_error' => __('If you are a human, please leave this field blank.', 'ninja-forms' ),
-				'timed_submit_error' => __('If you are a human, please slow down.', 'ninja-forms' ),
-				'javascript_error' => __( 'You need JavaScript to submit this form. Please enable it and try again.', 'ninja-forms' ),
-				'invalid_email' => __( 'Please enter a valid email address.', 'ninja-forms' ),
-				'process_label' => __('Processing', 'ninja-forms'),
-				'login_link' => __('Login', 'ninja-forms'),
-				'username_label' => __('Username', 'ninja-forms'),
-				'reset_password' => __('Reset Password (Opens in a new window)', 'ninja-forms'),
-				'password_label' => __('Password', 'ninja-forms'),
-				'repassword_label' => __('Re-enter Password', 'ninja-forms'),
-				'password_mismatch' => __('Passwords do not match.', 'ninja-forms'),
-				'login_button_label' => __('Login', 'ninja-forms'),
-				'cancel_button_label' => __('Cancel', 'ninja-forms'),
-				'login_error' => __('Login failed, please try again.', 'ninja-forms'),
-				'register_link' => __('Register', 'ninja-forms'),
-				'email_label' => __('Email Address', 'ninja-forms'),
-				'register_button_label' => __('Register', 'ninja-forms'),
-				'register_error' => __('There was an error registering you for this site.', 'ninja-forms'),
-				'register_spam_q' => __('4 + 9 = ', 'ninja-forms'),
-				'register_spam_a' => __('13', 'ninja-forms'),
-				'register_spam_error' => __('Please answer the anti-spam question correctly.', 'ninja-forms'),
-				'msg_format' => 'inline',
-				'base_upload_dir' => $base_upload_dir,
-				'max_file_size' => $max_file_size,
-			);
+		$sql = "CREATE TABLE IF NOT EXISTS " . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . " (
+		  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+		  `child_id` bigint(20) NOT NULL,
+		  `parent_id` bigint(20) NOT NULL,
+		  `child_type` varchar(255) NOT NULL,
+		  `parent_type` varchar(255) NOT NULL,
+		  PRIMARY KEY (`id`)
+		) DEFAULT CHARSET=utf8;";
 
-		}else{
-			$opt = $plugin_settings;
-		}
-
+		dbDelta( $sql );
 
 		$title = ninja_forms_get_preview_page_title();
 	    $preview_page = get_page_by_title( $title );
@@ -238,64 +191,6 @@ function ninja_forms_activation( $network_wide ){
 
 	 	update_option( "ninja_forms_settings", $opt );
 
-
-	 	if( is_array( $forms ) AND !empty( $forms ) ){
-	 		foreach( $forms as $form ){
-		 		$form['data'] = serialize( $form['data'] );
-		 		if ( isset( $form['field'] ) ){
-		 			$form_fields = $form['field'];
-		 		}else{
-		 			$form_fields = '';
-		 		}
-
-		 		if( isset( $form['subs'] ) ){
-		 			$form_subs = $form['subs'];
-		 		}else{
-		 			$form_subs = '';
-		 		}
-
-		 		unset( $form['field'] );
-		 		unset( $form['subs'] );
-
-				$wpdb->insert(NINJA_FORMS_TABLE_NAME, $form);
-				$form_id = $wpdb->insert_id;
-
-				if( is_array( $form_fields ) AND !empty( $form_fields ) ){
-					for( $x=0; $x < count( $form_fields ); $x++ ) {
-						$form_fields[$x]['form_id'] = $form_id;
-						$form_fields[$x]['data'] = serialize( $form_fields[$x]['data'] );
-						unset( $form_fields[$x]['id'] );
-						if( isset( $form_fields[$x]['old_id'] ) ){
-							$old_id = $form_fields[$x]['old_id'];
-							unset( $form_fields[$x]['old_id'] );
-						}
-						$wpdb->insert( NINJA_FORMS_FIELDS_TABLE_NAME, $form_fields[$x] );
-						$new_id = $wpdb->insert_id;
-						if( is_array( $form_subs ) AND !empty( $form_subs ) ){
-							for ($i=0; $i < count( $form_subs ); $i++) {
-								$form_subs[$i]['form_id'] = $form_id;
-								if( is_array( $form_subs[$i]['data'] ) AND !empty( $form_subs[$i]['data'] ) ){
-									for ($y=0; $y < count( $form_subs[$i]['data'] ); $y++){
-										if( isset( $form_subs[$i]['data'][$y]['old_id'] ) AND $form_subs[$i]['data'][$y]['old_id'] == $old_id ){
-											unset( $form_subs[$i]['data'][$y]['old_id'] );
-											$form_subs[$i]['data'][$y]['field_id'] = $new_id;
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-
-				if( is_array( $form_subs ) AND !empty( $form_subs ) ){
-					for ($i=0; $i < count( $form_subs ); $i++) {
-						$form_subs[$i]['data'] = serialize( $form_subs[$i]['data'] );
-						$wpdb->insert( NINJA_FORMS_SUBS_TABLE_NAME, $form_subs[$i] );
-					}
-				}
-	 		}
-	 	}
-
 	 	// check for an existing form
 	 	$starter_form_exists = ninja_forms_starter_form_exists();
 
@@ -303,6 +198,10 @@ function ninja_forms_activation( $network_wide ){
 	 		// if a starter form doesn't exist them create it
 	 		ninja_forms_add_starter_form();
 	 	}
+
+		update_option( 'nf_convert_notifications_complete', true);
+		update_option( 'nf_convert_subs_step', 'complete' );
+		update_option( 'nf_upgrade_notice', 'closed' );
 
 		// Add the transient to redirect
 		set_transient( '_nf_activation_redirect', true, 30 );
@@ -335,311 +234,6 @@ function nf_add_network_activation_error() {
 }
 
 add_action( 'nf_network_activation_error', 'nf_add_network_activation_error' );
-
-function ninja_forms_activation_old_forms_check(){
-	global $wpdb;
-	//Get the current plugin settings.
-	$plugin_settings = nf_get_settings();
-
-	$current_version = $plugin_settings['version'];
-
-	//if( version_compare( $current_version, '2.0' , '<' ) ){
-
-		if($wpdb->get_var("SHOW COLUMNS FROM ".NINJA_FORMS_TABLE_NAME." LIKE 'title'") == 'title') {
-			$all_forms = $wpdb->get_results( "SELECT * FROM ".NINJA_FORMS_TABLE_NAME, ARRAY_A );
-			if( is_array( $all_forms ) AND !empty( $all_forms ) ){
-				$forms = array();
-				$x = 0;
-				foreach( $all_forms as $form ){
-					$form_id = $form['id'];
-					$forms[$x]['data']['form_title'] = $form['title'];
-					if( $form['show_title'] == 'checked' ){
-						$show_title = 1;
-					}else{
-						$show_title = 0;
-					}
-					$forms[$x]['data']['show_title'] = $show_title;
-					$admin_mailto = explode(',', $form['mailto'] );
-					$forms[$x]['data']['admin_mailto'] = $admin_mailto;
-					$forms[$x]['data']['user_subject'] = $form['subject'];
-					$forms[$x]['data']['success_msg'] = $form['success_msg'];
-					if( $form['send_email'] == 'checked' ){
-						$send_email = 1;
-					}else{
-						$send_email = 0;
-					}
-					$forms[$x]['data']['send_email'] = $send_email;
-					$forms[$x]['data']['landing_page'] = $form['landing_page'];
-					$form['append_page'] = unserialize( $form['append_page'] );
-					if( isset( $form['append_page'][0] ) ){
-						$append_page = $form['append_page'][0];
-					}else{
-						$append_page = '';
-					}
-					$forms[$x]['data']['append_page'] = $append_page;
-					$forms[$x]['data']['email_from'] = $form['email_from'];
-					$forms[$x]['data']['user_email'] = $form['email_msg'];
-					if( $form['multi'] == 'checked' ){
-						$multi_part = 1;
-					}else{
-						$multi_part = 0;
-					}
-					$forms[$x]['data']['multi_part'] = $multi_part;
-					if( $form['post'] == 'checked' ){
-						$create_post = 1;
-					}else{
-						$create_post = 0;
-					}
-					$forms[$x]['data']['create_post'] = $create_post;
-					$form['post_options'] = unserialize( $form['post_options'] );
-					$forms[$x]['data']['post_logged_in'] = $form['post_options']['login'];
-					$forms[$x]['data']['post_as'] = $form['post_options']['user'];
-					$forms[$x]['data']['post_type'] = $form['post_options']['post_type'];
-					$forms[$x]['data']['post_status'] = $form['post_options']['post_status'];
-					if( $form['save_status'] == 'checked' ){
-						$save_progress = 1;
-					}else{
-						$save_progress = 0;
-					}
-
-					$forms[$x]['data']['save_progress'] = $save_progress;
-					$form['save_status_options'] = unserialize( $form['save_status_options'] );
-					$forms[$x]['data']['clear_incomplete_saves'] = $form['save_status_options']['delete'];
-					$forms[$x]['data']['save_msg'] = $form['save_status_options']['msg'];
-
-					$form_fields = $wpdb->get_results("SELECT * FROM ".NINJA_FORMS_FIELDS_TABLE_NAME." WHERE form_id = ".$form_id, ARRAY_A );
-					if( is_array( $form_fields ) AND !empty( $form_fields ) ){
-						$y = 0;
-						foreach( $form_fields as $field ){
-							$unset = false;
-							$field_type = $field['type'];
-							$forms[$x]['field'][$y]['old_id'] = $field['id'];
-							$forms[$x]['field'][$y]['form_id'] = $field['form_id'];
-							$forms[$x]['field'][$y]['order'] = $field['field_order'];
-							$forms[$x]['field'][$y]['data']['label'] = $field['label'];
-
-							$field['extra'] = unserialize( $field['extra'] );
-
-							if( isset( $field['value'] ) ){
-								$default_value = $field['value'];
-							}else{
-								$default_value = '';
-							}
-
-							if( $default_value == 'none' ){
-								$default_value = '';
-							}
-
-
-							switch( $field_type ){
-								case 'textbox':
-									$field_type = '_text';
-									break;
-								case 'list':
-									$field_type = '_list';
-									$forms[$x]['field'][$y]['data']['multi_size'] = 5;
-									break;
-								case 'checkbox':
-									$field_type = '_checkbox';
-									break;
-								case 'textarea':
-									$field_type = '_textarea';
-									break;
-								case 'hr':
-									$field_type = '_hr';
-									break;
-								case 'heading':
-									$default_value = $field['label'];
-									$forms[$x]['field'][$y]['data']['label'] = 'Text';
-									$field_type = '_desc';
-									break;
-								case 'spam':
-									$field_type = '_spam';
-									$forms[$x]['field'][$y]['data']['spam_answer'] = $default_value;
-									break;
-								case 'desc':
-									$field_type = '_desc';
-									break;
-								case 'submit':
-									$field_type = '_submit';
-									break;
-								case 'hidden':
-									$field_type = '_hidden';
-									break;
-								case 'file':
-									$field_type = '_upload';
-									if( isset( $field['extra']['extra']['upload_types'] ) ){
-										$forms[$x]['field'][$y]['data']['upload_types'] = $field['extra']['extra']['upload_types'];
-									}
-									if( isset( $field['extra']['extra']['upload_rename'] ) ){
-										$forms[$x]['field'][$y]['data']['upload_rename'] = $field['extra']['extra']['upload_rename'];
-									}
-									if( isset( $field['extra']['extra']['email_attachment'] ) ){
-										$forms[$x]['field'][$y]['data']['email_attachment'] = $field['extra']['extra']['email_attachment'];
-									}
-									$forms[$x]['field'][$y]['data']['upload_multi'] = 0;
-									break;
-								case 'divider':
-									$field_type = '_page_divider';
-									$forms[$x]['field'][$y]['data']['page_name'] = $field['label'];
-									break;
-								case 'progressbar':
-									$forms[$x]['data']['mp_progress_bar'] = 1;
-									$unset = true;
-									break;
-								case 'posttitle':
-									$field_type = '_post_title';
-									break;
-								case 'postcontent':
-									$field_type = '_post_content';
-									break;
-								case 'postcat':
-									$field_type = '_post_category';
-									break;
-								case 'posttags':
-									$field_type = '_post_tags';
-									break;
-
-							}
-
-							$forms[$x]['field'][$y]['type'] = $field_type;
-
-							$forms[$x]['field'][$y]['data']['default_value'] = $default_value;
-							$forms[$x]['field'][$y]['data']['req'] = $field['req'];
-							$forms[$x]['field'][$y]['data']['class'] = $field['class'];
-							$forms[$x]['field'][$y]['data']['help_text'] = $field['help'];
-
-							if( isset( $field['extra']['extra']['desc_cont'] ) ){
-								$forms[$x]['field'][$y]['data']['desc_el'] = $field['extra']['extra']['desc_cont'];
-							}
-							if( isset( $field['extra']['extra']['label_pos'] ) ){
-								$forms[$x]['field'][$y]['data']['label_pos'] = $field['extra']['extra']['label_pos'];
-							}else{
-								$forms[$x]['field'][$y]['data']['label_pos'] = 'left';
-							}
-
-							if( isset( $field['extra']['extra']['show_help'] ) ){
-								if( $field['extra']['extra']['show_help'] == 'checked' ){
-									$show_help = 1;
-								}else{
-									$show_help = 0;
-								}
-							}else{
-								$show_help = 0;
-							}
-
-							$forms[$x]['field'][$y]['data']['show_help'] = $show_help;
-
-							if( isset( $field['extra']['extra']['meta_key'] ) ){
-								$forms[$x]['field'][$y]['data']['meta_value'] = $field['extra']['extra']['meta_key'];
-							}
-							if( isset( $field['extra']['extra']['rte'] ) ){
-								if( $field['extra']['extra']['rte'] == 'checked' ){
-									$textarea_rte = 1;
-								}else{
-									$textarea_rte = 0;
-								}
-
-								$forms[$x]['field'][$y]['data']['textarea_rte'] = $textarea_rte;
-							}
-							if( isset( $field['extra']['extra']['list_type'] ) ){
-								$forms[$x]['field'][$y]['data']['list_type'] = $field['extra']['extra']['list_type'];
-							}
-							if( isset( $field['extra']['extra']['list_item'] ) AND is_array( $field['extra']['extra']['list_item'] ) ){
-								$n = 0;
-								foreach( $field['extra']['extra']['list_item'] as $item ){
-									$forms[$x]['field'][$y]['data']['list']['options'][$n]['label'] = $item;
-									$forms[$x]['field'][$y]['data']['list']['options'][$n]['value'] = $item;
-									$n++;
-								}
-							}
-
-							if( $unset ){
-								unset( $forms[$x]['field'][$y] );
-								$y--;
-							}
-							$y++;
-						}
-					}
-
-					$sub_results = $wpdb->get_results( "SELECT * FROM ".NINJA_FORMS_SUBS_TABLE_NAME." WHERE `form_id` = ".$form_id, ARRAY_A );
-					if( is_array( $sub_results ) AND !empty( $sub_results ) ){
-						$i = 0;
-						foreach( $sub_results as $sub ){
-
-							if( $sub['sub_status'] == 'complete' ){
-								$status = 1;
-							}else{
-								$status = 0;
-							}
-							$forms[$x]['subs'][$i]['status'] = $status;
-							$forms[$x]['subs'][$i]['user_id'] = $sub['user_id'];
-
-							if( $status == 0 ){
-								$forms[$x]['subs'][$i]['action'] = 'save';
-								if( isset( $sub['email'] ) ){
-									$user = get_user_by( 'email', $sub['email'] );
-									if( $user ){
-										$forms[$x]['subs'][$i]['user_id'] = $user->ID;
-									}else{
-										$password = wp_generate_password( 12, true );
-										$userdata = array(
-											'user_login' => $sub['email'],
-											'user_pass' => $password,
-											'user_email' => $sub['email'],
-											'role' => 'subscriber',
-										);
-										$user_id = wp_insert_user($userdata);
-										$forms[$x]['subs'][$i]['user_id'] = $user_id;
-										$blog_name = get_bloginfo( 'name' );
-										$reg_subject = $blog_name.' '.__( 'Ninja Forms Password', 'ninja-forms' );
-										$reg_msg = __( 'You are receiving this email because you have an incomplete form. Your username is now your email address and your password has been reset. It is now ', 'ninja-forms' );
-										wp_mail( $sub['email'], $reg_subject, $reg_msg . $password );
-									}
-								}
-							}else{
-								$forms[$x]['subs'][$i]['action'] = 'submit';
-							}
-
-
-							$forms[$x]['subs'][$i]['form_id'] = $sub['form_id'];
-							$forms[$x]['subs'][$i]['date_updated'] = $sub['date_updated'];
-
-							$form_values = unserialize( $sub['form_values'] );
-							if( is_array( $form_values ) AND !empty( $form_values ) ){
-								$n = 0;
-								foreach( $form_values as $data ){
-									$user_value = $data['value'];
-									foreach( $forms[$x]['field'] as $field ){
-										if( $field['old_id'] == $data['id'] ){
-											if( $field['type'] == '_upload' ){
-												$user_value = array();
-												$user_value[0]['user_file_name'] = $data['value'];
-												$user_value[0]['file_name'] = $data['value'];
-												$user_value[0]['file_path'] = '';
-												$user_value[0]['file_url'] = '';
-											}
-										}
-									}
-									$forms[$x]['subs'][$i]['data'][$n]['old_id'] = $data['id'];
-									$forms[$x]['subs'][$i]['data'][$n]['user_value'] = $user_value;
-									$n++;
-								}
-							}
-							$i++;
-						}
-					}
-					$x++;
-				}
-			}
-		}else{
-			return false;
-		}
-	//}else{
-		//return false;
-	//}
-	return $forms;
-}
 
 
 /*

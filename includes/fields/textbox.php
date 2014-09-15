@@ -13,23 +13,23 @@ function ninja_forms_register_field_textbox(){
 			array(
 				'type' => 'checkbox',
 				'name' => 'email',
-				'label' => __( 'Is this an email address?', 'ninja-forms' ),
+				'label' => __( 'Validate as an email address? (Field must be required)', 'ninja-forms' ),
 			),
-			array(
-				'type' => 'checkbox',
-				'name' => 'send_email',
-				'label' => __( 'Send a response email to this email address?', 'ninja-forms' ),
-			),
+			// array(
+			// 	'type' => 'checkbox',
+			// 	'name' => 'send_email',
+			// 	'label' => __( 'Send a response email to this email address?', 'ninja-forms' ),
+			// ),
 			// array(
 			// 	'type' => 'checkbox',
 			// 	'name' => 'from_email',
 			// 	'label' => __( 'Use this as the "From" email address for Administrative recipients of this form?', 'ninja-forms' ),
 			// ),
-			array(
-				'type' => 'checkbox',
-				'name' => 'replyto_email',
-				'label' => __( 'Use this email address as the Reply-To address?', 'ninja-forms' ),
-			),
+			// array(
+			// 	'type' => 'checkbox',
+			// 	'name' => 'replyto_email',
+			// 	'label' => __( 'Use this email address as the Reply-To address?', 'ninja-forms' ),
+			// ),
 			array(
 				'type' => 'hidden',
 				'name' => 'first_name',
@@ -38,11 +38,11 @@ function ninja_forms_register_field_textbox(){
 				'type' => 'hidden',
 				'name' => 'last_name',
 			),
-			array(
-				'type' => 'checkbox',
-				'name' => 'from_name',
-				'label' => __( 'Use this as the "From" and Reply-To email name for Administrative recipients of this form?', 'ninja-forms' ),
-			),
+			// array(
+			// 	'type' => 'checkbox',
+			// 	'name' => 'from_name',
+			// 	'label' => __( 'Use this as the "From" and Reply-To email name for Administrative recipients of this form?', 'ninja-forms' ),
+			// ),
 			array(
 				'type' => 'hidden',
 				'name' => 'user_address_1',

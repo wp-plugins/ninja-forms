@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms
 Plugin URI: http://ninjaforms.com/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 2.7.7
+Version: 2.8
 Author: The WP Ninjas
 Author URI: http://ninjaforms.com
 Text Domain: ninja-forms
@@ -63,6 +63,11 @@ class Ninja_Forms {
 	private static $instance;
 
 	/**
+	 * @var registered_notification_types
+	 */
+	var $registered_notification_types;
+
+	/**
 	 * Main Ninja_Forms Instance
 	 *
 	 * Insures that only one instance of Ninja_Forms exists in memory at any one
@@ -81,6 +86,9 @@ class Ninja_Forms {
 
 			// Start our submissions custom post type class
 			self::$instance->subs_cpt = new NF_Subs_CPT();
+
+			// Add our registration class object
+			self::$instance->register = new NF_Register();
 
 			register_activation_hook( __FILE__, 'ninja_forms_activation' );
 			add_action( 'plugins_loaded', array( self::$instance, 'load_lang' ) );
@@ -104,11 +112,23 @@ class Ninja_Forms {
 		// Instead, the subs() methods will act as wrappers for it.
 		self::$instance->subs = new NF_Subs();
 
+		// Get our notifications up and running.
+		self::$instance->notifications = new NF_Notifications();
+
+		self::$instance->register->notification_type( 'email', __( 'Email', 'ninja-forms' ), 'NF_Notification_Email' );
+		self::$instance->register->notification_type( 'redirect', __( 'Redirect', 'ninja-forms' ), 'NF_Notification_Redirect' );
+		self::$instance->register->notification_type( 'success_message', __( 'Success Message', 'ninja-forms' ), 'NF_Notification_Success_Message' );
+
+		do_action( 'nf_register_notification_types', self::$instance );
+
+		self::$instance->notification_types = new NF_Notification_Types();
+
 		// Get our step processor up and running.
 		// We only need this in the admin.
 		if ( is_admin() ) {
 			self::$instance->step_processing = new NF_Step_Processing();
 			self::$instance->download_all_subs = new NF_Download_All_Subs();
+			self::$instance->convert_notifications = new NF_Convert_Notifications();
 		}
 	}
 
@@ -135,7 +155,7 @@ class Ninja_Forms {
 	 */
 	public function __clone() {
 		// Cloning instances of the class is forbidden
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'ninja-forms' ), '2.7' );
+		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'ninja-forms' ), '2.8' );
 	}
 
 	/**
@@ -147,7 +167,31 @@ class Ninja_Forms {
 	 */
 	public function __wakeup() {
 		// Unserializing instances of the class is forbidden
-		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'ninja-forms' ), '2.7' );
+		_doing_it_wrong( __FUNCTION__, __( 'Cheatin&#8217; huh?', 'ninja-forms' ), '2.8' );
+	}
+
+	/**
+	 * Function that acts as a wrapper for our individual notification objects.
+	 * It checks to see if an object exists for this notification id.
+	 * If it does, it returns that object. Otherwise, it creates a new one and returns it.
+	 * 
+	 * @access public
+	 * @param int $n_id
+	 * @since 2.8
+	 * @return object self::$instance->$n_var
+	 */
+	public function notification( $n_id = '' ) {
+		// Bail if we don't get a notification id.
+		if ( '' == $n_id )
+			return false;
+
+		$n_var = 'notification_' . $n_id;
+		// Check to see if an object for this notification already exists.
+		// Create one if it doesn't exist.
+		if ( ! isset ( self::$instance->$n_var ) )
+			self::$instance->$n_var = new NF_Notification( $n_id );
+
+		return self::$instance->$n_var;
 	}
 
 	/**
@@ -156,7 +200,7 @@ class Ninja_Forms {
 	 * If it does, it returns that object. Otherwise, it creates a new one and returns it.
 	 * 
 	 * @access public
-	 * @param int $form_id
+	 * @param int $sub_id
 	 * @since 2.7
 	 * @return object self::$instance->$sub_var
 	 */
@@ -166,7 +210,7 @@ class Ninja_Forms {
 			return false;
 		
 		$sub_var = 'sub_' . $sub_id;
-		// Check to see if an object for this sub already exists
+		// Check to see if an object for this sub already exists.
 		// Create one if it doesn't exist.
 		if ( ! isset( self::$instance->$sub_var ) )
 			self::$instance->$sub_var = new NF_Sub( $sub_id );
@@ -221,30 +265,38 @@ class Ninja_Forms {
 		global $wpdb;
 
 		// Plugin version
-		if ( ! defined( 'NF_PLUGIN_VERSION' ) ) {
-			define( 'NF_PLUGIN_VERSION', '2.7.7' );
-		}
+		if ( ! defined( 'NF_PLUGIN_VERSION' ) )
+			define( 'NF_PLUGIN_VERSION', '2.8' );
 
 		// Plugin Folder Path
-		if ( ! defined( 'NF_PLUGIN_DIR' ) ) {
+		if ( ! defined( 'NF_PLUGIN_DIR' ) )
 			define( 'NF_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-		}
 
 		// Plugin Folder URL
-		if ( ! defined( 'NF_PLUGIN_URL' ) ) {
+		if ( ! defined( 'NF_PLUGIN_URL' ) )
 			define( 'NF_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-		}
 
 		// Plugin Root File
-		if ( ! defined( 'NF_PLUGIN_FILE' ) ) {
+		if ( ! defined( 'NF_PLUGIN_FILE' ) )
 			define( 'NF_PLUGIN_FILE', __FILE__ );
-		}
+
+		// Objects table name
+		if ( ! defined( 'NF_OBJECTS_TABLE_NAME') )
+			define( 'NF_OBJECTS_TABLE_NAME', $wpdb->prefix . 'nf_objects' );
+
+		// Meta table name
+		if ( ! defined( 'NF_OBJECT_META_TABLE_NAME' ) )
+			define( 'NF_OBJECT_META_TABLE_NAME', $wpdb->prefix . 'nf_objectmeta' );
+
+		// Relationships table name
+		if ( ! defined( 'NF_OBJECT_RELATIONSHIPS_TABLE_NAME' ) )
+			define( 'NF_OBJECT_RELATIONSHIPS_TABLE_NAME', $wpdb->prefix . 'nf_relationships' );
 
 		/* Legacy Definitions */
 
 		// Ninja Forms debug mode
 		if ( ! defined( 'NINJA_FORMS_JS_DEBUG' ) )
-			define( 'NINJA_FORMS_JS_DEBUG', false );
+			define( 'NINJA_FORMS_JS_DEBUG', true );
 
 		// Ninja Forms plugin directory
 		if ( ! defined( 'NINJA_FORMS_DIR' ) )
@@ -291,16 +343,32 @@ class Ninja_Forms {
 		require_once( NF_PLUGIN_DIR . 'classes/subs-cpt.php' );
 		// Include our form object.
 		require_once( NF_PLUGIN_DIR . 'classes/form.php' );
+		// Include our field, notification, and sidebar registration class.
+		require_once( NF_PLUGIN_DIR . 'classes/register.php' );
+		// Include our 'nf_action' watcher.
 		require_once( NF_PLUGIN_DIR . 'includes/actions.php' );
+		// Include our single notification object
+		require_once( NF_PLUGIN_DIR . 'classes/notification.php' );
+		// Include our notifications object
+		require_once( NF_PLUGIN_DIR . 'classes/notifications.php' );
+		// Include our notification table object
+		require_once( NF_PLUGIN_DIR . 'classes/notifications-table.php' );		
+		// Include our notification table object
+		require_once( NF_PLUGIN_DIR . 'classes/notification-types.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/notification-base-type.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/notification-email.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/notification-redirect.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/notification-success-message.php' );
 
-		
 		if ( is_admin () ) {
 			// Include our step processing stuff if we're in the admin.
 			require_once( NF_PLUGIN_DIR . 'includes/admin/step-processing.php' );
 			require_once( NF_PLUGIN_DIR . 'classes/step-processing.php' );
 
+
 			// Include our download all submissions php files
 			require_once( NF_PLUGIN_DIR . 'classes/download-all-subs.php' );
+			require_once( NF_PLUGIN_DIR . 'includes/admin/upgrades/convert-notifications.php' );
 		}
 
 		// Include our upgrade files.
@@ -338,11 +406,6 @@ class Ninja_Forms {
 		require_once( NINJA_FORMS_DIR . "/includes/display/processing/post-process.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/display/processing/save-sub.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/display/processing/filter-msgs.php" );
-		require_once( NINJA_FORMS_DIR . "/includes/display/processing/error-test.php" );
-		require_once( NINJA_FORMS_DIR . "/includes/display/processing/email-admin.php" );
-		require_once( NINJA_FORMS_DIR . "/includes/display/processing/email-user.php" );
-		require_once( NINJA_FORMS_DIR . "/includes/display/processing/email-add-fields.php" );
-		require_once( NINJA_FORMS_DIR . "/includes/display/processing/attachment-csv.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/display/processing/fields-pre-process.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/display/processing/fields-process.php" );
 		require_once( NINJA_FORMS_DIR . "/includes/display/processing/fields-post-process.php" );
