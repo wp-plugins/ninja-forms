@@ -293,6 +293,7 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 			unset( $form_settings['success_msg'] );
 			unset( $form_settings['user_email_msg'] );
 			unset( $form_settings['user_subject'] );
+			unset( $form_settings['landing_page'] );
 
 			$args = array(
 				'update_array' 	=> array(
