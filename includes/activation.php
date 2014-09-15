@@ -91,11 +91,15 @@ function ninja_forms_activation( $network_wide ){
 		dbDelta($sql);
 
 		$email_address = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM ".NINJA_FORMS_FAV_FIELDS_TABLE_NAME." WHERE name = %s AND row_type = 0", 'Email Address' ), ARRAY_A );
-		if( !isset($email_address['id']) ){
-			$sql = 'INSERT INTO `'.NINJA_FORMS_FAV_FIELDS_TABLE_NAME.'` (`id`, `row_type`, `type`, `order`, `data`, `name`) VALUES
-			(1, 0, \'_text\', 0, \'a:11:{s:5:\"label\";s:13:\"Email Address\";s:9:\"label_pos\";s:4:\"left\";s:13:\"default_value\";s:0:\"\";s:4:\"mask\";s:0:\"\";s:10:\"datepicker\";s:1:\"0\";s:5:\"email\";s:1:\"1\";s:10:\"send_email\";s:1:\"1\";s:3:\"req\";s:1:\"0\";s:5:\"class\";s:0:\"\";s:9:\"show_help\";s:1:\"0\";s:9:\"help_text\";s:0:\"\";}\', \'Email Address\')';
-			$wpdb->query($sql);
+
+		if( isset($email_address['id']) ){
+			$sql = 'DELETE FROM `' . NINJA_FORMS_FAV_FIELDS_TABLE_NAME . '` WHERE id = ' . $email_address['id'];
+			$wpdb->query( $sql );
 		}
+
+		$sql = 'INSERT INTO `'.NINJA_FORMS_FAV_FIELDS_TABLE_NAME.'` (`id`, `row_type`, `type`, `order`, `data`, `name`) VALUES
+		(1, 0, \'_text\', 0, \'a:11:{s:5:\"label\";s:13:\"Email Address\";s:9:\"label_pos\";s:4:\"left\";s:13:\"default_value\";s:0:\"\";s:4:\"mask\";s:0:\"\";s:10:\"datepicker\";s:1:\"0\";s:5:\"email\";s:1:\"1\";s:10:\"send_email\";s:1:\"0\";s:3:\"req\";s:1:\"0\";s:5:\"class\";s:0:\"\";s:9:\"show_help\";s:1:\"0\";s:9:\"help_text\";s:0:\"\";}\', \'Email Address\')';
+		$wpdb->query($sql);
 
 		$state_dropdown = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM ".NINJA_FORMS_FAV_FIELDS_TABLE_NAME." WHERE name = %s AND row_type = 0", 'State Dropdown' ), ARRAY_A );
 		if( !isset($state_dropdown['id']) ){

@@ -76,31 +76,27 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.8 (14 September 2014) =
+= 2.8.1 (14 September 2014 ) =
+
+*Bugs:*
+
+* Fixed a bug that could cause emails to be sent to the user's email address, even if a notification wasn't active.
 
 *Security:*
 
 * Version 2.8 fixes a minor security issue that could allow non-admins and other forms to delete Ninja Forms. This won't affect all users, but we encourage everyone to update. 
-
-*Features:*
-
-* New, simpler system for creating custom notifications.
-* Send any number of emails per form submission.
-* Easily redirect the user to a page or display a custom success message.
-
-*Changes:*
-
-* Changed the "Save Form Settings" button to "Save."
-
-*Bugs:*
-
-* Fixed PHP notices.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.8.1 (14 September 2014 ) =
+
+*Bugs:*
+
+* Fixed a bug that could cause emails to be sent to the user's email address, even if a notification wasn't active.
 
 = 2.8 (14 September 2014) =
 
