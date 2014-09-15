@@ -78,6 +78,10 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 = 2.8 (14 September 2014) =
 
+*Security:*
+
+* Version 2.8 fixes a minor security issue that could allow non-admins and other forms to delete Ninja Forms. This won't affect all users, but we encourage everyone to update. 
+
 *Features:*
 
 * New, simpler system for creating custom notifications.
@@ -91,7 +95,6 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 *Bugs:*
 
 * Fixed PHP notices.
-* Fixed some possible security vulnerabilites within the admin.
 
 == Requested Features ==
 
@@ -101,6 +104,10 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 
 = 2.8 (14 September 2014) =
 
+*Security:*
+
+* Version 2.8 fixes a minor security issue that could allow non-admins and other forms to delete Ninja Forms. This won't affect all users, but we encourage everyone to update. 
+
 *Features:*
 
 * New, simpler system for creating custom notifications.
@@ -114,7 +121,6 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 *Bugs:*
 
 * Fixed PHP notices.
-* Fixed some possible security vulnerabilites within the admin.
 
 = 2.7.7 (19 August 2014) =
 
