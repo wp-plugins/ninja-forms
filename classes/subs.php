@@ -183,6 +183,8 @@ class NF_Subs {
 		// Add our "Date" label.
 		$label_array[0]['_date_submitted'] = __( 'Date Submitted', 'ninja-forms' );
 
+		$label_array = apply_filters( 'nf_subs_csv_label_array_before_fields', $label_array, $sub_ids );
+
 		foreach ( $fields as $field_id => $field ) {
 			// Get our field type
 			$field_type = $field['type'];

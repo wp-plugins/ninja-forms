@@ -784,3 +784,10 @@ function nf_deprecate_all_fields_email_table( $value, $form_id ) {
 }
 
 add_filter( 'nf_all_fields_table', 'nf_deprecate_all_fields_email_table', 10, 2 );
+
+// Deprecate our old success message filter
+function nf_deprecate_success_message_filter( $message, $n_id ) {
+	return apply_filters( 'ninja_forms_success_msg', $message );
+}
+
+add_filter( 'nf_success_msg', 'nf_deprecate_success_message_filter', 10, 2 );

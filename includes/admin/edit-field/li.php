@@ -222,7 +222,7 @@ function ninja_forms_edit_field_output_li( $field_id ) {
 	 * If we're submitting via ajax, we'll need to use this list.
 	 */
 	if ( isset ( $_POST['action'] ) && $_POST['action'] == 'ninja_forms_new_field' ) {
-		if ( ! empty ( $nf_rte_editors ) ) {
+		if ( ! empty ( $nf_rte_editors ) && isset ( $editors ) && is_object( $editors ) ) {
 			$editors->output_js( $field_id, $nf_rte_editors );
 		}
 	}

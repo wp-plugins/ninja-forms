@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 2.8.1
+Stable tag: 2.8.2
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,21 +76,49 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.8.1 (14 September 2014 ) =
+= 2.8.2 (16 September 2014 ) =
 
 *Bugs:*
 
 * Fixed a bug that could cause emails to be sent to the user's email address, even if a notification wasn't active.
+* Fixed a bug that could prevent emails from being sent if the message was empty.
+* Fixed a bug with upgrades that caused submission conversion to fail.
+* Fixed PHP notices.
 
 *Security:*
 
-* Version 2.8 fixes a minor security issue that could allow non-admins and other forms to delete Ninja Forms. This won't affect all users, but we encourage everyone to update. 
+* Version 2.8 fixes a minor security issue that could allow non-admins and other forms to delete Ninja Forms. This won't affect all users, but we encourage everyone to update.
+
+*Changes:*
+
+* Added a filter for success message notifications: nf_success_msg.
+* Added a filter for CSV exports after labels have been added but before fields: nf_subs_csv_label_array_before_fields.
+* Deprecated the old version of the success message filter.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.8.2 (16 September 2014 ) =
+
+*Bugs:*
+
+* Fixed a bug that could cause emails to be sent to the user's email address, even if a notification wasn't active.
+* Fixed a bug that could prevent emails from being sent if the message was empty.
+* Fixed a bug with upgrades that caused submission conversion to fail.
+* Fixed PHP notices.
+
+*Security:*
+
+* Version 2.8 fixes a minor security issue that could allow non-admins and other forms to delete Ninja Forms. This won't affect all users, but we encourage everyone to update.
+
+*Changes:*
+
+* Added a filter for success message notifications: nf_success_msg.
+* Added a filter for CSV exports after labels have been added but before fields: nf_subs_csv_label_array_before_fields.
+* Deprecated the old version of the success message filter.
 
 = 2.8.1 (14 September 2014 ) =
 

@@ -71,7 +71,7 @@ class NF_Notification_Success_Message extends NF_Notification_Base_Type
 	public function process( $id ) {
 		global $ninja_forms_processing;
 
-		$success_msg = Ninja_Forms()->notification( $id )->get_setting( 'success_msg' );
+		$success_msg = apply_filters( 'nf_success_msg', Ninja_Forms()->notification( $id )->get_setting( 'success_msg' ), $id );
 		$success_msg = do_shortcode( wpautop( $success_msg ) );
 		$ninja_forms_processing->add_success_msg( 'success_msg', $success_msg );
 	}

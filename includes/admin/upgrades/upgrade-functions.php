@@ -33,6 +33,15 @@ function nf_show_upgrade_notices() {
 		);
 	}
 
+	$update_email_settings_complete = get_option( 'nf_update_email_settings_complete', false );
+
+	if ( $n_conversion_complete && ! $update_email_settings_complete ) {
+		printf(
+			'<div class="update-nag"><p>' . __( 'Ninja Forms needs to update your email settings, click <a href="%s">here</a> to start the upgrade.', 'ninja-forms' ) . '</p></div>',
+			admin_url( 'index.php?page=nf-processing&action=update_email_settings' )
+		);
+	}
+
 	if ( isset( $_GET['page'] ) && $_GET['page'] == 'nf-upgrades' )
 		return; // Don't show notices on the upgrades page
 

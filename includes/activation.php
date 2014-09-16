@@ -203,7 +203,7 @@ function ninja_forms_activation( $network_wide ){
 	 		ninja_forms_add_starter_form();
 	 	}
 
-		update_option( 'nf_convert_notifications_complete', true);
+		update_option( 'nf_convert_notifications_complete', true );
 		update_option( 'nf_convert_subs_step', 'complete' );
 		update_option( 'nf_upgrade_notice', 'closed' );
 

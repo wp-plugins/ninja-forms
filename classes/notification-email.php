@@ -242,6 +242,14 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		$cc 			= $this->process_setting( $id, 'cc' );
 		$bcc 			= $this->process_setting( $id, 'bcc' );
 
+		if ( empty ( $from_name ) )
+			$from_name = 'WordPress';
+
+		if ( empty ( $from_address ) ) {
+			$admin_email = get_bloginfo( 'admin_email' );
+			$from_address = $admin_email;
+		}
+
 		$email_from 	= $from_name.' <'.$from_address.'>';
 
 		$subject 		= $this->process_setting( $id, 'email_subject' );
@@ -253,9 +261,11 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		$message 		= $this->process_setting( $id, 'email_message' );
 		$message 		= $message[0];
 
-		if ( $email_format != 'plain' ) {
+		if ( $email_format != 'plain' )
 			$message = apply_filters( 'ninja_forms_admin_email_message_wpautop', wpautop( $message ) );
-		}
+
+		if ( empty ( $message ) )
+			$message 		= ' ';
 
 		$headers = array();
 		$headers[] = 'From: ' . $email_from;

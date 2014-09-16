@@ -60,7 +60,11 @@ class NF_Convert_Subs {
 	public function count_old_subs() {
 		global $wpdb;
 		$count = $wpdb->get_results( 'SELECT COUNT(*) FROM '. NINJA_FORMS_SUBS_TABLE_NAME . ' WHERE `action` != "mp_save"', ARRAY_A );
-		return $count[0]['COUNT(*)'];
+		if ( is_array ( $count ) && ! empty ( $count ) ) {
+			return $count[0]['COUNT(*)'];
+		} else {
+			return false;
+		}
 	}
 
 
