@@ -50,6 +50,8 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 
 		dbDelta( $sql );
 
+		$email_address = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM ".NINJA_FORMS_FAV_FIELDS_TABLE_NAME." WHERE name = %s AND row_type = 0", 'Email Address' ), ARRAY_A );
+
 		if( isset($email_address['id']) ){
 			$sql = 'DELETE FROM `' . NINJA_FORMS_FAV_FIELDS_TABLE_NAME . '` WHERE id = ' . $email_address['id'];
 			$wpdb->query( $sql );
@@ -333,7 +335,7 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 					if ( isset ( $matches[3][ $key ] ) ) {
 						$atts = shortcode_parse_atts( $matches[3][ $key ] );
 						$id = $atts['id'];
-						$text = str_replace( $matches[0][ $key ], '`' . $id . '`', $text );
+						$text = str_replace( $matches[0][ $key ], '`field_' . $id . '`', $text );
 					}		
 				}
 			}
