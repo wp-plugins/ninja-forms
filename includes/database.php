@@ -378,8 +378,8 @@ function ninja_forms_set_transient(){
 	if ( $ninja_forms_processing->get_all_fields() ) {
 		foreach ( $ninja_forms_processing->get_all_fields() as $field_id => $user_value ) {
 			$field_settings = $ninja_forms_processing->get_field_settings( $field_id );
-			$all_fields_settings[$field_id] = $field_settings; 
-		}		
+			$all_fields_settings[$field_id] = $field_settings;
+		}
 	}
 
 	$transient['field_settings'] = $all_fields_settings;
@@ -394,7 +394,7 @@ function ninja_forms_set_transient(){
 		ninja_forms_set_transient_id();
 
 	if ( isset ( $_SESSION['ninja_forms_transient_id'] ) ) {
-		$transient_id = $_SESSION['ninja_forms_transient_id'];		
+		$transient_id = $_SESSION['ninja_forms_transient_id'];
 	}
 
 	//delete_transient( 'ninja_forms_test' );
@@ -417,7 +417,7 @@ function ninja_forms_delete_transient(){
 
 /**
  * Get a count of submissions for a form
- * 
+ *
  * @since 2.7
  * @param int $post_id
  * @return int $count
@@ -437,7 +437,7 @@ function nf_get_sub_count( $form_id, $post_status = 'publish' ) {
 
 /**
  * Get an array of form settings by form ID
- * 
+ *
  * @since 2.7
  * @param int $form_id
  * @return array $form['data']

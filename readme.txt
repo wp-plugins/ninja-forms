@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 2.8.3
+Stable tag: 2.8.4
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,11 +76,22 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.8.3 (17 September 2014 ) =
+= 2.8.4 (17 September 2014 ) =
+
+*Changes:*
+
+* Moving reply to, cc, and bcc to an advanced settings section for email notifications.
+* Any field can now be inserted into the from name, address, to, subject, reply to, cc, and bcc fields.
+* Added a custom short code parser that will prevent other plugins from tampering with email and success message ninja forms short codes.
 
 *Bugs:*
 
-* Fixed a bug that could cause notification conversion to crash.
+* Fixed an issue where short codes were being parsed in the admin.
+* Fixed a bug that could cause phantom emails to be sent to users who filled out forms.
+* Settings labels should now populate correctly upon activation.
+* New installs should not see upgrade notices.
+* Favourite fields can now be removed properly in all installations.
+* Fixed PHP notices.
 
 *Security:*
 
@@ -92,7 +103,28 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 
 == Changelog ==
 
-= 2.8.3 (17 September 2014 ) =
+= 2.8.4 (17 September 2014 ) =
+
+*Changes:*
+
+* Moving reply to, cc, and bcc to an advanced settings section for email notifications.
+* Any field can now be inserted into the from name, address, to, subject, reply to, cc, and bcc fields.
+* Added a custom short code parser that will prevent other plugins from tampering with email and success message ninja forms short codes.
+
+*Bugs:*
+
+* Fixed an issue where short codes were being parsed in the admin.
+* Fixed a bug that could cause phantom emails to be sent to users who filled out forms.
+* Settings labels should now populate correctly upon activation.
+* New installs should not see upgrade notices.
+* Favourite fields can now be removed properly in all installations.
+* Fixed PHP notices.
+
+*Security:*
+
+* Version 2.8 fixes a minor security issue that could allow non-admins and other forms to delete Ninja Forms. This won't affect all users, but we encourage everyone to update.
+
+= 2.8.3 (17 September 2014) =
 
 *Bugs:*
 
@@ -102,7 +134,7 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 
 * Version 2.8 fixes a minor security issue that could allow non-admins and other forms to delete Ninja Forms. This won't affect all users, but we encourage everyone to update.
 
-= 2.8.2 (16 September 2014 ) =
+= 2.8.2 (16 September 2014) =
 
 *Bugs:*
 
@@ -121,7 +153,7 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 * Added a filter for CSV exports after labels have been added but before fields: nf_subs_csv_label_array_before_fields.
 * Deprecated the old version of the success message filter.
 
-= 2.8.1 (14 September 2014 ) =
+= 2.8.1 (14 September 2014) =
 
 *Bugs:*
 

@@ -1,9 +1,21 @@
 <?php
 
 function ninja_forms_shortcode( $atts ){
-	$form = ninja_forms_return_echo( 'ninja_forms_display_form', $atts['id'] );
-	return $form;
+	if ( is_admin() ) {
+		$return = '[ninja_forms_display_form';
+		if ( is_array ( $atts ) ) {
+			foreach ( $atts as $key => $value ) {
+				$return .= ' ' . $key . '=' . $value;
+			}
+		}
+		$return .= ']';
+		return $return;
+	} else {
+		$form = ninja_forms_return_echo( 'ninja_forms_display_form', $atts['id'] );
+		return $form;
+	}
 }
+
 add_shortcode( 'ninja_forms_display_form', 'ninja_forms_shortcode' );
 
 function ninja_forms_field_shortcode( $atts ){
@@ -52,34 +64,26 @@ function ninja_forms_pre_process_shortcode($content) {
 add_filter('the_content', 'ninja_forms_pre_process_shortcode', 9999);
 
 /**
- * Shortcode for submission sequential ID
- *
- * @since 2.7
- * @return string $content
+ * Parse the [nf_sub_seq_num] shortcode
+ * 
+ * @since 2.8.4
+ * @return string $setting
  */
-function nf_sub_seq_num_shortcode( $sub_id ) {
+function nf_parse_sub_seq_num_shortcode( $setting, $setting_name = '', $id = '' ) {
 	global $ninja_forms_processing;
-	
+
+	if ( ! is_object( $ninja_forms_processing ) )
+		return $setting;
+
+	$sub_id = $ninja_forms_processing->get_form_setting( 'sub_id' );
 	$seq_num = Ninja_Forms()->sub( $sub_id )->get_seq_num();
-
-	//Get the form settings for the form currently being processed.
-	$admin_subject = $ninja_forms_processing->get_form_setting( 'admin_subject' );
-	$user_subject = $ninja_forms_processing->get_form_setting( 'user_subject' );
-	$success_msg = $ninja_forms_processing->get_form_setting( 'success_msg' );
-	$admin_email_msg = $ninja_forms_processing->get_form_setting( 'admin_email_msg' );
-	$user_email_msg = $ninja_forms_processing->get_form_setting( 'user_email_msg' );
-	$save_msg = $ninja_forms_processing->get_form_setting( 'save_msg' );
-
-	$ninja_forms_processing->update_form_setting( 'admin_subject', str_replace( '[nf_sub_seq_num]', $seq_num, $admin_subject ) );
-	$ninja_forms_processing->update_form_setting( 'user_subject', str_replace( '[nf_sub_seq_num]', $seq_num, $user_subject ) );
-	$ninja_forms_processing->update_form_setting( 'success_msg', str_replace( '[nf_sub_seq_num]', $seq_num, $success_msg ) );
-	$ninja_forms_processing->update_form_setting( 'admin_email_msg', str_replace( '[nf_sub_seq_num]', $seq_num, $admin_email_msg ) );
-	$ninja_forms_processing->update_form_setting( 'user_email_msg', str_replace( '[nf_sub_seq_num]', $seq_num, $user_email_msg ) );
-	$ninja_forms_processing->update_form_setting( 'save_msg', str_replace( '[nf_sub_seq_num]', $seq_num, $save_msg ) );
 	
+	$setting = str_replace( '[nf_sub_seq_num]', $seq_num, $setting );
+	return $setting;
 }
 
-add_action( 'nf_save_sub', 'nf_sub_seq_num_shortcode' );
+add_filter( 'nf_email_notification_process_setting', 'nf_parse_sub_seq_num_shortcode', 10, 3 );
+add_filter( 'nf_success_msg', 'nf_parse_sub_seq_num_shortcode', 10, 2 );
 
 /**
  * Shortcode for ninja_forms_all_fields
@@ -87,7 +91,7 @@ add_action( 'nf_save_sub', 'nf_sub_seq_num_shortcode' );
  * @since 2.8
  * @return string $content
  */
-function nf_all_fields_shortcode( $atts ) {
+function nf_all_fields_shortcode( $atts, $content = '' ) {
 	global $ninja_forms_fields, $ninja_forms_processing;
 
 	if ( ! isset ( $ninja_forms_processing ) )
@@ -107,12 +111,49 @@ function nf_all_fields_shortcode( $atts ) {
 
 		$value = apply_filters( 'nf_all_fields_field_value', ninja_forms_field_shortcode( array( 'id' => $field_id ) ), $field_id );
 		$label = strip_tags( apply_filters( 'nf_all_fields_field_label', $field['data']['label'], $field_id ) );
-		$all_fields_table .= '<tr id="ninja_forms_field_' . $field_id . '"><td>' . $label .':</td><td>' . $value . '</td></tr>'; 
+		$all_fields_table .= '<tr id="ninja_forms_field_' . $field_id . '"><td>' . $label .':</td><td>' . $value . '</td></tr>';
 	}
-	
+
 	$all_fields_table .= '</tbody></table>';
 
 	return apply_filters( 'nf_all_fields_table', $all_fields_table, $ninja_forms_processing->get_form_ID() );
 }
 
 add_shortcode( 'ninja_forms_all_fields', 'nf_all_fields_shortcode' );
+
+/**
+ * Parse our [ninja_forms_field] shortcode, just incase the shortcode parser screwed up.
+ *
+ * @since 2.8.4
+ * @return content
+ */
+function nf_parse_fields_shortcode( $content ) {
+	global $ninja_forms_processing;
+
+	if ( ! isset ( $ninja_forms_processing ) )
+		return $content;
+
+	$matches = array();
+	$pattern = '\[(\[?)(ninja_forms_field|ninja_forms_all_fields)(?![\w-])([^\]\/]*(?:\/(?!\])[^\]\/]*)*?)(?:(\/)\]|\](?:([^\[]*+(?:\[(?!\/\2\])[^\[]*+)*+)\[\/\2\])?)(\]?)';
+
+	preg_match_all('/'.$pattern.'/s', $content, $matches);
+
+	if ( is_array( $matches ) && ! empty( $matches[2] ) ) {
+		foreach ( $matches[2] as $key => $shortcode ) {
+
+			if ( 'ninja_forms_field' == $shortcode  ) {
+				if ( isset ( $matches[3][ $key ] ) ) {
+					$atts = shortcode_parse_atts( $matches[3][ $key ] );
+					$id = $atts['id'];
+					$content = str_replace( $matches[0][ $key ], $ninja_forms_processing->get_field_value( $id ), $content );
+				}
+			} else if ( 'ninja_forms_all_fields' == $shortcode ) {
+				if ( isset ( $matches[3][ $key ] ) ) {
+					$atts = shortcode_parse_atts( $matches[3][ $key ] );
+					$content = str_replace( $matches[0][ $key ], nf_all_fields_shortcode( $atts, $content ), $content );
+				}
+			}
+		}
+	}
+	return $content;
+}

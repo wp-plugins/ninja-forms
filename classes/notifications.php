@@ -243,7 +243,7 @@ class NF_Notifications
 			<table class="form-table">
 				<tbody id="notification-main">
 					<tr>
-						<th scope="row"><label for="setting-name"><?php _e( 'Name', 'ninja-forms' ); ?></label></th>
+						<th scope="row"><label for="setting-name"><?php _e( 'Notification Name', 'ninja-forms' ); ?></label></th>
 						<td><input name="settings[name]" type="text" id="settings-name" value="<?php echo nf_get_object_meta_value( $id, 'name' ); ?>" class="regular-text"></td>
 					</tr>
 					<tr>

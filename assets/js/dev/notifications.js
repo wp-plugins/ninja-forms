@@ -108,4 +108,9 @@ jQuery(document).ready(function($) {
 		document.location.href = url;
 	});
 
+	$( '#toggle_email_advanced' ).click( function(e) {
+		e.preventDefault();
+		$( '#email_advanced' ).toggle();
+	});
+
 });

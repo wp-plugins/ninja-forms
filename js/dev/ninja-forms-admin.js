@@ -902,7 +902,7 @@ jQuery(document).ready(function($) {
 		event.preventDefault();
 		var field_id = this.id.replace("ninja_forms_field_", "");
 		field_id = field_id.replace("_fav", "");
-		$.post(ajaxurl, { field_id: field_id, action:"ninja_forms_remove_fav"}, function(response){
+		$.post(ajaxurl, { field_id: field_id, action:"ninja_forms_remove_fav", nf_ajax_nonce:ninja_forms_settings.nf_ajax_nonce }, function(response){
 			$("#ninja_forms_insert_fav_field_" + response.fav_id + "_p").remove();
 			$(".ninja-forms-field-fav-id").each(function(){
 				if(this.value == response.fav_id){

@@ -10,7 +10,9 @@ class NF_Update_Email_Settings extends NF_Step_Processing {
 	}
 
 	public function loading() {
-		global $wpdb;
+
+		// Remove old email settings.
+		nf_change_email_fav();
 
 		// Get our total number of forms.
 		$form_count = nf_get_form_count();
@@ -41,36 +43,9 @@ class NF_Update_Email_Settings extends NF_Step_Processing {
 	}
 
 	public function step() {
-		global $ninja_forms_fields;
-
 		// Get our form ID
 		$form_id = $this->args['forms'][ $this->step ];
-
-		$fields = Ninja_Forms()->form( $form_id )->fields;
-
-		// Create a notification for our user email
-		if ( ! empty ( $fields ) ) {
-			foreach ( $fields as $field_id => $field ) {
-				if ( isset ( $field['data']['send_email'] ) && $field['data']['send_email'] == 1 ) {
-					// Add this field to our $addresses variable.
-					unset( $field['data']['send_email'] );
-					unset( $field['data']['replyto_email'] );
-					unset( $field['data']['from_name'] );
-
-					$args = array(
-						'update_array'	=> array(
-							'data'		=> serialize( $field['data'] ),
-						),
-						'where'			=> array(
-							'id' 		=> $field_id,
-						),
-					);
-
-					ninja_forms_update_field( $args );
-				}
-			}
-		}
-
+		nf_remove_old_email_settings( $form_id );
 	}
 
 	public function complete() {

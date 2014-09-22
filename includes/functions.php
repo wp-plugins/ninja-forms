@@ -56,7 +56,7 @@ function ninja_forms_subval_sort( $a, $subkey ) {
 		foreach($b as $key=>$val) {
 			$c[] = $a[$key];
 		}
-		return $c;		
+		return $c;
 	} else {
 		return $a;
 	}
@@ -65,7 +65,7 @@ function ninja_forms_subval_sort( $a, $subkey ) {
 
 /**
  * Takes a field ID and returns the admin label if it exists and the label if it does not.
- * 
+ *
  * @since 2.8
  * @param int $field_id
  * @return string $label
@@ -92,7 +92,7 @@ function nf_get_field_admin_label( $field_id, $form_id = '' ) {
 /**
  * Return the begin date with an added 00:00:00.
  * Checks for the current date format setting and tries to respect it.
- * 
+ *
  * @since 2.7
  * @param string $begin_date
  * @return string $begin_date
@@ -120,7 +120,7 @@ function nf_get_begin_date( $begin_date ) {
 /**
  * Return the end date with an added 23:59:59.
  * Checks for the current date format setting and tries to respect it.
- * 
+ *
  * @since 2.7
  * @param string $end_date
  * @return string $end_date
@@ -161,7 +161,7 @@ function nf_is_func_disabled( $function ) {
 
 /**
  * Acts as a wrapper/alias for nf_get_objects_by_type that is specific to notifications.
- * 
+ *
  * @since 2.8
  * @return array $notifications
  */
@@ -171,7 +171,7 @@ function nf_get_all_notifications() {
 
 /**
  * Acts as a wrapper/alias for nf_get_object_children that is specific to notifications.
- * 
+ *
  * @since 2.8
  * @param string $form_id
  * @return array $notifications
@@ -195,11 +195,11 @@ function nf_get_notification_by_id( $notification_id ) {
 
 /**
  * Insert a notification into the database.
- * 
+ *
  * Calls nf_insert_object()
  * Calls nf_add_relationship()
  * Calls nf_update_object_meta()
- * 
+ *
  * @since 2.8
  * @param int $form_id
  * @return int $n_id
@@ -218,9 +218,9 @@ function nf_insert_notification( $form_id = '' ) {
 
 /**
  * Delete a notification.
- * 
+ *
  * Acts as a wrapper/alias for nf_delete_object
- * 
+ *
  * @since 2.8
  * @param int $n_id
  * @return void
@@ -233,7 +233,7 @@ function nf_delete_notification( $n_id ) {
 
 /**
  * Function that gets a piece of object meta
- * 
+ *
  * @since 2.8
  * @param string $object_id
  * @param string $meta_key
@@ -254,7 +254,7 @@ function nf_get_object_meta_value( $object_id, $meta_key ) {
 
 /**
  * Function that gets children objects by type and parent id
- * 
+ *
  * @since 2.8
  * @param string $parent_id
  * @param string $type
@@ -280,13 +280,13 @@ function nf_get_object_children( $object_id, $child_type = '', $full_data = true
 						$s['meta_value'] =  unserialize( $s['meta_value'] );
 					}
 					$tmp_array[ $child_id ][ $s['meta_key'] ] = $s['meta_value'];
-				}				
+				}
 			} else {
 				$tmp_array[ $child_id ] = array();
 			}
 		}
 
-			
+
 	} else {
 		if ( is_array( $children ) ) {
 			foreach ( $children as $child ) {
@@ -356,7 +356,7 @@ function nf_get_object_meta( $object_id ) {
 
 /**
  * Insert an object.
- * 
+ *
  * @since 3.0
  * @param string $type
  * @return int $object_id
@@ -393,7 +393,7 @@ function nf_delete_object( $object_id ) {
 
 /**
  * Create a relationship between two objects
- * 
+ *
  * @since 2.8
  * @param int $child_id
  * @param string child_type
@@ -467,7 +467,7 @@ function nf_get_ip() {
 
 /**
  * Function that gets all objects of a given type.
- * 
+ *
  * @since 2.8
  * @return array $results
  */

@@ -51,7 +51,6 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 			$email_message = Ninja_Forms()->notification( $id )->get_setting( 'email_message' );		
 		}
 
-		
 		?>
 		<tr>
 			<th scope="row"><label for="settings-email_format"><?php _e( 'Format', 'ninja-forms' ); ?></label></th>
@@ -65,44 +64,31 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		<tr>
 			<th scope="row"><label for="settings-from_name"><?php _e( 'From Name', 'ninja-forms' ); ?></label></th>
 			<td>
-				<input name="settings[from_name]" type="text" id="settings-from_name" value="<?php echo $from_name; ?>" class="nf-tokenize" placeholder="Name or fields" data-token-limit="0" data-key="from_name" data-type="name" />
+				<input name="settings[from_name]" type="text" id="settings-from_name" value="<?php echo $from_name; ?>" class="nf-tokenize" placeholder="Name or fields" data-token-limit="0" data-key="from_name" data-type="all" />
+				<span class="howto"><?php _e( 'Email will appear to be from this name.', 'ninja-forms' ) ?></span>
 			</td>
 		</tr>
+
 
 		<tr>
 			<th scope="row"><label for="settings-from_address"><?php _e( 'From Address', 'ninja-forms' ); ?></label></th>
 			<td>
-				<input name="settings[from_address]" type="text" id="settings-from_address" value="<?php echo $from_address; ?>" class="nf-tokenize" placeholder="One email address or field" data-token-limit="1" data-key="from_address" data-type="email" />
+				<input name="settings[from_address]" type="text" id="settings-from_address" value="<?php echo $from_address; ?>" class="nf-tokenize" placeholder="One email address or field" data-token-limit="1" data-key="from_address" data-type="all" />
+				<span class="howto"><?php _e( 'Email will appear to be from this email address.', 'ninja-forms' ) ?></span>
 			</td>
 		</tr>
 		<tr>
-			<th scope="row"><label for="settings-reply_to"><?php _e( 'Reply To', 'ninja-forms' ); ?></label></th>
-			<td>
-				<input name="settings[reply_to]" type="text" id="settings-reply_to" value="<?php echo $reply_to; ?>" class="nf-tokenize" placeholder="One email address or field" data-token-limit="1" data-key="reply_to" data-type="email" />
-			</td>
-		</tr>			
-		<tr>
 			<th scope="row"><label for="settings-to"><?php _e( 'To', 'ninja-forms' ); ?></label></th>
 			<td>
-				<input name="settings[to]" type="text" id="settings-to" value="<?php echo $to; ?>" class="nf-tokenize" placeholder="Email addresses or search for a field" data-token-limit="0" data-key="to" data-type="email" />
-			</td>
-		</tr>		
-		<tr>
-			<th scope="row"><label for="settings-cc"><?php _e( 'Cc', 'ninja-forms' ); ?></label></th>
-			<td>
-				<input name="settings[cc]" type="text" id="settings-cc" value="<?php echo $cc; ?>" class="nf-tokenize" placeholder="Email addresses or search for a field" data-token-limit="0" data-key="cc" data-type="email" />
-			</td>
-		</tr>		
-		<tr>
-			<th scope="row"><label for="settings-bcc"><?php _e( 'Bcc', 'ninja-forms' ); ?></label></th>
-			<td>
-				<input name="settings[bcc]" type="text" id="settings-bcc" value="<?php echo $bcc; ?>" class="nf-tokenize" placeholder="Email addresses or search for a field" data-token-limit="0" data-key="bcc" data-type="email" />
+				<input name="settings[to]" type="text" id="settings-to" value="<?php echo $to; ?>" class="nf-tokenize" placeholder="Email addresses or search for a field" data-token-limit="0" data-key="to" data-type="all" />
+				<span class="howto"><?php _e( 'Who should this email be sent to?', 'ninja-forms' ) ?></span>
 			</td>
 		</tr>
 		<tr>
 			<th scope="row"><label for="settings-email_subject"><?php _e( 'Subject', 'ninja-forms' ); ?></label></th>
 			<td>
 				<input name="settings[email_subject]" type="text" id="settings-email_subject" value="<?php echo $email_subject; ?>" class="nf-tokenize" placeholder="Subject Text or search for a field" data-token-limit="0" data-key="email_subject" data-type="all" />
+				<span class="howto"><?php _e( 'This will be the subject of the email.', 'ninja-forms' ) ?></span>
 			</td>
 		</tr>		
 		<tr>
@@ -147,7 +133,29 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 				</ul>
 			</td>
 		</tr>
-
+		<tr>
+			<th scope="row"><a href="#" id="toggle_email_advanced"><?php _e( 'Advanced Settings', 'ninja-forms' ); ?></a></th>
+		</tr>
+		<tbody id="email_advanced" style="display:none;">
+			<tr>
+				<th scope="row"><label for="settings-reply_to"><?php _e( 'Reply To', 'ninja-forms' ); ?></label></th>
+				<td>
+					<input name="settings[reply_to]" type="text" id="settings-reply_to" value="<?php echo $reply_to; ?>" class="nf-tokenize" placeholder="One email address or field" data-token-limit="1" data-key="reply_to" data-type="all" />
+				</td>
+			</tr>
+			<tr>
+				<th scope="row"><label for="settings-cc"><?php _e( 'Cc', 'ninja-forms' ); ?></label></th>
+				<td>
+					<input name="settings[cc]" type="text" id="settings-cc" value="<?php echo $cc; ?>" class="nf-tokenize" placeholder="Email addresses or search for a field" data-token-limit="0" data-key="cc" data-type="all" />
+				</td>
+			</tr>		
+			<tr>
+				<th scope="row"><label for="settings-bcc"><?php _e( 'Bcc', 'ninja-forms' ); ?></label></th>
+				<td>
+					<input name="settings[bcc]" type="text" id="settings-bcc" value="<?php echo $bcc; ?>" class="nf-tokenize" placeholder="Email addresses or search for a field" data-token-limit="0" data-key="bcc" data-type="all" />
+				</td>
+			</tr>
+		</tbody>
 		<?php
 
 		do_action( 'nf_email_notification_after_settings', $id );
@@ -161,8 +169,8 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 			$bcc = $this->get_value( $id, 'bcc', $form_id );			
 			$email_subject = $this->get_value( $id, 'email_subject', $form_id );			
 		} else {
-			$from_name = '';
-			$from_address = '';
+			$from_name = get_bloginfo( 'name' );
+			$from_address = get_bloginfo( 'admin_email' );
 			$reply_to = '';
 			$to = '';
 			$cc = '';
@@ -365,6 +373,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 				$setting[ $x ] = $ninja_forms_processing->get_field_value( str_replace( 'field_', '', $setting[ $x ] ) );
 			}
 			$setting[ $x ] = do_shortcode( $setting[ $x ] );
+			$setting[ $x ] = nf_parse_fields_shortcode( $setting[ $x ] );
 		}
 
 		return apply_filters( 'nf_email_notification_process_setting', $setting, $setting_name, $id );
