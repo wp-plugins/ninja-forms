@@ -267,7 +267,8 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		}
 
 		$message 		= $this->process_setting( $id, 'email_message' );
-		$message 		= $message[0];
+		if ( is_array ( $message ) )
+			$message 	= $message[0];
 
 		if ( $email_format != 'plain' )
 			$message = apply_filters( 'ninja_forms_admin_email_message_wpautop', wpautop( $message ) );
