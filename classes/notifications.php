@@ -260,9 +260,9 @@ class NF_Notifications
 							</select>
 						</td>
 					</tr>
-
 				</tbody>
 				<?php
+				do_action( 'nf_edit_notification_settings', $id );
 				foreach ( $this->get_types() as $slug => $nicename ) {
 					if ( $this_type == $slug ) {
 						$display = '';

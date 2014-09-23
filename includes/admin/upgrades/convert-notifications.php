@@ -52,7 +52,7 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 
 		// Remove old email settings.
 		nf_change_email_fav();
-		nf_update_email_field_settings();
+		nf_remove_old_email_settings();
 
 		// Get our total number of forms.
 		$form_count = nf_get_form_count();
