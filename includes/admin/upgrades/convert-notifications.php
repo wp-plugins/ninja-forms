@@ -268,7 +268,7 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 			nf_update_object_meta( $n_id, 'name', __( 'Success Message', 'ninja-forms' ) );
 			nf_update_object_meta( $n_id, 'type', 'success_message' );
 			nf_update_object_meta( $n_id, 'active', 1 );
-			nf_update_object_meta( $n_id, 'success_message', $form_settings['success_msg'] );
+			nf_update_object_meta( $n_id, 'success_msg', $form_settings['success_msg'] );
 		}
 
 		if ( isset ( $form_settings['landing_page'] ) && ! empty( $form_settings['landing_page'] ) ) {
