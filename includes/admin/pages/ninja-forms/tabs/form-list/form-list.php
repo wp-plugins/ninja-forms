@@ -169,7 +169,6 @@ function ninja_forms_tab_form_list($form_id, $data){
 			$link = remove_query_arg( array( 'paged' ) );
 			$edit_link = esc_url( add_query_arg( array( 'tab' => 'form_settings', 'form_id' => $form_id ), $link ) );
 			$subs_link = admin_url( 'edit.php?post_status=all&post_type=nf_sub&action=-1&m=0&form_id=' . $form_id . '&paged=1&mode=list&action2=-1' );
-			$export_link = esc_url( add_query_arg( array( 'export_form' => 1, 'form_id' => $form_id ), $link ) );
 			$duplicate_link = esc_url( add_query_arg( array( 'duplicate_form' => 1, 'form_id' => $form_id ), $link ) );
 			$shortcode = apply_filters ( "ninja_forms_form_list_shortcode", "[ninja_forms_display_form id=" .  $form_id . "]", $form_id );
 			$template_function = apply_filters ( "ninja_forms_form_list_template_function", "<pre>if( function_exists( 'ninja_forms_display_form' ) ){ ninja_forms_display_form( " . "$form_id" . " ); }</pre>", $form_id );
@@ -185,7 +184,6 @@ function ninja_forms_tab_form_list($form_id, $data){
 					<div class="row-actions">
 						<span class="edit"><a href="<?php echo $edit_link;?>"><?php _e( 'Edit', 'ninja-forms' ); ?></a> | </span>
 						<span class="trash"><a class="ninja-forms-delete-form" title="<?php _e( 'Delete this form', 'ninja-forms' ); ?>" href="#" id="ninja_forms_delete_form_<?php echo $form_id;?>"><?php _e( 'Delete', 'ninja-forms' ); ?></a> | </span>
-						<span class="export"><a href="<?php echo $export_link;?>" title="<?php _e( 'Export Form', 'ninja-forms' ); ?>"><?php _e( 'Export', 'ninja-forms' ); ?></a> | </span>
 						<span class="duplicate"><a href="<?php echo $duplicate_link;?>" title="<?php _e( 'Duplicate Form', 'ninja-forms' ); ?>"><?php _e( 'Duplicate', 'ninja-forms' ); ?></a> | </span>
 						<span class="bleep"><?php echo ninja_forms_preview_link( $form_id ); ?> | </span>
 						<span class="subs"><a href="<?php echo $subs_link;?>" class="" title="<?php _e( 'View Submissions', 'ninja-forms' ); ?>"><?php _e( 'View Submissions', 'ninja-forms' ); ?></a></span>

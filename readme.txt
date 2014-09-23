@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 2.8.4
+Stable tag: 2.8.5
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,22 +76,13 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.8.4 (17 September 2014 ) =
-
-*Changes:*
-
-* Moving reply to, cc, and bcc to an advanced settings section for email notifications.
-* Any field can now be inserted into the from name, address, to, subject, reply to, cc, and bcc fields.
-* Added a custom short code parser that will prevent other plugins from tampering with email and success message ninja forms short codes.
+= 2.8.5 (23 September 2014 ) =
 
 *Bugs:*
 
-* Fixed an issue where short codes were being parsed in the admin.
-* Fixed a bug that could cause phantom emails to be sent to users who filled out forms.
-* Settings labels should now populate correctly upon activation.
-* New installs should not see upgrade notices.
-* Favourite fields can now be removed properly in all installations.
-* Fixed PHP notices.
+* Fixed a bug with notifications that could prevent notifciations from converting properly in some instances.
+* Fixed a bug with changing email message content via the filter.
+* Properly included minified JS files.
 
 *Security:*
 
