@@ -1,9 +1,4 @@
 jQuery(document).ready(function(jQuery) {
-	// Initiate our response function list variable.
-	window['ninja_forms_response_function_list'] = {};
-
-	// Initiate our beforeSubmit function list variable.
-	window['ninja_forms_before_submit_function_list'] = {};
 
 	// Prevent the enter key from submitting the form.
 	jQuery(".ninja-forms-form input").bind("keypress", function(e) {
@@ -716,20 +711,6 @@ function ninja_forms_response(responseText, statusText, xhr, jQueryform){
 		}
 		return result;
 	}
-}
-
-function ninja_forms_register_response_function(form_id, name){
-	if( typeof window['ninja_forms_response_function_list'][form_id] == 'undefined' ){
-		window['ninja_forms_response_function_list'][form_id] = {};
-	}
-	window['ninja_forms_response_function_list'][form_id][name] = name;
-}
-
-function ninja_forms_register_before_submit_function(form_id, name){
-	if( typeof window['ninja_forms_before_submit_function_list'][form_id] == 'undefined' ){
-		window['ninja_forms_before_submit_function_list'][form_id] = {};
-	}
-	window['ninja_forms_before_submit_function_list'][form_id][name] = name;
 }
 
 function ninja_forms_default_before_submit(formData, jqForm, options){

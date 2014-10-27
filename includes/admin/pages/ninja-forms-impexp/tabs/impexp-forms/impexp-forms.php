@@ -108,6 +108,8 @@ function ninja_forms_serialize_form( $form_id ){
 	$notifications = nf_get_notifications_by_form_id( $form_id );
 	$form_row['notifications'] = $notifications;
 
+	$form_row = apply_filters( 'nf_export_form_row', $form_row );
+
 	$form_row = serialize($form_row);
 
 	return $form_row;

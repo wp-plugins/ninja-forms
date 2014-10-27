@@ -16,7 +16,7 @@ class NF_Notification_Redirect extends NF_Notification_Base_Type
 	 * Get things rolling
 	 */
 	function __construct() {
-
+		$this->name = __( 'Redirect', 'ninja-forms' );
 	}
 
 	/**
@@ -51,3 +51,5 @@ class NF_Notification_Redirect extends NF_Notification_Base_Type
 	}
 
 }
+
+return new NF_Notification_Redirect();

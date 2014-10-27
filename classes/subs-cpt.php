@@ -121,7 +121,7 @@ class NF_Subs_CPT {
 		$args = array(
 			'labels' => $labels,
 			'public' => false,
-			'publicly_queryable' => true,
+			'publicly_queryable' => false,
 			'show_ui' => true,
 			'_builtin' => false, // It's a custom post type, not built in!
 			'query_var' => true,

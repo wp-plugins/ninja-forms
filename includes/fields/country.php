@@ -257,7 +257,7 @@ function ninja_forms_register_field_country(){
 		$tmp_array[] = array( 'name' => $country, 'value' => $abbr );
 	}
 	$args = array(
-		'name' => 'Country',
+		'name' => __( 'Country', 'ninja-forms' ),
 		'sidebar' => '',
 		'display_function' => 'ninja_forms_field_country_display',
 		'group' => 'standard_fields',

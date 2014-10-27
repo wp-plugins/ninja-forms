@@ -278,7 +278,7 @@ function ninja_forms_display_js( $form_id, $local_vars = '' ) {
 add_action( 'ninja_forms_display_js', 'ninja_forms_display_js', 10, 2 );
 
 function ninja_forms_display_css(){
-	wp_enqueue_style( 'ninja-forms-display', NINJA_FORMS_URL .'/css/ninja-forms-display.css' );
+	wp_enqueue_style( 'ninja-forms-display', NINJA_FORMS_URL .'css/ninja-forms-display.css' );
 	wp_enqueue_style( 'jquery-qtip', NINJA_FORMS_URL .'css/qtip.css' );
 	wp_enqueue_style( 'jquery-rating', NINJA_FORMS_URL .'css/jquery.rating.css' );
 }

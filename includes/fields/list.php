@@ -161,7 +161,7 @@ function ninja_forms_field_list_edit($field_id, $data){
 	<span id="ninja_forms_field_<?php echo $field_id;?>_list_span" class="ninja-forms-list-span" style="display: none;">
 		<p class="description description-wide">
 			<?php _e( 'Options', 'ninja-forms' );?>: <a href="#" id="ninja_forms_field_<?php echo $field_id;?>_list_add_option" class="ninja-forms-field-add-list-option button-secondary"><?php _e( 'Add New', 'ninja-forms' );?></a>
-			<a href="#TB_inline?width=640&height=530&inlineId=ninja_forms_field_<?php echo $field_id;?>_import_options_div" class="thickbox button-secondary" title="Import List Items" id=""><?php _e( 'Import Options', 'ninja-forms' );?></a>
+			<a href="#TB_inline?width=640&height=530&inlineId=ninja_forms_field_<?php echo $field_id;?>_import_options_div" class="thickbox button-secondary" title="<?php _e( 'Import List Items', 'ninja-forms' ); ?>" id=""><?php _e( 'Import Options', 'ninja-forms' );?></a>
 		</p>
 
 		<p class="description description-wide">
@@ -191,16 +191,26 @@ function ninja_forms_field_list_edit($field_id, $data){
 			<p><?php _e( 'To use this feature, you can paste your CSV into the textarea above.', 'ninja-forms' );?></p>
 			<p><?php _e( 'The format should look like the following:', 'ninja-forms' );?></p>
 <pre>
-Label,Value,Calc
-Label,Value,Calc
-Label,Value,Calc
+<?php
+$example1 = _x( 'Label,Value,Calc', 'Example for list importing. Leave puncation in place.', 'ninja-forms' );
+echo $example1;
+echo '<br />';
+echo $example1;
+echo '<br />';
+echo $example1;
+?>
 </pre>
 
 			<p><?php _e( "If you want to send an empty value or calc, you should use '' for those.", 'ninja-forms' );?></p>
 <pre>
-Label,'',''
-Label,'',''
-Label,'',''
+<?php
+$example2 = __( 'Label', 'ninja-forms' ) . ",'',''";
+echo $example2;
+echo '<br />';
+echo $example2;
+echo '<br />';
+echo $example2;
+?>
 </pre>
 
 

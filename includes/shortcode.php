@@ -76,6 +76,9 @@ function nf_parse_sub_seq_num_shortcode( $setting, $setting_name = '', $id = '' 
 		return $setting;
 
 	$sub_id = $ninja_forms_processing->get_form_setting( 'sub_id' );
+	if ( empty ( $sub_id ) )
+		return $setting;
+
 	$seq_num = Ninja_Forms()->sub( $sub_id )->get_seq_num();
 	
 	$setting = str_replace( '[nf_sub_seq_num]', $seq_num, $setting );
@@ -97,9 +100,14 @@ function nf_all_fields_shortcode( $atts, $content = '' ) {
 	if ( ! isset ( $ninja_forms_processing ) )
 		return false;
 
-	// Generate our "all fields" table for use as a JS var.
-	$all_fields_table = '<table><tbody>';
+	$html = isset ( $atts['html'] ) ? $atts['html'] : 1;
 
+	if ( 1 == $html ) {
+		// Generate our "all fields" table for use as a JS var.
+		$field_list = '<table><tbody>';
+	} else {
+		$field_list = '';
+	}
 	foreach ( $ninja_forms_processing->get_all_fields() as $field_id => $user_value ) {
 		if ( ! $user_value )
 			continue;
@@ -111,12 +119,18 @@ function nf_all_fields_shortcode( $atts, $content = '' ) {
 
 		$value = apply_filters( 'nf_all_fields_field_value', ninja_forms_field_shortcode( array( 'id' => $field_id ) ), $field_id );
 		$label = strip_tags( apply_filters( 'nf_all_fields_field_label', $field['data']['label'], $field_id ) );
-		$all_fields_table .= '<tr id="ninja_forms_field_' . $field_id . '"><td>' . $label .':</td><td>' . $value . '</td></tr>';
+
+		if ( 1 == $html )
+			$field_list .= '<tr id="ninja_forms_field_' . $field_id . '"><td>' . $label .':</td><td>' . $value . '</td></tr>';
+		else
+			$field_list .= $label . ' - ' . $value . "\r\n";
 	}
 
-	$all_fields_table .= '</tbody></table>';
+	if ( 1 == $html )
+		$field_list .= '</tbody></table>';
 
-	return apply_filters( 'nf_all_fields_table', $all_fields_table, $ninja_forms_processing->get_form_ID() );
+	return apply_filters( 'nf_all_fields_table', $field_list, $ninja_forms_processing->get_form_ID() );
+
 }
 
 add_shortcode( 'ninja_forms_all_fields', 'nf_all_fields_shortcode' );

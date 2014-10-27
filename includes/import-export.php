@@ -16,7 +16,7 @@ function ninja_forms_import_form( $file ){
 	unset ( $form['notifications'] );
 
 	$form = apply_filters( 'ninja_forms_before_import_form', $form );
-	$form['data'] = serialize( $form['data'] );
+	$form['data'] = serialize( $form['data'] ) ;
 
 	$wpdb->insert( NINJA_FORMS_TABLE_NAME, $form );
 	$form_id = $wpdb->insert_id;
@@ -35,12 +35,18 @@ function ninja_forms_import_form( $file ){
 		}
 	}
 
+	$form['data'] = unserialize( $form['data'] );
+	$form['field'] = $form_fields;
+	$form['notifications'] = $notifications;	
+
 	// Insert any notifications we might have.
 	if ( is_array( $notifications ) ) {
 		foreach ( $notifications as $n ) {
 			$n_id = nf_insert_notification( $form_id );
+			$n = apply_filters( 'nf_import_notification_meta', $n, $n_id, $form );
+			unset( $n['conditions'] );
 			foreach ( $n as $meta_key => $meta_value ) {
-				foreach ( $form_fields as $field ) {						
+				foreach ( $form_fields as $field ) {
 					// We need to replace any references to old fields in our notification
 					if ( 'email_message' == $meta_key ) {
 						$meta_value = str_replace( '[ninja_forms_field id=' . $field['old_id'].']', '[ninja_forms_field id='.$field['id'].']', $meta_value );
@@ -54,9 +60,7 @@ function ninja_forms_import_form( $file ){
 		}
 	}
 
-	$form['data'] = unserialize( $form['data'] );
-	$form['field'] = $form_fields;
-	$form['notifications'] = $notifications;
+	
 	do_action( 'ninja_forms_after_import_form', $form );
 	return $form['id'];
 }

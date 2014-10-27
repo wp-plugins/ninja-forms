@@ -1,9 +1,9 @@
 === Ninja Forms ===
-Contributors: kstover, jameslaws, daveshine, mordauk, bftrick, helgatheviking
+Contributors: kstover, jameslaws, wpnzach, daveshine, mordauk, bftrick, helgatheviking
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 2.8.5
+Stable tag: 2.8.6
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -76,6 +76,44 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
+= 2.8.6 (27 October 2014 ) =
+
+*Changes:*
+
+* Added a new nf_init action that allows developers to run functions when Ninja Forms loads.
+* Added hooks and filters to allow notifications to be more easily extended.
+
+*Bugs:*
+
+* Fixed a bug with converting notifications from previous versions of Ninja Forms.
+* Re-Added the password mismatch label to the label settings tab.
+* The [ninja_forms_all_fields] short code should now function properly in plain text emails. 
+* Submitted forms that are set to clear upon completion should now properly re-populate default values that are based upon logged-in user information.
+* Fixed an issue with doubles slashes on Windows servers.
+* Importing forms should now work properly in all instances.
+
+== Requested Features ==
+
+If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
+
+== Changelog ==
+
+= 2.8.6 (27 October 2014 ) =
+
+*Changes:*
+
+* Added a new nf_init action that allows developers to run functions when Ninja Forms loads.
+* Added hooks and filters to allow notifications to be more easily extended.
+
+*Bugs:*
+
+* Fixed a bug with converting notifications from previous versions of Ninja Forms.
+* Re-Added the password mismatch label to the label settings tab.
+* The [ninja_forms_all_fields] short code should now function properly in plain text emails. 
+* Submitted forms that are set to clear upon completion should now properly re-populate default values that are based upon logged-in user information.
+* Fixed an issue with doubles slashes on Windows servers.
+* Importing forms should now work properly in all instances.
+
 = 2.8.5 (23 September 2014 ) =
 
 *Bugs:*
@@ -87,12 +125,6 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 *Security:*
 
 * Version 2.8 fixes a minor security issue that could allow non-admins and other forms to delete Ninja Forms. This won't affect all users, but we encourage everyone to update.
-
-== Requested Features ==
-
-If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
-
-== Changelog ==
 
 = 2.8.4 (17 September 2014 ) =
 

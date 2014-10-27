@@ -124,16 +124,18 @@ function ninja_forms_field_credit_card_display( $field_id, $data ) {
 			}
 			?>
 		</div>
-		<div class="ninja-forms-credit-card-number-error ninja-forms-field-error">
-			<?php
-			if ( $card_number_errors ) {
-				if( is_array( $card_number_errors ) ) {
-					foreach ( $card_number_errors as $error ) {
-						echo '<p>'.$error['msg'].'</p>';
+		<div class="ninja-forms-error">
+			<div class="ninja-forms-credit-card-number-error ninja-forms-field-error">
+				<?php
+				if ( $card_number_errors ) {
+					if( is_array( $card_number_errors ) ) {
+						foreach ( $card_number_errors as $error ) {
+							echo '<p>'.$error['msg'].'</p>';
+						}
 					}
 				}
-			}
-			?>
+				?>
+			</div>
 		</div>
 	<?php
 	
@@ -179,16 +181,18 @@ function ninja_forms_field_credit_card_display( $field_id, $data ) {
 			?>
 
 		</div>
-		<div class="ninja-forms-credit-card-cvc-error ninja-forms-field-error">
-			<?php
-			if ( $card_cvc_errors ) {
-				if( is_array( $card_cvc_errors ) ) {
-					foreach ( $card_cvc_errors as $error ) {
-						echo '<p>'.$error['msg'].'</p>';
+		<div class="ninja-forms-error">
+			<div class="ninja-forms-credit-card-cvc-error ninja-forms-field-error">
+				<?php
+				if ( $card_cvc_errors ) {
+					if( is_array( $card_cvc_errors ) ) {
+						foreach ( $card_cvc_errors as $error ) {
+							echo '<p>'.$error['msg'].'</p>';
+						}
 					}
 				}
-			}
-			?>
+				?>
+			</div>
 		</div>
 	<?php
 	
@@ -235,18 +239,19 @@ function ninja_forms_field_credit_card_display( $field_id, $data ) {
 			?>
 
 		</div>
-		<div class="ninja-forms-credit-card-name-error ninja-forms-field-error">
-			<?php
-			if ( $card_name_errors ) {
-				if( is_array( $card_name_errors ) ) {
-					foreach ( $card_name_errors as $error ) {
-						echo '<p>'.$error['msg'].'</p>';
+		<div class="ninja-forms-error">
+			<div class="ninja-forms-credit-card-name-error ninja-forms-field-error">
+				<?php
+				if ( $card_name_errors ) {
+					if( is_array( $card_name_errors ) ) {
+						foreach ( $card_name_errors as $error ) {
+							echo '<p>'.$error['msg'].'</p>';
+						}
 					}
 				}
-			}
-			?>
+				?>
+			</div>
 		</div>
-		
 	<?php
 	
 	}
@@ -291,17 +296,19 @@ function ninja_forms_field_credit_card_display( $field_id, $data ) {
 			?>
 
 		</div>
-		<div class="ninja-forms-credit-card-exp-month-error ninja-forms-field-error">
-			<?php
-			if ( $card_month_errors ) {
-				if( is_array( $card_month_errors ) ) {
-					foreach ( $card_month_errors as $error ) {
-						echo '<p>'.$error['msg'].'</p>';
+		<div class="ninja-forms-error">
+			<div class="ninja-forms-credit-card-exp-month-error ninja-forms-field-error">
+				<?php
+				if ( $card_month_errors ) {
+					if( is_array( $card_month_errors ) ) {
+						foreach ( $card_month_errors as $error ) {
+							echo '<p>'.$error['msg'].'</p>';
+						}
 					}
 				}
-			}
-			?>
-		</div> <!-- [close_exp_month_wrap] -->
+				?>
+			</div> <!-- [close_exp_month_wrap] -->
+		</div>
 		<div class="ninja-forms-credit-card-exp-year label-<?php echo $label_pos; ?> field-wrap"> <!-- [open_exp_year_wrap] -->
 			<?php
 			if ( $desc_pos == 'before_label' or $desc_pos == 'before_everything' ) {
@@ -340,17 +347,19 @@ function ninja_forms_field_credit_card_display( $field_id, $data ) {
 			?>
 
 		</div>
-		<div class="ninja-forms-credit-card-exp-year-error ninja-forms-field-error">
-			<?php
-			if ( $card_year_errors ) {
-				if( is_array( $card_year_errors ) ) {
-					foreach ( $card_year_errors as $error ) {
-						echo '<p>'.$error['msg'].'</p>';
+		<div class="ninja-forms-error">
+			<div class="ninja-forms-credit-card-exp-year-error ninja-forms-field-error">
+				<?php
+				if ( $card_year_errors ) {
+					if( is_array( $card_year_errors ) ) {
+						foreach ( $card_year_errors as $error ) {
+							echo '<p>'.$error['msg'].'</p>';
+						}
 					}
 				}
-			}
-			?>
-		</div> <!-- [close_exp_month_wrap] -->
+				?>
+			</div> <!-- [close_exp_month_wrap] -->
+		</div>
 	<?php
 	}
 }

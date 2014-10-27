@@ -427,6 +427,21 @@ function nf_get_object_parent( $child_id ) {
 }
 
 /**
+ * Get an object's type
+ * 
+ * @since 2.8.6
+ * @param $object_id
+ * @return string $type
+ */
+
+function nf_get_object_type( $object_id ) {
+	global $wpdb;
+	// Get our object type
+	$type = $wpdb->get_row( $wpdb->prepare( 'SELECT type FROM ' . NF_OBJECTS_TABLE_NAME . ' WHERE id = %d', $object_id ), ARRAY_A );
+	return $type['type'];
+}
+
+/**
  * Return our form count
  *
  * @since 2.8
@@ -483,3 +498,18 @@ function nf_get_objects_by_type( $object_type ) {
 
 	return $results;
 }
+
+/**
+ * Add filters so that users given the ability to see the "All Forms" table and the add new form page
+ * can add new fields and delete forms.
+ * 
+ * @since 2.8.6
+ * @return void
+ */
+function nf_add_permissions_filters( $cap ) {
+	return apply_filters( 'ninja_forms_admin_all_forms_capabilities', $cap );
+}
+
+add_filter( 'nf_new_field_capabilities', 'nf_add_permissions_filters' );
+add_filter( 'nf_delete_field_capabilities', 'nf_add_permissions_filters' );
+add_filter( 'nf_delete_form_capabilities', 'nf_add_permissions_filters' );

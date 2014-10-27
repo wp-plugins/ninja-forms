@@ -423,16 +423,22 @@ function ninja_forms_delete_transient(){
  * @return int $count
  */
 function nf_get_sub_count( $form_id, $post_status = 'publish' ) {
-	$args = array(
-		'meta_key' => '_form_id',
-	    'meta_value' => $form_id,
-	    'post_type' => 'nf_sub',
-	    'posts_per_page' => -1,
-	    'post_status' => $post_status,
-	);
-	$posts = get_posts( $args );
+	global $wpdb;
 
-	return count( $posts );
+	$meta_key = '_form_id';
+	$meta_value = $form_id;
+
+	$sql = "SELECT count(DISTINCT pm.post_id)
+	FROM $wpdb->postmeta pm
+	JOIN $wpdb->posts p ON (p.ID = pm.post_id)
+	WHERE pm.meta_key = '$meta_key'
+	AND pm.meta_value = '$meta_value'
+	AND p.post_type = 'nf_sub'
+	AND p.post_status = '$post_status'";
+
+	$count = $wpdb->get_var($sql);
+
+	return $count;
  }
 
 /**

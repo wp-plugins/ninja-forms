@@ -27,6 +27,13 @@ class NF_Notifications
 	function __construct() {
 		global $pagenow;
 
+		// Register our notification types
+		Ninja_Forms()->notification_types['email'] = require_once( NF_PLUGIN_DIR . 'classes/notification-email.php' );
+		Ninja_Forms()->notification_types['redirect'] = require_once( NF_PLUGIN_DIR . 'classes/notification-redirect.php' );
+		Ninja_Forms()->notification_types['success_message'] = require_once( NF_PLUGIN_DIR . 'classes/notification-success-message.php' );
+
+		Ninja_Forms()->notification_types = apply_filters( 'nf_notification_types', Ninja_Forms()->notification_types );
+
 		// Register our notification tab
 		add_action( 'admin_init', array( $this, 'register_tab' ) );
 		
@@ -42,6 +49,8 @@ class NF_Notifications
 		add_action( 'wp_ajax_nf_delete_notification', array( $this, 'delete_notification' ) );
 		add_action( 'wp_ajax_nf_activate_notification', array( $this, 'activate_notification' ) );
 		add_action( 'wp_ajax_nf_deactivate_notification', array( $this, 'deactivate_notification' ) );
+
+
 
 		// Add our hook to add notification types processors.
 		add_action( 'ninja_forms_post_process', array( $this, 'notification_processing' ), 999 );
@@ -212,9 +221,9 @@ class NF_Notifications
 	        <!-- Forms are NOT created automatically, so you need to wrap the table in one to use features like bulk actions -->
 	      	 <form id="forms-filter" method="get">
 	            <!-- For plugins, we also need to ensure that the form posts back to our current page -->
-	            <input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
-	            <input type="hidden" name="tab" value="<?php echo $_REQUEST['tab']; ?>" />
-	            <input type="hidden" name="form_id" value="<?php echo $_REQUEST['form_id']; ?>" />
+	            <input type="hidden" name="page" value="<?php echo esc_attr( $_REQUEST['page'] ); ?>" />
+	            <input type="hidden" name="tab" value="<?php echo esc_attr( $_REQUEST['tab'] ); ?>" />
+	            <input type="hidden" name="form_id" value="<?php echo esc_attr( $_REQUEST['form_id'] ); ?>" />
 				<?php
 				//Create an instance of our package class...
 			    $nf_all_forms = new NF_Notifications_List_Table();
@@ -273,7 +282,7 @@ class NF_Notifications
 					<tbody id="notification-<?php echo $slug; ?>" class="notification-type" style="<?php echo $display;?>">
 						<?php
 							// Call our type edit screen.
-							Ninja_Forms()->notification_types->$slug->edit_screen( $id );
+							Ninja_Forms()->notification_types[ $slug ]->edit_screen( $id );
 						?>
 					</tbody>
 					<?php
@@ -311,11 +320,13 @@ class NF_Notifications
 			$new = false;
 		}
 
-		$data = Ninja_Forms()->notification_types->$type->save_admin( $n_id, $data );
+		$data = Ninja_Forms()->notification_types[ $type ]->save_admin( $n_id, $data );
 
 		foreach ( $settings as $meta_key => $meta_value ) {
 			nf_update_object_meta( $n_id, $meta_key, $meta_value );
 		}
+
+		do_action( 'nf_save_notification', $n_id, $data, $new );
 
 		if ( $new ) {
 			$redirect = remove_query_arg( array( 'notification-action' ) );
@@ -336,8 +347,8 @@ class NF_Notifications
 	 */
 	public function get_types() {
 		$types = array();
-		foreach ( Ninja_Forms()->registered_notification_types as $slug => $type ) {
-			$types[ $slug ] = $type['nicename'];
+		foreach ( Ninja_Forms()->notification_types as $slug => $object ) {
+			$types[ $slug ] = $object->name;
 		}
 		return $types;
 	}
@@ -351,6 +362,9 @@ class NF_Notifications
 	 * @return void
 	 */
 	public function delete_notification() {
+		// Bail if our nonce doesn't verify.
+		check_ajax_referer( 'nf_ajax', 'nf_ajax_nonce' );
+
 		$n_id = $_REQUEST['n_id'];
 		Ninja_Forms()->notification( $n_id )->delete();
 	}
@@ -364,6 +378,9 @@ class NF_Notifications
 	 * @return void
 	 */
 	public function activate_notification() {
+		// Bail if our nonce doesn't verify.
+		check_ajax_referer( 'nf_ajax', 'nf_ajax_nonce' );
+
 		$n_id = $_REQUEST['n_id'];
 		Ninja_Forms()->notification( $n_id )->activate();
 	}
@@ -377,6 +394,9 @@ class NF_Notifications
 	 * @return void
 	 */
 	public function deactivate_notification() {
+		// Bail if our nonce doesn't verify.
+		check_ajax_referer( 'nf_ajax', 'nf_ajax_nonce' );
+
 		$n_id = $_REQUEST['n_id'];
 		Ninja_Forms()->notification( $n_id )->deactivate();
 	}
@@ -508,6 +528,7 @@ class NF_Notifications
 		$notifications = nf_get_notifications_by_form_id( $form_id, false );
 		if ( is_array( $notifications ) ) {
 			foreach ( $notifications as $id ) {
+				do_action( 'nf_notification_before_process', $id );
 				if ( Ninja_Forms()->notification( $id )->active ) {
 					Ninja_Forms()->notification( $id )->process();
 				}

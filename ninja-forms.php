@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms
 Plugin URI: http://ninjaforms.com/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 2.8.5
+Version: 2.8.6
 Author: The WP Ninjas
 Author URI: http://ninjaforms.com
 Text Domain: ninja-forms
@@ -65,7 +65,7 @@ class Ninja_Forms {
 	/**
 	 * @var registered_notification_types
 	 */
-	var $registered_notification_types;
+	var $notification_types = array();
 
 	/**
 	 * Main Ninja_Forms Instance
@@ -115,14 +115,6 @@ class Ninja_Forms {
 		// Get our notifications up and running.
 		self::$instance->notifications = new NF_Notifications();
 
-		self::$instance->register->notification_type( 'email', __( 'Email', 'ninja-forms' ), 'NF_Notification_Email' );
-		self::$instance->register->notification_type( 'redirect', __( 'Redirect', 'ninja-forms' ), 'NF_Notification_Redirect' );
-		self::$instance->register->notification_type( 'success_message', __( 'Success Message', 'ninja-forms' ), 'NF_Notification_Success_Message' );
-
-		do_action( 'nf_register_notification_types', self::$instance );
-
-		self::$instance->notification_types = new NF_Notification_Types();
-
 		// Get our step processor up and running.
 		// We only need this in the admin.
 		if ( is_admin() ) {
@@ -131,6 +123,10 @@ class Ninja_Forms {
 			self::$instance->convert_notifications = new NF_Convert_Notifications();
 			self::$instance->update_email_settings = new NF_Update_Email_Settings();
 		}
+
+		// Fire our Ninja Forms init filter.
+		// This will allow other plugins to register items to the instance.
+		do_action( 'nf_init', self::$instance );
 	}
 
 	/**
@@ -267,7 +263,7 @@ class Ninja_Forms {
 
 		// Plugin version
 		if ( ! defined( 'NF_PLUGIN_VERSION' ) )
-			define( 'NF_PLUGIN_VERSION', '2.8.5' );
+			define( 'NF_PLUGIN_VERSION', '2.8.6' );
 
 		// Plugin Folder Path
 		if ( ! defined( 'NF_PLUGIN_DIR' ) )
@@ -353,13 +349,9 @@ class Ninja_Forms {
 		// Include our notifications object
 		require_once( NF_PLUGIN_DIR . 'classes/notifications.php' );
 		// Include our notification table object
-		require_once( NF_PLUGIN_DIR . 'classes/notifications-table.php' );		
-		// Include our notification table object
-		require_once( NF_PLUGIN_DIR . 'classes/notification-types.php' );
+		require_once( NF_PLUGIN_DIR . 'classes/notifications-table.php' );
+		// Include our base notification type
 		require_once( NF_PLUGIN_DIR . 'classes/notification-base-type.php' );
-		require_once( NF_PLUGIN_DIR . 'classes/notification-email.php' );
-		require_once( NF_PLUGIN_DIR . 'classes/notification-redirect.php' );
-		require_once( NF_PLUGIN_DIR . 'classes/notification-success-message.php' );
 
 		if ( is_admin () ) {
 			// Include our step processing stuff if we're in the admin.
