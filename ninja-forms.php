@@ -293,7 +293,7 @@ class Ninja_Forms {
 
 		// Ninja Forms debug mode
 		if ( ! defined( 'NINJA_FORMS_JS_DEBUG' ) )
-			define( 'NINJA_FORMS_JS_DEBUG', false );
+			define( 'NINJA_FORMS_JS_DEBUG', true );
 
 		// Ninja Forms plugin directory
 		if ( ! defined( 'NINJA_FORMS_DIR' ) )
