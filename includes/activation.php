@@ -261,7 +261,7 @@ function ninja_forms_starter_form_exists() {
  */
 function ninja_forms_add_starter_form() {
     // load starter form
-    $file = file_get_contents( NINJA_FORMS_DIR . "/includes/forms/starter-form.nff" );
+    $file = file_get_contents( NINJA_FORMS_DIR . "/includes/forms/starter-form-new.nff" );
     $file = apply_filters( 'ninja_forms_starter_form_contents', $file );
 
     // create new form
