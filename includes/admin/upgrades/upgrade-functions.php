@@ -255,6 +255,25 @@ function nf_remove_old_email_send_to( $form_id ) {
 	if ( empty ( $form_id ) )
 		return false;
 
+	// Remove any "Admin mailto" settings we might have.
+	$form_row = ninja_forms_get_form_by_id( $form_id );
+
+	if ( isset ( $form_row['data']['admin_mailto'] ) ) {
+		unset ( $form_row['data']['admin_mailto'] );
+
+		$args = array(
+			'update_array'	=> array(
+				'data'		=> serialize( $form_row['data'] ),
+			),
+			'where'			=> array(
+				'id' 		=> $form_id,
+			),
+		);
+
+		ninja_forms_update_form( $args );
+
+	}
+
 	// Update any old email settings we have.
 	$fields = Ninja_Forms()->form( $form_id )->fields;
 

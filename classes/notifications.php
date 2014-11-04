@@ -509,7 +509,7 @@ class NF_Notifications
 			$html .= '<option value="' . $field_id . '">' . $label . ' - ID: ' . $field_id . '</option>';
 		}
 		$html .= '</select>';
-		$html .= ' <a href="#" class="button-secondary nf-insert-field">Insert Field</a> <a href="#" class="button-secondary nf-insert-all-fields">Insert All Fields</a>';
+		$html .= ' <a href="#" class="button-secondary nf-insert-field">' . __( 'Insert Field', 'ninja-forms' ) . '</a> <a href="#" class="button-secondary nf-insert-all-fields">' . __( 'Insert All Fields', 'ninja-forms' ) . '</a>';
 
 		return $html;
 	}

@@ -568,7 +568,7 @@ function ninja_forms_field_country_display( $field_id, $data ) {
 	}
 
 	if ( isset ( $data['country_use_custom_first'] ) AND $data['country_use_custom_first'] == 1 ) {
-		$countries = array_merge( array( $country_custom_first => $country_custom_first ), $countries );
+		$countries = array_merge( array( $country_custom_first => '' ), $countries );
 	}
 
 	$field_class = ninja_forms_get_field_class( $field_id );

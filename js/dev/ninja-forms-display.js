@@ -730,10 +730,13 @@ function ninja_forms_default_before_submit(formData, jqForm, options){
 function ninja_forms_default_response(response){
 	var form_id = response.form_id;
 
-	//jQuery("#ninja_forms_form_" + form_id + "_process_msg").hide();
+	ninja_forms_update_error_msgs(response);
+	ninja_forms_update_success_msg(response);
 
-	ninja_forms_update_error_msgs(response)
-	ninja_forms_update_success_msg(response)
+	if ( response.errors == false && typeof response.form_settings['landing_page'] != 'undefined' && response.form_settings['landing_page'] != '' ) {
+		window.location = response.form_settings['landing_page'];
+	}
+
 	return true;
 }
 

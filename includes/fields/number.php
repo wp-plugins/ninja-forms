@@ -6,19 +6,19 @@ function ninja_forms_register_field_number() {
 		'edit_function' => 'ninja_forms_field_number_edit',
 		'edit_options' => array(
 			array(
-				'type' => 'number',
+				'type' => 'text',
 				'class' => 'medium-text',
 				'name' => 'number_min',
 				'label' => __( 'Minimum Value', 'ninja-forms' ),
 			),
 			array(
-				'type' => 'number',
+				'type' => 'text',
 				'class' => 'medium-text',
 				'name' => 'number_max',
 				'label' => __( 'Maximum Value', 'ninja-forms' ),
 			),
 			array(
-				'type' => 'number',
+				'type' => 'text',
 				'class' => 'medium-text',
 				'name' => 'number_step',
 				'label' => __( 'Step (amount to increment by)', 'ninja-forms' ),

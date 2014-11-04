@@ -67,7 +67,7 @@ function ninja_forms_admin(){
 	}
 
 	if( !isset( $ninja_forms_admin_update_message ) AND isset( $_REQUEST['update_message'] ) ){
-		$ninja_forms_admin_update_message = $_REQUEST['update_message'];
+		$ninja_forms_admin_update_message = esc_html( $_REQUEST['update_message'] );
 	}
 
 	$output_form = isset ( $ninja_forms_tabs[$current_page][$current_tab]['output_form'] ) ? $ninja_forms_tabs[$current_page][$current_tab]['output_form'] : true;

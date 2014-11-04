@@ -261,14 +261,24 @@ function nf_get_object_meta_value( $object_id, $meta_key ) {
  * @return array $children
  */
 
-function nf_get_object_children( $object_id, $child_type = '', $full_data = true ) {
+function nf_get_object_children( $object_id, $child_type = '', $full_data = true, $include_forms = true ) {
 	global $wpdb;
 
-	if ( $child_type != '' ) {
-		$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . " WHERE child_type = %s AND parent_id = %d", $child_type, $object_id ), ARRAY_A);
+
+	if ( $include_forms ) {
+		if ( $child_type != '' ) {
+			$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . " WHERE child_type = %s AND parent_id = %d", $child_type, $object_id ), ARRAY_A);
+		} else {
+			$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . " WHERE parent_id = %d", $object_id ), ARRAY_A);
+		}
 	} else {
-		$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . " WHERE parent_id = %d", $object_id ), ARRAY_A);
+		if ( $child_type != '' ) {
+			$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . " WHERE child_type = %s AND parent_id = %d AND parent_type <> 'form'", $child_type, $object_id ), ARRAY_A);
+		} else {
+			$children = $wpdb->get_results( $wpdb->prepare( "SELECT child_id FROM " . NF_OBJECT_RELATIONSHIPS_TABLE_NAME . " WHERE parent_id = %d AND parent_type <> 'form'", $object_id ), ARRAY_A);
+		}
 	}
+
 	$tmp_array = array();
 	if ( $full_data ) {
 		foreach( $children as $id ) {
@@ -379,6 +389,13 @@ function nf_insert_object( $type ) {
 function nf_delete_object( $object_id ) {
 	global $wpdb;
 
+	// Check to see if we have any object children.
+	$children = nf_get_object_children( $object_id, '', false, false );
+
+	foreach ( $children as $child_id ) {
+		nf_delete_object( $child_id );
+	}
+
 	// Delete this object.
 	$wpdb->query( $wpdb->prepare( 'DELETE FROM ' . NF_OBJECTS_TABLE_NAME .' WHERE id = %d', $object_id ) );
 
@@ -390,6 +407,7 @@ function nf_delete_object( $object_id ) {
 
 	return true;
 }
+
 
 /**
  * Create a relationship between two objects

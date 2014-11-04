@@ -122,6 +122,13 @@ function ninja_forms_delete_form( $form_id = '' ){
 	$wpdb->query($wpdb->prepare("DELETE FROM ".NINJA_FORMS_TABLE_NAME." WHERE id = %d", $form_id));
 	$wpdb->query($wpdb->prepare("DELETE FROM ".NINJA_FORMS_FIELDS_TABLE_NAME." WHERE form_id = %d", $form_id));
 
+	// Delete any notifications attached to this form.
+	// Grab notifications.
+	$notifications = nf_get_notifications_by_form_id( $form_id, false );
+	foreach ( $notifications as $n_id ) {
+		nf_delete_object( $n_id );
+	}
+
 	if( $ajax ){
 		die();
 	}

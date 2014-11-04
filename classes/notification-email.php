@@ -55,28 +55,28 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		<tr>
 			<th scope="row"><label for="settings-from_name"><?php _e( 'From Name', 'ninja-forms' ); ?></label></th>
 			<td>
-				<input name="settings[from_name]" type="text" id="settings-from_name" value="<?php echo $from_name; ?>" class="nf-tokenize" placeholder="Name or fields" data-token-limit="0" data-key="from_name" data-type="all" />
+				<input name="settings[from_name]" type="text" id="settings-from_name" value="<?php echo $from_name; ?>" class="nf-tokenize" placeholder="<?php _e( 'Name or fields', 'ninja-forms' ); ?>" data-token-limit="0" data-key="from_name" data-type="all" />
 				<span class="howto"><?php _e( 'Email will appear to be from this name.', 'ninja-forms' ) ?></span>
 			</td>
 		</tr>
 		<tr>
 			<th scope="row"><label for="settings-from_address"><?php _e( 'From Address', 'ninja-forms' ); ?></label></th>
 			<td>
-				<input name="settings[from_address]" type="text" id="settings-from_address" value="<?php echo $from_address; ?>" class="nf-tokenize" placeholder="One email address or field" data-token-limit="1" data-key="from_address" data-type="all" />
+				<input name="settings[from_address]" type="text" id="settings-from_address" value="<?php echo $from_address; ?>" class="nf-tokenize" placeholder="<?php _e( 'One email address or field', 'ninja-forms' ); ?>" data-token-limit="1" data-key="from_address" data-type="all" />
 				<span class="howto"><?php _e( 'Email will appear to be from this email address.', 'ninja-forms' ) ?></span>
 			</td>
 		</tr>
 		<tr>
 			<th scope="row"><label for="settings-to"><?php _e( 'To', 'ninja-forms' ); ?></label></th>
 			<td>
-				<input name="settings[to]" type="text" id="settings-to" value="<?php echo $to; ?>" class="nf-tokenize" placeholder="Email addresses or search for a field" data-token-limit="0" data-key="to" data-type="all" />
+				<input name="settings[to]" type="text" id="settings-to" value="<?php echo $to; ?>" class="nf-tokenize" placeholder="<?php _e( 'Email addresses or search for a field', 'ninja-forms' ); ?>" data-token-limit="0" data-key="to" data-type="all" />
 				<span class="howto"><?php _e( 'Who should this email be sent to?', 'ninja-forms' ) ?></span>
 			</td>
 		</tr>
 		<tr>
 			<th scope="row"><label for="settings-email_subject"><?php _e( 'Subject', 'ninja-forms' ); ?></label></th>
 			<td>
-				<input name="settings[email_subject]" type="text" id="settings-email_subject" value="<?php echo $email_subject; ?>" class="nf-tokenize" placeholder="Subject Text or search for a field" data-token-limit="0" data-key="email_subject" data-type="all" />
+				<input name="settings[email_subject]" type="text" id="settings-email_subject" value="<?php echo $email_subject; ?>" class="nf-tokenize" placeholder="<?php _e( 'Subject Text or search for a field', 'ninja-forms' ); ?>" data-token-limit="0" data-key="email_subject" data-type="all" />
 				<span class="howto"><?php _e( 'This will be the subject of the email.', 'ninja-forms' ) ?></span>
 			</td>
 		</tr>
@@ -98,7 +98,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 					<?php
 					$attachment_types = apply_filters( 'nf_email_notification_attachment_types',
 						array(
-							'attach_csv' => 'Submission CSV',
+							'attach_csv' => __( 'Submission CSV', 'ninja-forms' ),
 						)
 					);
 
@@ -286,11 +286,11 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		$headers[] = 'charset=utf-8';
 
 		if ( ! empty( $cc ) ) {
-			$headers[] = 'Cc: ' . $address;
+			$headers[] = 'Cc: ' . $cc;
 		}
 
 		if ( ! empty( $bcc ) ) {
-			$headers[] = 'Bcc: ' . $address;
+			$headers[] = 'Bcc: ' . $bcc;
 		}
 
 		$csv_attachment = '';
@@ -343,7 +343,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 
 		// Delete our admin CSV if one is present.
 		if ( file_exists( $csv_attachment ) ) {
-			unlink ( $csv_attachment );
+			//unlink ( $csv_attachment );
 		}
 	}
 

@@ -909,7 +909,7 @@ function ninja_forms_calc_evaluate( $op, $value1, $value2 ) {
  * @return calc_value
  */
 function ninja_forms_field_calc_value( $field_id, $field_value = '', $calc_method = 'auto' ) {
-	global $ninja_forms_loading, $ninja_forms_processing;
+	global $ninja_forms_loading, $ninja_forms_processing, $wp_locale;
 
 	if ( isset ( $ninja_forms_loading ) ) {
 		$field = $ninja_forms_loading->get_field_settings( $field_id );
@@ -957,7 +957,8 @@ function ninja_forms_field_calc_value( $field_id, $field_value = '', $calc_metho
 		if ( !$field_value OR $field_value == '' ) {
 			$field_value = 0;
 		}
-		$calc_value = (float) preg_replace('/[^0-9.]*/','',$field_value);
+		$decimal_point = $wp_locale->number_format['decimal_point'];
+		$calc_value = (float) preg_replace('/[^0-9' . $decimal_point . '-]*/','',$field_value);
 	}
 
 	if ( is_string( $calc_value ) AND strpos( $calc_value, "%" ) !== false ) {
