@@ -13,8 +13,6 @@ Ninja Forms is the ultimate FREE form creation solution for WordPress. Build Wor
 
 The Ninja Forms framework is now on [GitHub](https://github.com/wpninjas/ninja-forms)! If you're a developer and want to help make Ninja Forms better, check out our [GitHub repo](https://github.com/wpninjas/ninja-forms). It's also a great resource for developers who are interested in creating premium extensions for our online store.
 
-This review of Ninja Forms was done by Pippin Williamson:
-
 [youtube http://www.youtube.com/watch?v=2yf2Fqvbmkk]
 
 Here are just a few of the things you will find in Ninja Forms:
