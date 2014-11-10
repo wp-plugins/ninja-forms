@@ -15,7 +15,7 @@ The Ninja Forms framework is now on [GitHub](https://github.com/wpninjas/ninja-f
 
 This review of Ninja Forms was done by Pippin Williamson:
 
-[youtube http://www.youtube.com/watch?v=hVfPmKzqYpk]
+[youtube http://www.youtube.com/watch?v=2yf2Fqvbmkk]
 
 Here are just a few of the things you will find in Ninja Forms:
 
