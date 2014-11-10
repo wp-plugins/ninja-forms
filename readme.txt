@@ -31,7 +31,7 @@ Here are just a few of the things you will find in Ninja Forms:
 * Please note that if you are using a version of PHP lower than 5.3, you may experience some problems using AJAX Submissions. These can be minimized by using simple success/error messages without any quotes or special characters.
 
 = Demo Site =
-Please feel free to visit our [demo site](http://demo.wpninjas.com/ninja-forms/) where you can test the features of Ninja Forms and all of our extensions. http://demo.wpninjas.com/ninja-forms/
+Please feel free to visit our [demo site](http://demo.ninjaforms.com) where you can test the features of Ninja Forms and all of our extensions. http://demo.ninjaforms.com
 
 = In addition to these features, extensions are available at our website: =
 
