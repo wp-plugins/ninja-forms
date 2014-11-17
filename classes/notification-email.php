@@ -138,19 +138,19 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 			<tr>
 				<th scope="row"><label for="settings-reply_to"><?php _e( 'Reply To', 'ninja-forms' ); ?></label></th>
 				<td>
-					<input name="settings[reply_to]" type="text" id="settings-reply_to" value="<?php echo $reply_to; ?>" class="nf-tokenize" placeholder="One email address or field" data-token-limit="1" data-key="reply_to" data-type="all" />
+					<input name="settings[reply_to]" type="text" id="settings-reply_to" value="<?php echo $reply_to; ?>" class="nf-tokenize" placeholder="<?php __( 'One email address or field', 'ninja-forms' ); ?>" data-token-limit="1" data-key="reply_to" data-type="all" />
 				</td>
 			</tr>
 			<tr>
 				<th scope="row"><label for="settings-cc"><?php _e( 'Cc', 'ninja-forms' ); ?></label></th>
 				<td>
-					<input name="settings[cc]" type="text" id="settings-cc" value="<?php echo $cc; ?>" class="nf-tokenize" placeholder="Email addresses or search for a field" data-token-limit="0" data-key="cc" data-type="all" />
+					<input name="settings[cc]" type="text" id="settings-cc" value="<?php echo $cc; ?>" class="nf-tokenize" placeholder="<?php __( 'Email addresses or search for a field', 'ninja-forms' ); ?>" data-token-limit="0" data-key="cc" data-type="all" />
 				</td>
 			</tr>
 			<tr>
 				<th scope="row"><label for="settings-bcc"><?php _e( 'Bcc', 'ninja-forms' ); ?></label></th>
 				<td>
-					<input name="settings[bcc]" type="text" id="settings-bcc" value="<?php echo $bcc; ?>" class="nf-tokenize" placeholder="Email addresses or search for a field" data-token-limit="0" data-key="bcc" data-type="all" />
+					<input name="settings[bcc]" type="text" id="settings-bcc" value="<?php echo $bcc; ?>" class="nf-tokenize" placeholder="<?php __( 'Email addresses or search for a field', 'ninja-forms' ); ?>" data-token-limit="0" data-key="bcc" data-type="all" />
 				</td>
 			</tr>
 		</tbody>
@@ -246,9 +246,9 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		$reply_to 		= $reply_to[0];
 		$to 			= $this->process_setting( $id, 'to' );
 		$cc 			= $this->process_setting( $id, 'cc' );
-		$cc             = $cc[0];
+//		$cc             = $cc[0];
 		$bcc 			= $this->process_setting( $id, 'bcc' );
-		$bcc 			= $bcc[0];
+//		$bcc 			= $bcc[0];
 
 		if ( empty ( $from_name ) )
 			$from_name = 'WordPress';
@@ -286,11 +286,15 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 		$headers[] = 'charset=utf-8';
 
 		if ( ! empty( $cc ) ) {
-			$headers[] = 'Cc: ' . $cc;
+			foreach ($cc as $ccemail) {
+				$headers[] = 'Cc: ' . $ccemail;
+			}
 		}
 
 		if ( ! empty( $bcc ) ) {
-			$headers[] = 'Bcc: ' . $bcc;
+			foreach ($bcc as $bccemail) {
+				$headers[] = 'Bcc: ' . $bccemail;
+			}
 		}
 
 		$csv_attachment = '';
@@ -367,7 +371,7 @@ class NF_Notification_Email extends NF_Notification_Base_Type
 
 		// call parent process setting method
 		$setting = parent::process_setting( $id, $setting, $html );
-		
+
 		// gotta keep the old filter in case anyone was using it.
 		return apply_filters( 'nf_email_notification_process_setting', $setting, $setting_name, $id );
 	}

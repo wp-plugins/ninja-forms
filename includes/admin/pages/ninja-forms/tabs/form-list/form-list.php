@@ -96,7 +96,6 @@ function ninja_forms_tab_form_list($form_id, $data){
 			<select id="" class="" name="bulk_action">
 				<option value=""><?php _e( 'Bulk Actions', 'ninja-forms' );?></option>
 				<option value="delete"><?php _e( 'Delete', 'ninja-forms' );?></option>
-				<!-- <option value="export"><?php _e( 'Export Forms', 'ninja-forms' );?></option> -->
 			</select>
 			<input type="submit" name="submit" value="<?php _e( 'Apply', 'ninja-forms' ); ?>" class="button-secondary">
 		</div>
@@ -138,7 +137,7 @@ function ninja_forms_tab_form_list($form_id, $data){
 			<span class="pagination-links">
 				<a class="first-page disabled" title="<?php _e( 'Go to the first page', 'ninja-forms' ); ?>" href="<?php echo $first_page;?>">«</a>
 				<a class="prev-page disabled" title="<?php _e( 'Go to the previous page', 'ninja-forms' ); ?>" href="<?php echo $prev_page;?>">‹</a>
-				<span class="paging-input"><input class="current-page" title="Current page" type="text" name="paged" value="<?php echo $current_page;?>" size="2"> of <span class="total-pages"><?php echo $page_count;?></span></span>
+				<span class="paging-input"><input class="current-page" title="<?php _e( 'Current page', 'ninja-forms' ); ?>" type="text" name="paged" value="<?php echo $current_page;?>" size="2"> <?php _e( 'of', 'ninja-forms' ); ?> <span class="total-pages"><?php echo $page_count;?></span></span>
 				<a class="next-page" title="<?php _e( 'Go to the next page', 'ninja-forms' ); ?>" href="<?php echo $next_page;?>">›</a>
 				<a class="last-page" title="<?php _e( 'Go to the last page', 'ninja-forms' ); ?>" href="<?php echo $last_page;?>">»</a>
 			</span>

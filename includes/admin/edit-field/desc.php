@@ -63,7 +63,6 @@ function ninja_forms_edit_field_desc( $field_id ) {
 		ninja_forms_edit_field_el_output( $field_id, 'select', __( 'Description Position', 'ninja-forms' ), 'desc_pos', $desc_pos, 'wide', $options, 'wide' );
 		ninja_forms_edit_field_el_output( $field_id, 'rte', __( 'Description Content', 'ninja-forms' ), 'desc_text', $desc_text, 'wide', '', 'widefat' );
 
-		// ninja_forms_edit_field_el_output($field_id, 'desc', $desc_desc, 'desc_desc');
 ?>
 		</span>
 		<?php

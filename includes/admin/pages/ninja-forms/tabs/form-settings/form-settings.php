@@ -86,7 +86,7 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				'desc' => '',
 				'label' => __( 'Require user to be logged in to view form?', 'ninja-forms' ),
 				'display_function' => '',
-				'help' => __( '', 'ninja-forms' ),
+				'help' => '',
 			),
 			array(
 				'name' => 'append_page',
@@ -94,7 +94,7 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				'desc' => '',
 				'label' => __( 'Add form to this page', 'ninja-forms' ),
 				'display_function' => '',
-				'help' => __('', 'ninja-forms'),
+				'help' => '',
 				'options' => $append_array,
 			),
 			array(
@@ -103,7 +103,7 @@ function ninja_forms_register_form_settings_basic_metabox(){
 				'desc' => '',
 				'label' => __( 'Submit via AJAX (without page reload)?', 'ninja-forms' ),
 				'display_function' => '',
-				'help' => __( '', 'ninja-forms' )
+				'help' => '',
 			),
 			array(
 				'name' => 'clear_complete',
@@ -148,46 +148,6 @@ function ninja_forms_register_form_settings_basic_metabox(){
 
 add_action( 'admin_init', 'ninja_forms_register_form_settings_basic_metabox' );
 
-function ninja_forms_admin_email($form_id, $data){
-	if(isset($data['admin_mailto'])){
-		$admin_mailto = $data['admin_mailto'];
-	}else{
-		$admin_mailto = '';
-	}
-
-	?>
-	<label for="">
-		<p>
-			<a href="#" id="ninja_forms_add_mailto_<?php echo $form_id;?>" name="" class="ninja-forms-add-mailto"><?php _e( 'Add New', 'ninja-forms' ); ?></a>
-			<a href="#" class="tooltip">
-			    <img id="" class='ninja-forms-help-text' src="<?php echo NINJA_FORMS_URL;?>images/question-ico.gif" title="">
-			    <span>
-			        <img class="callout" src="<?php echo NINJA_FORMS_URL;?>/images/callout.gif" />
-			        <?php _e( 'Please enter all the addresses this form should be sent to.', 'ninja-forms' );?>
-			    </span>
-			</a>
-		</p>
-	</label>
-	<div id="ninja_forms_mailto">
-		<input type="hidden" name="admin_mailto" value="">
-		<?php
-		if(is_array($admin_mailto) AND !empty($admin_mailto)){
-			$x = 0;
-			foreach($admin_mailto as $v){
-				?>
-				<span id="ninja_forms_mailto_<?php echo $x;?>_span">
-					<a href="#" id="" class="ninja-forms-remove-mailto">X</a> <input type="text" name="admin_mailto[]" id="" value="<?php echo $v;?>" class="ninja-forms-mailto-address">
-				</span>
-				<?php
-				$x++;
-			}
-		}
-		?>
-	</div>
-	<br />
-	<?php
-}
-
 function ninja_forms_save_form_settings( $form_id, $data ){
 	global $wpdb, $ninja_forms_admin_update_message;
 	$form_row = ninja_forms_get_form_by_id( $form_id );
@@ -198,38 +158,11 @@ function ninja_forms_save_form_settings( $form_id, $data ){
 	}
 
 	if ( $form_id != 'new' ){
-
-		$email_from = ninja_forms_split_email_from( $form_data['email_from'] );
-
-		$form_data['email_from'] = $email_from['email_from'];
-
-		if ( !isset ( $form_data['email_from_name'] ) or empty( $form_data['email_from_name'] ) ) {
-			$form_data['email_from_name'] = $email_from['email_from_name'];
-		}
-
-		if ( empty( $form_data['email_from_name'] ) ) {
-			$form_data['email_from_name'] = get_option( 'blogname' );
-		}
-		if ( empty( $form_data['email_from'] ) ) {
-			$form_data['email_from'] = get_option( 'admin_email' );
-		}
-
 		$date_updated = date( 'Y-m-d H:i:s', strtotime ( 'now' ) );
-
 		$data_array = array( 'data' => serialize( $form_data ), 'date_updated' => $date_updated );
 		$wpdb->update( NINJA_FORMS_TABLE_NAME, $data_array, array( 'id' => $form_id ) );
 	} else {
-		if ( empty( $form_data['admin_mailto'] ) ) {
-			$form_data['admin_mailto'] = array( get_option( 'admin_email' ) );
-		}
-		if ( empty( $form_data['email_from_name'] ) ) {
-			$form_data['email_from_name'] = get_option( 'blogname' );
-		}
-		if ( empty( $form_data['email_from'] ) ) {
-			$form_data['email_from'] = get_option( 'admin_email' );
-		}
 		$data_array = array('data' => serialize( $form_data ) );
-
 		$wpdb->insert( NINJA_FORMS_TABLE_NAME, $data_array );
 		$redirect = add_query_arg( array( 'form_id' => $wpdb->insert_id, 'update_message' => urlencode( __( 'Form Settings Saved', 'ninja-forms' ) ) ) );
 		do_action( 'ninja_forms_save_new_form_settings', $wpdb->insert_id, $data );

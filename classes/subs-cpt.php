@@ -105,8 +105,8 @@ class NF_Subs_CPT {
 			$not_found = __( 'No Submissions Found', 'ninja-forms' );
 		}
 		$labels = array(
-		    'name' => _x('Submissions', 'post type general name' ),
-		    'singular_name' => _x( 'Submission', 'post type singular name' ),
+		    'name' => _x('Submissions', 'post type general name', 'ninja-forms' ),
+		    'singular_name' => _x( 'Submission', 'post type singular name', 'ninja-forms' ),
 		    'add_new' => _x( 'Add New', 'nf_sub' ),
 		    'add_new_item' => __( 'Add New Submission', 'ninja-forms' ),
 		    'edit_item' => __( 'Edit Submission', 'ninja-forms' ),
@@ -386,14 +386,14 @@ class NF_Subs_CPT {
 				if ( !isset ( $_GET['post_status'] ) || $_GET['post_status'] == 'all' ) {
 					echo '<div class="row-actions">';
 					do_action( 'nf_sub_table_before_row_actions', $sub_id, $column );
-					echo '<span class="edit"><a href="post.php?post=' . $sub_id . '&action=edit&ref=' . urlencode( add_query_arg( array() ) ) . '" title="' . __( 'Edit this item', 'ninja-forms' ) . '">Edit</a> | </span> 
+					echo '<span class="edit"><a href="post.php?post=' . $sub_id . '&action=edit&ref=' . urlencode( add_query_arg( array() ) ) . '" title="' . __( 'Edit this item', 'ninja-forms' ) . '">' . __( 'Edit', 'ninja-forms' ) . '</a> | </span> 
 						<span class="edit"><a href="' . add_query_arg( array( 'export_single' => $sub_id ) ) . '" title="' . __( 'Export this item', 'ninja-forms' ) . '">' . __( 'Export', 'ninja-forms' ) . '</a> | </span>';
 					$row_actions = apply_filters( 'nf_sub_table_row_actions', array(), $sub_id, $form_id );
 					if ( ! empty( $row_actions ) ) {
 						echo implode(" | ", $row_actions);
 						echo '| ';
 					}
-					echo '<span class="trash"><a class="submitdelete" title="' . __( 'Move this item to the Trash', 'ninja-forms' ) . '" href="' . get_delete_post_link( $sub_id ) . '">Trash</a> </span>';
+					echo '<span class="trash"><a class="submitdelete" title="' . __( 'Move this item to the Trash', 'ninja-forms' ) . '" href="' . get_delete_post_link( $sub_id ) . '">' . __( 'Trash', 'ninja-forms' ) . '</a> </span>';
 					do_action( 'nf_sub_table_after_row_actions', $sub_id, $column );
 					echo '</div>';
 				} else {
@@ -514,7 +514,7 @@ class NF_Subs_CPT {
 		$html = '<div style="float:left;">';
 		$html .= '<span style="float:left;" class="spinner"></span>';
 		$html .= '<select name="form_id" id="form_id" class="nf-form-jump">';
-		$html .= '<option value="">- Select a form</option>';
+		$html .= '<option value="">' . __( '- Select a form', 'ninja-forms' ) . '</option>';
 		if ( is_array( $forms ) ) {
 			foreach ( $forms as $form ) {
 				$html .= '<option value="' . $form['id'] . '" ' . selected( $form['id'], $form_id, false ) . '>' . $form['data']['form_title'] . '</option>';
@@ -639,11 +639,11 @@ class NF_Subs_CPT {
 	 */
 	public function updated_messages_filter( $bulk_messages, $bulk_counts ) {
 	    $bulk_messages['nf_sub'] = array(
-	        'updated'   => _n( '%s submission updated.', '%s submissions updated.', $bulk_counts['updated'] ),
-	        'locked'    => _n( '%s submission not updated, somebody is editing it.', '%s submissions not updated, somebody is editing them.', $bulk_counts['locked'] ),
-	        'deleted'   => _n( '%s submission permanently deleted.', '%s submissions permanently deleted.', $bulk_counts['deleted'] ),
-	        'trashed'   => _n( '%s submission moved to the Trash.', '%s submissions moved to the Trash.', $bulk_counts['trashed'] ),
-	        'untrashed' => _n( '%s submission restored from the Trash.', '%s submissions restored from the Trash.', $bulk_counts['untrashed'] ),
+	        'updated'   => _n( '%s submission updated.', '%s submissions updated.', $bulk_counts['updated'], 'ninja-forms' ),
+	        'locked'    => _n( '%s submission not updated, somebody is editing it.', '%s submissions not updated, somebody is editing them.', $bulk_counts['locked'], 'ninja-forms' ),
+	        'deleted'   => _n( '%s submission permanently deleted.', '%s submissions permanently deleted.', $bulk_counts['deleted'], 'ninja-forms' ),
+	        'trashed'   => _n( '%s submission moved to the Trash.', '%s submissions moved to the Trash.', $bulk_counts['trashed'], 'ninja-forms' ),
+	        'untrashed' => _n( '%s submission restored from the Trash.', '%s submissions restored from the Trash.', $bulk_counts['untrashed'], 'ninja-forms' ),
 	    );
 
 	    return $bulk_messages;
@@ -1053,8 +1053,8 @@ class NF_Subs_CPT {
 
 				<div id="publishing-action">
 				<span class="spinner"></span>
-						<input name="original_publish" type="hidden" id="original_publish" value="Update">
-						<input name="save" type="submit" class="button button-primary button-large" id="publish" accesskey="p" value="Update">
+						<input name="original_publish" type="hidden" id="original_publish" value="<?php _e( 'Update', 'ninja-forms' ); ?>">
+						<input name="save" type="submit" class="button button-primary button-large" id="publish" accesskey="p" value="<?php _e( 'Update', 'ninja-forms' ); ?>">
 				</div>
 				<div class="clear"></div>
 			</div>

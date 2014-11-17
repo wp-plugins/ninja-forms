@@ -70,8 +70,6 @@ function ninja_forms_register_field_checkbox(){
 				),
 			),
 		),
-		//'process' => 'ninja_forms_field_checkbox_pre_process',
-		//'edit_sub_pre_process' => 'ninja_forms_field_checkbox_pre_process',
 		'req_validation' => 'ninja_forms_field_checkbox_validation',
 		'edit_sub_value' => 'nf_field_checkbox_edit_sub_value',
 	);

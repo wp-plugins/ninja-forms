@@ -45,7 +45,7 @@ function ninja_forms_output_tab_metabox($form_id = '', $slug, $metabox){
 		?>
 		<div id="ninja_forms_metabox_<?php echo $slug;?>" class="postbox ">
 			<span class="item-controls">
-				<a class="item-edit metabox-item-edit" id="edit_id" title="Edit Menu Item" href="#">Edit Menu Item</a>
+				<a class="item-edit metabox-item-edit" id="edit_id" title="<?php _e( 'Edit Menu Item', 'ninja-forms' ); ?>" href="#"><?php _e( 'Edit Menu Item', 'ninja-forms' ); ?></a>
 			</span>
 			<h3 class="hndle"><span><?php _e($title, 'ninja-forms');?></span></h3>
 			<div class="inside" style="<?php echo $state;?>">

@@ -171,10 +171,9 @@ class NF_Notifications_List_Table extends WP_List_Table {
     public function get_columns(){
         $columns = array(
             'cb'            => '<input type="checkbox" />', //Render a checkbox instead of text
-            'name'          => 'Name',
-            'type'          => 'Type',
-            // 'stats'         => 'Stats',
-            'date_updated'  => 'Date Updated'
+            'name'          => __( 'Name', 'ninja-forms' ),
+            'type'          => __( 'Type', 'ninja-forms' ),
+            'date_updated'  => __( 'Date Updated', 'ninja-forms' ),
         );
         return $columns;
     }

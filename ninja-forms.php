@@ -506,14 +506,8 @@ class Ninja_Forms {
 		/* General Settings */
 		require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms-settings/tabs/general-settings/general-settings.php" );
 
-		/* Favorite Field Settings */
-		require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms-settings/tabs/favorite-fields/favorite-fields.php" );
-
 		/* Label Settings */
 		require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms-settings/tabs/label-settings/label-settings.php" );
-
-		/* Ajax Settings */
-		require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms-settings/tabs/ajax-settings/ajax-settings.php" );
 
 		/* License Settings */
 		require_once( NINJA_FORMS_DIR . "/includes/admin/pages/ninja-forms-settings/tabs/license-settings/license-settings.php" );
