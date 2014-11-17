@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws, wpnzach, daveshine, mordauk, bftrick, helgathe
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 2.8.7
+Stable tag: 2.8.8
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -74,27 +74,35 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.8.7 (4 November 2014 ) =
+= 2.8.8 (17 November 2014 ) =
 
 *Changes:*
 
-* The redirect notification type now works with AJAX enabled.
+* Credit card field labels and descriptions can now be edited on the field settings tab.
 
 *Bugs:*
 
-* Fixed a security issue within the wp-admin.
-* The Custom First Option setting for country fields now works properly with required fields.
-* BCC and CC fields should now work properly in all cases.
-* Negative numbers should be properly represented in emails when using calculation fields.
-* Fixed errors with some internationalization strings.
-* Deleting a form should now properly delete notifications attached to that form.
-* Changed number field settings to allow non-integer step values.
+* Fixed a bug with importing the initial contact form.
+* BCC and CC fields should now send to multiple addresses properly.
+* Fixed several instances where strings weren't internationalized properly.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.8.8 (17 November 2014 ) =
+
+*Changes:*
+
+* Credit card field labels and descriptions can now be edited on the field settings tab.
+
+*Bugs:*
+
+* Fixed a bug with importing the initial contact form.
+* BCC and CC fields should now send to multiple addresses properly.
+* Fixed several instances where strings weren't internationalized properly.
 
 = 2.8.7 (4 November 2014 ) =
 
@@ -1098,7 +1106,7 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 *Changes:*
 
 * Added a new action hook that runs if a form is set to "Require Logged-In", but the user is not logged in. It is named: ninja_forms_display_user_not_logged_in.
-* Added new filters for the arguments sent to the wp_editor() function when a rich text editor is rendered. They are:	ninja_forms_textarea_rte (Front-End Textarea), ninja_forms_admin_metabox_rte (Ninja Forms admin settings areas), ninja_forms_edit_field_rte (Field settings).
+* Added new filters for the arguments sent to the wp_editor() function when a rich text editor is rendered. They are:   ninja_forms_textarea_rte (Front-End Textarea), ninja_forms_admin_metabox_rte (Ninja Forms admin settings areas), ninja_forms_edit_field_rte (Field settings).
 
 = 2.2.0 =
 
