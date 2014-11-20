@@ -52,7 +52,7 @@ function ninja_forms_register_field_desc(){
 
 add_action('init', 'ninja_forms_register_field_desc');
 
-function ninja_forms_field_desc_display( $field_id, $data ){
+function ninja_forms_field_desc_display( $field_id, $data, $form_id = '' ){
 
 	if(isset($data['desc_el'])){
 		$desc_el = $data['desc_el'];
@@ -80,7 +80,7 @@ function ninja_forms_field_desc_display( $field_id, $data ){
 		$display_style = '';
 	}
 	$default_value = do_shortcode( $default_value );
-	$field_class = ninja_forms_get_field_class($field_id);
+	$field_class = ninja_forms_get_field_class( $field_id, $form_id );
 	?>
 	<<?php echo $desc_el;?> class="<?php echo $field_class;?>" id="ninja_forms_field_<?php echo $field_id;?>_div_wrap" style="<?php echo $display_style;?>" rel="<?php echo $field_id;?>"><?php echo $default_value;?></<?php echo $desc_el;?>>
 	<?php

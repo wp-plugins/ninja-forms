@@ -124,7 +124,8 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 		}
 
 		// Create a notification for our admin email
-		if ( isset ( $form_settings['admin_mailto'] ) && ! empty ( $form_settings['admin_mailto'] ) ) {
+		if ( isset ( $form_settings['admin_email_msg'] ) && ! empty ( $form_settings['admin_email_msg'] ) ) {
+
 			// Create a notification
 			$n_id = nf_insert_notification( $form_id );
 
@@ -137,8 +138,10 @@ class NF_Convert_Notifications extends NF_Step_Processing {
 			// Update our notification name
 			Ninja_Forms()->notification( $n_id )->update_setting( 'name', __( 'Admin Email', 'ninja-forms' ) );
 
+			$admin_mailto = isset ( $form_settings['admin_mailto'] ) ? $form_settings['admin_mailto'] : array();
+
 			// Implode our admin email addresses
-			$to = implode('`', $form_settings['admin_mailto'] );
+			$to = implode('`', $admin_mailto );
 			// Update our to setting
 			Ninja_Forms()->notification( $n_id )->update_setting( 'to', $to );
 

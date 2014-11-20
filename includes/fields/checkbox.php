@@ -81,9 +81,9 @@ function ninja_forms_register_field_checkbox(){
 add_action('init', 'ninja_forms_register_field_checkbox');
 
 //Checkbox Display Function
-function ninja_forms_field_checkbox_display($field_id, $data){
+function ninja_forms_field_checkbox_display( $field_id, $data, $form_id = '' ){
 
-	$field_class = ninja_forms_get_field_class($field_id);
+	$field_class = ninja_forms_get_field_class( $field_id, $form_id );
 	$default_value = $data['default_value'];
 	if($default_value == 'checked' OR $default_value == 1){
 		$checked = 'checked = "checked"';

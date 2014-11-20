@@ -453,7 +453,7 @@ class NF_Subs_CPT {
 					$user_value = Ninja_Forms()->sub( $sub_id )->get_field( $field_id );
 
 					$args['field_id'] = $field_id;
-					$args['user_value'] = $user_value;
+					$args['user_value'] = htmlentities($user_value);
 					$args['field'] = $field;
 
 					call_user_func_array( $edit_value_function, $args );

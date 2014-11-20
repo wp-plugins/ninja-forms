@@ -197,9 +197,9 @@ function ninja_forms_field_text_edit( $field_id, $data ){
 	<?php
 }
 
-function ninja_forms_field_text_display( $field_id, $data ){
+function ninja_forms_field_text_display( $field_id, $data, $form_id = '' ){
 	global $current_user;
-	$field_class = ninja_forms_get_field_class( $field_id );
+	$field_class = ninja_forms_get_field_class( $field_id, $form_id );
 
 	if ( isset( $data['email'] ) && $data['email'] == 1 ) {
 		$field_class .= ' email';

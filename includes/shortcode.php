@@ -30,7 +30,7 @@ function ninja_forms_field_shortcode( $atts ){
 	} else {
 		$value = '';
 	}
-	return $value;
+	return esc_html( $value );
 }
 add_shortcode( 'ninja_forms_field', 'ninja_forms_field_shortcode' );
 

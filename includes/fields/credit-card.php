@@ -127,7 +127,7 @@ add_action( 'init', 'ninja_forms_register_field_credit_card' );
  * @returns void
  */
 
-function ninja_forms_field_credit_card_display( $field_id, $data ) {
+function ninja_forms_field_credit_card_display( $field_id, $data, $form_id = '' ) {
 	global $ninja_forms_processing;
 
 	if( isset( $data['default_value'] ) ) {
@@ -177,7 +177,7 @@ function ninja_forms_field_credit_card_display( $field_id, $data ) {
 		$card_year_errors = '';
 	}
 
-	$field_class = ninja_forms_get_field_class( $field_id );
+	$field_class = ninja_forms_get_field_class( $field_id, $form_id );
 	$post_field = apply_filters( 'ninja_forms_post_credit_card_field', false );
 	$desc_pos = apply_filters( 'ninja_forms_credit_card_field_desc_pos', 'after_label' );
 	$hide_cc_fields = apply_filters( 'ninja_forms_hide_cc_field', array() );

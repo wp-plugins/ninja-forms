@@ -3,7 +3,7 @@ Contributors: kstover, jameslaws, wpnzach, daveshine, mordauk, bftrick, helgathe
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.8
 Tested up to: 4.0
-Stable tag: 2.8.8
+Stable tag: 2.8.9
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -74,23 +74,33 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.8.8 (17 November 2014 ) =
+= 2.8.9 (20 November 2014 ) =
 
-*Changes:*
+*Security Update:*
 
-* Credit card field labels and descriptions can now be edited on the field settings tab.
+* This version includes a fix to a security vulnerability. Please take the time to update to this version.
 
 *Bugs:*
 
-* Fixed a bug with importing the initial contact form.
-* BCC and CC fields should now send to multiple addresses properly.
-* Fixed several instances where strings weren't internationalized properly.
+* Fixed a bug with conversions from older versions of Ninja Forms.
+* Fixed a bug that could cause two forms on the same page to behave improperly.
 
 == Requested Features ==
 
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.8.9 (20 November 2014 ) =
+
+*Security Update:*
+
+* This version includes a fix to a security vulnerability. Please take the time to update to this version.
+
+*Bugs:*
+
+* Fixed a bug with conversions from older versions of Ninja Forms.
+* Fixed a bug that could cause two forms on the same page to behave improperly.
 
 = 2.8.8 (17 November 2014 ) =
 

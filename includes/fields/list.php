@@ -218,7 +218,7 @@ echo $example2;
 	<?php
 }
 
-function ninja_forms_field_list_display( $field_id, $data ){
+function ninja_forms_field_list_display( $field_id, $data, $form_id = '' ){
 	global $wpdb, $ninja_forms_fields;
 
 	if(isset($data['show_field'])){
@@ -227,7 +227,7 @@ function ninja_forms_field_list_display( $field_id, $data ){
 		$show_field = true;
 	}
 
-	$field_class = ninja_forms_get_field_class($field_id);
+	$field_class = ninja_forms_get_field_class( $field_id, $form_id );
 	$field_row = ninja_forms_get_field_by_id($field_id);
 
 	$type = $field_row['type'];
