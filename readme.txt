@@ -70,7 +70,7 @@ Shortcodes have been re-implemented. They are used like so: [ninja_forms_display
 
 == Use ==
 
-For help and video tutorials, please visit our website: [Ninja Forms Documentation](http://ninjaforms.com/documentation/)
+For help and video tutorials, please visit our website: [Ninja Forms Documentation](http://docs.ninjaforms.com/)
 
 == Upgrade Notice ==
 
