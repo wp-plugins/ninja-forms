@@ -3,7 +3,7 @@ Contributors: wpninjasllc, kstover, jameslaws, wpnzach, daveshine, mordauk, bftr
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.8
 Tested up to: 4.1.1
-Stable tag: 2.9.1
+Stable tag: 2.9.2
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -74,7 +74,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.9.1 (3 March 2015) =
+= 2.9.2 (3 March 2015) =
 
 *Changes:*
 
@@ -84,6 +84,8 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 *Bugs:*
 
+* Preview pages should now always display properly.
+* Success messages should now always be shown after submission properly.
 * Fixed a bug that could cause a PHP notice to show in placeholders.
 * Fixed a bug that could cause forms not to display properly when added via the "append to page" option.
 * Fixed a major bug that could prevent longer forms from saving properly. Previous fixes required modifying a php.ini file.
@@ -98,7 +100,14 @@ If you have any feature requests, please feel free to visit [ninjaforms.com](htt
 
 == Changelog ==
 
-= 2.9.1 (3 March 2015 ) =
+= 2.9.2 (3 March 2015) =
+
+*Bugs:*
+
+* Preview pages should now always display properly.
+* Success messages should now always be shown after submission properly.
+
+= 2.9.1 (3 March 2015) =
 
 *Bugs:*
 

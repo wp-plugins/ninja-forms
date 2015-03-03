@@ -69,6 +69,12 @@ add_action( 'wp_head', 'ninja_forms_clear_transient' );
 function ninja_forms_page_append_check(){
 	global $post, $ninja_forms_append_page_form_id;
 
+	if ( ! empty ( $_REQUEST['preview'] ) && ! empty ( $_REQUEST['preview'] ) ) {
+		if(is_array($ninja_forms_append_page_form_id)){
+			unset($ninja_forms_append_page_form_id);
+		}
+	}
+
 	if(!isset($ninja_forms_append_page_form_id)){
 		$ninja_forms_append_page_form_id = array();
 	}

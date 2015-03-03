@@ -9,6 +9,7 @@ function ninja_forms_post_process(){
 	if(!$ninja_forms_processing->get_all_errors()){
 
 		do_action('ninja_forms_post_process');
+		$json = ninja_forms_json_response();
 
 		if( !$ninja_forms_processing->get_all_errors() ){
 
