@@ -3,7 +3,7 @@ Contributors: wpninjasllc, kstover, jameslaws, wpnzach, daveshine, mordauk, bftr
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.8
 Tested up to: 4.1.1
-Stable tag: 2.9
+Stable tag: 2.9.1
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -66,7 +66,7 @@ This section describes how to install the plugin and get it working.
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Visit the 'Forms' menu item in your admin sidebar
 
-Shortcodes have been re-implemented. They are used like so: [ninja_forms_display_form id=3] where 3 is the ID number of the form you want to display.
+Shortcodes have been re-implemented. They are used like so: [ninja_form id=3] where 3 is the ID number of the form you want to display.
 
 == Use ==
 
@@ -74,7 +74,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.9 (3 March 2015) =
+= 2.9.1 (3 March 2015) =
 
 *Changes:*
 
@@ -84,6 +84,8 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 *Bugs:*
 
+* Fixed a bug that could cause a PHP notice to show in placeholders.
+* Fixed a bug that could cause forms not to display properly when added via the "append to page" option.
 * Fixed a major bug that could prevent longer forms from saving properly. Previous fixes required modifying a php.ini file.
 * Creating a new action should now show the proper saved message.
 * Updated the Ninja Forms translation file with several new strings and cleaned up existing strings.
@@ -95,6 +97,13 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 If you have any feature requests, please feel free to visit [ninjaforms.com](http://ninjaforms.com) and let us know about it.
 
 == Changelog ==
+
+= 2.9.1 (3 March 2015 ) =
+
+*Bugs:*
+
+* Fixed a bug that could cause a PHP notice to show in placeholders.
+* Fixed a bug that could cause forms not to display properly when added via the "append to page" option.
 
 = 2.9 (3 March 2015) =
 

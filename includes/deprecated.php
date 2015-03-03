@@ -945,11 +945,6 @@ function nf_get_form_count() {
 }
 
 /**
- * Old Ninja Forms shortcode
- */
-add_shortcode( 'ninja_forms_display_form', 'ninja_forms_shortcode' );
-
-/**
  * Old update form function.
  * 
  * @since 1.0
