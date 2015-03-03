@@ -17,12 +17,7 @@ function nf_check_post() {
 		if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'nf_form_' . absint( $_POST['_form_id'] ) ) )
 			return false;
 
-		$form_row = ninja_forms_get_form_by_id( absint( $_POST['_form_id'] ) );
-		if( isset( $form_row['data']['ajax'] ) ){
-			$ajax = $form_row['data']['ajax'];
-		}else{
-			$ajax = '';
-		}
+		$ajax = Ninja_Forms()->form( absint( $_POST['_form_id'] ) )->get_setting( 'ajax' );
 
 		if( $ajax != 1 ){
 			add_action( 'init', 'ninja_forms_setup_processing_class', 5 );
@@ -133,6 +128,7 @@ function ninja_forms_display_form( $form_id = '' ){
 		$function = true;
 	}
 	if($form_id != ''){ //Make sure that we have an active form_id.
+		do_action( 'nf_before_display_loading', $form_id );
 
 		// Instantiate our loading global singleton.
 		if ( !isset ( $ninja_forms_processing ) or ( isset ( $ninja_forms_processing ) and $ninja_forms_processing->get_form_ID() != $form_id ) ) {
