@@ -3,7 +3,7 @@ Contributors: wpninjasllc, kstover, jameslaws, wpnzach, daveshine, mordauk, bftr
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.8
 Tested up to: 4.1.1
-Stable tag: 2.9.4
+Stable tag: 2.9.5
 License: GPLv2 or later
 
 Forms created with a simple drag and drop interface. Contact forms, Email collection forms, or any other form you want on your WordPress site.
@@ -74,7 +74,7 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.9.4 (3 March 2015) =
+= 2.9.5 (3 March 2015) =
 
 *Changes:*
 
@@ -85,6 +85,8 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 *Bugs:*
 
+* Deleting Ninja Forms from the plugins page should now work in all instances.
+* Display of checkbox lists should now work properly.
 * Fixed a bug that could prompt users to run unnecessary updates on their site.
 * Preview pages should now always display properly.
 * Success messages should now always be shown after submission properly.
