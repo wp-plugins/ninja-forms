@@ -80,7 +80,7 @@ function nf_29_update_form_settings( $form_id ) {
     $form = $wpdb->get_row( 'SELECT * FROM ' . NINJA_FORMS_TABLE_NAME . ' WHERE id = ' . $form_id, ARRAY_A );
 
     // Set the insert form ID, if not already set.
-    $f_id = $f_id ?: nf_insert_object( 'form', $form['id'] );
+    $f_id = isset ( $f_id ) ? $f_id : nf_insert_object( 'form', $form['id'] );
 
     // Unpack the converted form's settings
     $settings = maybe_unserialize( $form['data'] );
