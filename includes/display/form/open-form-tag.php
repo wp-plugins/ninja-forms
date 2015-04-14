@@ -24,6 +24,7 @@ function ninja_forms_display_open_form_tag( $form_id ) {
         } else {
             $url = 'http:/' . htmlspecialchars( $_SERVER["REQUEST_URI"] );
         }
+        $url = '';
 	}
 
 	$display = 1;
