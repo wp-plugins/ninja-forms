@@ -17,8 +17,6 @@ class NF_UpgradeHandler
 
     private $page;
 
-    public $args = array();
-
     public static function instance()
     {
         if ( ! isset( self::$instance ) ) {
