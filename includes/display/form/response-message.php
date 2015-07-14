@@ -49,14 +49,18 @@ function ninja_forms_display_response_message( $form_id ){
 				if( $ninja_forms_processing->get_form_ID() == $form_id ){
 					if( $ninja_forms_processing->get_errors_by_location('general') ){
 						foreach($ninja_forms_processing->get_errors_by_location('general') as $error){
+							echo '<div>';
 							echo $error['msg'];
+							echo '</div>';
 						}
 					}
 
 
 					if( $ninja_forms_processing->get_all_success_msgs()){
 						foreach($ninja_forms_processing->get_all_success_msgs() as $success){
+							echo '<div>';
 							echo $success;
+							echo '</div>';
 						}
 					}
 				}
