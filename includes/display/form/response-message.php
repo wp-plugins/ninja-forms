@@ -7,9 +7,9 @@
 function ninja_forms_display_response_message( $form_id ){
 	global $ninja_forms_processing;
 
-	if ( ! is_object( $ninja_forms_processing ) || $ninja_forms_processing->get_form_ID() != $form_id ) {
-		return false;
-	}
+//	if ( ! is_object( $ninja_forms_processing ) || $ninja_forms_processing->get_form_ID() != $form_id ) {
+//		return false;
+//	}
 
 	$plugin_settings = nf_get_settings();
 
