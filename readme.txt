@@ -3,7 +3,7 @@ Contributors: wpninjasllc, kstover, jameslaws, wpnzach, kbjohnson90, aman086, da
 Tags: form, forms, contact form, custom form, form builder, form creator, form manager, form creation, contact forms, custom forms, forms builder, forms creator, forms manager, forms creation, form administration,
 Requires at least: 3.9
 Tested up to: 4.2.2
-Stable tag: 2.9.23
+Stable tag: 2.9.24
 License: GPLv2 or later
 
 Create forms and manage submissions easily with a simple drag and drop interface. Contact forms, subscription forms, or any other form for WordPress.
@@ -97,17 +97,27 @@ For help and video tutorials, please visit our website: [Ninja Forms Documentati
 
 == Upgrade Notice ==
 
-= 2.9.23 (4 August 2015) =
+= 2.9.24 (4 August 2015) =
 
-*Features:*
+*Security:*
 
-* Honeypot fields are now added by default to help protect your forms from spam.
+* Removed a possible security vulnerability.
 
 *Bugs:*
 
-* Legacy honeypot fields should display properly.
+* The "Download All Submissions" button should now function properly.
 
 == Changelog ==
+
+= 2.9.24 (4 August 2015) =
+
+*Security:*
+
+* Removed a possible security vulnerability.
+
+*Bugs:*
+
+* The "Download All Submissions" button should now function properly.
 
 = 2.9.23 (4 August 2015) =
 

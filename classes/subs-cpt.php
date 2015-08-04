@@ -702,7 +702,7 @@ class NF_Subs_CPT {
 
 					if ( isset ( $_REQUEST['form_id'] ) && ! empty ( $_REQUEST['form_id'] ) ) {
 						$redirect = urlencode( remove_query_arg( array( 'download_all', 'download_file' ) ) );
-						$url = admin_url( 'admin.php?page=nf-processing&action=download_all_subs&form_id=' . $_REQUEST['form_id'] . '&redirect=' . $redirect );
+						$url = admin_url( 'admin.php?page=nf-processing&action=download_all_subs&form_id=' . absint( $_REQUEST['form_id'] ) . '&redirect=' . $redirect );
 						$url = esc_url( $url );
 						?>
 						var button = '<a href="<?php echo $url; ?>" class="button-secondary nf-download-all"><?php echo __( 'Download All Submissions', 'ninja-forms' ); ?></a>';

@@ -75,7 +75,7 @@ class NF_Step_Processing
 
 		// Get our passed arguments. These come from the querysting of the processing page.
 		if ( isset ( $_REQUEST['args'] ) ) {
-			$this->args = esc_html( $_REQUEST['args'] );
+			$this->args = $_REQUEST['args'];
 			if ( isset ( $this->args['redirect'] ) ) {
 				$this->redirect = $this->args['redirect'];
 			}
