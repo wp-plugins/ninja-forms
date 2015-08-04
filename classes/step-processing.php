@@ -75,7 +75,7 @@ class NF_Step_Processing
 
 		// Get our passed arguments. These come from the querysting of the processing page.
 		if ( isset ( $_REQUEST['args'] ) ) {
-			$this->args = $_REQUEST['args'];
+			$this->args = esc_html( $_REQUEST['args'] );
 			if ( isset ( $this->args['redirect'] ) ) {
 				$this->redirect = $this->args['redirect'];
 			}
@@ -84,10 +84,10 @@ class NF_Step_Processing
 		}	
 
 		// Get our current step.
-		$this->step = isset ( $_REQUEST['step'] )? $_REQUEST['step'] : 'loading';
+		$this->step = isset ( $_REQUEST['step'] )? esc_html( $_REQUEST['step'] ) : 'loading';
 
 		// Get our total steps
-		$this->total_steps = isset ( $_REQUEST['total_steps'] )? $_REQUEST['total_steps'] : 0;
+		$this->total_steps = isset ( $_REQUEST['total_steps'] )? esc_html( $_REQUEST['total_steps'] ) : 0;
 
 		// If our step is loading, then we need to return how many total steps there are along with the next step, which is 1.
 		if ( 'loading' == $this->step ) {

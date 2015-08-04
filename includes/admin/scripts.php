@@ -20,7 +20,7 @@ function ninja_forms_add_class($classes) {
 function ninja_forms_admin_js(){
 	global $version_compare, $public_query_vars;
 
-	$form_id = isset ( $_REQUEST['form_id'] ) ? $_REQUEST['form_id'] : '';
+	$form_id = isset ( $_REQUEST['form_id'] ) ? absint( $_REQUEST['form_id'] ) : '';
 
 	if ( defined( 'NINJA_FORMS_JS_DEBUG' ) && NINJA_FORMS_JS_DEBUG ) {
 		$suffix = '';
