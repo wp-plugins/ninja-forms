@@ -61,7 +61,7 @@ class NF_Notices_SP extends NF_Notices
                         $admin_notices['save_progress'] = array(
                             'title' => __( 'Increase Conversions', 'ninja-forms' ),
                             'msg' => __( 'Users are more likely to complete long forms when they can save and return to complete their submission later.<p>The Save Progress extension for Ninja Forms makes this quick and easy.</p>', 'ninja-forms' ),
-                            'link' => '<li> <span class="dashicons dashicons-external"></span><a href="https://ninjaforms.com/extensions/save-user-progress/' . $tags . '"> ' . __( 'Learn More About Save Progress', 'ninja-forms' ) . '</a></li>
+                            'link' => '<li> <span class="dashicons dashicons-external"></span><a target="_blank" href="https://ninjaforms.com/extensions/save-user-progress/' . $tags . '"> ' . __( 'Learn More About Save Progress', 'ninja-forms' ) . '</a></li>
                                         <li><span class="dashicons dashicons-calendar-alt"></span><a href="' . $save_progress_temp . '">' . __( 'Maybe Later' ,'ninja-forms' ) . '</a></li>
                                         <li><span class="dashicons dashicons-dismiss"></span><a href="' . $save_progress_ignore . '">' . __( 'Dismiss', 'ninja-forms' ) . '</a></li>',
                             'int' => 0

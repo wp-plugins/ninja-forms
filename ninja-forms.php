@@ -3,7 +3,7 @@
 Plugin Name: Ninja Forms
 Plugin URI: http://ninjaforms.com/
 Description: Ninja Forms is a webform builder with unparalleled ease of use and features.
-Version: 2.9.22
+Version: 2.9.23
 Author: The WP Ninjas
 Author URI: http://ninjaforms.com
 Text Domain: ninja-forms
@@ -100,7 +100,6 @@ class Ninja_Forms {
 
             register_activation_hook( __FILE__, 'ninja_forms_activation' );
             add_action( 'plugins_loaded', array( self::$instance, 'load_lang' ) );
-            add_action( 'init', array( self::$instance, 'set_transient_id'), 1 );
             add_action( 'init', array( self::$instance, 'init' ), 5 );
             add_action( 'admin_init', array( self::$instance, 'admin_init' ), 5 );
             add_action( 'update_option_ninja_forms_settings', array( self::$instance, 'refresh_plugin_settings' ), 10 );
@@ -314,7 +313,7 @@ class Ninja_Forms {
 
         // Plugin version
         if ( ! defined( 'NF_PLUGIN_VERSION' ) )
-            define( 'NF_PLUGIN_VERSION', '2.9.22' );
+            define( 'NF_PLUGIN_VERSION', '2.9.23' );
 
         // Plugin Folder Path
         if ( ! defined( 'NF_PLUGIN_DIR' ) )
