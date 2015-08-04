@@ -97,7 +97,7 @@ jQuery.fn.nfAdminModal = function( action, options ) {
 		options = action;
 	}
 
-	var defaults = { 'title' : '', 'buttons' : false };
+	var defaults = { 'title' : '', 'buttons' : false, 'backgroundClose': false };
 
 	if ( 'undefined' === typeof options ) {
 		options = jQuery( this ).data( 'nfAdminModal' );
@@ -129,18 +129,25 @@ jQuery.fn.nfAdminModal = function( action, options ) {
 		jQuery( '#modal-contents-wrapper' ).find( '.submitbox' ).hide();
 	}
 
+	jQuery( '#nf-admin-modal-backdrop' ).data( 'backgroundClose', options.backgroundClose );
+
 	if ( 'close' == action ) {
 		jQuery.fn.nfAdminModal.close();
 	} else if ( 'open' == action ) {
 		jQuery.fn.nfAdminModal.open();
 	}
-
-	jQuery( document ).on( 'click', '.modal-close', function( e ) {
-		e.preventDefault();
-		jQuery.fn.nfAdminModal.close();
-	} );
-
 };
+
+jQuery( document ).on( 'click', '#nf-admin-modal-backdrop', function( e ) { 
+	if ( jQuery( this ).data( 'backgroundClose' ) == true ) {
+		jQuery.fn.nfAdminModal.close();
+	}
+} );
+
+jQuery( document ).on( 'click', '.modal-close', function( e ) {
+	e.preventDefault();
+	jQuery.fn.nfAdminModal.close();
+} );
 
 jQuery.fn.nfAdminModal.close = function() {
 	jQuery( '#nf-admin-modal-backdrop' ).hide();

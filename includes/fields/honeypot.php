@@ -2,7 +2,7 @@
 function ninja_forms_register_field_honeypot(){
 	$args = array(
 		'name' => __( 'Honey Pot', 'ninja-forms' ),
-		'sidebar' => 'template_fields',
+		'sidebar' => '',
 		'edit_function' => '',
 		'display_function' => 'ninja_forms_field_honeypot_display',
 		'save_function' => '',
