@@ -61,7 +61,7 @@ class NF_Notices_MP extends NF_Notices
                         $admin_notices['multi_part'] = array(
                             'title' => __( 'Increase Conversions', 'ninja-forms' ),
                             'msg' => __( 'Did you know that you can increase form conversion by breaking larger forms into smaller, more easily digested parts?<p>The Multi-Part Forms extension for Ninja Forms makes this quick and easy.</p>', 'ninja-forms' ),
-                            'link' => '<li> <span class="dashicons dashicons-external"></span><a href="https://ninjaforms.com/extensions/multi-part-forms/' . $tags . '"> ' . __( 'Learn More About Multi-Part Forms', 'ninja-forms' ) . '</a></li>
+                            'link' => '<li> <span class="dashicons dashicons-external"></span><a target="_blank" href="https://ninjaforms.com/extensions/multi-part-forms/' . $tags . '"> ' . __( 'Learn More About Multi-Part Forms', 'ninja-forms' ) . '</a></li>
                                         <li><span class="dashicons dashicons-calendar-alt"></span><a href="' . $multi_part_temp . '">' . __( 'Maybe Later' ,'ninja-forms' ) . '</a></li>
                                         <li><span class="dashicons dashicons-dismiss"></span><a href="' . $multi_part_ignore . '">' . __( 'Dismiss', 'ninja-forms' ) . '</a></li>',
                             'int' => 0
