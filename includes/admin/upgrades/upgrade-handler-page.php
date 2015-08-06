@@ -82,6 +82,11 @@ class NF_UpgradeHandlerPage
         /* Handle */ 'ninja-forms-admin',
             /* Source */ NF_PLUGIN_URL . 'css/ninja-forms-admin.css'
         );
+
+        wp_enqueue_style(
+        /* Handle */ 'ninja-forms-admin',
+            /* Source */ NF_PLUGIN_URL . 'assets/css/admin-modal.css'
+        );
     }
 
     public function show_upgrade_notices()

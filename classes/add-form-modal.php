@@ -39,17 +39,21 @@ class NF_Admin_AddFormModal {
             }
         </style>';
         $html .= '<a href="#" class="button-secondary nf-insert-form"><span class="nf-insert-form dashicons dashicons-feedback"></span> ' . __( 'Add Form', 'ninja-forms' ) . '</a>';
-        ninja_forms_admin_css();
+
         ninja_forms_admin_js();
 
         wp_enqueue_script( 'nf-combobox',
             NF_PLUGIN_URL . 'assets/js/min/combobox.min.js',
             array( 'jquery', 'jquery-ui-core', 'jquery-ui-button', 'jquery-ui-autocomplete' ) );
+
         wp_enqueue_style( 'nf-combobox',
             NF_PLUGIN_URL . 'assets/css/combobox.css' );
 
+        wp_enqueue_style( 'nf-admin-modal',
+            NF_PLUGIN_URL . 'assets/css/admin-modal.css' );
+
         add_action( 'admin_footer', array( $this, 'output_tinymce_button_js' ) );
-        return $html;
+        return $context . ' ' . $html;
     }
 
     /**
@@ -92,7 +96,7 @@ class NF_Admin_AddFormModal {
         <script type="text/javascript">
         jQuery( document ).ready( function( $ ) {
 
-            $( '#nf-insert-form-modal' ).nfAdminModal( { title: 'Test', buttons: '#nf-insert-form-buttons', backgroundClose: true } );
+            $( '#nf-insert-form-modal' ).nfAdminModal( { title: '<?php _e( "Add Form", "ninja-forms" ); ?>', buttons: '#nf-insert-form-buttons', backgroundClose: true } );
             $( document ).on( 'click', '.nf-insert-form', function( e ) {
                 e.preventDefault();
                 $( '#nf-insert-form-modal' ).nfAdminModal( 'open' );
